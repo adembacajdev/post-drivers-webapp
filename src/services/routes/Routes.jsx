@@ -3,6 +3,7 @@ import { Router as BaseRouter, Route, Switch } from 'react-router-dom';
 import history from './history';
 import Loader from '../../components/loader/Loader';
 import { useSelector } from 'react-redux';
+import { Navbar, Sidebar } from '../../components';
 
 //pages
 const Home = lazy(() => import('../../pages/home/Home'));
@@ -17,23 +18,27 @@ function Router(props) {
     const isLoggedIn = useSelector(state => state.isLoggedIn);
     return (
         <BaseRouter history={history}>
-            <Suspense fallback={<Loader />}>
-                {isLoggedIn
-                ?
-                <Switch>
-                    <Route path='/' exact component={Home} />
-                    <Route path='/customers' exact component={Customers} />
-                    <Route path='/orders' exact component={Orders} />
-                    <Route path='/products' exact component={Products} />
-                    <Route path='/statistics' exact component={Statistics} />
-                    <Route path='/transfers' exact component={Transfers} />
-                </Switch>
-                :
-                <Switch>
-                    <Route path='/' exact component={Login} />
-                </Switch>
-                }
-            </Suspense>
+            <Navbar />
+            <Sidebar />
+            <div>
+                <Suspense fallback={<Loader />}>
+                    {isLoggedIn
+                        ?
+                        <Switch>
+                            <Route path='/' exact component={Home} />
+                            <Route path='/customers' exact component={Customers} />
+                            <Route path='/orders' exact component={Orders} />
+                            <Route path='/products' exact component={Products} />
+                            <Route path='/statistics' exact component={Statistics} />
+                            <Route path='/transfers' exact component={Transfers} />
+                        </Switch>
+                        :
+                        <Switch>
+                            <Route path='/' exact component={Login} />
+                        </Switch>
+                    }
+                </Suspense>
+            </div>
         </BaseRouter>
     )
 }
