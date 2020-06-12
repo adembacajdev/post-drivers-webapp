@@ -17,13 +17,13 @@
         height: 50px;
         background-color: #FFFFFF;
         cursor: pointer;
-        transition: 0.3s linear all;
+        transition: 0.4s linear all;
         &-line{
             width: 5px;
             height: 100%;
             background-color: #FFFFFF;
             margin-right: 20px;
-            transition: 0.3s linear all;
+            transition: 0.4s linear all;
         }
         &-icon{
             width: 16px;
@@ -37,14 +37,14 @@
             font-family: "Avenir";
         }
         &[is-active=true]{
-            transition: 0.3s linear all;
+            transition: 0.4s linear all;
             background-color: #F5F7F9;
             .strike-sidebar__item-line{
                 background-color: #FECB2E;
             }
         }
         &:hover{
-            transition: 0.3s linear all;
+            transition: 0.4s linear all;
             background-color: #F5F7F9;
             .strike-sidebar__item-line{
                 background-color: #FECB2E;
