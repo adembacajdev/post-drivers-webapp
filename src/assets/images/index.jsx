@@ -11,6 +11,12 @@ const images = {
         ordersIcon: require('./ordersMenu.svg'),
         productsIcon: require('./productsMenu.svg'),
         transfersIcon: require('./transfersMenu.svg'),
+    },
+    home: {
+        blueChart: require('./blueChart.svg'),
+        yellowChart: require('./yellowChart.svg'),
+        redChart: require('./redChart.svg'),
+        greenChart: require('./greenChart.svg'),
     }
 }
 
