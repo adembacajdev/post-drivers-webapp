@@ -253,3 +253,115 @@
         }
     }
 }
+
+
+@media only screen and (max-width: 700px) {
+    .strike-navbar{
+        background-color: #FFFFFF;
+        width: 100%;
+        height: 70px;
+        position: fixed;
+        top: 0;
+        z-index: 1;
+        flex-direction: row;
+        align-items: center;
+        -webkit-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);
+        -moz-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);
+        box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);
+        &__left{
+            width: 260px;
+            height: 100%;
+            display: flex;
+            float: left;
+            align-items: center;
+            -webkit-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);
+            -moz-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);
+            box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);
+            &-text{
+                color: #43425D;
+                font-size: 15px;
+                line-height: 21px;
+                font-family: "Avenir";
+                font-weight: 600;
+                margin-left: 50px;
+            }
+        }
+        &__middle{
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 25px;
+            float: left;
+            &-text{
+                font-size: 28px;
+                line-height: 32px;
+                color: #43425D;
+                font-family: Arial;
+            }
+        }
+        &__right{
+            visibility: hidden;
+            display: flex;
+            float: right;
+            height: 100%;
+            align-items: center;
+            padding-right: 15px;
+            &-notification{
+                outline: none;
+                border: none;
+                cursor: pointer;
+                padding: 0 20px;
+                &-icon{
+                    width: 19px;
+                    height: 21px;
+                }
+            }
+            &-amount{
+                cursor: pointer;
+                &-text{
+                    color: #43425D;
+                    font-size: 15px;
+                    line-height: 20px;
+                    font-family: "Avenir";
+                }
+            }
+            &-name{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                cursor: pointer;
+                margin-right: 5px;
+                outline: none;
+                border: none;
+                &-text{
+                    font-size: 15px;
+                    line-height: 25px;
+                    color: #43425D;
+                    font-family: "Avenir";
+                    margin-right: 5px;
+                }
+                &-downarrow{
+                    width: 11px;
+                    height: 7px;
+                    transform: rotate(0deg);
+                    transition: 0.2s linear all;
+                    &:hover{
+                        transform: rotate(180deg);
+                        transition: 0.4s linear all;
+                    }
+                    &[is-active = true]{
+                        transform: rotate(180deg);
+                        transition: 0.4s linear all;
+                    }
+                }
+                &:hover{
+                    .strike-navbar__right-name-downarrow{
+                            transform: rotate(180deg);
+                            transition: 0.4s linear all;
+                    }
+                }
+            }
+            &-avatar{}
+        }
+    }
+  }
