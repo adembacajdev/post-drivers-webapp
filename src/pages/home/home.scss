@@ -18,6 +18,7 @@
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+        margin-bottom: 25px;
         &-grid{
             display: flex;
             flex-direction: column;
@@ -49,6 +50,366 @@
                     height: 40px;
                     margin-left: 60px;
                 }
+            }
+        }
+    }
+    &__map{
+        display: flex;
+        flex-direction: column;
+        padding: 30px;
+        background-color: white;
+        -webkit-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);
+        -moz-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);
+        box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);
+        &-header{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            width: 100%;
+            border-bottom: 3px solid #EBF2F7;
+            padding-bottom: 10px;
+            &-left{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                flex: 0.5;
+                &-text{
+                    font-family: "Rajdhani";
+                    font-size: 22px;
+                    line-height: 20px;
+                    font-weight: bold;
+                    color: #333333;
+                }
+            }
+            &-right{
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                align-items: center;
+                flex: 0.5;
+                &-icon{
+                    cursor: pointer;
+                    width: 17px;
+                    height: 17px;
+                }
+            }
+        }
+        &-body{
+            display: flex;
+            flex-direction: row;
+            width: inherit;
+            &-map{
+                width: 80%;
+                height: 320px;
+            }
+            &-right{
+                padding: 20px 30px;
+                width: 20%;
+                border-radius: 20px;
+                -webkit-box-shadow: 0px 2px 6px 5px rgba(0,0,0,0.04);
+                -moz-box-shadow: 0px 2px 6px 5px rgba(0,0,0,0.04);
+                box-shadow: 0px 2px 6px 5px rgba(0,0,0,0.04);
+                display: flex;
+                z-index: 9999;
+                flex-direction: column;
+                &-title{
+                    font-size: 31px;
+                    line-height: 40px;
+                    font-family: 'Rajdhani';
+                    font-weight: bold;
+                    color: #333333
+                }
+                &-item{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    height: 40px;
+                    padding-left: 30px;
+                    border-bottom: 1px solid #EBF2F7;
+                    &-left{
+                        display: flex;
+                        flex: 0.5;
+                        flex-direction: row;
+                        align-items: center;
+                        font-size: 16px;
+                        line-height: 41px;
+                        font-family: 'Rajdhani';
+                        color: #333333;
+                    }
+                    &-right{
+                        display: flex;
+                        flex: 0.5;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: flex-end;
+                        font-size: 12px;
+                        line-height: 41px;
+                        font-family: 'Roboto';
+                        color: #B3B8BD;
+                    }
+                }
+                &-footer{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                    color: #508FF4;
+                    font-size: 14px;
+                    line-height: 22px;
+                    font-family: 'Rajdhani';
+                    margin-top: 15px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    &__bottom{
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        width: 100%;
+        margin-top: 30px;
+        &-left{
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex: 0.7;
+            background-color: white;
+            width: 100%;
+            -webkit-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);
+            -moz-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);
+            box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);
+            margin-right: 20px;
+            &-title{
+                margin-bottom: 20px;
+                color: #4D4F5C;
+                font-size: 18px;
+                line-height: 13px;
+                font-family: "Avenir";
+            }
+            &-tableheader{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                height: 45px;
+                background-color: #F5F6FA;
+                width: 100%;
+                &-product{
+                    padding-left: 20px;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: flex-start;
+                    flex: 0.45;
+                    color: #A3A6B4;
+                    font-size: 11px;
+                    line-height: 15px;
+                    font-family: "Avenir";
+                    font-weight: bold;
+                }
+                &-description{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: flex-start;
+                    flex: 0.25;
+                    color: #A3A6B4;
+                    font-size: 11px;
+                    line-height: 15px;
+                    font-family: "Avenir";
+                    font-weight: bold;
+                }
+                &-price{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: flex-start;
+                    flex: 0.15;
+                    color: #A3A6B4;
+                    font-size: 11px;
+                    line-height: 15px;
+                    font-family: "Avenir";
+                    font-weight: bold;
+                }
+                &-noorders{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: flex-start;
+                    flex: 0.15;
+                    color: #A3A6B4;
+                    font-size: 11px;
+                    line-height: 15px;
+                    font-family: "Avenir";
+                    font-weight: bold;
+                }
+            }
+            &-table{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                height: 80px;
+                background-color: #FFFFFF;
+                border-bottom: 1px solid #F5F6FA;
+                width: 100%;
+                &-product{
+                    padding-left: 20px;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: flex-start;
+                    flex: 0.45;
+                    color: #4D4F5C;
+                    font-size: 11px;
+                    line-height: 15px;
+                    font-family: "Avenir";
+                    img{
+                        margin-right: 15px;
+                        width: 42px;
+                        height: 42px;
+                    }
+                    &-text{
+                        color: #4D4F5C;
+                        font-size: 11px;
+                        line-height: 15px;
+                        font-family: "Avenir";
+                    }
+                }
+                &-description{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: flex-start;
+                    flex: 0.25;
+                    color: #4D4F5C;
+                    font-size: 11px;
+                    line-height: 15px;
+                    font-family: "Avenir";
+                }
+                &-price{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: flex-start;
+                    flex: 0.15;
+                    color: #4D4F5C;
+                    font-size: 11px;
+                    line-height: 15px;
+                    font-family: "Avenir";
+                }
+                &-noorders{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: flex-start;
+                    flex: 0.15;
+                    color: #4D4F5C;
+                    font-size: 11px;
+                    line-height: 15px;
+                    font-family: "Avenir";
+                }
+            }
+        }
+        &-right{
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex: 0.3;
+            background-color: white;
+            width: 100%;
+            -webkit-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);
+            -moz-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);
+            box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);
+            &-title{
+                margin-bottom: 20px;
+                color: #4D4F5C;
+                font-size: 18px;
+                line-height: 13px;
+                font-family: "Avenir";
+            }
+            &-table{
+                &-header{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    width: 100%;
+                    height: 45px;
+                    background-color: #F5F6FA;
+                    &-left{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        flex: 0.5;
+                        width: 100%;
+                        color: #A3A6B4;
+                        font-size: 13px;
+                        line-height: 18px;
+                        font-family: "Avenir";
+                        font-weight: bold;
+                        padding-left: 20px;
+                    }
+                    &-right{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: flex-end;
+                        flex: 0.5;
+                        width: 100%;
+                        color: #A3A6B4;
+                        font-size: 13px;
+                        line-height: 18px;
+                        font-family: "Avenir";
+                        font-weight: bold;
+                        padding-right: 20px;
+                    }
+                }
+                &-item{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    width: 100%;
+                    height: 50px;
+                    background-color: #FFFFFF;
+                    border-bottom: 1px solid #F5F6FA;
+                    &-left{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        flex: 0.5;
+                        width: 100%;
+                        color: #4D4F5C;
+                        font-size: 13px;
+                        line-height: 18px;
+                        font-family: "Avenir";
+                        padding-left: 20px;
+                    }
+                    &-right{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: flex-end;
+                        flex: 0.5;
+                        width: 100%;
+                        color: #4D4F5C;
+                        font-size: 13px;
+                        line-height: 18px;
+                        font-family: "Avenir";
+                        padding-right: 20px;
+                    }
+                }
+            }
+            &-footer{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                height: 40px;
+                color: #FECB2E;
+                font-size: 13px;
+                line-height: 20px;
+                font-family: "Avenir";
+                padding-left: 20px;
+                cursor: pointer;
             }
         }
     }
