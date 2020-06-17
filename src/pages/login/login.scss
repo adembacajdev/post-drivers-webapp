@@ -1,0 +1,65 @@
+.strike-login{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    &__title{
+        color: #43425D;
+        font-family: "Rajdhani";
+        font-size: 50px;
+        font-weight: bold;
+    }
+    &__inputs{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+        -webkit-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);
+        -moz-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);
+        box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);
+        &-label{
+            color: #43425D;
+            font-size: 16px;
+            line-height: 15px;
+            font-family: "Avenir";
+            margin-bottom: 10px;
+        }
+        &-input{
+            width: 300px;
+            height: 40px;
+            margin-bottom: 25px;
+            padding-left: 15px;
+            font-family: "Avenir";
+            color: #43425D;
+            outline: none;
+            border: 1px solid #43425D;
+            border-radius: 5px;
+            &::placeholder{
+                color: #C4C4C4;
+            }
+            &[has-error = true]{
+                border: 1px solid red
+            }
+        }
+        button{outline: none;}
+        &-button{
+            width: 300px;
+            height: 40px;
+            margin-bottom: 25px;
+            padding-left: 15px;
+            font-family: "Avenir";
+            color: #43425D;
+            outline: none;
+            border: 1px solid #43425D;
+            border-radius: 5px;
+            transition: 0.2s linear all;
+            &:active{
+                background-color: white;
+            }
+        }
+    }
+}

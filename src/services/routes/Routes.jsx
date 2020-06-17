@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { Router as BaseRouter, Route, Switch } from 'react-router-dom';
+import { Router as BaseRouter, Route, Switch, Redirect } from 'react-router-dom';
 import history from './history';
 import Loader from '../../components/loader/Loader';
 import { useSelector } from 'react-redux';
@@ -17,13 +17,21 @@ const Transfers = lazy(() => import('../../pages/transfers/Transfers'));
 function Router(props) {
     const isLoggedIn = useSelector(state => state.isLoggedIn);
     return (
-        <BaseRouter history={history}>
-            <Navbar />
-            <Sidebar />
-            <div>
+        !isLoggedIn
+            ?
+            <BaseRouter history={history}>
                 <Suspense fallback={<Loader />}>
-                    {isLoggedIn
-                        ?
+                    <Switch>
+                        <Route path='/' exact component={Login} />
+                    </Switch>
+                </Suspense>
+            </BaseRouter>
+            :
+            <BaseRouter history={history}>
+                <Navbar />
+                <Sidebar />
+                <div>
+                    <Suspense fallback={<Loader />}>
                         <Switch>
                             <Route path='/' exact component={Home} />
                             <Route path='/customers' exact component={Customers} />
@@ -31,15 +39,11 @@ function Router(props) {
                             <Route path='/products' exact component={Products} />
                             <Route path='/statistics' exact component={Statistics} />
                             <Route path='/transfers' exact component={Transfers} />
+                            <Route path='/login' exact component={Login} />
                         </Switch>
-                        :
-                        <Switch>
-                            <Route path='/' exact component={Login} />
-                        </Switch>
-                    }
-                </Suspense>
-            </div>
-        </BaseRouter>
+                    </Suspense>
+                </div>
+            </BaseRouter>
     )
 }
 
