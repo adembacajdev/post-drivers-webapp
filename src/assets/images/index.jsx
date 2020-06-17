@@ -41,6 +41,16 @@ const images = {
         unfilledLeftArrow: require('./unfilledLeftArrow.svg'),
         filledRightArrow: require('./filledRightArrow.svg'),
         unfilledRightArrow: require('./unfilledRightArrow.svg'),
+    },
+    transfers: {
+        infoIcon: require('./infoIcon.svg'),
+        tableArrow: require('./tableArrow.svg'),
+        threePoints: require('./threePoints.svg'),
+        filledLeftArrow: require('./filledLeftArrow.svg'),
+        unfilledLeftArrow: require('./unfilledLeftArrow.svg'),
+        filledRightArrow: require('./filledRightArrow.svg'),
+        unfilledRightArrow: require('./unfilledRightArrow.svg'),
+        history: require('./history.svg'),
     }
 }
 
