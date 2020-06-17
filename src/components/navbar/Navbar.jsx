@@ -10,7 +10,9 @@ export const Navbar = (props) => {
     const [profile, setProfile] = useState(false);
     const toggleNotifications = useCallback(() => { setNotifications(!notifications) }, [notifications]);
     const toggleProfile = useCallback(() => { setProfile(!profile) }, [profile]);
-    
+    const profileBlur = useCallback(() => { setProfile(false) }, [profile]);
+    const notificationBlur = useCallback(() => { setNotifications(false) }, [notifications]);
+
     return (
         <div className="strike-navbar">
             <div className="strike-navbar__left">
@@ -23,12 +25,12 @@ export const Navbar = (props) => {
                 <div tabIndex="0" onBlur={toggleNotifications} onClick={toggleNotifications} className="strike-navbar__right-notification">
                     <img className="strike-navbar__right-notification-icon" src={onNotification} />
                 </div>
-                <Notifications notifications={notifications} onBlur={toggleNotifications} />
+                <Notifications notifications={notifications} onBlur={notificationBlur} />
                 <div className="strike-navbar__right-amount">
                     <div className="strike-navbar__right-amount-text">200.50$</div>
                 </div>
                 <div className="line" />
-                <div onClick={toggleProfile} tabIndex="1" onBlur={toggleProfile} className="strike-navbar__right-name">
+                <div onClick={toggleProfile} tabIndex="1" onBlur={profileBlur} className="strike-navbar__right-name">
                     <div className="strike-navbar__right-name-text">Filan Fisteku</div>
                     <img is-active={profile ? 'true' : 'false'} className="strike-navbar__right-name-downarrow" src={downArrow} />
                 </div>

@@ -19,6 +19,10 @@ const images = {
         greenChart: require('./greenChart.svg'),
         infoIcon: require('./infoIcon.svg'),
         testProduct: require('./testProduct.png') //test
+    },
+    products: {
+        testProduct: require('./testProduct.png'), //test
+        threePoints: require('./threePoints.svg'),
     }
 }
 
