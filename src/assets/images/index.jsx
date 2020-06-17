@@ -23,6 +23,15 @@ const images = {
     products: {
         testProduct: require('./testProduct.png'), //test
         threePoints: require('./threePoints.svg'),
+    },
+    orders: {
+        infoIcon: require('./infoIcon.svg'),
+        tableArrow: require('./tableArrow.svg'),
+        threePoints: require('./threePoints.svg'),
+        filledLeftArrow: require('./filledLeftArrow.svg'),
+        unfilledLeftArrow: require('./unfilledLeftArrow.svg'),
+        filledRightArrow: require('./filledRightArrow.svg'),
+        unfilledRightArrow: require('./unfilledRightArrow.svg'),
     }
 }
 
