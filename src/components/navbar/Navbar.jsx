@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import images from '../../assets/images';
 import Notifications from './Notifications';
 import Profile from './Profile';
+import i18n from '../../services/locales/i18n';
 import './navbar.scss';
 
 export const Navbar = (props) => {
@@ -16,10 +17,10 @@ export const Navbar = (props) => {
     return (
         <div className="strike-navbar">
             <div className="strike-navbar__left">
-                <div className="strike-navbar__left-text">Online Shop</div>
+                <div className="strike-navbar__left-text">{i18n.t('navbar.onlineShop')}</div>
             </div>
             <div className="strike-navbar__middle">
-                <div className="strike-navbar__middle-text">Strike.</div>
+                <div className="strike-navbar__middle-text">{i18n.t('navbar.strike')}</div>
             </div>
             <div className="strike-navbar__right">
                 <div tabIndex="0" onBlur={toggleNotifications} onClick={toggleNotifications} className="strike-navbar__right-notification">

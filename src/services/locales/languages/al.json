@@ -1,0 +1,10 @@
+{
+    "login": {
+        "title": "Strike App",
+        "emailLabel": "Adresa elektronike",
+        "emailPlaceholder": "Shkruani adresen tuaj elektronike këtu...",
+        "passwordLabel": "Fjalëkalimi",
+        "passwordPlaceholder": "Shkruani fjalëkalimin tuaj këtu...",
+        "loginButton": "Kyçu"
+    }
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import Router from './services/routes/Routes';
 
-const App = (props) => {
+const App = () => {
   return (
     <>
       <Router />

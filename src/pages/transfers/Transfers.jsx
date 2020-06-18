@@ -3,31 +3,32 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Wrapper from '../../containers/wrapper/Wrapper';
 import images from '../../assets/images';
+import i18n from '../../services/locales/i18n';
 import './transfers.scss';
 
 const transfers = (props) => {
-    const { infoIcon, filledLeftArrow, unfilledLeftArrow, filledRightArrow, unfilledRightArrow, history } = images.transfers;
+    const { history } = images.transfers;
     return (
         <Wrapper>
             <div className="strike-transfers-top">
                 <div className="strike-transfers-top__left">
-                    <div className="strike-transfers-top__left-title">Current Balance</div>
-                    <div className="strike-transfers-top__left-subtitle">Total amount</div>
+                    <div className="strike-transfers-top__left-title">{i18n.t('transfers.currentBalance')}</div>
+                    <div className="strike-transfers-top__left-subtitle">{i18n.t('transfers.totalAmount')}</div>
                     <div className="strike-transfers-top__left-price">200.50 %</div>
                     <div className="strike-transfers-top__left-history">
                         <img className="strike-transfers-top__left-history-icon" src={history} />
-                        <div className="strike-transfers-top__left-history-text">Transaction history</div>
+                        <div className="strike-transfers-top__left-history-text">{i18n.t('transfers.transactionHistory')}</div>
                     </div>
                 </div>
 
 
                 <div className="strike-transfers-top__right">
-                    <div className="strike-transfers-top__right-title">Total earning</div>
-                    <div className="strike-transfers-top__right-subtitle">Total amount</div>
+                    <div className="strike-transfers-top__right-title">{i18n.t('transfers.totalEarning')}</div>
+                    <div className="strike-transfers-top__right-subtitle">{i18n.t('transfers.totalAmount')}</div>
                     <div className="strike-transfers-top__right-price">2550.25 %</div>
                     <div className="strike-transfers-top__right-history">
                         <img className="strike-transfers-top__right-history-icon" src={history} />
-                        <div className="strike-transfers-top__right-history-text">Transaction history</div>
+                        <div className="strike-transfers-top__right-history-text">{i18n.t('transfers.transactionHistory')}</div>
                     </div>
                 </div>
             </div>
@@ -49,19 +50,19 @@ const Table = ({ items }) => {
         <div className="strike-transfers__table">
             <div className="strike-transfers__table-header">
                 <div className="strike-transfers__table-header-item">
-                    <div className="strike-transfers__table-header-item-text">Amount</div>
+                    <div className="strike-transfers__table-header-item-text">{i18n.t('transfers.amount')}</div>
                 </div>
                 <div className="strike-transfers__table-header-item">
-                    <div className="strike-transfers__table-header-item-text">Date</div>
+                    <div className="strike-transfers__table-header-item-text">{i18n.t('transfers.date')}</div>
                 </div>
                 <div className="strike-transfers__table-header-item">
-                    <div className="strike-transfers__table-header-item-text">Time</div>
+                    <div className="strike-transfers__table-header-item-text">{i18n.t('transfers.time')}</div>
                 </div>
                 <div className="strike-transfers__table-header-item">
-                    <div className="strike-transfers__table-header-item-text">Shop User</div>
+                    <div className="strike-transfers__table-header-item-text">{i18n.t('transfers.shopUser')}</div>
                 </div>
                 <div className="strike-transfers__table-header-item">
-                    <div className="strike-transfers__table-header-item-text">Courier User</div>
+                    <div className="strike-transfers__table-header-item-text">{i18n.t('transfers.courierUser')}</div>
                 </div>
             </div>
             {items && items.map(item => {

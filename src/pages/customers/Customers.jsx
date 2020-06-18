@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Wrapper from '../../containers/wrapper/Wrapper';
 import images from '../../assets/images';
+import i18n from '../../services/locales/i18n';
 import './customers.scss';
 
 const Customers = (props) => {
@@ -12,7 +13,7 @@ const Customers = (props) => {
             <div className="strike-customers">
                 <div className="strike-customers__header">
                     <div className="strike-customers__header-left">
-                        <div className="strike-customers__header-left-text">All Customers</div>
+                        <div className="strike-customers__header-left-text">{i18n.t('customers.allCustomers')}</div>
                     </div>
                     <div className="strike-customers__header-right">
                         <img className="strike-customers__header-right-icon" src={infoIcon} />
@@ -44,31 +45,31 @@ const Table = ({ items }) => {
         <div className="strike-customers__table">
             <div className="strike-customers__table-header">
                 <div className="strike-customers__table-header-item">
-                    <div className="strike-customers__table-header-item-text">ID</div>
+                    <div className="strike-customers__table-header-item-text">{i18n.t('customers.id')}</div>
                     <img className="strike-customers__table-header-item-icon" src={tableArrow} />
                 </div>
                 <div className="strike-customers__table-header-item">
-                    <div className="strike-customers__table-header-item-text">First Name</div>
+                    <div className="strike-customers__table-header-item-text">{i18n.t('customers.firstName')}</div>
                     <img className="strike-customers__table-header-item-icon" src={tableArrow} />
                 </div>
                 <div className="strike-customers__table-header-item">
-                    <div className="strike-customers__table-header-item-text">Last Name</div>
+                    <div className="strike-customers__table-header-item-text">{i18n.t('customers.lastName')}</div>
                     <img className="strike-customers__table-header-item-icon" src={tableArrow} />
                 </div>
                 <div className="strike-customers__table-header-item">
-                    <div className="strike-customers__table-header-item-text">Phone</div>
+                    <div className="strike-customers__table-header-item-text">{i18n.t('customers.phone')}</div>
                     <img className="strike-customers__table-header-item-icon" src={tableArrow} />
                 </div>
                 <div className="strike-customers__table-header-item">
-                    <div className="strike-customers__table-header-item-text">Address</div>
+                    <div className="strike-customers__table-header-item-text">{i18n.t('customers.address')}</div>
                     <img className="strike-customers__table-header-item-icon" src={tableArrow} />
                 </div>
                 <div className="strike-customers__table-header-item centered">
-                    <div className="strike-customers__table-header-item-text">City</div>
+                    <div className="strike-customers__table-header-item-text">{i18n.t('customers.city')}</div>
                     <img className="strike-customers__table-header-item-icon" src={tableArrow} />
                 </div>
                 <div className="strike-customers__table-header-item centered">
-                    <div className="strike-customers__table-header-item-text">Actions</div>
+                    <div className="strike-customers__table-header-item-text">{i18n.t('customers.actions')}</div>
                 </div>
             </div>
             {items && items.map(item => {
@@ -105,8 +106,8 @@ const Item = (props) => {
                 <div class="dropdown">
                     <img className="strike-customers__table-item-container-dots" src={threePoints} />
                     <div class="dropdown-content">
-                        <div className="dropdown-content-text">Open location</div>
-                        <div className="dropdown-content-text">Delete</div>
+                        <div className="dropdown-content-text">{i18n.t('customers.openLocation')}</div>
+                        <div className="dropdown-content-text">{i18n.t('customers.delete')}</div>
                     </div>
                 </div>
             </div>

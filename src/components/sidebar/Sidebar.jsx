@@ -1,17 +1,18 @@
 import React from 'react';
 import images from '../../assets/images';
 import { useHistory, useLocation } from 'react-router-dom';
+import i18n from '../../services/locales/i18n';
 import './sidebar.scss';
 
 export const Sidebar = (props) => {
     const { homeIcon, customersIcon, ordersIcon, productsIcon, transfersIcon } = images.sidebar;
     const menu = [
-        { name: 'Home', path: '/', icon: homeIcon },
-        { name: 'Products', path: '/products', icon: productsIcon },
-        { name: 'Orders', path: '/orders', icon: ordersIcon },
-        { name: 'Customers', path: '/customers', icon: customersIcon },
-        { name: 'Transfers', path: '/transfers', icon: transfersIcon },
-        { name: 'Statistics', path: '/statistics', icon: null },
+        { name: i18n.t('sidebar.home'), path: '/', icon: homeIcon },
+        { name: i18n.t('sidebar.products'), path: '/products', icon: productsIcon },
+        { name: i18n.t('sidebar.orders'), path: '/orders', icon: ordersIcon },
+        { name: i18n.t('sidebar.customers'), path: '/customers', icon: customersIcon },
+        { name: i18n.t('sidebar.transfers'), path: '/transfers', icon: transfersIcon },
+        { name: i18n.t('sidebar.statistics'), path: '/statistics', icon: null },
     ]
     const history = useHistory();
     const location = useLocation();

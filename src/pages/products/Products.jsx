@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Wrapper from '../../containers/wrapper/Wrapper';
 import images from '../../assets/images';
+import i18n from '../../services/locales/i18n';
 import './products.scss';
 
 const Products = (props) => {
@@ -10,7 +11,7 @@ const Products = (props) => {
         <Wrapper>
             <div className="strike-products">
                 <div className="strike-products__header">
-                    <div className="strike-products__header-title">Top Products</div>
+                    <div className="strike-products__header-title">{i18n.t('products.topProducts')}</div>
                 </div>
                 <Table items={[1, 2, 3, 4]} />
             </div>
@@ -29,15 +30,15 @@ const Table = ({ items }) => {
         <div className="strike-products__table">
             <div className="strike-products__table-header">
                 <div className="strike-products__table-header-item flex-1">#</div>
-                <div className="strike-products__table-header-item flex-3">PRODUCT</div>
-                <div className="strike-products__table-header-item flex-3">DESCRIPTION</div>
-                <div className="strike-products__table-header-item flex-15">PRICE</div>
-                <div className="strike-products__table-header-item flex-15 text-center">ACTIONS</div>
+                <div className="strike-products__table-header-item flex-3">{i18n.t('products.product')}</div>
+                <div className="strike-products__table-header-item flex-3">{i18n.t('products.description')}</div>
+                <div className="strike-products__table-header-item flex-15">{i18n.t('products.price')}</div>
+                <div className="strike-products__table-header-item flex-15 text-center">{i18n.t('products.actions')}</div>
             </div>
             {items && items.map(item => {
                 return <TableItem item={item} />
             })}
-            <div className="strike-products__showmore">Show more</div>
+            <div className="strike-products__showmore">{i18n.t('products.showMore')}</div>
         </div>
     )
 }
@@ -66,9 +67,9 @@ const TableItem = ({ item }) => {
                 <div class="dropdown">
                     <img className="strike-products__table-item-content-points" src={threePoints} />
                     <div class="dropdown-content">
-                        <div className="dropdown-content-text">Copy link</div>
-                        <div className="dropdown-content-text">Edit</div>
-                        <div className="dropdown-content-text">Delete</div>
+                        <div className="dropdown-content-text">{i18n.t('products.copyLink')}</div>
+                        <div className="dropdown-content-text">{i18n.t('products.edit')}</div>
+                        <div className="dropdown-content-text">{i18n.t('products.delete')}</div>
                     </div>
                 </div>
             </div>

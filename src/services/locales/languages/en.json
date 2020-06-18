@@ -1,0 +1,96 @@
+{
+    "navbar": {
+        "onlineShop": "Online Shop",
+        "strike": "Strike.",
+        "notifications": "Notifications",
+        "seeAll": "See all",
+        "status": "Status",
+        "online": "Online",
+        "offline": "Offline",
+        "accountSettings": "Account Settings",
+        "feedback": "Feedback",
+        "logout": "Log out"
+    },
+    "sidebar": {
+        "home": "Home",
+        "products": "Products",
+        "orders": "Orders",
+        "customers": "Customers",
+        "transfers": "Transfers",
+        "statistics": "Stastistics"
+    },
+    "login": {
+        "title": "Strike App",
+        "emailLabel": "Email",
+        "emailPlaceholder": "Type your email here...",
+        "passwordLabel": "Password",
+        "passwordPlaceholder": "Type your password here...",
+        "loginButton": "Login"
+    },
+    "home": {
+        "overview": "Overview",
+        "pendingOrders": "Pending Orders",
+        "ongoingOrders": "Ongoing Orders",
+        "cancelledOrders": "Cancelled Orders",
+        "completedOrders": "Completed Orders",
+        "topCities": "Top Cities",
+        "viewAll": "View All",
+        "topProducts": "Top Products",
+        "recentCustomers": "Recent Customers",
+        "product": "PRODUCT",
+        "description": "DESCRIPTION",
+        "price": "PRICE",
+        "noOrders": "NO. ORDERS",
+        "name": "NAME",
+        "total": "TOTAL",
+        "showMore": "Show More"
+    },
+    "products": {
+        "topProducts": "Top Products",
+        "product": "PRODUCT",
+        "description": "DESCRIPTION",
+        "price": "PRICE",
+        "actions": "ACTIONS",
+        "showMore": "Show More",
+        "copyLink": "Copy Link",
+        "edit": "Edit",
+        "delete": "Delete"
+    },
+    "orders": {
+        "allOrders": "All Orders",
+        "id": "ID",
+        "status": "Status",
+        "unitedPrice": "United Price",
+        "customerId": "Customer ID",
+        "customerName": "Customer Name",
+        "city": "City",
+        "actions": "Actions",
+        "openLocation": "Open Location",
+        "share": "Share",
+        "print": "Print",
+        "delete": "Delete"
+    },
+    "customers": {
+        "allCustomers": "All Customers",
+        "id": "ID",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "phone": "Phone",
+        "address": "Address",
+        "city": "City",
+        "actions": "Actions",
+        "openLocation": "Open Location",
+        "delete": "Delete"
+    },
+    "transfers": {
+        "currentBalance": "Current Balance",
+        "totalAmount": "Total amount",
+        "transactionHistory": "Transaction History",
+        "totalEarning": "Total Earning",
+        "amount": "Amount",
+        "date": "Date",
+        "time": "Time",
+        "shopUser": "Shop User",
+        "courierUser": "Courier User"
+    }
+}
