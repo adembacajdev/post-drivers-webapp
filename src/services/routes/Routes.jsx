@@ -17,6 +17,9 @@ const Transfers = lazy(() => import('../../pages/transfers/Transfers'));
 const Users = lazy(() => import('../../pages/users/Users'));
 const Pricing = lazy(() => import('../../pages/pricing/Pricing'));
 const AddUser = lazy(() => import('../../pages/users/AddUser'));
+const AddTransfer = lazy(() => import('../../pages/transfers/AddTransfer'));
+const AddProduct = lazy(() => import('../../pages/products/AddProduct'));
+const AddOrder = lazy(() => import('../../pages/orders/AddOrder'));
 
 function Router(props) {
     const isLoggedIn = useSelector(state => state.isLoggedIn);
@@ -40,9 +43,12 @@ function Router(props) {
                             <Route path='/' exact component={Home} />
                             <Route path='/customers' exact component={Customers} />
                             <Route path='/orders' exact component={Orders} />
+                            <Route path='/add-order' exact component={AddOrder} />
                             <Route path='/products' exact component={Products} />
+                            <Route path='/add-product' exact component={AddProduct} />
                             <Route path='/statistics' exact component={Statistics} />
                             <Route path='/transfers' exact component={Transfers} />
+                            <Route path='/add-transfer' exact component={AddTransfer} />
                             <Route path='/pricing' exact component={Pricing} />
                             <Route path='/users' exact component={Users} />
                             <Route path='/add-user' exact component={AddUser} />

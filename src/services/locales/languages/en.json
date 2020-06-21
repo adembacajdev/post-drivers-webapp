@@ -133,5 +133,38 @@
         "isAdmin": "Is Admin",
         "true": "Yes",
         "false": "No"
+    },
+    "addProductForm": {
+        "title": "Add Product",
+        "name": "Name",
+        "description": "Description",
+        "price": "Price",
+        "size": "Size",
+        "medium": "Medium",
+        "small": "Small",
+        "large": "Large",
+        "addProduct": "Add Product"
+    },
+    "addTransferForm": {
+        "title": "Add Transfer",
+        "amount": "Amount",
+        "date": "Date",
+        "time": "Time",
+        "addTransfer": "Add Transfer"
+    },
+    "addOrderForm": {
+        "title": "Add Order",
+        "addOrder": "Add Order",
+        "productId": "Product ID",
+        "description": "Description",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "phone": "Phone",
+        "country": "Country",
+        "city": "City",
+        "address": "Address",
+        "building": "Building",
+        "latitude": "Latitude",
+        "longitude": "Longitude"
     }
 }
