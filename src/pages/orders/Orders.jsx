@@ -66,7 +66,11 @@ const Table = ({ items }) => {
                     <img className="strike-orders__table-header-item-icon" src={tableArrow} />
                 </div>
                 <div is-responsive="true" className="strike-orders__table-header-item">
-                    <div className="strike-orders__table-header-item-text">{i18n.t('orders.customerId')}</div>
+                    <div className="strike-orders__table-header-item-text">{i18n.t('orders.date')}</div>
+                    <img className="strike-orders__table-header-item-icon" src={tableArrow} />
+                </div>
+                <div is-responsive="true" className="strike-orders__table-header-item">
+                    <div className="strike-orders__table-header-item-text">{i18n.t('orders.time')}</div>
                     <img className="strike-orders__table-header-item-icon" src={tableArrow} />
                 </div>
                 <div is-responsive="true" className="strike-orders__table-header-item">
@@ -107,7 +111,10 @@ const Item = (props) => {
                 <div className="strike-orders__table-item-container-text">35440</div>
             </div>
             <div is-responsive="true" className="strike-orders__table-item-container">
-                <div className="strike-orders__table-item-container-text">Francesco Metts</div>
+                <div className="strike-orders__table-item-container-text">12/12/2019</div>
+            </div>
+            <div is-responsive="true" className="strike-orders__table-item-container">
+                <div className="strike-orders__table-item-container-text">12:00 PM</div>
             </div>
             <div is-responsive="true" className="strike-orders__table-item-container centered">
                 <div className="strike-orders__table-item-container-text">Prishtine</div>

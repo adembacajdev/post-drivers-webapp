@@ -63,14 +63,15 @@
         "id": "ID",
         "status": "Status",
         "unitedPrice": "United Price",
-        "customerId": "Customer ID",
         "customerName": "Customer Name",
         "city": "City",
         "actions": "Actions",
         "openLocation": "Open Location",
         "share": "Share",
         "print": "Print",
-        "delete": "Delete"
+        "delete": "Delete",
+        "date": "Date",
+        "time": "Time"
     },
     "customers": {
         "allCustomers": "All Customers",
