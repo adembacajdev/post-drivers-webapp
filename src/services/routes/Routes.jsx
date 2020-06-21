@@ -16,6 +16,7 @@ const Statistics = lazy(() => import('../../pages/statistics/Statistics'));
 const Transfers = lazy(() => import('../../pages/transfers/Transfers'));
 const Users = lazy(() => import('../../pages/users/Users'));
 const Pricing = lazy(() => import('../../pages/pricing/Pricing'));
+const AddUser = lazy(() => import('../../pages/users/AddUser'));
 
 function Router(props) {
     const isLoggedIn = useSelector(state => state.isLoggedIn);
@@ -44,6 +45,7 @@ function Router(props) {
                             <Route path='/transfers' exact component={Transfers} />
                             <Route path='/pricing' exact component={Pricing} />
                             <Route path='/users' exact component={Users} />
+                            <Route path='/add-user' exact component={AddUser} />
                             <Route path='/login' exact component={Login} />
                         </Switch>
                     </Suspense>

@@ -5,9 +5,11 @@ import Wrapper from '../../containers/wrapper/Wrapper';
 import images from '../../assets/images';
 import i18n from '../../services/locales/i18n';
 import './style.scss';
+import { useCallback } from 'react';
 
 const Customers = (props) => {
     const { infoIcon, filledLeftArrow, unfilledLeftArrow, filledRightArrow, unfilledRightArrow } = images.customers;
+    const addUser = useCallback(() => {props.history.push('/add-user')}, [])
     return (
         <Wrapper>
             <div className="strike-customers">
@@ -16,7 +18,7 @@ const Customers = (props) => {
                         <div className="strike-customers__header-left-text">{i18n.t('users.title')}</div>
                     </div>
                     <div className="strike-customers__header-right">
-                        <div className="strike-customers__header-right-text">Add User</div>
+                        <div onClick={addUser} className="strike-customers__header-right-text">{i18n.t('users.addUser')}</div>
                     </div>
                 </div>
                 <Table items={[1, 2, 3, 4, 5, 6]} />

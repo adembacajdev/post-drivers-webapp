@@ -114,7 +114,8 @@
         "role": "Role",
         "actions": "Actions",
         "edit": "Edit",
-        "delete": "Delete"
+        "delete": "Delete",
+        "addUser": "Add User"
     },
     "pricing": {
         "title": "Pricing",
@@ -122,5 +123,14 @@
         "size": "Size",
         "shipmentPrice": "Shipment Price",
         "cancellationPrice": "Cancellation Price"
+    },
+    "addUserForm": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "phone": "Phone",
+        "isAdmin": "Is Admin",
+        "true": "Yes",
+        "false": "No"
     }
 }
