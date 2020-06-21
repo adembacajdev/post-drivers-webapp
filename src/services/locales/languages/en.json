@@ -115,5 +115,12 @@
         "actions": "Actions",
         "edit": "Edit",
         "delete": "Delete"
+    },
+    "pricing": {
+        "title": "Pricing",
+        "country": "Country",
+        "size": "Size",
+        "shipmentPrice": "Shipment Price",
+        "cancellationPrice": "Cancellation Price"
     }
 }

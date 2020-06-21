@@ -5,8 +5,9 @@ import Wrapper from '../../containers/wrapper/Wrapper';
 import images from '../../assets/images';
 import i18n from '../../services/locales/i18n';
 import './transfers.scss';
+import { Trans } from 'react-i18next';
 
-const transfers = (props) => {
+const Transfers = (props) => {
     const { history } = images.transfers;
     return (
         <Wrapper>
@@ -47,7 +48,7 @@ const transfers = (props) => {
 const mapStateToProps = null;
 const mapDispatchToProps = null;
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(transfers));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Transfers));
 
 
 const Table = ({ items }) => {

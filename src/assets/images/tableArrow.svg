@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" viewBox="0 0 14 12">
-  <g id="Polygon_1" data-name="Polygon 1" transform="translate(14 12) rotate(180)">
-    <path d="M 13.12947845458984 11.50000095367432 L 0.8705216646194458 11.50000095367432 L 7 0.9923238158226013 L 13.12947845458984 11.50000095367432 Z" stroke="none"/>
-    <path d="M 7 1.984636306762695 L 1.741037368774414 11.00000095367432 L 12.25896263122559 11.00000095367432 L 7 1.984636306762695 M 7 9.5367431640625e-07 L 14 12.00000095367432 L 0 12.00000095367432 L 7 9.5367431640625e-07 Z" stroke="none" fill="#707070"/>
-  </g>
-</svg>
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 213.333 213.333" style="enable-background:new 0 0 213.333 213.333;" xml:space="preserve" width="512px" height="512px"><g><g>
+	<g>
+		<polygon points="0,53.333 106.667,160 213.333,53.333   " data-original="#000000" class="active-path" data-old_color="#000000" fill="#C1C8D8"/>
+	</g>
+</g></g> </svg>
