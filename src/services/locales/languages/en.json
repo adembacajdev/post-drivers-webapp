@@ -97,5 +97,10 @@
         "time": "Time",
         "shopUser": "Shop User",
         "courierUser": "Courier User"
+    },
+    "statistics": {
+        "title": "Statistics",
+        "earning": "Earning",
+        "orders": "Orders"
     }
 }
