@@ -3,7 +3,8 @@ import { Router as BaseRouter, Route, Switch, Redirect } from 'react-router-dom'
 import history from './history';
 import Loader from '../../components/loader/Loader';
 import { useSelector } from 'react-redux';
-import { Navbar, Sidebar } from '../../components';
+import Navbar from '../../components/navbar/Navbar';
+import { Sidebar } from '../../components';
 
 //pages
 const Home = lazy(() => import('../../pages/home/Home'));

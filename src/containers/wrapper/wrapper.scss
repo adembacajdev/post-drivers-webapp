@@ -4,3 +4,11 @@
     padding: 50px;
     padding: 50px 80px 50px 50px;
 }
+
+@media only screen and (max-width: 700px) {
+    .strike-wrapper{
+        margin-top: 75px;
+        margin-left: 0;
+        padding: 50px 5px 50px 5px;
+    }
+}

@@ -60,7 +60,7 @@ const Table = ({ items }) => {
                     <div className="strike-customers__table-header-item-text">{i18n.t('customers.phone')}</div>
                     <img className="strike-customers__table-header-item-icon" src={tableArrow} />
                 </div>
-                <div className="strike-customers__table-header-item">
+                <div is-responsive="true" className="strike-customers__table-header-item">
                     <div className="strike-customers__table-header-item-text">{i18n.t('customers.address')}</div>
                     <img className="strike-customers__table-header-item-icon" src={tableArrow} />
                 </div>
@@ -68,7 +68,7 @@ const Table = ({ items }) => {
                     <div className="strike-customers__table-header-item-text">{i18n.t('customers.city')}</div>
                     <img className="strike-customers__table-header-item-icon" src={tableArrow} />
                 </div>
-                <div className="strike-customers__table-header-item centered">
+                <div is-responsive="true" className="strike-customers__table-header-item centered">
                     <div className="strike-customers__table-header-item-text">{i18n.t('customers.actions')}</div>
                 </div>
             </div>
@@ -96,13 +96,13 @@ const Item = (props) => {
             <div className="strike-customers__table-item-container">
                 <div className="strike-customers__table-item-container-text">35440</div>
             </div>
-            <div className="strike-customers__table-item-container">
+            <div is-responsive="true" className="strike-customers__table-item-container">
                 <div className="strike-customers__table-item-container-text">rr.7 September</div>
             </div>
             <div className="strike-customers__table-item-container centered">
                 <div className="strike-customers__table-item-container-text">London</div>
             </div>
-            <div className="strike-customers__table-item-container centered">
+            <div is-responsive="true" className="strike-customers__table-item-container centered">
                 <div class="dropdown">
                     <img className="strike-customers__table-item-container-dots" src={threePoints} />
                     <div class="dropdown-content">

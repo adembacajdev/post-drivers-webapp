@@ -2,7 +2,7 @@
     height: 100%;
     width: 260px; //this should be 0
     position: fixed;
-    z-index: 0;
+    z-index: 99999;
     top: 60px;
     left: 0;
     overflow-x: hidden;
@@ -50,6 +50,67 @@
             .strike-sidebar__item-line{
                 background-color: #FECB2E;
             }
+        }
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .strike-sidebar{
+        height: 100%;
+        width: 0; //this should be 260px
+        position: fixed;
+        z-index: 99999;
+        top: 60px;
+        left: 0;
+        overflow-x: hidden;
+        transition: 0.4s;
+        background-color: #FFFFFF !important;
+        padding: 10px 0;
+        border-right: 1px solid #F5F7F9;
+        &__item{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            width: 100%;
+            height: 50px;
+            background-color: #FFFFFF;
+            cursor: pointer;
+            transition: 0.4s linear all;
+            &-line{
+                width: 5px;
+                height: 100%;
+                background-color: #FFFFFF;
+                margin-right: 20px;
+                transition: 0.4s linear all;
+            }
+            &-icon{
+                width: 16px;
+                height: 16px;
+                margin-right: 10px;
+            }
+            &-text{
+                color: #43425D;
+                font-size: 15px;
+                line-height: 20px;
+                font-family: "Avenir";
+            }
+            &[is-active=true]{
+                transition: 0.4s linear all;
+                background-color: #F5F7F9;
+                .strike-sidebar__item-line{
+                    background-color: #FECB2E;
+                }
+            }
+            &:hover{
+                transition: 0.4s linear all;
+                background-color: #F5F7F9;
+                .strike-sidebar__item-line{
+                    background-color: #FECB2E;
+                }
+            }
+        }
+        &[is-open = true]{
+            width: 260px; //this should be 260px
         }
     }
 }

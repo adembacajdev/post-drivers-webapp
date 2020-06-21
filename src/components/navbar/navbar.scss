@@ -104,6 +104,17 @@
         }
         &-avatar{}
     }
+    &__menu{
+        &-responsive{
+            display: none;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 100%;
+            margin-right: 10px;
+        }
+    }
 }
 
 .line{
@@ -294,75 +305,26 @@
             padding: 0 25px;
             float: left;
             &-text{
-                font-size: 28px;
-                line-height: 32px;
+                font-size: 18px;
+                line-height: 22px;
                 color: #43425D;
                 font-family: Arial;
             }
         }
         &__right{
-            visibility: hidden;
-            display: flex;
-            float: right;
-            height: 100%;
-            align-items: center;
-            padding-right: 15px;
-            &-notification{
-                outline: none;
-                border: none;
-                cursor: pointer;
-                padding: 0 20px;
-                &-icon{
-                    width: 19px;
-                    height: 21px;
-                }
-            }
-            &-amount{
-                cursor: pointer;
-                &-text{
-                    color: #43425D;
-                    font-size: 15px;
-                    line-height: 20px;
-                    font-family: "Avenir";
-                }
-            }
-            &-name{
+            display: none;
+        }
+        &__menu{
+            &-responsive{
                 display: flex;
                 flex-direction: row;
                 align-items: center;
+                justify-content: center;
+                width: 30px;
+                height: 100%;
+                margin-right: 10px;
                 cursor: pointer;
-                margin-right: 5px;
-                outline: none;
-                border: none;
-                &-text{
-                    font-size: 15px;
-                    line-height: 25px;
-                    color: #43425D;
-                    font-family: "Avenir";
-                    margin-right: 5px;
-                }
-                &-downarrow{
-                    width: 11px;
-                    height: 7px;
-                    transform: rotate(0deg);
-                    transition: 0.2s linear all;
-                    &:hover{
-                        transform: rotate(180deg);
-                        transition: 0.4s linear all;
-                    }
-                    &[is-active = true]{
-                        transform: rotate(180deg);
-                        transition: 0.4s linear all;
-                    }
-                }
-                &:hover{
-                    .strike-navbar__right-name-downarrow{
-                            transform: rotate(180deg);
-                            transition: 0.4s linear all;
-                    }
-                }
             }
-            &-avatar{}
         }
     }
   }

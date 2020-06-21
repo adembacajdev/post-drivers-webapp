@@ -3,9 +3,11 @@ import images from '../../assets/images';
 import Notifications from './Notifications';
 import Profile from './Profile';
 import i18n from '../../services/locales/i18n';
+import { connect } from 'react-redux';
+import { toggleSidebar } from '../../store/actions/toggle.sidebar';
 import './navbar.scss';
 
-export const Navbar = (props) => {
+const Navbar = (props) => {
     const { avatar, onNotification, offNotification, downArrow } = images.navbar;
     const [notifications, setNotifications] = useState(false);
     const [profile, setProfile] = useState(false);
@@ -13,6 +15,8 @@ export const Navbar = (props) => {
     const toggleProfile = useCallback(() => { setProfile(!profile) }, [profile]);
     const profileBlur = useCallback(() => { setProfile(false) }, [profile]);
     const notificationBlur = useCallback(() => { setNotifications(false) }, [notifications]);
+
+    const openSidebar = useCallback(() => { props.toggleSidebar() }, [props.sidebar])
 
     return (
         <div className="strike-navbar">
@@ -40,6 +44,12 @@ export const Navbar = (props) => {
                     <img className="strike-navbar__right-avatar-icon" src={avatar} />
                 </div>
             </div>
+            <div onClick={openSidebar} className="strike-navbar__menu-responsive">&#9776;</div>
         </div>
     )
 }
+
+const mapStateToProps = ({ sidebar }) => ({ sidebar });
+const mapDispatchToProps = { toggleSidebar };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

@@ -12,24 +12,29 @@ const transfers = (props) => {
         <Wrapper>
             <div className="strike-transfers-top">
                 <div className="strike-transfers-top__left">
-                    <div className="strike-transfers-top__left-title">{i18n.t('transfers.currentBalance')}</div>
-                    <div className="strike-transfers-top__left-subtitle">{i18n.t('transfers.totalAmount')}</div>
-                    <div className="strike-transfers-top__left-price">200.50 %</div>
-                    <div className="strike-transfers-top__left-history">
-                        <img className="strike-transfers-top__left-history-icon" src={history} />
-                        <div className="strike-transfers-top__left-history-text">{i18n.t('transfers.transactionHistory')}</div>
+                    <div className="strike-transfers-top__left-title">{i18n.t('transfers.latestEarning')}</div>
+                    <div className="strike-transfers-top__left-middle">
+                        <div className="strike-transfers-top__left-middle-left">
+                            <div className="strike-transfers-top__left-middle-left-title">{i18n.t('transfers.totalAmount')}</div>
+                            <div className="strike-transfers-top__left-middle-left-subtitle">200.50$</div>
+                        </div>
+                        <div className="strike-transfers-top__left-middle-right">
+                            <div className="strike-transfers-top__left-middle-right-title">{i18n.t('transfers.transportCost')}</div>
+                            <div className="strike-transfers-top__left-middle-right-subtitle">- 40.50$</div>
+                        </div>
                     </div>
+                    <div className="strike-transfers-top__left-subtitle text-center">{i18n.t('transfers.netoAmount')}</div>
+                    <div className="strike-transfers-top__left-price text-center">160.00$</div>
                 </div>
-
-
+                <div className="strike-transfers-top__middle">
+                    <div className="strike-transfers-top__middle-title">{i18n.t('transfers.currentBalance')}</div>
+                    <div className="strike-transfers-top__middle-subtitle">{i18n.t('transfers.totalAmount')}</div>
+                    <div className="strike-transfers-top__middle-price">200.50 %</div>
+                </div>
                 <div className="strike-transfers-top__right">
-                    <div className="strike-transfers-top__right-title">{i18n.t('transfers.totalEarning')}</div>
+                    <div className="strike-transfers-top__right-title">{i18n.t('transfers.allTimeEarning')}</div>
                     <div className="strike-transfers-top__right-subtitle">{i18n.t('transfers.totalAmount')}</div>
                     <div className="strike-transfers-top__right-price">2550.25 %</div>
-                    <div className="strike-transfers-top__right-history">
-                        <img className="strike-transfers-top__right-history-icon" src={history} />
-                        <div className="strike-transfers-top__right-history-text">{i18n.t('transfers.transactionHistory')}</div>
-                    </div>
                 </div>
             </div>
             <div className="strike-transfers">
@@ -58,10 +63,10 @@ const Table = ({ items }) => {
                 <div className="strike-transfers__table-header-item">
                     <div className="strike-transfers__table-header-item-text">{i18n.t('transfers.time')}</div>
                 </div>
-                <div className="strike-transfers__table-header-item">
+                <div is-responsive="true" className="strike-transfers__table-header-item">
                     <div className="strike-transfers__table-header-item-text">{i18n.t('transfers.shopUser')}</div>
                 </div>
-                <div className="strike-transfers__table-header-item">
+                <div is-responsive="true" className="strike-transfers__table-header-item">
                     <div className="strike-transfers__table-header-item-text">{i18n.t('transfers.courierUser')}</div>
                 </div>
             </div>
@@ -84,10 +89,10 @@ const Item = (props) => {
             <div className="strike-transfers__table-item-container">
                 <div className="strike-transfers__table-item-container-text">12:30</div>
             </div>
-            <div className="strike-transfers__table-item-container">
+            <div is-responsive="true" className="strike-transfers__table-item-container">
                 <div className="strike-transfers__table-item-container-text">John Doe</div>
             </div>
-            <div className="strike-transfers__table-item-container">
+            <div is-responsive="true" className="strike-transfers__table-item-container">
                 <div className="strike-transfers__table-item-container-text">Will Doe</div>
             </div>
         </div>
