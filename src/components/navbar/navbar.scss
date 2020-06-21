@@ -305,7 +305,7 @@
             padding: 0 25px;
             float: left;
             &-text{
-                font-size: 18px;
+                font-size: 12px;
                 line-height: 22px;
                 color: #43425D;
                 font-family: Arial;
@@ -316,6 +316,7 @@
         }
         &__menu{
             &-responsive{
+                font-size: 30px;
                 display: flex;
                 flex-direction: row;
                 align-items: center;
