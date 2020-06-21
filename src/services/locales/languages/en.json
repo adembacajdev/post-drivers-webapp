@@ -17,7 +17,9 @@
         "orders": "Orders",
         "customers": "Customers",
         "transfers": "Transfers",
-        "statistics": "Stastistics"
+        "statistics": "Stastistics",
+        "users": "Users",
+        "pricing": "Pricing"
     },
     "login": {
         "title": "Strike App",

@@ -5,16 +5,24 @@ import Wrapper from '../../containers/wrapper/Wrapper';
 import images from '../../assets/images';
 import i18n from '../../services/locales/i18n';
 import './orders.scss';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 const Orders = (props) => {
+    const [title, setTitle] = useState(i18n.t('orders.allOrders'))
     const { innerWidth, innerHeight } = window;
     const { infoIcon, filledLeftArrow, unfilledLeftArrow, filledRightArrow, unfilledRightArrow } = images.orders;
+    useEffect(() => {
+        if(props.location.state && props.location.state.title){
+            setTitle(props.location.state.title)
+        }
+    }, [])
     return (
         <Wrapper>
             <div className="strike-orders">
                 <div className="strike-orders__header">
                     <div className="strike-orders__header-left">
-                        <div className="strike-orders__header-left-text">{i18n.t('orders.allOrders')}</div>
+                        <div className="strike-orders__header-left-text">{title}</div>
                     </div>
                     <div className="strike-orders__header-right">
                         <img className="strike-orders__header-right-icon" src={infoIcon} />

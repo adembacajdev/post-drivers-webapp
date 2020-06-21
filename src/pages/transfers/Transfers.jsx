@@ -63,12 +63,6 @@ const Table = ({ items }) => {
                 <div className="strike-transfers__table-header-item">
                     <div className="strike-transfers__table-header-item-text">{i18n.t('transfers.time')}</div>
                 </div>
-                <div is-responsive="true" className="strike-transfers__table-header-item">
-                    <div className="strike-transfers__table-header-item-text">{i18n.t('transfers.shopUser')}</div>
-                </div>
-                <div is-responsive="true" className="strike-transfers__table-header-item">
-                    <div className="strike-transfers__table-header-item-text">{i18n.t('transfers.courierUser')}</div>
-                </div>
             </div>
             {items && items.map(item => {
                 return <Item />
@@ -88,12 +82,6 @@ const Item = (props) => {
             </div>
             <div className="strike-transfers__table-item-container">
                 <div className="strike-transfers__table-item-container-text">12:30</div>
-            </div>
-            <div is-responsive="true" className="strike-transfers__table-item-container">
-                <div className="strike-transfers__table-item-container-text">John Doe</div>
-            </div>
-            <div is-responsive="true" className="strike-transfers__table-item-container">
-                <div className="strike-transfers__table-item-container-text">Will Doe</div>
             </div>
         </div>
     )

@@ -16,28 +16,28 @@ const Home = (props) => {
             <div className="strike-home">
                 <div className="strike-home__header">{i18n.t('home.overview')}</div>
                 <div className="strike-home__grids">
-                    <div className="strike-home__grids-grid">
+                    <div onClick={() => props.history.push('/orders', { title: i18n.t('home.pendingOrders') })} className="strike-home__grids-grid">
                         <div className="strike-home__grids-grid-title">{i18n.t('home.pendingOrders')}</div>
                         <div className="strike-home__grids-grid-bottom">
                             <div className="strike-home__grids-grid-bottom-number">20</div>
                             <img className="strike-home__grids-grid-bottom-icon" src={blueChart} />
                         </div>
                     </div>
-                    <div className="strike-home__grids-grid">
+                    <div onClick={() => props.history.push('/orders', { title: i18n.t('home.ongoingOrders') })} className="strike-home__grids-grid">
                         <div className="strike-home__grids-grid-title">{i18n.t('home.ongoingOrders')}</div>
                         <div className="strike-home__grids-grid-bottom">
                             <div className="strike-home__grids-grid-bottom-number">200</div>
                             <img className="strike-home__grids-grid-bottom-icon" src={yellowChart} />
                         </div>
                     </div>
-                    <div className="strike-home__grids-grid">
+                    <div onClick={() => props.history.push('/orders', { title: i18n.t('home.cancelledOrders') })} className="strike-home__grids-grid">
                         <div className="strike-home__grids-grid-title">{i18n.t('home.cancelledOrders')}</div>
                         <div className="strike-home__grids-grid-bottom">
                             <div className="strike-home__grids-grid-bottom-number">0</div>
                             <img className="strike-home__grids-grid-bottom-icon" src={redChart} />
                         </div>
                     </div>
-                    <div className="strike-home__grids-grid">
+                    <div onClick={() => props.history.push('/orders', { title: i18n.t('home.completedOrders') })} className="strike-home__grids-grid">
                         <div className="strike-home__grids-grid-title">{i18n.t('home.completedOrders')}</div>
                         <div className="strike-home__grids-grid-bottom">
                             <div className="strike-home__grids-grid-bottom-number">30</div>
@@ -121,7 +121,7 @@ const Home = (props) => {
                                 <div className="strike-home__map-body-right-item-right">3</div>
                             </div>
                             <div className="strike-home__map-body-right-footer">
-                            {i18n.t('home.viewAll')}
+                                {i18n.t('home.viewAll')}
                             </div>
                         </div>
                     </div>
@@ -206,7 +206,7 @@ const Home = (props) => {
                             <div className="strike-home__bottom-right-table-item-right">3476</div>
                         </div>
                         <div className="strike-home__bottom-right-footer">
-                        {i18n.t('home.showMore')}
+                            {i18n.t('home.showMore')}
                         </div>
                     </div>
                 </div>

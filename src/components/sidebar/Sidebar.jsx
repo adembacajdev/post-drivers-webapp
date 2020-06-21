@@ -9,14 +9,16 @@ import './sidebar.scss';
 export const Sidebar = (props) => {
     const sidebar = useSelector(state => state.sidebar);
     const dispatch = useDispatch();
-    const { homeIcon, customersIcon, ordersIcon, productsIcon, transfersIcon } = images.sidebar;
+    const { homeIcon, customersIcon, statisticsIcon, productsIcon, transfersIcon, usersIcon, pricingIcon, ordersIcon } = images.sidebar;
     const menu = [
         { name: i18n.t('sidebar.home'), path: '/', icon: homeIcon },
         { name: i18n.t('sidebar.products'), path: '/products', icon: productsIcon },
         { name: i18n.t('sidebar.orders'), path: '/orders', icon: ordersIcon },
         { name: i18n.t('sidebar.customers'), path: '/customers', icon: customersIcon },
         { name: i18n.t('sidebar.transfers'), path: '/transfers', icon: transfersIcon },
-        { name: i18n.t('sidebar.statistics'), path: '/statistics', icon: null },
+        { name: i18n.t('sidebar.statistics'), path: '/statistics', icon: statisticsIcon },
+        { name: i18n.t('sidebar.users'), path: '/users', icon: usersIcon },
+        { name: i18n.t('sidebar.pricing'), path: '/pricing', icon: pricingIcon },
     ]
     const history = useHistory();
     const location = useLocation();

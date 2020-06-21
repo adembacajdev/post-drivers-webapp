@@ -8,9 +8,12 @@ const images = {
     sidebar: {
         homeIcon: require('./homeMenu.svg'),
         customersIcon: require('./customersMenu.svg'),
-        ordersIcon: require('./ordersMenu.svg'),
+        statisticsIcon: require('./statisticsMenu.svg'),
         productsIcon: require('./productsMenu.svg'),
         transfersIcon: require('./transfersMenu.svg'),
+        usersIcon: require('./usersMenu.svg'),
+        pricingIcon: require('./pricingMenu.svg'),
+        ordersIcon: require('./ordersMenu.svg'),
     },
     home: {
         blueChart: require('./blueChart.svg'),
