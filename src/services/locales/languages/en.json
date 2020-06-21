@@ -102,5 +102,18 @@
         "title": "Statistics",
         "earning": "Earning",
         "orders": "Orders"
+    },
+    "users": {
+        "title": "Users",
+        "id": "ID",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "phone": "Phone",
+        "email": "Email",
+        "createdAt": "Created At",
+        "role": "Role",
+        "actions": "Actions",
+        "edit": "Edit",
+        "delete": "Delete"
     }
 }
