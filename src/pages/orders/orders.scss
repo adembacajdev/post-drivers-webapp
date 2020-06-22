@@ -263,6 +263,7 @@
             line-height: 20px;
             color: #333333;
             font-family: "Avenir";
+            transition: 0.4s linear all;
             &[has-error=true]{
                 border: 1px solid red;
             }

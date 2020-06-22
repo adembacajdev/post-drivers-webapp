@@ -6,8 +6,10 @@ import { connect } from 'react-redux';
 import i18n from '../../services/locales/i18n';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import { useState } from 'react';
+import { useForm } from "react-hook-form";
 
 const AddOrder = (props) => {
+    const { register, handleSubmit, watch, errors } = useForm();
     const [popupInfo, setPopupInfo] = useState('');
     const [latitudeMarker, setLatitudeMarker] = useState(42.66758079200047);
     const [longitudeMarker, setLongitudeMarker] = useState(21.165194013322285);
@@ -46,6 +48,9 @@ const AddOrder = (props) => {
         setLatitudeInput(event.lngLat[1]);
         setLongitudeInput(event.lngLat[0]);
     }
+
+
+  const onSubmit = data => console.log(data);
     return (
         <Wrapper>
             <div className="strike-addorder">
@@ -65,29 +70,29 @@ const AddOrder = (props) => {
 
                 </ReactMapGL>
                 <div className="strike-addorder__title">{i18n.t('addOrderForm.title')}</div>
-                <form className="strike-addorder__form">
+                <form onSubmit={handleSubmit(onSubmit)} className="strike-addorder__form">
                     <div className="strike-addorder__form-label">{i18n.t('addOrderForm.productId')}</div>
-                    <input className="strike-addorder__form-input" placeholder={i18n.t('addOrderForm.productId')} />
+                    <input has-error={errors.productId ? 'true': 'false'} ref={register({ required: true })} name="productid" className="strike-addorder__form-input" placeholder={i18n.t('addOrderForm.productId')} />
                     <div className="strike-addorder__form-label">{i18n.t('addOrderForm.latitude')}</div>
-                    <input disabled defaultValue={latitudeInput} className="strike-addorder__form-input" placeholder={i18n.t('addOrderForm.latitude')} />
+                    <input has-error={errors.latitude ? 'true': 'false'} ref={register({ required: true })} name="latitude" disabled defaultValue={latitudeInput} className="strike-addorder__form-input" placeholder={i18n.t('addOrderForm.latitude')} />
                     <div className="strike-addorder__form-label">{i18n.t('addOrderForm.longitude')}</div>
-                    <input disabled defaultValue={longitudeInput} className="strike-addorder__form-input" placeholder={i18n.t('addOrderForm.longitude')} />
+                    <input has-error={errors.longitude ? 'true': 'false'} ref={register({ required: true })} name="longitude" disabled defaultValue={longitudeInput} className="strike-addorder__form-input" placeholder={i18n.t('addOrderForm.longitude')} />
                     <div className="strike-addorder__form-label">{i18n.t('addOrderForm.description')}</div>
-                    <input className="strike-addorder__form-input" placeholder={i18n.t('addOrderForm.description')} />
+                    <input has-error={errors.description ? 'true': 'false'} ref={register({ required: true })} name="description" className="strike-addorder__form-input" placeholder={i18n.t('addOrderForm.description')} />
                     <div className="strike-addorder__form-label">{i18n.t('addOrderForm.firstName')}</div>
-                    <input className="strike-addorder__form-input" placeholder={i18n.t('addOrderForm.firstName')} />
+                    <input has-error={errors.firstName ? 'true': 'false'} ref={register({ required: true })} name="firstName" className="strike-addorder__form-input" placeholder={i18n.t('addOrderForm.firstName')} />
                     <div className="strike-addorder__form-label">{i18n.t('addOrderForm.lastName')}</div>
-                    <input className="strike-addorder__form-input" placeholder={i18n.t('addOrderForm.lastName')} />
+                    <input has-error={errors.lastName ? 'true': 'false'} ref={register({ required: true })} name="lastName" className="strike-addorder__form-input" placeholder={i18n.t('addOrderForm.lastName')} />
                     <div className="strike-addorder__form-label">{i18n.t('addOrderForm.phone')}</div>
-                    <input className="strike-addorder__form-input" placeholder={i18n.t('addOrderForm.phone')} />
+                    <input has-error={errors.phone ? 'true': 'false'} ref={register({ required: true })} name="phone" className="strike-addorder__form-input" placeholder={i18n.t('addOrderForm.phone')} />
                     <div className="strike-addorder__form-label">{i18n.t('addOrderForm.country')}</div>
-                    <input className="strike-addorder__form-input" placeholder={i18n.t('addOrderForm.country')} />
+                    <input has-error={errors.country ? 'true': 'false'} ref={register({ required: true })} name="country" className="strike-addorder__form-input" placeholder={i18n.t('addOrderForm.country')} />
                     <div className="strike-addorder__form-label">{i18n.t('addOrderForm.city')}</div>
-                    <input className="strike-addorder__form-input" placeholder={i18n.t('addOrderForm.city')} />
+                    <input has-error={errors.city ? 'true': 'false'} ref={register({ required: true })} name="city" className="strike-addorder__form-input" placeholder={i18n.t('addOrderForm.city')} />
                     <div className="strike-addorder__form-label">{i18n.t('addOrderForm.address')}</div>
-                    <input className="strike-addorder__form-input" placeholder={i18n.t('addOrderForm.address')} />
+                    <input has-error={errors.address ? 'true': 'false'} ref={register({ required: true })} name="address" className="strike-addorder__form-input" placeholder={i18n.t('addOrderForm.address')} />
                     <div className="strike-addorder__form-label">{i18n.t('addOrderForm.building')}</div>
-                    <input className="strike-addorder__form-input" placeholder={i18n.t('addOrderForm.building')} />
+                    <input has-error={errors.building ? 'true': 'false'} ref={register({ required: true })} name="building" className="strike-addorder__form-input" placeholder={i18n.t('addOrderForm.building')} />
                     <button className="strike-addorder__form-button">{i18n.t('addOrderForm.addOrder')}</button>
                 </form>
             </div>
