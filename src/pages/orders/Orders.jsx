@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, useHistory } from 'react-router-dom';
 import Wrapper from '../../containers/wrapper/Wrapper';
 import images from '../../assets/images';
 import i18n from '../../services/locales/i18n';
@@ -13,7 +13,7 @@ const Orders = (props) => {
     const { innerWidth, innerHeight } = window;
     const { infoIcon, filledLeftArrow, unfilledLeftArrow, filledRightArrow, unfilledRightArrow } = images.orders;
     useEffect(() => {
-        if(props.location.state && props.location.state.title){
+        if (props.location.state && props.location.state.title) {
             setTitle(props.location.state.title)
         }
     }, [])
@@ -93,9 +93,10 @@ const Table = ({ items }) => {
 }
 
 const Item = (props) => {
+    const history = useHistory();
     const { threePoints } = images.orders;
     return (
-        <div className="strike-orders__table-item">
+        <div onClick={() => history.push('/order')} className="strike-orders__table-item">
             <div className="strike-orders__table-item-container">
                 <input className="strike-orders__table-item-container-checkbox" type="checkbox" />
                 <div className="strike-orders__table-item-container-text">123456</div>

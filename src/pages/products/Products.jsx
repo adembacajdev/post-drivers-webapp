@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, useHistory } from 'react-router-dom';
 import Wrapper from '../../containers/wrapper/Wrapper';
 import images from '../../assets/images';
 import i18n from '../../services/locales/i18n';
@@ -44,12 +44,13 @@ const Table = ({ items }) => {
 }
 
 const TableItem = ({ item }) => {
+    const history = useHistory()
     const { testProduct, threePoints } = images.products;
     const [isOpen, open] = useState(false);
     const toggle = useCallback(() => { open(!isOpen) }, [isOpen]);
 
     return (
-        <div className="strike-products__table-item">
+        <div onClick={() => {history.push('/product')}} className="strike-products__table-item">
             <div className="strike-products__table-item-content flex-1">
                 <input type="checkbox" />
             </div>

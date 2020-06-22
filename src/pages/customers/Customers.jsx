@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, useHistory } from 'react-router-dom';
 import Wrapper from '../../containers/wrapper/Wrapper';
 import images from '../../assets/images';
 import i18n from '../../services/locales/i18n';
@@ -80,9 +80,10 @@ const Table = ({ items }) => {
 }
 
 const Item = (props) => {
+    const history = useHistory()
     const { threePoints } = images.customers;
     return (
-        <div className="strike-customers__table-item">
+        <div onClick={() => history.push('/customer')} className="strike-customers__table-item">
             <div is-responsive="true"  className="strike-customers__table-item-container">
                 <input className="strike-customers__table-item-container-checkbox" type="checkbox" />
                 <div className="strike-customers__table-item-container-text">123456</div>
