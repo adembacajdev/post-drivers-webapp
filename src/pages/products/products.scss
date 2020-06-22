@@ -47,6 +47,7 @@
             height: 80px;
             border-bottom: 1px solid #F1F1F3;
             padding: 0 25px;
+            transition: 0.2s linear all;
             &-content{
                 display: flex;
                 flex-direction: row;
@@ -66,6 +67,10 @@
                     height: 6px;
                     cursor: pointer;
                 }
+            }
+            &:hover{
+                background-color: #F5F6FA;
+                cursor: pointer;
             }
         }
     }
