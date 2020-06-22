@@ -301,8 +301,7 @@
             height: 100%;
             display: flex;
             align-items: center;
-            padding: 0 25px;
-            float: left;
+            float: right;
             &-text{
                 font-size: 12px;
                 line-height: 22px;
@@ -322,8 +321,8 @@
                 justify-content: center;
                 width: 30px;
                 height: 100%;
-                margin-right: 10px;
                 cursor: pointer;
+                color: #43425D;
             }
         }
     }
