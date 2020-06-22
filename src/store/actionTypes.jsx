@@ -1,2 +1,60 @@
 export const IS_LOGGED_IN = 'IS_LOGGED_IN';
 export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR';
+
+//Authorization
+export const LOG_IN = 'LOG_IN';
+export const LOG_OUT = 'LOG_OUT';
+export const GET_USER = 'GET_USER';
+export const RESET_PASSWORD = 'RESET_PASSWORD';
+
+//Products
+export const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS';
+export const GET_PRODUCT = 'GET_PRODUCT';
+export const GET_PRODUCT_ORDER = 'GET_PRODUCT_ORDER';
+export const POST_STORE_PRODUCT = 'POST_STORE_PRODUCT';
+export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
+export const DELETE_PRODUCT = 'DELETE_PRODUCT';
+export const DELETE_PRODUCTS = 'DELETE_PRODUCTS';
+
+// Orders
+export const GET_ALL_ORDERS = 'GET_ALL_ORDERS';
+export const GET_ORDER = 'GET_ORDER';
+export const NUMBER_OF_ORDERS_BY_STATUS = 'NUMBER_OF_ORDERs_BY_STATUS';
+export const POST_ORDER = 'POST_ORDER';
+export const GET_ORDER_BY_STATUS = 'GET_ORDER_BY_STATUS';
+export const GET_ORDERS_BY_CITY = 'GET_ORDERS_BY_CITY';
+export const DELETE_ORDER = 'DELETE_ORDER';
+export const DELETE_ORDERS = 'DELETE_ORDERS';
+export const GET_TOP_CITIES = 'GET_TOP_CITIES';
+export const GET_TOP_PRODUCTS = 'GET_TOP_PRODUCTS';
+
+//Customers
+export const GET_ALL_CUSTOMERS = 'GET_ALL_CUSTOMERS';
+export const GET_SELECTED_CUSTOMERS = 'GET_SELECTED_CUSTOMERS';
+export const GET_CUSTOMERS_ORDER = 'GET_CUSTOMERS_ORDER';
+export const DELETE_CUSTOMER = 'DELETE_CUSTOMER';
+export const DELETE_CUSTOMERS = 'DELETE_CUSTOMERS';
+export const GET_RECENT_CUSTOMERS = 'GET_RECENT_CUSTOMERS';
+
+//Locations
+export const GET_ALL_LOCATIONS = 'GET_ALL_LOCATIONS';
+export const GET_SELECTED_LOCATION = 'GET_SELECTED_LOCATION';
+
+//Users
+export const GET_ALL_USERS = 'GET_ALL_USERS';
+export const GET_SELECTED_USER = 'GET_SELECTED_USER';
+export const POST_USER = 'POST_USER';
+export const UPDATE_USER = 'UPDATE_USER';
+export const DELETE_USER = 'DELETE_USER';
+
+//Pricing
+export const GET_PRICING_TABLE = 'GET_PRICING_TABLE';
+
+// Transfer
+export const GET_ALL_TRANSFERS = 'GET_ALL_TRANSFERS';
+export const GET_SELECTED_TRANSFERS = 'GET_SELECTED_TRANSFERS';
+export const GET_BALANCE_DETAILS = 'GET_BALANCE_DETAILS';
+
+//Statistics
+export const GET_DAILY_EARNINGS = 'GET_DAILY_EARNINGS';
+export const GET_DAILY_ORDERS = 'GET_DAILY_ORDERS';
