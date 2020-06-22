@@ -23,11 +23,11 @@ const Navbar = (props) => {
             <div className="strike-navbar__left">
                 <div className="strike-navbar__left-text">{i18n.t('navbar.onlineShop')}</div>
             </div>
-            <div className="strike-navbar__middle">
+            {/* <div className="strike-navbar__middle">
                 <div className="strike-navbar__middle-text">{i18n.t('navbar.strike')}</div>
-            </div>
+            </div> */}
             <div className="strike-navbar__right">
-                <div tabIndex="0" onBlur={toggleNotifications} onClick={toggleNotifications} className="strike-navbar__right-notification">
+                <div tabIndex="0" onBlur={notificationBlur} onClick={toggleNotifications} className="strike-navbar__right-notification">
                     <img className="strike-navbar__right-notification-icon" src={onNotification} />
                 </div>
                 <Notifications notifications={notifications} onBlur={notificationBlur} />
@@ -40,9 +40,6 @@ const Navbar = (props) => {
                     <img is-active={profile ? 'true' : 'false'} className="strike-navbar__right-name-downarrow" src={downArrow} />
                 </div>
                 <Profile profile={profile} />
-                <div className="strike-navbar__right-avatar">
-                    <img className="strike-navbar__right-avatar-icon" src={avatar} />
-                </div>
             </div>
             <div onClick={openSidebar} className="strike-navbar__menu-responsive">&#9776;</div>
         </div>

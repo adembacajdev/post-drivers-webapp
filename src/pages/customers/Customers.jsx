@@ -44,7 +44,7 @@ const Table = ({ items }) => {
     return (
         <div className="strike-customers__table">
             <div className="strike-customers__table-header">
-                <div className="strike-customers__table-header-item">
+                <div is-responsive="true"  className="strike-customers__table-header-item">
                     <div className="strike-customers__table-header-item-text">{i18n.t('customers.id')}</div>
                     <img className="strike-customers__table-header-item-icon" src={tableArrow} />
                 </div>
@@ -83,7 +83,7 @@ const Item = (props) => {
     const { threePoints } = images.customers;
     return (
         <div className="strike-customers__table-item">
-            <div className="strike-customers__table-item-container">
+            <div is-responsive="true"  className="strike-customers__table-item-container">
                 <input className="strike-customers__table-item-container-checkbox" type="checkbox" />
                 <div className="strike-customers__table-item-container-text">123456</div>
             </div>
@@ -94,7 +94,7 @@ const Item = (props) => {
                 <div className="strike-customers__table-item-container-text">Metts</div>
             </div>
             <div className="strike-customers__table-item-container">
-                <div className="strike-customers__table-item-container-text">35440</div>
+                <div className="strike-customers__table-item-container-text">0038349838861</div>
             </div>
             <div is-responsive="true" className="strike-customers__table-item-container">
                 <div className="strike-customers__table-item-container-text">rr.7 September</div>

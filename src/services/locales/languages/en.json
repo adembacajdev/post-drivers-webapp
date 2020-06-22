@@ -122,8 +122,8 @@
         "title": "Pricing",
         "country": "Country",
         "size": "Size",
-        "shipmentPrice": "Shipment Price",
-        "cancellationPrice": "Cancellation Price"
+        "shipmentPrice": "Shipment",
+        "cancellationPrice": "Cancellation"
     },
     "addUserForm": {
         "firstName": "First Name",
