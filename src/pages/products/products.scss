@@ -258,7 +258,7 @@
                     font-family: "Avenir";
                     color: #A3A6B4;
                     font-weight: 600;
-                    &[is-action=true]{
+                    &[is-responsive=true]{
                         display: none;
                     }
                 }
@@ -291,7 +291,7 @@
                         height: 6px;
                         cursor: pointer;
                     }
-                    &[is-action=true]{
+                    &[is-responsive=true]{
                         display: none;
                     }
                 }

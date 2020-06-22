@@ -11,7 +11,7 @@ const Products = (props) => {
         <Wrapper>
             <div className="strike-products">
                 <div className="strike-products__header">
-                    <div className="strike-products__header-title">{i18n.t('products.topProducts')}</div>
+                    <div className="strike-products__header-title">{i18n.t('products.products')}</div>
                 </div>
                 <Table items={[1, 2, 3, 4]} />
             </div>
@@ -31,9 +31,9 @@ const Table = ({ items }) => {
             <div className="strike-products__table-header">
                 <div className="strike-products__table-header-item flex-1">#</div>
                 <div className="strike-products__table-header-item flex-3">{i18n.t('products.product')}</div>
-                <div className="strike-products__table-header-item flex-45">{i18n.t('products.description')}</div>
+                <div is-responsive="true" className="strike-products__table-header-item flex-3">{i18n.t('products.description')}</div>
                 <div className="strike-products__table-header-item flex-15">{i18n.t('products.price')}</div>
-                <div is-action="true" className="strike-products__table-header-item flex-15 text-center">{i18n.t('products.actions')}</div>
+                <div is-responsive="true" className="strike-products__table-header-item flex-15 text-center">{i18n.t('products.actions')}</div>
             </div>
             {items && items.map(item => {
                 return <TableItem item={item} />
@@ -57,13 +57,13 @@ const TableItem = ({ item }) => {
                 <img className="strike-products__table-item-content-icon" src={testProduct} />
                 <div className="strike-products__table-item-content-text ml-15">Women's Vintage Peacoat</div>
             </div>
-            <div className="strike-products__table-item-content flex-45">
+            <div is-responsive="true" className="strike-products__table-item-content flex-3">
                 <div className="strike-products__table-item-content-text">Women's Vintage Peacoat</div>
             </div>
             <div className="strike-products__table-item-content flex-15">
                 <div className="strike-products__table-item-content-text">$29.192</div>
             </div>
-            <div is-action="true" onClick={toggle} className="strike-products__table-item-content flex-15 text-center">
+            <div is-responsive="true" onClick={toggle} className="strike-products__table-item-content flex-15 text-center">
                 <div class="dropdown">
                     <img className="strike-products__table-item-content-points" src={threePoints} />
                     <div class="dropdown-content">
