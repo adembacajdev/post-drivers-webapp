@@ -2,13 +2,17 @@ import React from 'react';
 import images from '../../assets/images';
 import { useHistory, useLocation } from 'react-router-dom';
 import i18n from '../../services/locales/i18n';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, connect } from 'react-redux';
 import { TOGGLE_SIDEBAR } from '../../store/actionTypes';
 import './sidebar.scss';
+import { useCallback } from 'react';
+import { logout } from '../../store/actions/authorization';
 
-export const Sidebar = (props) => {
+const Sidebar = ({ logout }) => {
     const sidebar = useSelector(state => state.sidebar);
     const dispatch = useDispatch();
+    const history = useHistory();
+    const location = useLocation();
     const { homeIcon, customersIcon, statisticsIcon, productsIcon, transfersIcon, usersIcon, pricingIcon, ordersIcon } = images.sidebar;
     const menu = [
         { name: i18n.t('sidebar.home'), path: '/', icon: homeIcon },
@@ -20,8 +24,7 @@ export const Sidebar = (props) => {
         { name: i18n.t('sidebar.users'), path: '/users', icon: usersIcon },
         { name: i18n.t('sidebar.pricing'), path: '/pricing', icon: pricingIcon },
     ]
-    const history = useHistory();
-    const location = useLocation();
+    const signout = useCallback(() => { logout() }, [])
     return (
         <div is-open={sidebar ? 'true' : 'false'} className="strike-sidebar">
             {menu.map((item, index) => {
@@ -39,8 +42,13 @@ export const Sidebar = (props) => {
             <div className="strike-sidebar__profile">
                 <div className="strike-sidebar__profile-amount">200.50$</div>
                 <div className="strike-sidebar__profile-settings">Account Settings</div>
-                <div className="strike-sidebar__profile-logout">Log out</div>
+                <div onClick={signout} className="strike-sidebar__profile-logout">Log out</div>
             </div>
         </div>
     )
 }
+
+const mapStateToProps = null;
+const mapDispatchToProps = { logout }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

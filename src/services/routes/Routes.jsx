@@ -4,7 +4,7 @@ import history from './history';
 import Loader from '../../components/loader/Loader';
 import { useSelector } from 'react-redux';
 import Navbar from '../../components/navbar/Navbar';
-import { Sidebar } from '../../components';
+import Sidebar from '../../components/sidebar/Sidebar';
 
 //pages
 const Home = lazy(() => import('../../pages/home/Home'));

@@ -2,7 +2,7 @@ import React from 'react';
 import i18n from '../../services/locales/i18n';
 import './navbar.scss';
 
-const Profile = ({profile}) => {
+const Profile = ({ profile, logout }) => {
     return (
         <div is-active={profile ? "true" : 'false'} className="navbar-profile">
             <div className="navbar-profile__toparrow" />
@@ -10,7 +10,7 @@ const Profile = ({profile}) => {
                 <div className="navbar-profile__body-item">
                     <div className="navbar-profile__body-item-text">{i18n.t('navbar.accountSettings')}</div>
                 </div>
-                <div style={{borderBottom: 'none'}} className="navbar-profile__body-item">
+                <div onClick={logout} style={{ borderBottom: 'none' }} className="navbar-profile__body-item">
                     <div className="navbar-profile__body-item-text">{i18n.t('navbar.logout')}</div>
                 </div>
             </div>

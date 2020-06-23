@@ -1,11 +1,18 @@
-import { LOG_IN, LOG_OUT, GET_USER, RESET_PASSWORD } from '../actionTypes';
+import { LOG_IN, LOG_OUT, GET_USER, RESET_PASSWORD, IS_LOGGED_IN } from '../actionTypes';
 import axios from 'axios';
 
 export const login = (body) => async (dispatch) => {
     try {
         const { email, password } = body;
-        const { data } = await axios.post('/login', { email, password });
-        if (data.success) dispatch({ type: LOG_IN, data });
+        const { data } = await axios.post('/login', { email, password, device_name: 'web' });
+        if (data.success) {
+            const { plainTextToken } = data.data;
+            dispatch({ type: LOG_IN, data: data.data });
+            dispatch({ type: IS_LOGGED_IN, data: true });
+            localStorage.setItem('token', plainTextToken);
+            axios.defaults.headers.common['Content-Type'] = "applicaton/json"
+            axios.defaults.headers.common['Authorization'] = `Bearer ${plainTextToken}`
+        }
     } catch (e) {
         return Promise.reject(e);
     }
@@ -14,7 +21,11 @@ export const login = (body) => async (dispatch) => {
 export const logout = () => async (dispatch) => {
     try {
         const { data } = await axios.post('/logout');
-        if (data.success) dispatch({ type: LOG_OUT, data });
+        if (data.success) {
+            dispatch({ type: LOG_OUT, data });
+            dispatch({ type: IS_LOGGED_IN, data: false });
+            localStorage.removeItem('token');
+        };
     } catch (e) {
         return Promise.reject(e);
     }

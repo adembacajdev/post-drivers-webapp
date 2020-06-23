@@ -2,13 +2,18 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { authenticate } from '../../store/actions/authenticate.action';
+import { login } from '../../store/actions/authorization';
 import { useForm } from "react-hook-form";
 import i18n from '../../services/locales/i18n';
 import './login.scss';
 
-const Login = (props) => {
+const Login = ({ login, loggedIn, authenticate }) => {
     const { register, handleSubmit, watch, errors } = useForm();
-    const onSubmit = ({ email, password }) => props.authenticate(true);
+    const onSubmit = ({ email, password }) => {
+        if (!errors.email && !errors.password) {
+            login({ email, password })
+        }
+    };
     // useEffect(() => { i18n.changeLanguage('al') }, [])
     return (
         <div className="strike-login">
@@ -26,6 +31,6 @@ const Login = (props) => {
     )
 }
 
-const mapStateToProps = null;
-const mapDispatchToProps = { authenticate };
+const mapStateToProps = ({ loggedIn }) => ({ loggedIn });
+const mapDispatchToProps = { authenticate, login };
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login));

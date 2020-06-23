@@ -5,6 +5,7 @@ import Profile from './Profile';
 import i18n from '../../services/locales/i18n';
 import { connect } from 'react-redux';
 import { toggleSidebar } from '../../store/actions/toggle.sidebar';
+import { logout } from '../../store/actions/authorization';
 import './navbar.scss';
 
 const Navbar = (props) => {
@@ -16,7 +17,8 @@ const Navbar = (props) => {
     const profileBlur = useCallback(() => { setProfile(false) }, [profile]);
     const notificationBlur = useCallback(() => { setNotifications(false) }, [notifications]);
 
-    const openSidebar = useCallback(() => { props.toggleSidebar() }, [props.sidebar])
+    const openSidebar = useCallback(() => { props.toggleSidebar() }, [props.sidebar]);
+    const logout = useCallback(() => { props.logout() }, [])
 
     return (
         <div className="strike-navbar">
@@ -40,13 +42,13 @@ const Navbar = (props) => {
                     <div className="strike-navbar__right-name-text">Filan Fisteku</div>
                     <img is-active={profile ? 'true' : 'false'} className="strike-navbar__right-name-downarrow" src={downArrow} />
                 </div>
-                <Profile profile={profile} />
+                <Profile logout={logout} profile={profile} />
             </div>
         </div>
     )
 }
 
 const mapStateToProps = ({ sidebar }) => ({ sidebar });
-const mapDispatchToProps = { toggleSidebar };
+const mapDispatchToProps = { toggleSidebar, logout };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

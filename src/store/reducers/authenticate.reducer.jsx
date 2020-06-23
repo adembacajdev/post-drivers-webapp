@@ -1,6 +1,6 @@
 import { IS_LOGGED_IN } from '../actionTypes';
 
-export default function (state = true, action) {
+export default function (state = false, action) {
     const { type, data } = action;
 
     switch (type) {

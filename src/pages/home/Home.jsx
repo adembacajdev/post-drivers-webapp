@@ -9,7 +9,6 @@ import './home.scss';
 
 const Home = (props) => {
     const { blueChart, yellowChart, redChart, greenChart, infoIcon, testProduct } = images.home;
-
     let markers = [{ name: "Universitas Islam Sultan Agung", latLng: [-6.954821, 110.458576] }, { name: "Other university", latLng: [-5.132412, 119.488454] }, { name: "Other university", latLng: [-4.009751, 122.520665] }]
     return (
         <Wrapper>
