@@ -31,6 +31,15 @@ export const getCustomerOrders = () => async (dispatch) => {
     }
 }
 
+export const getRecentCustomers = () => async (dispatch) => {
+    try {
+        const { data } = axios.get(`/recent/customers`);
+        if (data.success) dispatch({ type: GET_RECENT_CUSTOMERS, data });
+    } catch (e) {
+        return Promise.reject(e);
+    }
+}
+
 export const deleteCustomer = (id) => async (dispatch) => {
     try {
         const { data } = axios.delete(`/clients/${id}`);

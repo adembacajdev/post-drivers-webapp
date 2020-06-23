@@ -9,7 +9,7 @@ export function allUsers(state = null, { type, data }) {
     }
 }
 
-export function user(state = null, { type, data }) {
+export function selectedUser(state = null, { type, data }) {
     switch (type) {
         case GET_SELECTED_USER: return data;
         default: return state;
