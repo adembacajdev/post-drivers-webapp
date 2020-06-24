@@ -25,7 +25,12 @@ export const logout = () => async (dispatch) => {
             dispatch({ type: LOG_OUT, data });
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');
-        };
+        }else if(data.code === 403){
+            dispatch({ type: IS_LOGGED_IN, data: false });
+            localStorage.removeItem('token');
+            axios.defaults.headers.common['Content-Type'] = "applicaton/json"
+            axios.defaults.headers.common['Authorization'] = ``
+        }
     } catch (e) {
         return Promise.reject(e);
     }
@@ -34,7 +39,14 @@ export const logout = () => async (dispatch) => {
 export const getUser = () => async (dispatch) => {
     try {
         const { data } = await axios.get('/user');
-        if (data.success) dispatch({ type: GET_USER, data });
+        if (data.success) {
+            dispatch({ type: GET_USER, data });
+        }else if(data.code === 403){
+            dispatch({ type: IS_LOGGED_IN, data: false });
+            localStorage.removeItem('token');
+            axios.defaults.headers.common['Content-Type'] = "applicaton/json"
+            axios.defaults.headers.common['Authorization'] = ``
+        }
     } catch (e) {
         return Promise.reject(e);
     }
@@ -44,7 +56,14 @@ export const resetPassword = (body) => async (dispatch) => {
     try {
         const { old_password, new_password, new_password_confirmation } = body;
         const { data } = await axios.put('/password/reset', { old_password, new_password, new_password_confirmation });
-        if (data.success) dispatch({ type: RESET_PASSWORD, data });
+        if (data.success) {
+            dispatch({ type: RESET_PASSWORD, data });
+        }else if(data.code === 403){
+            dispatch({ type: IS_LOGGED_IN, data: false });
+            localStorage.removeItem('token');
+            axios.defaults.headers.common['Content-Type'] = "applicaton/json"
+            axios.defaults.headers.common['Authorization'] = ``
+        }
     } catch (e) {
         return Promise.reject(e);
     }
