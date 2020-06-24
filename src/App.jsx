@@ -6,13 +6,14 @@ import { authenticate } from './store/actions/authenticate.action';
 
 const App = ({ authenticate }) => {
   useEffect(() => {
-    axios.defaults.baseURL = 'https://wmkwslc4.myhook.io/api';
+    axios.defaults.baseURL = 'https://84db6ijf.myhook.io/api';
     const token = localStorage.getItem('token');
     console.log('token', token)
     if (token !== 'undefined') {
       axios.defaults.headers.common['Content-Type'] = "applicaton/json"
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       authenticate(true);
+      console.log('token', token)
     } else {
       axios.defaults.headers.common = { 'Content-Type': 'applicaton/json' };
       authenticate(false);

@@ -106,9 +106,9 @@ const Item = (props) => {
                 <div className="strike-users__table-item-container-text">Manager</div>
             </div>
             <div is-responsive="true" className="strike-users__table-item-container centered">
-                <div class="dropdown">
+                <div className="dropdown">
                     <img className="strike-users__table-item-container-dots" src={threePoints} />
-                    <div class="dropdown-content">
+                    <div className="dropdown-content">
                         <div className="dropdown-content-text">{i18n.t('users.edit')}</div>
                         <div className="dropdown-content-text">{i18n.t('users.delete')}</div>
                     </div>

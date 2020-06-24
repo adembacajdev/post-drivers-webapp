@@ -104,9 +104,9 @@ const Item = (props) => {
                 <div className="strike-customers__table-item-container-text">London</div>
             </div>
             <div is-responsive="true" className="strike-customers__table-item-container centered">
-                <div class="dropdown">
+                <div className="dropdown">
                     <img className="strike-customers__table-item-container-dots" src={threePoints} />
-                    <div class="dropdown-content">
+                    <div className="dropdown-content">
                         <div className="dropdown-content-text">{i18n.t('customers.openLocation')}</div>
                         <div className="dropdown-content-text">{i18n.t('customers.delete')}</div>
                     </div>
