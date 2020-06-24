@@ -6,6 +6,9 @@ import {
 export function allOrders(state = null, { type, data }) {
     switch (type) {
         case GET_ALL_ORDERS: return data;
+        case DELETE_ORDER: 
+        const deletedOrders = state.filter(item => item.id !== data.id);
+        return deletedOrders;
         default: return state;
     }
 }

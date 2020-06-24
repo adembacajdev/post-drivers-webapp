@@ -8,7 +8,7 @@ export const getAllOrders = () => async (dispatch) => {
     try {
         const { data } = await axios.get('/orders');
         if (data.success) {
-            dispatch({ type: GET_ALL_ORDERS, data });
+            dispatch({ type: GET_ALL_ORDERS, data: data.data });
         }else if(data.code === 403){
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');
@@ -136,8 +136,9 @@ export const getTopProducts = () => async (dispatch) => {
 export const deleteOrder = (id) => async (dispatch) => {
     try {
         const { data } = await axios.delete(`/orders/${id}`);
+        console.log('data', data)
         if (data.success) {
-            dispatch({ type: DELETE_ORDER, data });
+            dispatch({ type: DELETE_ORDER, data: data.data });
         }else if(data.code === 403){
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');

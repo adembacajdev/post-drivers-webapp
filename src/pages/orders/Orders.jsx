@@ -1,22 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, useHistory } from 'react-router-dom';
 import Wrapper from '../../containers/wrapper/Wrapper';
 import images from '../../assets/images';
 import i18n from '../../services/locales/i18n';
 import './orders.scss';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { getAllOrders, deleteOrder } from '../../store/actions/orders';
+import moment from 'moment';
 
 const Orders = (props) => {
     const [title, setTitle] = useState(i18n.t('orders.allOrders'))
     const { innerWidth, innerHeight } = window;
     const { infoIcon, filledLeftArrow, unfilledLeftArrow, filledRightArrow, unfilledRightArrow } = images.orders;
     useEffect(() => {
+        props.getAllOrders()
         if (props.location.state && props.location.state.title) {
             setTitle(props.location.state.title)
         }
     }, [])
+
+    useEffect(() => { console.log('allOrders', props.allOrders) }, [props.allOrders])
     return (
         <Wrapper>
             <div className="strike-orders">
@@ -28,7 +31,7 @@ const Orders = (props) => {
                         <img className="strike-orders__header-right-icon" src={infoIcon} />
                     </div>
                 </div>
-                <Table items={[1, 2, 3, 4, 5, 6]} />
+                <Table deleteItem={props.deleteOrder} items={props.allOrders} />
                 <div className="strike-orders__pagination">
                     <img src={unfilledLeftArrow} className='strike-orders__pagination-leftarrow' />
                     <div is-active="true" className="strike-orders__pagination-number">1</div>
@@ -42,13 +45,13 @@ const Orders = (props) => {
     )
 }
 
-const mapStateToProps = null;
-const mapDispatchToProps = null;
+const mapStateToProps = ({ allOrders }) => ({ allOrders });
+const mapDispatchToProps = { getAllOrders, deleteOrder };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Orders));
 
 
-const Table = ({ items }) => {
+const Table = ({ items, deleteItem }) => {
     const { tableArrow } = images.orders;
     return (
         <div className="strike-orders__table">
@@ -85,37 +88,40 @@ const Table = ({ items }) => {
                     <div className="strike-orders__table-header-item-text">{i18n.t('orders.actions')}</div>
                 </div>
             </div>
-            {items && items.map(item => {
-                return <Item />
+            {items && items.map((item, index) => {
+                return <Item deleteItem={deleteItem} {...item} key={index} />
             })}
         </div>
     )
 }
 
-const Item = (props) => {
+const Item = ({ id, description, product_id, serial_number, status, updated_at, client_id, deleteItem }) => {
     const history = useHistory();
     const { threePoints } = images.orders;
+    const date = moment(updated_at).format('DD/MM/YYYY');
+    let newStatus = status === 'archived:completed' ? 'completed' : status === 'archived:cancelled' ? 'cancelled' : status;
+    const deleteThisItem = () => deleteItem(id);
     return (
-        <div onClick={() => history.push('/order')} className="strike-orders__table-item">
+        <div className="strike-orders__table-item">
             <div className="strike-orders__table-item-container">
                 <input className="strike-orders__table-item-container-checkbox" type="checkbox" />
-                <div className="strike-orders__table-item-container-text">123456</div>
+                <div className="strike-orders__table-item-container-text">{id}</div>
             </div>
             <div className="strike-orders__table-item-container">
                 <div className="cancelled" />
-                <div className="strike-orders__table-item-container-text">Cancelled</div>
+                <div className="strike-orders__table-item-container-text">{newStatus}</div>
             </div>
             <div className="strike-orders__table-item-container">
                 <div className="strike-orders__table-item-container-text">5.23</div>
             </div>
             <div is-responsive="true" className="strike-orders__table-item-container">
-                <div className="strike-orders__table-item-container-text">35440</div>
+                <div className="strike-orders__table-item-container-text">{date}</div>
             </div>
             <div is-responsive="true" className="strike-orders__table-item-container">
-                <div className="strike-orders__table-item-container-text">12/12/2019</div>
+                <div className="strike-orders__table-item-container-text">Time</div>
             </div>
             <div is-responsive="true" className="strike-orders__table-item-container">
-                <div className="strike-orders__table-item-container-text">12:00 PM</div>
+                <div className="strike-orders__table-item-container-text">{client_id}</div>
             </div>
             <div is-responsive="true" className="strike-orders__table-item-container centered">
                 <div className="strike-orders__table-item-container-text">Prishtine</div>
@@ -127,7 +133,7 @@ const Item = (props) => {
                         <div className="dropdown-content-text">{i18n.t('orders.openLocation')}</div>
                         <div className="dropdown-content-text">{i18n.t('orders.share')}</div>
                         <div className="dropdown-content-text">{i18n.t('orders.print')}</div>
-                        <div className="dropdown-content-text">{i18n.t('orders.delete')}</div>
+                        <div onClick={deleteThisItem} className="dropdown-content-text">{i18n.t('orders.delete')}</div>
                     </div>
                 </div>
             </div>
