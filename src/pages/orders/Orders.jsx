@@ -95,36 +95,44 @@ const Table = ({ items, deleteItem }) => {
     )
 }
 
-const Item = ({ id, description, product_id, serial_number, status, updated_at, client_id, deleteItem }) => {
+const Item = ({ id, status, updated_at, deleteItem, price, client }) => {
     const history = useHistory();
     const { threePoints } = images.orders;
     const date = moment(updated_at).format('DD/MM/YYYY');
-    let newStatus = status === 'archived:completed' ? 'completed' : status === 'archived:cancelled' ? 'cancelled' : status;
+    const time = moment(updated_at).format('HH:mm:ss');
+    let newStatus;
+    if (status === 'archived:completed') newStatus = 'completed';
+    else if (status === 'archived:ongoing') newStatus = 'ongoing';
+    else if (status === 'archived:cancelled') newStatus = 'cancelled';
+    else if (status === 'archived:pending') newStatus = 'pending';
+    else newStatus = status;
     const deleteThisItem = () => deleteItem(id);
+
+    const navigate = () => history.push('/order', { id })
     return (
         <div className="strike-orders__table-item">
-            <div className="strike-orders__table-item-container">
+            <div onClick={navigate} className="strike-orders__table-item-container">
                 <input className="strike-orders__table-item-container-checkbox" type="checkbox" />
                 <div className="strike-orders__table-item-container-text">{id}</div>
             </div>
-            <div className="strike-orders__table-item-container">
-                <div className="cancelled" />
+            <div onClick={navigate} className="strike-orders__table-item-container">
+                <div className={newStatus} />
                 <div className="strike-orders__table-item-container-text">{newStatus}</div>
             </div>
-            <div className="strike-orders__table-item-container">
-                <div className="strike-orders__table-item-container-text">5.23</div>
+            <div onClick={navigate} className="strike-orders__table-item-container">
+                <div className="strike-orders__table-item-container-text">{price}€</div>
             </div>
-            <div is-responsive="true" className="strike-orders__table-item-container">
+            <div onClick={navigate} is-responsive="true" className="strike-orders__table-item-container">
                 <div className="strike-orders__table-item-container-text">{date}</div>
             </div>
-            <div is-responsive="true" className="strike-orders__table-item-container">
-                <div className="strike-orders__table-item-container-text">Time</div>
+            <div onClick={navigate} is-responsive="true" className="strike-orders__table-item-container">
+                <div className="strike-orders__table-item-container-text">{time}</div>
             </div>
-            <div is-responsive="true" className="strike-orders__table-item-container">
-                <div className="strike-orders__table-item-container-text">{client_id}</div>
+            <div onClick={navigate} is-responsive="true" className="strike-orders__table-item-container">
+                <div className="strike-orders__table-item-container-text">{client.first_name}</div>
             </div>
-            <div is-responsive="true" className="strike-orders__table-item-container centered">
-                <div className="strike-orders__table-item-container-text">Prishtine</div>
+            <div onClick={navigate} is-responsive="true" className="strike-orders__table-item-container centered">
+                <div className="strike-orders__table-item-container-text">{client.city}</div>
             </div>
             <div is-responsive="true" className="strike-orders__table-item-container centered">
                 <div className="dropdown">

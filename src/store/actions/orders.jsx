@@ -24,7 +24,8 @@ export const getOrder = (id) => async (dispatch) => {
     try {
         const { data } = await axios.get(`/orders/${id}`);
         if (data.success) {
-            dispatch({ type: GET_ORDER, data });
+            console.log('data', data.data)
+            dispatch({ type: GET_ORDER, data: data.data });
         }else if(data.code === 403){
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');
@@ -54,9 +55,10 @@ export const getNumberOfOrdersByStatus = () => async (dispatch) => {
 
 export const postOrder = (body) => async (dispatch) => {
     try {
-        const { product_id, description, first_name, last_name, phone, country, city, address, building, latitude, longitude } = body;
-        const { data } = await axios.post(`/orders`, { product_id, description, first_name, last_name, phone, country, city, address, building, latitude, longitude });
+        const { data } = await axios.post(`/orders`, body);
+        console.log('data', data)
         if (data.success) {
+            console.log('data', data.data)
             dispatch({ type: POST_ORDER, data });
         }else if(data.code === 403){
             dispatch({ type: IS_LOGGED_IN, data: false });

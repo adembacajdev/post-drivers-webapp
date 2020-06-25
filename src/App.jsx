@@ -6,7 +6,7 @@ import { authenticate } from './store/actions/authenticate.action';
 
 const App = ({ authenticate }) => {
   useEffect(() => {
-    axios.defaults.baseURL = 'https://84db6ijf.myhook.io/api';
+    axios.defaults.baseURL = 'https://dq5dk124.myhook.io/api';
     const token = localStorage.getItem('token');
     console.log('token', token)
     if (token !== 'undefined') {
