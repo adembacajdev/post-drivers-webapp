@@ -1,6 +1,6 @@
 import {
     GET_ALL_ORDERS, GET_ORDER, NUMBER_OF_ORDERS_BY_STATUS, POST_ORDER, GET_ORDERS_BY_CITY, GET_ORDER_BY_STATUS, DELETE_ORDER,
-    DELETE_ORDERS, GET_TOP_CITIES, GET_TOP_PRODUCTS, IS_LOGGED_IN
+    DELETE_ORDERS, GET_TOP_CITIES, GET_TOP_PRODUCTS, IS_LOGGED_IN, PRINT_ONE_ORDER
 } from '../actionTypes';
 import axios from 'axios';
 
@@ -107,7 +107,7 @@ export const getTopCities = () => async (dispatch) => {
     try {
         const { data } = await axios.get(`/top/cities`);
         if (data.success) {
-            dispatch({ type: GET_TOP_CITIES, data });
+            dispatch({ type: GET_TOP_CITIES, data: data.data });
         }else if(data.code === 403){
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');
@@ -123,7 +123,7 @@ export const getTopProducts = () => async (dispatch) => {
     try {
         const { data } = await axios.get(`/top/products`);
         if (data.success) {
-            dispatch({ type: GET_TOP_PRODUCTS, data });
+            dispatch({ type: GET_TOP_PRODUCTS, data: data.data });
         }else if(data.code === 403){
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');
@@ -164,6 +164,25 @@ export const deleteProducts = (order_ids) => async (dispatch) => {
             axios.defaults.headers.common['Authorization'] = ``
         }
     } catch (e) {
+        return Promise.reject(e);
+    }
+}
+
+export const printOneOrder = (id) => async (dispatch) => {
+    try {
+        const { data } = await axios.get(`/orders/${id}/print`, {responseType: 'blob'});
+        dispatch({ type: PRINT_ONE_ORDER, data });
+        // if (data.success) {
+        //     const base64 = JSON.stringify(data)
+        //     dispatch({ type: PRINT_ONE_ORDER, data: base64 });
+        // }else if(data.code === 403){
+        //     dispatch({ type: IS_LOGGED_IN, data: false });
+        //     localStorage.removeItem('token');
+        //     axios.defaults.headers.common['Content-Type'] = "applicaton/json"
+        //     axios.defaults.headers.common['Authorization'] = ``
+        // }
+    } catch (e) {
+        console.log('e', e.message)
         return Promise.reject(e);
     }
 }

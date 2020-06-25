@@ -27,6 +27,7 @@ export const DELETE_ORDER = 'DELETE_ORDER';
 export const DELETE_ORDERS = 'DELETE_ORDERS';
 export const GET_TOP_CITIES = 'GET_TOP_CITIES';
 export const GET_TOP_PRODUCTS = 'GET_TOP_PRODUCTS';
+export const PRINT_ONE_ORDER = 'PRINT_ONE_ORDER'
 
 //Customers
 export const GET_ALL_CUSTOMERS = 'GET_ALL_CUSTOMERS';

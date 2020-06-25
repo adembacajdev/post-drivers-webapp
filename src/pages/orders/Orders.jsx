@@ -5,8 +5,9 @@ import Wrapper from '../../containers/wrapper/Wrapper';
 import images from '../../assets/images';
 import i18n from '../../services/locales/i18n';
 import './orders.scss';
-import { getAllOrders, deleteOrder } from '../../store/actions/orders';
+import { getAllOrders, deleteOrder, printOneOrder } from '../../store/actions/orders';
 import moment from 'moment';
+import { saveAs } from 'file-saver';
 
 const Orders = (props) => {
     const [title, setTitle] = useState(i18n.t('orders.allOrders'))
@@ -19,7 +20,12 @@ const Orders = (props) => {
         }
     }, [])
 
-    useEffect(() => { console.log('allOrders', props.allOrders) }, [props.allOrders])
+    useEffect(() => {
+        if (props.printOrder) {
+            saveAs(props.printOrder, 'newFile.pdf')
+        }
+    }, [props.printOrder]);
+
     return (
         <Wrapper>
             <div className="strike-orders">
@@ -31,7 +37,7 @@ const Orders = (props) => {
                         <img className="strike-orders__header-right-icon" src={infoIcon} />
                     </div>
                 </div>
-                <Table deleteItem={props.deleteOrder} items={props.allOrders} />
+                <Table printOne={props.printOneOrder} deleteItem={props.deleteOrder} items={props.allOrders} />
                 <div className="strike-orders__pagination">
                     <img src={unfilledLeftArrow} className='strike-orders__pagination-leftarrow' />
                     <div is-active="true" className="strike-orders__pagination-number">1</div>
@@ -45,13 +51,13 @@ const Orders = (props) => {
     )
 }
 
-const mapStateToProps = ({ allOrders }) => ({ allOrders });
-const mapDispatchToProps = { getAllOrders, deleteOrder };
+const mapStateToProps = ({ allOrders, printOrder }) => ({ allOrders, printOrder });
+const mapDispatchToProps = { getAllOrders, deleteOrder, printOneOrder };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Orders));
 
 
-const Table = ({ items, deleteItem }) => {
+const Table = ({ items, deleteItem, printOne }) => {
     const { tableArrow } = images.orders;
     return (
         <div className="strike-orders__table">
@@ -89,13 +95,13 @@ const Table = ({ items, deleteItem }) => {
                 </div>
             </div>
             {items && items.map((item, index) => {
-                return <Item deleteItem={deleteItem} {...item} key={index} />
+                return <Item printOne={printOne} deleteItem={deleteItem} {...item} key={index} />
             })}
         </div>
     )
 }
 
-const Item = ({ id, status, updated_at, deleteItem, price, client }) => {
+const Item = ({ id, status, updated_at, deleteItem, price, client, printOne }) => {
     const history = useHistory();
     const { threePoints } = images.orders;
     const date = moment(updated_at).format('DD/MM/YYYY');
@@ -109,6 +115,8 @@ const Item = ({ id, status, updated_at, deleteItem, price, client }) => {
     const deleteThisItem = () => deleteItem(id);
 
     const navigate = () => history.push('/order', { id })
+
+    const printOrder = () => printOne(id)
     return (
         <div className="strike-orders__table-item">
             <div onClick={navigate} className="strike-orders__table-item-container">
@@ -140,7 +148,7 @@ const Item = ({ id, status, updated_at, deleteItem, price, client }) => {
                     <div className="dropdown-content">
                         <div className="dropdown-content-text">{i18n.t('orders.openLocation')}</div>
                         <div className="dropdown-content-text">{i18n.t('orders.share')}</div>
-                        <div className="dropdown-content-text">{i18n.t('orders.print')}</div>
+                        <div onClick={printOrder} className="dropdown-content-text">{i18n.t('orders.print')}</div>
                         <div onClick={deleteThisItem} className="dropdown-content-text">{i18n.t('orders.delete')}</div>
                     </div>
                 </div>

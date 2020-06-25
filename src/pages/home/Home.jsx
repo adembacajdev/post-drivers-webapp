@@ -6,10 +6,21 @@ import images from '../../assets/images';
 import { VectorMap } from 'react-jvectormap';
 import i18n from '../../services/locales/i18n';
 import './home.scss';
+import { getTopCities, getTopProducts } from '../../store/actions/orders';
+import { useEffect } from 'react';
 
 const Home = (props) => {
     const { blueChart, yellowChart, redChart, greenChart, infoIcon, testProduct } = images.home;
-    let markers = [{ name: "Universitas Islam Sultan Agung", latLng: [-6.954821, 110.458576] }, { name: "Other university", latLng: [-5.132412, 119.488454] }, { name: "Other university", latLng: [-4.009751, 122.520665] }]
+    let markers = [{ name: "Universitas Islam Sultan Agung", latLng: [-6.954821, 110.458576] }, { name: "Other university", latLng: [-5.132412, 119.488454] }, { name: "Other university", latLng: [-4.009751, 122.520665] }];
+
+    useEffect(() => {
+        props.getTopCities();
+        props.getTopProducts()
+    }, [])
+
+    useEffect(() => {
+        console.log('topProducts', props.topProducts) //TO-DO - Adem
+    }, [props.topProducts])
     return (
         <Wrapper>
             <div className="strike-home">
@@ -99,26 +110,14 @@ const Home = (props) => {
                         </div>
                         <div className="strike-home__map-body-right">
                             <div className="strike-home__map-body-right-title">{i18n.t('home.topCities')}</div>
-                            <div className="strike-home__map-body-right-item">
-                                <div className="strike-home__map-body-right-item-left">Prishtine</div>
-                                <div className="strike-home__map-body-right-item-right">21</div>
-                            </div>
-                            <div className="strike-home__map-body-right-item">
-                                <div className="strike-home__map-body-right-item-left">Prizren</div>
-                                <div className="strike-home__map-body-right-item-right">14</div>
-                            </div>
-                            <div className="strike-home__map-body-right-item">
-                                <div className="strike-home__map-body-right-item-left">Tirane</div>
-                                <div className="strike-home__map-body-right-item-right">8</div>
-                            </div>
-                            <div className="strike-home__map-body-right-item">
-                                <div className="strike-home__map-body-right-item-left">Peje</div>
-                                <div className="strike-home__map-body-right-item-right">7</div>
-                            </div>
-                            <div className="strike-home__map-body-right-item">
-                                <div className="strike-home__map-body-right-item-left">Mitrovice</div>
-                                <div className="strike-home__map-body-right-item-right">3</div>
-                            </div>
+                            {props.topCities && Object.entries(props.topCities).map((item, index) => {
+                                return (
+                                    <div key={index} className="strike-home__map-body-right-item">
+                                        <div className="strike-home__map-body-right-item-left">{item[0]}</div>
+                                        <div className="strike-home__map-body-right-item-right">{item[1]}</div>
+                                    </div>
+                                )
+                            })}
                             <div className="strike-home__map-body-right-footer">
                                 {i18n.t('home.viewAll')}
                             </div>
@@ -214,7 +213,7 @@ const Home = (props) => {
     )
 }
 
-const mapStateToProps = null;
-const mapDispatchToProps = null;
+const mapStateToProps = ({ topCities, topProducts }) => ({ topCities, topProducts });
+const mapDispatchToProps = { getTopCities, getTopProducts };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home));

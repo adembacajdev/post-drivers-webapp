@@ -1,6 +1,6 @@
 import {
     GET_ALL_ORDERS, GET_ORDER, NUMBER_OF_ORDERS_BY_STATUS, GET_ORDERS_BY_CITY, GET_ORDER_BY_STATUS,
-    GET_TOP_CITIES, GET_TOP_PRODUCTS, POST_ORDER, DELETE_ORDER, DELETE_ORDERS //I will check other types after I console all api
+    GET_TOP_CITIES, GET_TOP_PRODUCTS, POST_ORDER, DELETE_ORDER, DELETE_ORDERS, PRINT_ONE_ORDER //I will check other types after I console all api
 } from '../actionTypes';
 
 export function allOrders(state = null, { type, data }) {
@@ -51,6 +51,13 @@ export function topCities(state = null, { type, data }) {
 export function topProducts(state = null, { type, data }) {
     switch (type) {
         case GET_TOP_PRODUCTS: return data;
+        default: return state;
+    }
+}
+
+export function printOrder(state = null, { type, data }) {
+    switch (type) {
+        case PRINT_ONE_ORDER: return data;
         default: return state;
     }
 }
