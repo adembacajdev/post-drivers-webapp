@@ -4,42 +4,42 @@ import { withRouter } from 'react-router-dom';
 import Wrapper from '../../containers/wrapper/Wrapper';
 import i18n from '../../services/locales/i18n';
 import './statistics.scss';
+import moment from 'moment'
+import { getDailyEarnings, getDailyOrders } from '../../store/actions/statistics';
 
 //Chartist
 import 'matchmedia/index.js';
 import 'chartist/dist/chartist.min.css';
 import ChartistGraph from 'react-chartist';
 import Chartist from 'chartist';
+import { useEffect } from 'react';
 
 const Statistics = (props) => {
-    const SVGAnimation = {
-        data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-            series: [
-                [18, 7, 16, 13, 17, 9],
-            ]
-        },
-        options: {
-            low: 0,
-            showArea: true,
-            showPoint: false,
-            fullWidth: true,
-            height: 300
-        },
+    // Object.keys(data).forEach(item => months.push(item));
+    // console.log('months', months);
+    // Object.values(data).forEach(item => newData.push(item));
+    useEffect(() => {
+        props.getDailyEarnings()
+        props.getDailyOrders();
+    }, []);
 
-        events: {
-            draw: function (data) {
-                if (data.type === 'line' || data.type === 'area') {
-                    data.element.animate({
-                        d: {
-                            begin: 2000 * data.index,
-                            dur: 2000,
-                            from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
-                            to: data.path.clone().stringify(),
-                            easing: Chartist.Svg.Easing.easeOutQuint
-                        }
-                    });
-                }
+    useEffect(() => {
+        console.log('dailyEarning', props.dailyEarnings);
+        console.log('dailyOrders', props.dailyOrders);
+    }, [props.dailyEarnings, props.dailyOrders]);
+
+    const options = { low: 0, showArea: true, showPoint: false, fullWidth: true, height: 300 }
+
+    const events = {
+        draw: function (data) {
+            if (data.type === 'line' || data.type === 'area') {
+                data.element.animate({
+                    d: {
+                        begin: 2000 * data.index, dur: 2000,
+                        from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
+                        to: data.path.clone().stringify(), easing: Chartist.Svg.Easing.easeOutQuint
+                    }
+                });
             }
         }
     }
@@ -62,7 +62,7 @@ const Statistics = (props) => {
                         </div>
                     </div>
                     <div className="strike-statistics__chart-body">
-                        <ChartistGraph data={SVGAnimation.data} options={SVGAnimation.options} listener={SVGAnimation.events} type={'Line'} />
+                        <ChartistGraph data={props.dailyEarnings} options={options} listener={events} type={'Line'} />
                     </div>
                 </div>
                 <div className="strike-statistics__chart">
@@ -80,7 +80,7 @@ const Statistics = (props) => {
                         </div>
                     </div>
                     <div className="strike-statistics__chart-body">
-                        <ChartistGraph data={SVGAnimation.data} options={SVGAnimation.options} listener={SVGAnimation.events} type={'Line'} />
+                        <ChartistGraph data={props.dailyOrders} options={options} listener={events} type={'Line'} />
                     </div>
                 </div>
             </div>
@@ -88,7 +88,7 @@ const Statistics = (props) => {
     )
 }
 
-const mapStateToProps = null;
-const mapDispatchToProps = null;
+const mapStateToProps = ({ dailyEarnings, dailyOrders }) => ({ dailyEarnings, dailyOrders });
+const mapDispatchToProps = { getDailyEarnings, getDailyOrders };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Statistics));
