@@ -101,7 +101,7 @@ const Table = ({ items, deleteItem, printOne }) => {
     )
 }
 
-const Item = ({ id, status, updated_at, deleteItem, price, client, printOne }) => {
+const Item = ({ id, serial_number, status, updated_at, deleteItem, price, client, printOne }) => {
     const history = useHistory();
     const { threePoints } = images.orders;
     const date = moment(updated_at).format('DD/MM/YYYY');
@@ -121,7 +121,7 @@ const Item = ({ id, status, updated_at, deleteItem, price, client, printOne }) =
         <div className="strike-orders__table-item">
             <div onClick={navigate} className="strike-orders__table-item-container">
                 <input className="strike-orders__table-item-container-checkbox" type="checkbox" />
-                <div className="strike-orders__table-item-container-text">{id}</div>
+                <div className="strike-orders__table-item-container-text">{serial_number}</div>
             </div>
             <div onClick={navigate} className="strike-orders__table-item-container">
                 <div className={newStatus} />

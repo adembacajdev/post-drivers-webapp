@@ -4,16 +4,11 @@ import {
 } from '../actionTypes';
 import axios from 'axios';
 
-export const getAllCustomers = () => async (dispatch) => {
+export const getAllCustomers = (limit, page) => async (dispatch) => {
     try {
-        const { data } = axios.get(`/clients`);
-        if (data.success) {
-            dispatch({ type: GET_ALL_CUSTOMERS, data });
-        } else if (data.code === 403) {
-            dispatch({ type: IS_LOGGED_IN, data: false });
-            localStorage.removeItem('token');
-            axios.defaults.headers.common['Content-Type'] = "applicaton/json"
-            axios.defaults.headers.common['Authorization'] = ``
+        const data = await axios.get(`clients/paginate/${limit}?page=${page}`);
+        if (data.status === 200) {
+            dispatch({ type: GET_ALL_CUSTOMERS, data: data.data })
         }
     } catch (e) {
         return Promise.reject(e);
@@ -22,9 +17,9 @@ export const getAllCustomers = () => async (dispatch) => {
 
 export const getCustomer = (id) => async (dispatch) => {
     try {
-        const { data } = axios.get(`/clients/${id}`);
+        const { data } = await axios.get(`/clients/${id}`);
         if (data.success) {
-            dispatch({ type: GET_SELECTED_CUSTOMERS, data });
+            dispatch({ type: GET_SELECTED_CUSTOMERS, data: data.data });
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');
@@ -36,9 +31,9 @@ export const getCustomer = (id) => async (dispatch) => {
     }
 }
 
-export const getCustomerOrders = () => async (dispatch) => {
+export const getCustomerOrders = (id) => async (dispatch) => {
     try {
-        const { data } = axios.get(`/clients/${id}/order`);
+        const { data } = await axios.get(`/clients/${id}/order`);
         if (data.success) {
             dispatch({ type: GET_CUSTOMERS_ORDER, data });
         } else if (data.code === 403) {
@@ -54,7 +49,7 @@ export const getCustomerOrders = () => async (dispatch) => {
 
 export const getRecentCustomers = () => async (dispatch) => {
     try {
-        const { data } = axios.get(`/recent/customers`);
+        const { data } = await axios.get(`/recent/customers`);
         if (data.success) {
             dispatch({ type: GET_RECENT_CUSTOMERS, data });
         } else if (data.code === 403) {
@@ -70,9 +65,9 @@ export const getRecentCustomers = () => async (dispatch) => {
 
 export const deleteCustomer = (id) => async (dispatch) => {
     try {
-        const { data } = axios.delete(`/clients/${id}`);
+        const { data } = await axios.delete(`/clients/${id}`);
         if (data.success) {
-            dispatch({ type: DELETE_CUSTOMER, data });
+            dispatch({ type: DELETE_CUSTOMER, data: data.data });
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');
@@ -86,7 +81,7 @@ export const deleteCustomer = (id) => async (dispatch) => {
 
 export const deleteCustomers = (client_ids) => async (dispatch) => {
     try {
-        const { data } = axios.delete(`/clients/${client_ids}`);
+        const { data } = await axios.delete(`/clients/${client_ids}`);
         if (data.success) {
             dispatch({ type: DELETE_CUSTOMERS, data });
         } else if (data.code === 403) {

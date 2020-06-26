@@ -159,7 +159,7 @@ export const deleteOrder = (id) => async (dispatch) => {
     }
 }
 
-export const deleteProducts = (order_ids) => async (dispatch) => {
+export const deleteOrders = (order_ids) => async (dispatch) => {
     try {
         const { data } = await axios.delete(`/orders/${order_ids}`);
         if (data.success) {

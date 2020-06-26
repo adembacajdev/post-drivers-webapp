@@ -7,9 +7,7 @@ import { connect } from 'react-redux';
 import moment from 'moment'
 
 const SeeOrder = (props) => {
-    useEffect(() => {
-        props.getOrder(props.location.state.id);
-    }, [])
+    useEffect(() => { props.getOrder(props.location.state.id); }, [])
     return (
         <Wrapper>
             <div className="strike-order">
