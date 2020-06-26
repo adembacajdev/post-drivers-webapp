@@ -5,21 +5,25 @@ import Wrapper from '../../containers/wrapper/Wrapper';
 import images from '../../assets/images';
 import i18n from '../../services/locales/i18n';
 import './style.scss';
+import { getAllPricing } from '../../store/actions/pricing';
+import { useEffect } from 'react';
 
 const Pricing = (props) => {
     const { history } = images.transfers;
+    useEffect(() => { props.getAllPricing() }, []);
+    useEffect(() => { console.log('pricing', props.pricingTable) }, [props.pricingTable]);
     return (
         <Wrapper>
             <div className="strike-pricing">
                 <div className="strike-pricing__header">{i18n.t('pricing.title')}</div>
-                <Table items={[1, 2, 3, 4, 5, 6]} />
+                <Table items={props.pricingTable} />
             </div>
         </Wrapper>
     )
 }
 
-const mapStateToProps = null;
-const mapDispatchToProps = null;
+const mapStateToProps = ({ pricingTable }) => ({ pricingTable });
+const mapDispatchToProps = { getAllPricing };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Pricing));
 
@@ -41,27 +45,27 @@ const Table = ({ items }) => {
                     <div className="strike-pricing__table-header-item-text">{i18n.t('pricing.cancellationPrice')}</div>
                 </div>
             </div>
-            {items && items.map(item => {
-                return <Item />
+            {items && items.map((item, index) => {
+                return <Item key={index} {...item} />
             })}
         </div>
     )
 }
 
-const Item = (props) => {
+const Item = ({cancellation_price, country, shipment_price, size}) => {
     return (
         <div className="strike-pricing__table-item">
             <div className="strike-pricing__table-item-container">
-                <div className="strike-pricing__table-item-container-text">Kosove</div>
+                <div className="strike-pricing__table-item-container-text">{country}</div>
             </div>
             <div className="strike-pricing__table-item-container">
-                <div className="strike-pricing__table-item-container-text">Small</div>
+                <div className="strike-pricing__table-item-container-text">{size}</div>
             </div>
             <div className="strike-pricing__table-item-container">
-                <div className="strike-pricing__table-item-container-text">2.00$</div>
+                <div className="strike-pricing__table-item-container-text">{shipment_price}</div>
             </div>
             <div className="strike-pricing__table-item-container">
-                <div className="strike-pricing__table-item-container-text">00.00$</div>
+                <div className="strike-pricing__table-item-container-text">{cancellation_price}</div>
             </div>
         </div>
     )
