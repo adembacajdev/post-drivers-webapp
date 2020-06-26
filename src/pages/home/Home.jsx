@@ -17,10 +17,6 @@ const Home = (props) => {
         props.getTopCities();
         props.getTopProducts()
     }, [])
-
-    useEffect(() => {
-        console.log('topProducts', props.topProducts) //TO-DO - Adem
-    }, [props.topProducts])
     return (
         <Wrapper>
             <div className="strike-home">
@@ -134,42 +130,19 @@ const Home = (props) => {
                             <div className="strike-home__bottom-left-tableheader-price">{i18n.t('home.price')}</div>
                             <div className="strike-home__bottom-left-tableheader-noorders">{i18n.t('home.noOrders')}</div>
                         </div>
-                        <div className="strike-home__bottom-left-table">
-                            <div className="strike-home__bottom-left-table-product">
-                                <img className="strike-home__bottom-left-table-product-icon" src={testProduct} />
-                                <div className="strike-home__bottom-left-table-product-text">Women's Vintage Peacoat</div>
-                            </div>
-                            <div className="strike-home__bottom-left-table-description">Lorem Ipsum</div>
-                            <div className="strike-home__bottom-left-table-price">$29.162</div>
-                            <div className="strike-home__bottom-left-table-noorders">20</div>
-                        </div>
-                        <div className="strike-home__bottom-left-table">
-                            <div className="strike-home__bottom-left-table-product">
-                                <img className="strike-home__bottom-left-table-product-icon" src={testProduct} />
-                                <div className="strike-home__bottom-left-table-product-text">Women's Vintage Peacoat</div>
-                            </div>
-                            <div className="strike-home__bottom-left-table-description">Lorem Ipsum</div>
-                            <div className="strike-home__bottom-left-table-price">$29.162</div>
-                            <div className="strike-home__bottom-left-table-noorders">20</div>
-                        </div>
-                        <div className="strike-home__bottom-left-table">
-                            <div className="strike-home__bottom-left-table-product">
-                                <img className="strike-home__bottom-left-table-product-icon" src={testProduct} />
-                                <div className="strike-home__bottom-left-table-product-text">Women's Vintage Peacoat</div>
-                            </div>
-                            <div className="strike-home__bottom-left-table-description">Lorem Ipsum</div>
-                            <div className="strike-home__bottom-left-table-price">$29.162</div>
-                            <div className="strike-home__bottom-left-table-noorders">20</div>
-                        </div>
-                        <div className="strike-home__bottom-left-table">
-                            <div className="strike-home__bottom-left-table-product">
-                                <img className="strike-home__bottom-left-table-product-icon" src={testProduct} />
-                                <div className="strike-home__bottom-left-table-product-text">Women's Vintage Peacoat</div>
-                            </div>
-                            <div className="strike-home__bottom-left-table-description">Lorem Ipsum</div>
-                            <div className="strike-home__bottom-left-table-price">$29.162</div>
-                            <div className="strike-home__bottom-left-table-noorders">20</div>
-                        </div>
+                        {props.topProducts && props.topProducts.map((item, index) => {
+                            return (
+                                <div key={index} className="strike-home__bottom-left-table">
+                                    <div className="strike-home__bottom-left-table-product">
+                                        <img className="strike-home__bottom-left-table-product-icon" src={testProduct} />
+                                        <div className="strike-home__bottom-left-table-product-text">{item.name}</div>
+                                    </div>
+                                    <div className="strike-home__bottom-left-table-description">{item.description}</div>
+                                    <div className="strike-home__bottom-left-table-price">{item.price}</div>
+                                    <div className="strike-home__bottom-left-table-noorders">{item.orders}</div>
+                                </div>
+                            )
+                        })}
                     </div>
 
 

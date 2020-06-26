@@ -3,7 +3,7 @@ import isLoggedIn from './authenticate.reducer';
 import sidebar from './toggle.sidebar';
 import { loggedIn, newPassword, user } from './authorization';
 import { allProducts, product, productOrder } from './products';
-import { allOrders, order, numberOfOrdersByStatus, ordersByCity, ordersByStatus, topCities, topProducts, printOrder } from './orders';
+import { allOrders, order, numberOfOrdersByStatus, ordersByCity, ordersByStatus, topCities, topProducts, printOrder, ordersPaginated } from './orders';
 import { allCustomers, customer, recentCustomers, customerOrders } from './customers';
 import { allLocations, location } from './location';
 import { allUsers, selectedUser } from './users';
@@ -15,7 +15,7 @@ export default combineReducers({
     isLoggedIn, sidebar,
     loggedIn, newPassword, user,
     allProducts, product, productOrder,
-    allOrders, order, numberOfOrdersByStatus, ordersByCity, ordersByStatus, topCities, topProducts, printOrder,
+    allOrders, order, numberOfOrdersByStatus, ordersByCity, ordersByStatus, topCities, topProducts, printOrder, ordersPaginated,
     allCustomers, customer, recentCustomers, customerOrders,
     allLocations, location,
     allUsers, selectedUser,

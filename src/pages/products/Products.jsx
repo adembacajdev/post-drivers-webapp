@@ -10,7 +10,6 @@ import { useEffect } from 'react';
 
 const Products = (props) => {
     useEffect(() => { props.getAllProducts() }, []);
-    useEffect(() => { console.log('allProducts', props.allProducts) }, [props.allProducts]);
     return (
         <Wrapper>
             <div className="strike-products">

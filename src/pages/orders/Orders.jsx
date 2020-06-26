@@ -5,26 +5,27 @@ import Wrapper from '../../containers/wrapper/Wrapper';
 import images from '../../assets/images';
 import i18n from '../../services/locales/i18n';
 import './orders.scss';
-import { getAllOrders, deleteOrder, printOneOrder } from '../../store/actions/orders';
+import { getAllOrders, deleteOrder, printOneOrder, getOrdersPaginated } from '../../store/actions/orders';
 import moment from 'moment';
 import { saveAs } from 'file-saver';
+import { useCallback } from 'react';
 
 const Orders = (props) => {
-    const [title, setTitle] = useState(i18n.t('orders.allOrders'))
-    const { innerWidth, innerHeight } = window;
+    const [title, setTitle] = useState(i18n.t('orders.allOrders'));
+    const [orders, setOrders] = useState(props.ordersPaginated);
     const { infoIcon, filledLeftArrow, unfilledLeftArrow, filledRightArrow, unfilledRightArrow } = images.orders;
     useEffect(() => {
-        props.getAllOrders()
-        if (props.location.state && props.location.state.title) {
-            setTitle(props.location.state.title)
-        }
+        props.getOrdersPaginated(5, 1)
+        if (props.location.state && props.location.state.title) setTitle(props.location.state.title);
     }, [])
 
-    useEffect(() => {
-        if (props.printOrder) {
-            saveAs(props.printOrder, 'newFile.pdf')
-        }
-    }, [props.printOrder]);
+    useEffect(() => { if (props.printOrder) saveAs(props.printOrder, 'newFile.pdf'); }, [props.printOrder]);
+
+    useEffect(() => { setOrders(props.ordersPaginated); }, [props.ordersPaginated]);
+
+    const nextPage = useCallback(() => { if (orders.hasNextPage) props.getOrdersPaginated(5, orders.currentPage + 1) }, [orders]);
+    const prevPage = useCallback(() => { if (orders.hasPrevPage) props.getOrdersPaginated(5, orders.currentPage - 1) }, [orders]);
+    const number = useCallback((page) => { props.getOrdersPaginated(5, page) }, [orders]);
 
     return (
         <Wrapper>
@@ -37,22 +38,21 @@ const Orders = (props) => {
                         <img className="strike-orders__header-right-icon" src={infoIcon} />
                     </div>
                 </div>
-                <Table printOne={props.printOneOrder} deleteItem={props.deleteOrder} items={props.allOrders} />
+                <Table printOne={props.printOneOrder} deleteItem={props.deleteOrder} items={orders.data} />
                 <div className="strike-orders__pagination">
-                    <img src={unfilledLeftArrow} className='strike-orders__pagination-leftarrow' />
-                    <div is-active="true" className="strike-orders__pagination-number">1</div>
-                    <div className="strike-orders__pagination-number">2</div>
-                    <div className="strike-orders__pagination-number">3</div>
-                    <div className="strike-orders__pagination-number">4</div>
-                    <img src={filledRightArrow} className='strike-orders__pagination-rightArrow' />
+                    <img onClick={prevPage} src={orders.hasPrevPage ? filledLeftArrow : unfilledLeftArrow} className='strike-orders__pagination-leftarrow' />
+                    {orders && orders.lastPage.map(item => {
+                        return <div onClick={() => number(item)} is-active={item === orders.currentPage ? 'true' : 'false'} key={item} className="strike-orders__pagination-number">{item}</div>
+                    })}
+                    <img onClick={nextPage} src={orders.hasNextPage ? filledRightArrow : unfilledRightArrow} className='strike-orders__pagination-rightarrow' />
                 </div>
             </div>
         </Wrapper>
     )
 }
 
-const mapStateToProps = ({ allOrders, printOrder }) => ({ allOrders, printOrder });
-const mapDispatchToProps = { getAllOrders, deleteOrder, printOneOrder };
+const mapStateToProps = ({ allOrders, printOrder, ordersPaginated }) => ({ allOrders, printOrder, ordersPaginated });
+const mapDispatchToProps = { getAllOrders, deleteOrder, printOneOrder, getOrdersPaginated };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Orders));
 

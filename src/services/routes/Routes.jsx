@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { Router as BaseRouter, Route, Switch, Redirect } from 'react-router-dom';
 import history from './history';
 import Loader from '../../components/loader/Loader';
@@ -28,45 +28,54 @@ const EditProduct = lazy(() => import('../../pages/products/EditProduct'));
 
 function Router(props) {
     const isLoggedIn = useSelector(state => state.isLoggedIn);
+    const protectedRoutes = [
+        { path: '/', exact: true, component: Home },
+        { path: '/customers', exact: true, component: Customers },
+        { path: '/customer', exact: true, component: SeeCustomer },
+        { path: '/orders', exact: true, component: Orders },
+        { path: '/order', exact: true, component: SeeOrder },
+        { path: '/add-order', exact: true, component: AddOrder },
+        { path: '/products', exact: true, component: Products },
+        { path: '/product', exact: true, component: SeeProduct },
+        { path: '/add-product', exact: true, component: AddProduct },
+        { path: '/edit-product', exact: true, component: EditProduct },
+        { path: '/statistics', exact: true, component: Statistics },
+        { path: '/transfers', exact: true, component: Transfers },
+        { path: '/add-transfer', exact: true, component: AddTransfer },
+        { path: '/pricing', exact: true, component: Pricing },
+        { path: '/users', exact: true, component: Users },
+        { path: '/user', exact: true, component: SeeUser },
+        { path: '/add-user', exact: true, component: AddUser },
+    ]
+    useEffect(() => {
+        if (!isLoggedIn) return history.push('/login');
+        else return history.push('/')
+    }, [isLoggedIn])
     return (
-        !isLoggedIn
-            ?
-            <BaseRouter history={history}>
+        <BaseRouter history={history}>
+        {isLoggedIn ? <Navbar /> : null}
+        {isLoggedIn ? <Sidebar /> : null}
+            <div>
                 <Suspense fallback={<Loader />}>
                     <Switch>
-                        <Route path='/' exact component={Login} />
+                        <Route path='/login' exact component={Login} />
+                        {isLoggedIn ? <Route path='/' exact component={Home} /> : <Redirect to="/login" />}
+                        {isLoggedIn && protectedRoutes.map((route, idx) => {
+                            return route.component ? (
+                                <Route
+                                    key={idx}
+                                    path={route.path}
+                                    exact={route.exact}
+                                    render={props => (
+                                        <route.component {...props} />
+                                    )} />
+                            ) : (null);
+                        })}
+                        <Redirect from="/" to={isLoggedIn ? '/' : '/login'} />
                     </Switch>
                 </Suspense>
-            </BaseRouter>
-            :
-            <BaseRouter history={history}>
-                <Navbar />
-                <Sidebar />
-                <div>
-                    <Suspense fallback={<Loader />}>
-                        <Switch>
-                            <Route path='/' exact component={Home} />
-                            <Route path='/customers' exact component={Customers} />
-                            <Route path='/customer' exact component={SeeCustomer} />
-                            <Route path='/orders' exact component={Orders} />
-                            <Route path='/order' exact component={SeeOrder} />
-                            <Route path='/add-order' exact component={AddOrder} />
-                            <Route path='/products' exact component={Products} />
-                            <Route path='/product' exact component={SeeProduct} />
-                            <Route path='/add-product' exact component={AddProduct} />
-                            <Route path='/edit-product' exact component={EditProduct} />
-                            <Route path='/statistics' exact component={Statistics} />
-                            <Route path='/transfers' exact component={Transfers} />
-                            <Route path='/add-transfer' exact component={AddTransfer} />
-                            <Route path='/pricing' exact component={Pricing} />
-                            <Route path='/users' exact component={Users} />
-                            <Route path='/user' exact component={SeeUser} />
-                            <Route path='/add-user' exact component={AddUser} />
-                            <Route path='/login' exact component={Login} />
-                        </Switch>
-                    </Suspense>
-                </div>
-            </BaseRouter>
+            </div>
+        </BaseRouter>
     )
 }
 
