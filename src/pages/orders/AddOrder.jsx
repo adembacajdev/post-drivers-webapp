@@ -94,7 +94,7 @@ const AddOrder = (props) => {
                     <input has-error={errors.address ? 'true' : 'false'} ref={register({ required: true })} name="address" className="strike-addorder__form-input" placeholder={i18n.t('addOrderForm.address')} />
                     <div className="strike-addorder__form-label">{i18n.t('addOrderForm.building')}</div>
                     <input has-error={errors.building ? 'true' : 'false'} ref={register({ required: true })} name="building" className="strike-addorder__form-input" placeholder={i18n.t('addOrderForm.building')} />
-                    <button className="strike-addorder__form-button">{i18n.t('addOrderForm.addOrder')}</button>
+                    <button type="submit" className="strike-addorder__form-button">{i18n.t('addOrderForm.addOrder')}</button>
                 </form>
             </div>
         </Wrapper>

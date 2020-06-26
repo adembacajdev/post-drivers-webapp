@@ -20,17 +20,10 @@ export const login = (body) => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
     try {
-        const { data } = await axios.post('/logout');
-        if (data.success) {
-            dispatch({ type: LOG_OUT, data });
-            dispatch({ type: IS_LOGGED_IN, data: false });
-            localStorage.removeItem('token');
-        }else if(data.code === 403){
-            dispatch({ type: IS_LOGGED_IN, data: false });
-            localStorage.removeItem('token');
-            axios.defaults.headers.common['Content-Type'] = "applicaton/json"
-            axios.defaults.headers.common['Authorization'] = ``
-        }
+        // const { data } = await axios.post('/logout');
+        dispatch({ type: LOG_OUT });
+        dispatch({ type: IS_LOGGED_IN, data: false });
+        localStorage.removeItem('token');
     } catch (e) {
         return Promise.reject(e);
     }

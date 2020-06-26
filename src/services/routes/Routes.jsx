@@ -47,10 +47,11 @@ function Router(props) {
         { path: '/user', exact: true, component: SeeUser },
         { path: '/add-user', exact: true, component: AddUser },
     ]
-    useEffect(() => {
-        if (!isLoggedIn) return history.push('/login');
-        else return history.push('/')
-    }, [isLoggedIn])
+    // useEffect(() => {
+    //     console.log('history', history)
+    //     if (!isLoggedIn) return history.push('/login');
+    //     else return history.push('/')
+    // }, [isLoggedIn])
     return (
         <BaseRouter history={history}>
         {isLoggedIn ? <Navbar /> : null}
@@ -58,8 +59,6 @@ function Router(props) {
             <div>
                 <Suspense fallback={<Loader />}>
                     <Switch>
-                        <Route path='/login' exact component={Login} />
-                        {isLoggedIn ? <Route path='/' exact component={Home} /> : <Redirect to="/login" />}
                         {isLoggedIn && protectedRoutes.map((route, idx) => {
                             return route.component ? (
                                 <Route
@@ -71,7 +70,7 @@ function Router(props) {
                                     )} />
                             ) : (null);
                         })}
-                        <Redirect from="/" to={isLoggedIn ? '/' : '/login'} />
+                        <Route path='/login' exact component={Login} />
                     </Switch>
                 </Suspense>
             </div>

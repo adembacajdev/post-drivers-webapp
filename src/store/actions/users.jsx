@@ -5,10 +5,10 @@ import axios from 'axios';
 
 export const getAllUsers = () => async (dispatch) => {
     try {
-        const { data } = axios.get(`/users`);
+        const { data } = await axios.get(`/users`);
         if (data.success) {
-            dispatch({ type: GET_ALL_USERS, data });
-        }else if(data.code === 403){
+            dispatch({ type: GET_ALL_USERS, data: data.data });
+        } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
@@ -21,10 +21,10 @@ export const getAllUsers = () => async (dispatch) => {
 
 export const getUser = (id) => async (dispatch) => {
     try {
-        const { data } = axios.get(`/users/${id}`);
+        const { data } = await axios.get(`/users/${id}`);
         if (data.success) {
-            dispatch({ type: GET_SELECTED_USER, data });
-        }else if(data.code === 403){
+            dispatch({ type: GET_SELECTED_USER, data: data.data });
+        } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
@@ -35,13 +35,16 @@ export const getUser = (id) => async (dispatch) => {
     }
 }
 
-export const postUser = (body) => async (dispatch) => {
+export const postUser = (body, history) => async (dispatch) => {
     try {
         const { first_name, last_name, email, phone } = body;
-        const { data } = axios.post(`/users`, { first_name, last_name, email, phone });
+        const { data } = await axios.post(`/users`, { first_name, last_name, email, phone });
+        console.log('data', data)
         if (data.success) {
-            dispatch({ type: POST_USER, data });
-        }else if(data.code === 403){
+            console.log('user', data)
+            dispatch({ type: POST_USER, data: data.data });
+            history.goBack();
+        } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
@@ -52,13 +55,13 @@ export const postUser = (body) => async (dispatch) => {
     }
 }
 
-export const postUser = (body) => async (dispatch) => {
+export const updateUser = (body) => async (dispatch) => {
     try {
         const { id, first_name, last_name, email, phone } = body;
-        const { data } = axios.put(`/users/${id}`, { first_name, last_name, email, phone });
+        const { data } = await axios.put(`/users/${id}`, { first_name, last_name, email, phone });
         if (data.success) {
             dispatch({ type: UPDATE_USER, data });
-        }else if(data.code === 403){
+        } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
@@ -71,10 +74,11 @@ export const postUser = (body) => async (dispatch) => {
 
 export const deleteUser = (id) => async (dispatch) => {
     try {
-        const { data } = axios.delete(`/users${id}`);
+        const { data } = await axios.delete(`/users${id}`);
+        console.log('data', data)
         if (data.success) {
-            dispatch({ type: DELETE_USER, data });
-        }else if(data.code === 403){
+            dispatch({ type: DELETE_USER, data: data.data });
+        } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"

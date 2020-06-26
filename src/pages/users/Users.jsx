@@ -6,10 +6,14 @@ import images from '../../assets/images';
 import i18n from '../../services/locales/i18n';
 import './style.scss';
 import { useCallback } from 'react';
+import { getAllUsers, deleteUser } from '../../store/actions/users';
+import { useEffect } from 'react';
+import moment from 'moment';
 
 const Customers = (props) => {
     const { infoIcon, filledLeftArrow, unfilledLeftArrow, filledRightArrow, unfilledRightArrow } = images.customers;
-    const addUser = useCallback(() => {props.history.push('/add-user')}, [])
+    const addUser = useCallback(() => { props.history.push('/add-user') }, []);
+    useEffect(() => { props.getAllUsers() }, []);
     return (
         <Wrapper>
             <div className="strike-users">
@@ -21,7 +25,7 @@ const Customers = (props) => {
                         <div onClick={addUser} className="strike-users__header-right-text">{i18n.t('users.addUser')}</div>
                     </div>
                 </div>
-                <Table items={[1, 2, 3, 4, 5, 6]} />
+                <Table deleteUser={props.deleteUser} items={props.allUsers} />
                 <div className="strike-users__pagination">
                     <img src={unfilledLeftArrow} className='strike-users__pagination-leftarrow' />
                     <div is-active="true" className="strike-users__pagination-number">1</div>
@@ -35,13 +39,13 @@ const Customers = (props) => {
     )
 }
 
-const mapStateToProps = null;
-const mapDispatchToProps = null;
+const mapStateToProps = ({ allUsers }) => ({ allUsers });
+const mapDispatchToProps = { getAllUsers, deleteUser };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Customers));
 
 
-const Table = ({ items }) => {
+const Table = ({ items, deleteUser }) => {
     const { tableArrow } = images.customers;
     return (
         <div className="strike-users__table">
@@ -71,46 +75,49 @@ const Table = ({ items }) => {
                     <div className="strike-users__table-header-item-text">{i18n.t('users.actions')}</div>
                 </div>
             </div>
-            {items && items.map(item => {
-                return <Item item={item} />
+            {items && items.map((item, index) => {
+                return <Item deleteUser={deleteUser} key={index} {...item} />
             })}
         </div>
     )
 }
 
-const Item = (props) => {
+const Item = ({ created_at, email, first_name, last_name, id, phone, deleteUser }) => {
     const history = useHistory();
     const { threePoints } = images.customers;
+    const date = moment(created_at).format('DD/MM/YYYY')
+    const navigate = useCallback(() => { history.push('/user', { id }) }, []);
+    const deleteUsr = () => deleteUser(id)
     return (
-        <div onClick={() => history.push('/user')} className="strike-users__table-item">
-            <div is-responsive="true" className="strike-users__table-item-container">
+        <div className="strike-users__table-item">
+            <div onClick={navigate} is-responsive="true" className="strike-users__table-item-container">
                 <input className="strike-users__table-item-container-checkbox" type="checkbox" />
-                <div className="strike-users__table-item-container-text">{props.item}</div>
+                <div className="strike-users__table-item-container-text">{id}</div>
             </div>
-            <div className="strike-users__table-item-container">
-                <div className="strike-users__table-item-container-text">Francesca</div>
+            <div onClick={navigate} className="strike-users__table-item-container">
+                <div className="strike-users__table-item-container-text">{first_name}</div>
             </div>
-            <div className="strike-users__table-item-container">
-                <div className="strike-users__table-item-container-text">Metts</div>
+            <div onClick={navigate} className="strike-users__table-item-container">
+                <div className="strike-users__table-item-container-text">{last_name}</div>
             </div>
-            <div className="strike-users__table-item-container">
-                <div className="strike-users__table-item-container-text">049838871</div>
+            <div onClick={navigate} className="strike-users__table-item-container">
+                <div className="strike-users__table-item-container-text">{phone}</div>
             </div>
-            <div is-responsive="true" className="strike-users__table-item-container">
-                <div className="strike-users__table-item-container-text">fran@gmail.com</div>
+            <div onClick={navigate} is-responsive="true" className="strike-users__table-item-container">
+                <div className="strike-users__table-item-container-text">{email}</div>
             </div>
-            <div is-responsive="true" className="strike-users__table-item-container centered">
-                <div className="strike-users__table-item-container-text">23/06/2020</div>
+            <div onClick={navigate} is-responsive="true" className="strike-users__table-item-container centered">
+                <div className="strike-users__table-item-container-text">{date}</div>
             </div>
-            <div is-responsive="true" className="strike-users__table-item-container centered">
-                <div className="strike-users__table-item-container-text">Manager</div>
+            <div onClick={navigate} is-responsive="true" className="strike-users__table-item-container centered">
+                <div className="strike-users__table-item-container-text">TBD</div>
             </div>
             <div is-responsive="true" className="strike-users__table-item-container centered">
                 <div className="dropdown">
                     <img className="strike-users__table-item-container-dots" src={threePoints} />
                     <div className="dropdown-content">
                         <div className="dropdown-content-text">{i18n.t('users.edit')}</div>
-                        <div className="dropdown-content-text">{i18n.t('users.delete')}</div>
+                        <div onClick={deleteUsr} className="dropdown-content-text">{i18n.t('users.delete')}</div>
                     </div>
                 </div>
             </div>
