@@ -6,47 +6,52 @@ import images from '../../assets/images';
 import { VectorMap } from 'react-jvectormap';
 import i18n from '../../services/locales/i18n';
 import './home.scss';
-import { getTopCities, getTopProducts } from '../../store/actions/orders';
+import { getTopCities, getTopProducts, getNumberOfOrdersByStatus } from '../../store/actions/orders';
+import { getAllLocations } from '../../store/actions/location';
 import { useEffect } from 'react';
+import { useState } from 'react';
 
 const Home = (props) => {
+    const [markers, setMarkers] = useState([]);
     const { blueChart, yellowChart, redChart, greenChart, infoIcon, testProduct } = images.home;
-    let markers = [{ name: "Universitas Islam Sultan Agung", latLng: [-6.954821, 110.458576] }, { name: "Other university", latLng: [-5.132412, 119.488454] }, { name: "Other university", latLng: [-4.009751, 122.520665] }];
 
     useEffect(() => {
         props.getTopCities();
-        props.getTopProducts()
+        props.getTopProducts();
+        props.getNumberOfOrdersByStatus();
+        props.getAllLocations();
     }, [])
+    useEffect(() => {setMarkers(props.allLocations)}, [props.allLocations])
     return (
         <Wrapper>
             <div className="strike-home">
                 <div className="strike-home__header">{i18n.t('home.overview')}</div>
                 <div className="strike-home__grids">
-                    <div onClick={() => props.history.push('/orders', { title: i18n.t('home.pendingOrders') })} className="strike-home__grids-grid">
+                    <div onClick={() => props.history.push('/order-by-status', { title: i18n.t('home.pendingOrders'), slug: 'pending' })} className="strike-home__grids-grid">
                         <div className="strike-home__grids-grid-title">{i18n.t('home.pendingOrders')}</div>
                         <div className="strike-home__grids-grid-bottom">
-                            <div className="strike-home__grids-grid-bottom-number">20</div>
+                            <div className="strike-home__grids-grid-bottom-number">{props.numberOfOrdersByStatus && props.numberOfOrdersByStatus.pending}</div>
                             <img className="strike-home__grids-grid-bottom-icon" src={blueChart} />
                         </div>
                     </div>
-                    <div onClick={() => props.history.push('/orders', { title: i18n.t('home.ongoingOrders') })} className="strike-home__grids-grid">
+                    <div onClick={() => props.history.push('/order-by-status', { title: i18n.t('home.ongoingOrders'), slug: 'ongoing' })} className="strike-home__grids-grid">
                         <div className="strike-home__grids-grid-title">{i18n.t('home.ongoingOrders')}</div>
                         <div className="strike-home__grids-grid-bottom">
-                            <div className="strike-home__grids-grid-bottom-number">200</div>
+                            <div className="strike-home__grids-grid-bottom-number">{props.numberOfOrdersByStatus && props.numberOfOrdersByStatus.ongoing}</div>
                             <img className="strike-home__grids-grid-bottom-icon" src={yellowChart} />
                         </div>
                     </div>
-                    <div onClick={() => props.history.push('/orders', { title: i18n.t('home.cancelledOrders') })} className="strike-home__grids-grid">
+                    <div onClick={() => props.history.push('/order-by-status', { title: i18n.t('home.cancelledOrders'), slug: 'cancelled' })} className="strike-home__grids-grid">
                         <div className="strike-home__grids-grid-title">{i18n.t('home.cancelledOrders')}</div>
                         <div className="strike-home__grids-grid-bottom">
-                            <div className="strike-home__grids-grid-bottom-number">0</div>
+                            <div className="strike-home__grids-grid-bottom-number">{props.numberOfOrdersByStatus && props.numberOfOrdersByStatus.cancelled}</div>
                             <img className="strike-home__grids-grid-bottom-icon" src={redChart} />
                         </div>
                     </div>
-                    <div onClick={() => props.history.push('/orders', { title: i18n.t('home.completedOrders') })} className="strike-home__grids-grid">
+                    <div onClick={() => props.history.push('/order-by-status', { title: i18n.t('home.completedOrders'), slug: 'completed' })} className="strike-home__grids-grid">
                         <div className="strike-home__grids-grid-title">{i18n.t('home.completedOrders')}</div>
                         <div className="strike-home__grids-grid-bottom">
-                            <div className="strike-home__grids-grid-bottom-number">30</div>
+                            <div className="strike-home__grids-grid-bottom-number">{props.numberOfOrdersByStatus && props.numberOfOrdersByStatus.completed}</div>
                             <img className="strike-home__grids-grid-bottom-icon" src={greenChart} />
                         </div>
                     </div>
@@ -186,7 +191,7 @@ const Home = (props) => {
     )
 }
 
-const mapStateToProps = ({ topCities, topProducts }) => ({ topCities, topProducts });
-const mapDispatchToProps = { getTopCities, getTopProducts };
+const mapStateToProps = ({ topCities, topProducts, numberOfOrdersByStatus, allLocations }) => ({ topCities, topProducts, numberOfOrdersByStatus, allLocations });
+const mapDispatchToProps = { getTopCities, getTopProducts, getNumberOfOrdersByStatus, getAllLocations };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home));

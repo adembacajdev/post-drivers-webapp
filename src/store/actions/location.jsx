@@ -5,7 +5,7 @@ export const getAllLocations = () => async (dispatch) => {
     try {
         const { data } = await axios.get('/locations');
         if (data.success) {
-            dispatch({ type: GET_ALL_LOCATIONS, data });
+            dispatch({ type: GET_ALL_LOCATIONS, data: data.data });
         }else if(data.code === 403){
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');
@@ -21,7 +21,7 @@ export const getLocation = (id) => async (dispatch) => {
     try {
         const { data } = await axios.get(`/locations/${id}`);
         if (data.success) {
-            dispatch({ type: GET_SELECTED_LOCATION, data });
+            dispatch({ type: GET_SELECTED_LOCATION, data: data.data });
         }else if(data.code === 403){
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');

@@ -15,9 +15,6 @@ import Chartist from 'chartist';
 import { useEffect } from 'react';
 
 const Statistics = (props) => {
-    // Object.keys(data).forEach(item => months.push(item));
-    // console.log('months', months);
-    // Object.values(data).forEach(item => newData.push(item));
     useEffect(() => {
         props.getDailyEarnings()
         props.getDailyOrders();

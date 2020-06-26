@@ -14,6 +14,7 @@ const Login = lazy(() => import('../../pages/login/Login'));
 const Orders = lazy(() => import('../../pages/orders/Orders'));
 const SeeOrder = lazy(() => import('../../pages/orders/SeeOrder'));
 const AddOrder = lazy(() => import('../../pages/orders/AddOrder'));
+const OrderByStatus = lazy(() => import('../../pages/orders/OrdersByStatus'));
 const Products = lazy(() => import('../../pages/products/Products'));
 const SeeProduct = lazy(() => import('../../pages/products/SeeProduct'));
 const Statistics = lazy(() => import('../../pages/statistics/Statistics'));
@@ -36,6 +37,7 @@ function Router(props) {
         { path: '/orders', exact: true, component: Orders },
         { path: '/order', exact: true, component: SeeOrder },
         { path: '/add-order', exact: true, component: AddOrder },
+        { path: '/order-by-status', exact: true, component: OrderByStatus },
         { path: '/products', exact: true, component: Products },
         { path: '/product', exact: true, component: SeeProduct },
         { path: '/add-product', exact: true, component: AddProduct },
@@ -49,11 +51,10 @@ function Router(props) {
         { path: '/add-user', exact: true, component: AddUser },
         { path: '/edit-user', exact: true, component: EditUser },
     ]
-    // useEffect(() => {
-    //     console.log('history', history)
-    //     if (!isLoggedIn) return history.push('/login');
-    //     else return history.push('/')
-    // }, [isLoggedIn])
+    useEffect(() => {
+        if (!isLoggedIn) return history.push('/login');
+        else return history.push('/')
+    }, [isLoggedIn])
     return (
         <BaseRouter history={history}>
         {isLoggedIn ? <Navbar /> : null}
