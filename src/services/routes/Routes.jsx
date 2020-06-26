@@ -22,6 +22,7 @@ const Users = lazy(() => import('../../pages/users/Users'));
 const SeeUser = lazy(() => import('../../pages/users/SeeUser'));
 const Pricing = lazy(() => import('../../pages/pricing/Pricing'));
 const AddUser = lazy(() => import('../../pages/users/AddUser'));
+const EditUser = lazy(() => import('../../pages/users/EditUser'));
 const AddTransfer = lazy(() => import('../../pages/transfers/AddTransfer'));
 const AddProduct = lazy(() => import('../../pages/products/AddProduct'));
 const EditProduct = lazy(() => import('../../pages/products/EditProduct'));
@@ -46,6 +47,7 @@ function Router(props) {
         { path: '/users', exact: true, component: Users },
         { path: '/user', exact: true, component: SeeUser },
         { path: '/add-user', exact: true, component: AddUser },
+        { path: '/edit-user', exact: true, component: EditUser },
     ]
     // useEffect(() => {
     //     console.log('history', history)

@@ -116,7 +116,8 @@
         "actions": "Actions",
         "edit": "Edit",
         "delete": "Delete",
-        "addUser": "Add User"
+        "addUser": "Add User",
+        "editUser": "Edit User"
     },
     "pricing": {
         "title": "Pricing",

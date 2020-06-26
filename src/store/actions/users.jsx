@@ -39,9 +39,7 @@ export const postUser = (body, history) => async (dispatch) => {
     try {
         const { first_name, last_name, email, phone } = body;
         const { data } = await axios.post(`/users`, { first_name, last_name, email, phone });
-        console.log('data', data)
         if (data.success) {
-            console.log('user', data)
             dispatch({ type: POST_USER, data: data.data });
             history.goBack();
         } else if (data.code === 403) {
@@ -55,12 +53,13 @@ export const postUser = (body, history) => async (dispatch) => {
     }
 }
 
-export const updateUser = (body) => async (dispatch) => {
+export const updateUser = (id, body, history) => async (dispatch) => {
     try {
-        const { id, first_name, last_name, email, phone } = body;
+        const { first_name, last_name, email, phone } = body;
         const { data } = await axios.put(`/users/${id}`, { first_name, last_name, email, phone });
         if (data.success) {
-            dispatch({ type: UPDATE_USER, data });
+            dispatch({ type: UPDATE_USER, data: data.data });
+            history.goBack();
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');
@@ -75,7 +74,6 @@ export const updateUser = (body) => async (dispatch) => {
 export const deleteUser = (id) => async (dispatch) => {
     try {
         const { data } = await axios.delete(`/users${id}`);
-        console.log('data', data)
         if (data.success) {
             dispatch({ type: DELETE_USER, data: data.data });
         } else if (data.code === 403) {

@@ -8,7 +8,6 @@ const App = ({ authenticate }) => {
   useEffect(() => {
     axios.defaults.baseURL = 'https://820bq0ls.myhook.io/api';
     const token = localStorage.getItem('token');
-    console.log('token', token)
     if (token !== 'undefined') {
       axios.defaults.headers.common['Content-Type'] = "applicaton/json"
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;

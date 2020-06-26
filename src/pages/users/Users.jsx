@@ -87,7 +87,8 @@ const Item = ({ created_at, email, first_name, last_name, id, phone, deleteUser 
     const { threePoints } = images.customers;
     const date = moment(created_at).format('DD/MM/YYYY')
     const navigate = useCallback(() => { history.push('/user', { id }) }, []);
-    const deleteUsr = () => deleteUser(id)
+    const deleteUsr = () => deleteUser(id);
+    const editUsr = () => history.push('/edit-user', { id });
     return (
         <div className="strike-users__table-item">
             <div onClick={navigate} is-responsive="true" className="strike-users__table-item-container">
@@ -116,7 +117,7 @@ const Item = ({ created_at, email, first_name, last_name, id, phone, deleteUser 
                 <div className="dropdown">
                     <img className="strike-users__table-item-container-dots" src={threePoints} />
                     <div className="dropdown-content">
-                        <div className="dropdown-content-text">{i18n.t('users.edit')}</div>
+                        <div onClick={editUsr} className="dropdown-content-text">{i18n.t('users.edit')}</div>
                         <div onClick={deleteUsr} className="dropdown-content-text">{i18n.t('users.delete')}</div>
                     </div>
                 </div>

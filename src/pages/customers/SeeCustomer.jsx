@@ -6,7 +6,6 @@ import { getCustomer } from '../../store/actions/customers';
 
 const SeeCustomer = (props) => {
     useEffect(() => { props.getCustomer(props.location.state.id); }, [])
-    useEffect(() => { console.log('props', props.customer); }, [props.customer])
     return (
         <Wrapper>
             <div className="strike-customer">
