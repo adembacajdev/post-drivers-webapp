@@ -8,7 +8,6 @@ export function allProducts(state = null, { type, data }) {
         case GET_ALL_PRODUCTS:
             data.forEach(item => item.checked = false);
             return data;
-        return data;
         case SEARCH_PRODUCTS: return data;
         case DELETE_PRODUCT:
             const { id } = data

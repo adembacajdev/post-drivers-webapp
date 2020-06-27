@@ -32,7 +32,7 @@ const Products = (props) => {
                         <button type="submit" className="strike-products__search-button">{i18n.t('products.search')}</button>
                     </form>
                     <Table items={data} deleteProduct={props.deleteProduct} />
-                    <button onClick={deleteSelectedProducts} disabled={selected.length ? false : true} className="strike-products__delete-selected">Delete selected products</button>
+                    <button onClick={deleteSelectedProducts} disabled={selected.length ? false : true} className="strike-products__delete-selected">{i18n.t('products.deleteProducts')}</button>
                 </div>
             </Wrapper>
         </Context.Provider>

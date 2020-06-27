@@ -58,7 +58,8 @@
         "edit": "Edit",
         "delete": "Delete",
         "search": "Search",
-        "searchPlaceholder": "Search for a product..."
+        "searchPlaceholder": "Search for a product...",
+        "deleteProducts": "Delete selected products"
     },
     "orders": {
         "allOrders": "All Orders",
@@ -85,7 +86,11 @@
         "city": "City",
         "actions": "Actions",
         "openLocation": "Open Location",
-        "delete": "Delete"
+        "delete": "Delete",
+        "search": "Search",
+        "searchPlaceholder": "Search for a customer...",
+        "name": "Name",
+        "deleteCustomers": "Delete selected customers"
     },
     "transfers": {
         "currentBalance": "Current Balance",

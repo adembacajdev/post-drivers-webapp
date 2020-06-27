@@ -1,5 +1,7 @@
 import {
-    GET_ALL_CUSTOMERS, GET_SELECTED_CUSTOMERS, GET_CUSTOMERS_ORDER, DELETE_CUSTOMER, DELETE_CUSTOMERS, GET_RECENT_CUSTOMERS
+    GET_ALL_CUSTOMERS, GET_SELECTED_CUSTOMERS, GET_CUSTOMERS_ORDER, DELETE_CUSTOMER, DELETE_CUSTOMERS, GET_RECENT_CUSTOMERS,
+    SEARCH_CUSTOMERS,
+    SEARCH_PRODUCTS
 } from '../actionTypes';
 
 const initialState = {
@@ -17,12 +19,21 @@ export function allCustomers(state = initialState, { type, data }) {
             for (var i = 0; i < (data.meta && data.meta.last_page); i++) {
                 lastPages.push(i + 1);
             }
+            data.data.forEach(item => item.checked = false);
             return {
                 hasNextPage: data.links && data.links.next !== null,
                 hasPrevPage: data.links && data.links.prev !== null,
                 currentPage: data.meta && data.meta.current_page,
                 data: data && data.data,
                 lastPage: lastPages
+            }
+        case SEARCH_PRODUCTS:
+            return {
+                hasNextPage: false,
+                hasPrevPage: false,
+                currentPage: 1,
+                data: data,
+                lastPage: 1
             }
         case DELETE_CUSTOMER:
             const deletedClients = state.data.filter(item => item.id !== data.id);
