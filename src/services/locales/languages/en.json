@@ -74,7 +74,12 @@
         "print": "Print",
         "delete": "Delete",
         "date": "Date",
-        "time": "Time"
+        "time": "Time",
+        "serialNumber": "Serial Number",
+        "search": "Search",
+        "searchPlaceholder": "Search for a order...",
+        "deleteOrders": "Delete selected orders",
+        "printSelected": "Print selected orders"
     },
     "customers": {
         "allCustomers": "All Customers",

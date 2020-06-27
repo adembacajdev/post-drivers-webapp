@@ -5,10 +5,10 @@ import {
 import axios from 'axios';
 import qs from 'qs';
 
-export const getAllProducts = () => async (dispatch) => {
+export const getAllProducts = (limit, page) => async (dispatch) => {
     try {
-        const { data } = await axios.get('/products');
-        if (data.success) {
+        const data = await axios.get(`/products/paginate/${limit}?page=${page}`);
+        if (data.status === 200) {
             dispatch({ type: GET_ALL_PRODUCTS, data: data.data });
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
@@ -23,7 +23,7 @@ export const getAllProducts = () => async (dispatch) => {
 
 export const searchProducts = (search) => async (dispatch) => {
     try {
-        const { data } = await axios.get('/products', { search });
+        const { data } = await axios.post(`/products/search?name=${search}`);
         if (data.success) {
             console.log('searchs', data)
             dispatch({ type: SEARCH_PRODUCTS, data: data.data });
@@ -129,7 +129,6 @@ export const deleteProducts = (product_ids) => async (dispatch) => {
             if (query === '') query = `product_ids[]=${item}`;
             else query = `${query}&product_ids[]=${item}`;
         });
-        console.log('query', query)
         const { data } = await axios.delete(`/products?${query}`);
         console.log('data', data)
         if (data.success) {

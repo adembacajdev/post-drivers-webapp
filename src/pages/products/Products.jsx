@@ -11,15 +11,20 @@ import { useForm } from "react-hook-form";
 const Context = createContext(null)
 
 const Products = (props) => {
-    const [data, setData] = useState([]);
+    const { infoIcon, filledLeftArrow, unfilledLeftArrow, filledRightArrow, unfilledRightArrow } = images.customers;
+    const [data, setData] = useState(props.allProducts);
     const [selected, setSelected] = useState([]);
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = ({ search }) => {
         props.searchProducts(search);
     };
-    useEffect(() => { props.getAllProducts() }, []);
+    useEffect(() => { props.getAllProducts(5, 1) }, []);
     useEffect(() => { setData(props.allProducts) }, [props.allProducts]);
     const deleteSelectedProducts = () => props.deleteProducts(selected)
+
+    const nextPage = useCallback(() => { if (data.hasNextPage) props.getAllProducts(5, data.currentPage + 1) }, [data]);
+    const prevPage = useCallback(() => { if (data.hasPrevPage) props.getAllProducts(5, data.currentPage - 1) }, [data]);
+    const number = useCallback((page) => { props.getAllProducts(5, page) }, [data]);
     return (
         <Context.Provider value={{ selected, setSelected }}>
             <Wrapper>
@@ -31,7 +36,14 @@ const Products = (props) => {
                         <input name="search" ref={register({ required: true })} placeholder={i18n.t('products.searchPlaceholder')} className="strike-products__search-input" />
                         <button type="submit" className="strike-products__search-button">{i18n.t('products.search')}</button>
                     </form>
-                    <Table items={data} deleteProduct={props.deleteProduct} />
+                    <Table items={data.data} deleteProduct={props.deleteProduct} />
+                    <div className="strike-products__pagination">
+                        <img onClick={prevPage} src={data.hasPrevPage ? filledLeftArrow : unfilledLeftArrow} className='strike-products__pagination-leftarrow' />
+                        {data && data.lastPage.map(item => {
+                            return <div onClick={() => number(item)} is-active={item === data.currentPage ? 'true' : 'false'} key={item} className="strike-products__pagination-number">{item}</div>
+                        })}
+                        <img onClick={nextPage} src={data.hasNextPage ? filledRightArrow : unfilledRightArrow} className='strike-products__pagination-rightarrow' />
+                    </div>
                     <button onClick={deleteSelectedProducts} disabled={selected.length ? false : true} className="strike-products__delete-selected">{i18n.t('products.deleteProducts')}</button>
                 </div>
             </Wrapper>

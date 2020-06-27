@@ -1,6 +1,7 @@
 import {
     GET_ALL_ORDERS, GET_ORDER, NUMBER_OF_ORDERS_BY_STATUS, POST_ORDER, GET_ORDERS_BY_CITY, GET_ORDER_BY_STATUS, DELETE_ORDER,
-    DELETE_ORDERS, GET_TOP_CITIES, GET_TOP_PRODUCTS, IS_LOGGED_IN, PRINT_ONE_ORDER, GET_ALL_ORDERS_PAGINATED
+    DELETE_ORDERS, GET_TOP_CITIES, GET_TOP_PRODUCTS, IS_LOGGED_IN, PRINT_ONE_ORDER, GET_ALL_ORDERS_PAGINATED, SEARCH_ORDERS,
+    PRINT_SELECTED_ORDERS
 } from '../actionTypes';
 import axios from 'axios';
 
@@ -14,6 +15,18 @@ export const getAllOrders = () => async (dispatch) => {
             localStorage.removeItem('token');
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
             axios.defaults.headers.common['Authorization'] = ``
+        }
+    } catch (e) {
+        return Promise.reject(e);
+    }
+}
+
+export const searchOrders = (type, text) => async (dispatch) => {
+    try {
+        const data = await axios.get(`orders/?${type}=${text}`);
+        console.log('data', data)
+        if (data.status === 200) {
+            dispatch({ type: SEARCH_ORDERS, data: data.data })
         }
     } catch (e) {
         return Promise.reject(e);
@@ -177,8 +190,23 @@ export const deleteOrders = (order_ids) => async (dispatch) => {
 
 export const printOneOrder = (id) => async (dispatch) => {
     try {
-        const { data } = await axios.get(`/orders/${id}/print`, { responseType: 'blob' });
+        const data = await axios.get(`/orders/${id}/print`, { responseType: 'blob' });
+        // console.log('onePrint', data)
         dispatch({ type: PRINT_ONE_ORDER, data });
+    } catch (e) {
+        return Promise.reject(e);
+    }
+}
+
+export const printSelectedOrders = (order_ids) => async (dispatch) => {
+    try {
+        var query = '';
+        order_ids.forEach(item => {
+            if (query === '') query = `order_ids[]=${item}`;
+            else query = `${query}&order_ids[]=${item}`;
+        });
+        const { data } = await axios.post(`/orders/print/selected?${query}`, { responseType: 'blob' });
+        dispatch({ type: PRINT_SELECTED_ORDERS, data });
     } catch (e) {
         return Promise.reject(e);
     }
