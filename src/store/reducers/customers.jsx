@@ -1,7 +1,6 @@
 import {
     GET_ALL_CUSTOMERS, GET_SELECTED_CUSTOMERS, GET_CUSTOMERS_ORDER, DELETE_CUSTOMER, DELETE_CUSTOMERS, GET_RECENT_CUSTOMERS,
-    SEARCH_CUSTOMERS,
-    SEARCH_PRODUCTS
+    SEARCH_CUSTOMERS
 } from '../actionTypes';
 
 const initialState = {
@@ -27,7 +26,7 @@ export function allCustomers(state = initialState, { type, data }) {
                 data: data && data.data,
                 lastPage: lastPages
             }
-        case SEARCH_PRODUCTS:
+        case SEARCH_CUSTOMERS:
             return {
                 hasNextPage: false,
                 hasPrevPage: false,
