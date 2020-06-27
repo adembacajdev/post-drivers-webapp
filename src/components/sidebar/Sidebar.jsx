@@ -39,11 +39,6 @@ const Sidebar = ({ logout }) => {
                     </div>
                 )
             })}
-            <div className="strike-sidebar__profile">
-                <div className="strike-sidebar__profile-amount">200.50$</div>
-                <div className="strike-sidebar__profile-settings">Account Settings</div>
-                <div onClick={signout} className="strike-sidebar__profile-logout">Log out</div>
-            </div>
         </div>
     )
 }

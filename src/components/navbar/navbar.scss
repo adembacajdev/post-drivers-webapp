@@ -350,8 +350,25 @@
             }
         }
         &__right{
-            display: none;
+            display: flex;
+            &-name{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                cursor: pointer;
+                margin-right: 5px;
+                outline: none;
+                border: none;
+                &-text{
+                    display: none;
+                    font-size: 15px;
+                    line-height: 25px;
+                    color: #43425D;
+                    font-family: "Avenir";
+                    margin-right: 5px;
+                }
         }
+    }
         &__menu{
             &-responsive{
                 font-size: 30px;

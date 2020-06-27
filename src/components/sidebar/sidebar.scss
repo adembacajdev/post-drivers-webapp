@@ -6,6 +6,7 @@
     top: 60px;
     left: 0;
     overflow-x: hidden;
+    overflow-y: scroll;
     transition: 0.4s;
     background-color: #FFFFFF !important;
     padding: 10px 0;
@@ -51,9 +52,6 @@
                 background-color: #FECB2E;
             }
         }
-    }
-    &__profile{
-        display: none;
     }
 }
 
@@ -114,37 +112,6 @@
         }
         &[is-open = true]{
             width: 260px; //this should be 260px
-        }
-        &__profile{
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            bottom: 0;
-            border-top: 1px solid #F5F7F9;
-            padding: 10px;
-            white-space: nowrap;
-            margin-top: 20px;
-            &-amount{
-                font-size: 13px;
-                line-height: 24px;
-                color: #4D565C;
-                font-family: "Avenir";
-                font-weight: bold;
-            }
-            &-settings{
-                font-size: 13px;
-                line-height: 24px;
-                color: #4D565C;
-                font-family: "Avenir";
-                cursor: pointer;
-            }
-            &-logout{
-                font-size: 13px;
-                line-height: 24px;
-                color: red;
-                font-family: "Avenir";
-                cursor: pointer;
-            }
         }
     }
 }
