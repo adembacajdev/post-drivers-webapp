@@ -1,29 +1,46 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect, createContext, useContext } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, useHistory } from 'react-router-dom';
 import Wrapper from '../../containers/wrapper/Wrapper';
 import images from '../../assets/images';
 import i18n from '../../services/locales/i18n';
 import './products.scss';
-import { getAllProducts, deleteProduct } from '../../store/actions/products';
-import { useEffect } from 'react';
+import { getAllProducts, deleteProduct, searchProducts, deleteProducts } from '../../store/actions/products';
+import { useForm } from "react-hook-form";
+
+const Context = createContext(null)
 
 const Products = (props) => {
+    const [data, setData] = useState([]);
+    const [selected, setSelected] = useState([]);
+    const { register, handleSubmit, watch, errors } = useForm();
+    const onSubmit = ({ search }) => {
+        props.searchProducts(search);
+    };
     useEffect(() => { props.getAllProducts() }, []);
+    useEffect(() => { setData(props.allProducts) }, [props.allProducts]);
+    const deleteSelectedProducts = () => props.deleteProducts(selected)
     return (
-        <Wrapper>
-            <div className="strike-products">
-                <div className="strike-products__header">
-                    <div className="strike-products__header-title">{i18n.t('products.products')}</div>
+        <Context.Provider value={{ selected, setSelected }}>
+            <Wrapper>
+                <div className="strike-products">
+                    <div className="strike-products__header">
+                        <div className="strike-products__header-title">{i18n.t('products.products')}</div>
+                    </div>
+                    <form onSubmit={handleSubmit(onSubmit)} className="strike-products__search">
+                        <input name="search" ref={register({ required: true })} placeholder={i18n.t('products.searchPlaceholder')} className="strike-products__search-input" />
+                        <button type="submit" className="strike-products__search-button">{i18n.t('products.search')}</button>
+                    </form>
+                    <Table items={data} deleteProduct={props.deleteProduct} />
+                    <button onClick={deleteSelectedProducts} disabled={selected.length ? false : true} className="strike-products__delete-selected">Delete selected products</button>
                 </div>
-                <Table items={props.allProducts} deleteProduct={props.deleteProduct} />
-            </div>
-        </Wrapper>
+            </Wrapper>
+        </Context.Provider>
     )
 }
 
 const mapStateToProps = ({ allProducts }) => ({ allProducts });
-const mapDispatchToProps = { getAllProducts, deleteProduct };
+const mapDispatchToProps = { getAllProducts, deleteProduct, searchProducts, deleteProducts };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Products));
 
@@ -47,6 +64,8 @@ const Table = ({ items, deleteProduct }) => {
 }
 
 const TableItem = ({ item, deleteProduct }) => {
+    const { selected, setSelected } = useContext(Context);
+    const [checked, setChecked] = useState(item.checked)
     const history = useHistory()
     const { testProduct, threePoints } = images.products;
     const [isOpen, open] = useState(false);
@@ -54,11 +73,19 @@ const TableItem = ({ item, deleteProduct }) => {
     const navigate = useCallback(() => { history.push('/product', { id: item.id }) }, []);
     const edit = useCallback(() => { history.push('/edit-product', { id: item.id }) }, []);
     const deleteProd = useCallback(() => { deleteProduct(item.id) }, []);
+    const check = () => setChecked(!checked);
+    useEffect(() => {
+        if (checked) setSelected([...selected, item.id])
+        else if (!checked) {
+            const deletedCheck = selected.filter(el => el !== item.id);
+            setSelected(deletedCheck);
+        }
+    }, [checked])
 
     return (
         <div className="strike-products__table-item">
-            <div onClick={navigate} className="strike-products__table-item-content flex-1">
-                <input type="checkbox" />
+            <div className="strike-products__table-item-content flex-1">
+                <input type="checkbox" onChange={check} value={checked} checked={checked} />
             </div>
             <div onClick={navigate} className="strike-products__table-item-content flex-3">
                 <img className="strike-products__table-item-content-icon" src={testProduct} />

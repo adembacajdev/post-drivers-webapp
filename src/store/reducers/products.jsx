@@ -1,11 +1,15 @@
 import {
     GET_ALL_PRODUCTS, GET_PRODUCT, GET_PRODUCT_ORDER,
-    POST_STORE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, DELETE_PRODUCTS //for these types,we should add later when we console all data
+    POST_STORE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, DELETE_PRODUCTS, SEARCH_PRODUCTS //for these types,we should add later when we console all data
 } from '../actionTypes';
 
 export function allProducts(state = null, { type, data }) {
     switch (type) {
-        case GET_ALL_PRODUCTS: return data;
+        case GET_ALL_PRODUCTS:
+            data.forEach(item => item.checked = false);
+            return data;
+        return data;
+        case SEARCH_PRODUCTS: return data;
         case DELETE_PRODUCT:
             const { id } = data
             const newProducts = state.filter(item => item.id !== id);

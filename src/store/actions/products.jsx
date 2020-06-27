@@ -1,13 +1,32 @@
 import {
-    GET_ALL_PRODUCTS, GET_PRODUCT, GET_PRODUCT_ORDER, POST_STORE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, DELETE_PRODUCTS, IS_LOGGED_IN
+    GET_ALL_PRODUCTS, GET_PRODUCT, GET_PRODUCT_ORDER, POST_STORE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, DELETE_PRODUCTS, IS_LOGGED_IN,
+    SEARCH_PRODUCTS
 } from '../actionTypes';
 import axios from 'axios';
+import qs from 'qs';
 
 export const getAllProducts = () => async (dispatch) => {
     try {
         const { data } = await axios.get('/products');
         if (data.success) {
             dispatch({ type: GET_ALL_PRODUCTS, data: data.data });
+        } else if (data.code === 403) {
+            dispatch({ type: IS_LOGGED_IN, data: false });
+            localStorage.removeItem('token');
+            axios.defaults.headers.common['Content-Type'] = "applicaton/json"
+            axios.defaults.headers.common['Authorization'] = ``
+        }
+    } catch (e) {
+        return Promise.reject(e);
+    }
+}
+
+export const searchProducts = (search) => async (dispatch) => {
+    try {
+        const { data } = await axios.get('/products', { search });
+        if (data.success) {
+            console.log('searchs', data)
+            dispatch({ type: SEARCH_PRODUCTS, data: data.data });
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');
@@ -105,9 +124,17 @@ export const deleteProduct = (id) => async (dispatch) => {
 
 export const deleteProducts = (product_ids) => async (dispatch) => {
     try {
-        const { data } = await axios.delete(`/products/${product_ids}`);
+        var query = '';
+        product_ids.forEach(item => {
+            if (query === '') query = `product_ids[]=${item}`;
+            else query = `${query}&product_ids[]=${item}`;
+        });
+        console.log('query', query)
+        const { data } = await axios.delete(`/products?${query}`);
+        console.log('data', data)
         if (data.success) {
-            dispatch({ type: DELETE_PRODUCTS, data });
+            dispatch({ type: DELETE_PRODUCTS, data: data.data });
+            // getAllProducts();
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');
