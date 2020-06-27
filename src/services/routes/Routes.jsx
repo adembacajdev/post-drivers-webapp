@@ -30,7 +30,6 @@ const AddProduct = lazy(() => import('../../pages/products/AddProduct'));
 const EditProduct = lazy(() => import('../../pages/products/EditProduct'));
 
 function Router({ location }) {
-    const [token, setToken] = useState(localStorage.getItem('token'));
     const isLoggedIn = useSelector(state => state.isLoggedIn);
     const protectedRoutes = [
         { path: '/', exact: true, component: Home },
@@ -53,18 +52,17 @@ function Router({ location }) {
         { path: '/add-user', exact: true, component: AddUser },
         { path: '/edit-user', exact: true, component: EditUser },
     ]
-    useEffect(() => { setToken(localStorage.getItem('token')) }, [isLoggedIn])
     return (
         <BaseRouter history={history}>
-            {token && <Navbar />}
-            {token && <Sidebar />}
+            {isLoggedIn && <Navbar />}
+            {isLoggedIn && <Sidebar />}
             <div>
                 <Suspense fallback={<Loader />}>
                     <Switch location={location}>
+                        <Route path="/login" component={Login} exact />
                         {protectedRoutes.map((route, idx) => {
                             return <PrivateRoute {...route} />
                         })}
-                        <Route path="/login" component={Login} exact />
                     </Switch>
                 </Suspense>
             </div>

@@ -3,12 +3,13 @@ import Router from './services/routes/Routes';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { authenticate } from './store/actions/authenticate.action';
+import Auth from './services/auth/Auth';
 
 const App = ({ authenticate }) => {
   useEffect(() => {
+    const token = Auth.getToken();
     axios.defaults.baseURL = 'https://dxwxjirx.myhook.io/api';
-    const token = localStorage.getItem('token');
-    if (token !== 'undefined') {
+    if (token) {
       axios.defaults.headers.common['Content-Type'] = "applicaton/json"
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       authenticate(true);
