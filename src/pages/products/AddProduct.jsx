@@ -6,13 +6,12 @@ import { connect } from 'react-redux';
 import i18n from '../../services/locales/i18n';
 import { useForm } from "react-hook-form";
 import { postStoreProduct } from '../../store/actions/products';
+import { ProductSchema } from '../../services/schemas/ProductSchema';
 
 const AddProduct = (props) => {
-    const { register, handleSubmit, watch, errors } = useForm();
+    const { register, handleSubmit, watch, errors } = useForm({ validationSchema: ProductSchema });
     const onSubmit = ({ name, description, price, size }) => {
-        if (name !== '' && description !== '' && price !== '' && size !== '') {
-            props.postStoreProduct({ name, description, price, size, history: props.history });
-        }
+        props.postStoreProduct({ name, description, price, size, history: props.history });
     };
     return (
         <Wrapper>

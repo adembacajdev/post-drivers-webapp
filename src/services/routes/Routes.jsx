@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useEffect } from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
 import { Router as BaseRouter, Route, Switch, Redirect } from 'react-router-dom';
 import history from './history';
 import Loader from '../../components/loader/Loader';
@@ -28,7 +28,8 @@ const AddTransfer = lazy(() => import('../../pages/transfers/AddTransfer'));
 const AddProduct = lazy(() => import('../../pages/products/AddProduct'));
 const EditProduct = lazy(() => import('../../pages/products/EditProduct'));
 
-function Router(props) {
+function Router({ location }) {
+    const [token, setToken] = useState(localStorage.getItem('token'));
     const isLoggedIn = useSelector(state => state.isLoggedIn);
     const protectedRoutes = [
         { path: '/', exact: true, component: Home },
@@ -51,34 +52,49 @@ function Router(props) {
         { path: '/add-user', exact: true, component: AddUser },
         { path: '/edit-user', exact: true, component: EditUser },
     ]
-    useEffect(() => {
-        if (!isLoggedIn) return history.push('/login');
-        else return history.push('/')
-    }, [isLoggedIn])
-    return (
-        <BaseRouter history={history}>
-        {isLoggedIn ? <Navbar /> : null}
-        {isLoggedIn ? <Sidebar /> : null}
-            <div>
-                <Suspense fallback={<Loader />}>
-                    <Switch>
-                        {isLoggedIn && protectedRoutes.map((route, idx) => {
-                            return route.component ? (
-                                <Route
-                                    key={idx}
-                                    path={route.path}
-                                    exact={route.exact}
-                                    render={props => (
-                                        <route.component {...props} />
-                                    )} />
-                            ) : (null);
-                        })}
-                        <Route path='/login' exact component={Login} />
-                    </Switch>
-                </Suspense>
-            </div>
-        </BaseRouter>
-    )
+    useEffect(() => { setToken(localStorage.getItem('token')) }, [isLoggedIn])
+    if (token !== null || typeof (token) !== 'undefined') {
+        return (
+            <BaseRouter history={history}>
+                {token && <Navbar />}
+                {token && <Sidebar />}
+                <div>
+                    <Suspense fallback={<Loader />}>
+                        <Switch location={location}>
+                            {isLoggedIn && protectedRoutes.map((route, idx) => {
+                                return route.component ? (
+                                    <Route
+                                        key={idx}
+                                        path={route.path}
+                                        exact={route.exact}
+                                        render={props => (
+                                            <route.component {...props} />
+                                        )} />
+                                ) : (null);
+                            })}
+                            <Route path="/login" component={Login} exact />
+                            {!token ? <Redirect to="/login" /> : <Redirect to="/" />}
+                        </Switch>
+                    </Suspense>
+                </div>
+            </BaseRouter>
+        )
+    } else {
+        return (
+            <BaseRouter history={history}>
+                {token && <Navbar />}
+                {token && <Sidebar />}
+                <div>
+                    <Suspense fallback={<Loader />}>
+                        <Switch location={location}>
+                            <Route path="/login" component={Login} exact />
+                            {!token ? <Redirect to="/login" /> : <Redirect to="/" />}
+                        </Switch>
+                    </Suspense>
+                </div>
+            </BaseRouter>
+        )
+    }
 }
 
 export default Router;

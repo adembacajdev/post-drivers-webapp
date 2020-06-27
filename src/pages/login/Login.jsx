@@ -6,9 +6,10 @@ import { login } from '../../store/actions/authorization';
 import { useForm } from "react-hook-form";
 import i18n from '../../services/locales/i18n';
 import './login.scss';
+import { LoginSchema } from '../../services/schemas/LoginSchema';
 
 const Login = ({ login, loggedIn, authenticate }) => {
-    const { register, handleSubmit, watch, errors } = useForm();
+    const { register, handleSubmit, watch, errors } = useForm({ validationSchema: LoginSchema });
     const onSubmit = ({ email, password }) => {
         if (!errors.email && !errors.password) {
             login({ email, password })

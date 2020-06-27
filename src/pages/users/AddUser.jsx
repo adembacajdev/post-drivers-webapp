@@ -6,9 +6,10 @@ import { connect } from 'react-redux';
 import i18n from '../../services/locales/i18n';
 import { postUser } from '../../store/actions/users';
 import { useForm } from "react-hook-form";
+import { UserSchema } from '../../services/schemas/UserSchema';
 
 const AddUser = (props) => {
-    const { register, handleSubmit, watch, errors } = useForm();
+    const { register, handleSubmit, watch, errors } = useForm({ validationSchema: UserSchema });
     const onSubmit = data => props.postUser(data, props.history)
     return (
         <Wrapper>

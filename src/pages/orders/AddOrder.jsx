@@ -8,9 +8,10 @@ import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { postOrder } from '../../store/actions/orders';
+import { OrderSchema } from '../../services/schemas';
 
 const AddOrder = (props) => {
-    const { register, handleSubmit, watch, errors } = useForm();
+    const { register, handleSubmit, watch, errors } = useForm({ validationSchema: OrderSchema });
     const [popupInfo, setPopupInfo] = useState('');
     const [latitudeMarker, setLatitudeMarker] = useState(42.66758079200047);
     const [longitudeMarker, setLongitudeMarker] = useState(21.165194013322285);
