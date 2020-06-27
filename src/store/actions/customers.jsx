@@ -103,8 +103,10 @@ export const deleteCustomers = (client_ids) => async (dispatch) => {
         const { data } = await axios.delete(`/clients?${query}`);
         console.log('data', data)
         if (data.success) {
-            dispatch({ type: DELETE_CUSTOMERS, data: data.data });
-            // getAllCustomers();
+            const data = await axios.get(`clients/paginate/${5}?page=${1}`);
+            if (data.status === 200) {
+                dispatch({ type: GET_ALL_CUSTOMERS, data: data.data })
+            }
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');

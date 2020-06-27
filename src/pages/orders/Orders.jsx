@@ -5,7 +5,7 @@ import Wrapper from '../../containers/wrapper/Wrapper';
 import images from '../../assets/images';
 import i18n from '../../services/locales/i18n';
 import './orders.scss';
-import { getAllOrders, deleteOrder, printOneOrder, getOrdersPaginated, searchOrders, printSelectedOrders } from '../../store/actions/orders';
+import { getAllOrders, deleteOrder, printOneOrder, getOrdersPaginated, searchOrders, printSelectedOrders, deleteOrders } from '../../store/actions/orders';
 import moment from 'moment';
 import { saveAs } from 'file-saver';
 import { useCallback } from 'react';
@@ -32,7 +32,7 @@ const Orders = (props) => {
 
     useEffect(() => { setOrders(props.ordersPaginated); }, [props.ordersPaginated]);
     
-    const deleteSelectedOrders = () => props.deleteCustomers(selected);
+    const deleteSelectedOrders = () => props.deleteOrders(selected);
     const printSelectedOrd = () => props.printSelectedOrders(selected);
 
     const nextPage = useCallback(() => { if (orders.hasNextPage) props.getOrdersPaginated(5, orders.currentPage + 1) }, [orders]);
@@ -81,7 +81,7 @@ const Orders = (props) => {
 }
 
 const mapStateToProps = ({ allOrders, printOrder, ordersPaginated }) => ({ allOrders, printOrder, ordersPaginated });
-const mapDispatchToProps = { getAllOrders, deleteOrder, printOneOrder, getOrdersPaginated, searchOrders, printSelectedOrders };
+const mapDispatchToProps = { getAllOrders, deleteOrder, printOneOrder, getOrdersPaginated, searchOrders, printSelectedOrders, deleteOrders };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Orders));
 

@@ -36,8 +36,8 @@ export function allProducts(state = initialState, { type, data }) {
             }
         case DELETE_PRODUCT:
             const { id } = data
-            const newProducts = state.filter(item => item.id !== id);
-            return newProducts;
+            const newProducts = state.data.filter(item => item.id !== id);
+            return {...state, data: newProducts};
         case POST_STORE_PRODUCT:
             let storeProduct = state;
             storeProduct.push(data);

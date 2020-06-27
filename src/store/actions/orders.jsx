@@ -183,7 +183,10 @@ export const deleteOrders = (order_ids) => async (dispatch) => {
     try {
         const { data } = await axios.delete(`/orders/${order_ids}`);
         if (data.success) {
-            dispatch({ type: DELETE_ORDERS, data });
+            const data = await axios.get(`orders/paginate/${5}?page=${1}`);
+            if (data.status === 200) {
+                dispatch({ type: GET_ALL_ORDERS_PAGINATED, data: data.data })
+            }
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');

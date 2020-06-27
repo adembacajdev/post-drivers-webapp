@@ -3,7 +3,6 @@ import {
     SEARCH_PRODUCTS
 } from '../actionTypes';
 import axios from 'axios';
-import qs from 'qs';
 
 export const getAllProducts = (limit, page) => async (dispatch) => {
     try {
@@ -130,10 +129,11 @@ export const deleteProducts = (product_ids) => async (dispatch) => {
             else query = `${query}&product_ids[]=${item}`;
         });
         const { data } = await axios.delete(`/products?${query}`);
-        console.log('data', data)
         if (data.success) {
-            dispatch({ type: DELETE_PRODUCTS, data: data.data });
-            // getAllProducts();
+            const data = await axios.get(`/products/paginate/${5}?page=${1}`);
+            if (data.status === 200) {
+                dispatch({ type: GET_ALL_PRODUCTS, data: data.data });
+            }
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');

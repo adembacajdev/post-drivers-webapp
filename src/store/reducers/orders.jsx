@@ -94,14 +94,9 @@ export function ordersPaginated(state = initialState, { type, data }) {
                 lastPage: [1]
             }
         case DELETE_ORDER:
-            const deletedOrders = state.data.filter(item => item.id !== data.id);
-            return {
-                hasNextPage: state.hasNextPage,
-                hasPrevPage: state.hasPrevPage,
-                currentPage: state.currentPage,
-                data: deletedOrders,
-                lastPage: state.lastPage
-            }
+            const { id } = data
+            const newOrders = state.data.filter(item => item.id !== id);
+            return {...state, data: newOrders};
         default: return state;
     }
 }
