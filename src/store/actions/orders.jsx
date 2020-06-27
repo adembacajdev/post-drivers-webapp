@@ -23,9 +23,16 @@ export const getAllOrders = () => async (dispatch) => {
 
 export const searchOrders = (type, text) => async (dispatch) => {
     try {
-        const data = await axios.get(`orders/?${type}=${text}`);
-        console.log('data', data)
-        if (data.status === 200) {
+        let url = '';
+        if (type === 'status') url = `/orders/status?status=${text}`;
+        if (type === 'city') url = `/orders/city?city=${text}`;
+        if (type === 'serial_number') url = `/orders/serial/number?serial_number=${text}`;
+        if (type === 'customer_name') url = `/orders/customer/name?customer_name=${text}`;
+        if (type === 'date') url = `/orders/date?date=${text}`;
+
+        const { data } = await axios.post(url);
+
+        if (data.success) {
             dispatch({ type: SEARCH_ORDERS, data: data.data })
         }
     } catch (e) {

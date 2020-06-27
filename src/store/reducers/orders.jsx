@@ -85,16 +85,13 @@ export function ordersPaginated(state = initialState, { type, data }) {
                 lastPage: lastPages
             }
         case SEARCH_ORDERS:
-            let lastPages2 = [];
-            for (var i = 0; i < (data.meta && data.meta.last_page); i++) {
-                lastPages2.push(i + 1);
-            }
+            let isArray = Array.isArray(data);
             return {
-                hasNextPage: data.links && data.links.next !== null,
-                hasPrevPage: data.links && data.links.prev !== null,
-                currentPage: data.meta && data.meta.current_page,
-                data: data && data.data,
-                lastPage: lastPages2
+                hasNextPage: false,
+                hasPrevPage: false,
+                currentPage: 1,
+                data: isArray ? data : [data],
+                lastPage: [1]
             }
         case DELETE_ORDER:
             const deletedOrders = state.data.filter(item => item.id !== data.id);

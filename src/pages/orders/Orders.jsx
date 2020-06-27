@@ -31,6 +31,7 @@ const Orders = (props) => {
     useEffect(() => { if (props.printOrder) saveAs(props.printOrder); }, [props.printOrder]);
 
     useEffect(() => { setOrders(props.ordersPaginated); }, [props.ordersPaginated]);
+    
     const deleteSelectedOrders = () => props.deleteCustomers(selected);
     const printSelectedOrd = () => props.printSelectedOrders(selected);
 
