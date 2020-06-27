@@ -1,5 +1,5 @@
 import {
-    GET_ALL_TRANSFERS, GET_SELECTED_TRANSFERS, GET_BALANCE_DETAILS
+    GET_ALL_TRANSFERS, GET_SELECTED_TRANSFERS, GET_BALANCE_DETAILS, SEARCH_TRANSFERS
 } from '../actionTypes';
 
 const initialState = {
@@ -23,6 +23,18 @@ export function allTransfers(state = initialState, { type, data }) {
                 currentPage: data.meta && data.meta.current_page,
                 data: data && data.data,
                 lastPage: lastPages
+            }
+        case SEARCH_TRANSFERS:
+            let lastPages2 = [];
+            for (var i = 0; i < (data.meta && data.meta.last_page); i++) {
+                lastPages2.push(i + 1);
+            }
+            return {
+                hasNextPage: data.links && data.links.next !== null,
+                hasPrevPage: data.links && data.links.prev !== null,
+                currentPage: data.meta && data.meta.current_page,
+                data: data && data.data,
+                lastPage: lastPages2
             }
         default: return state;
     }

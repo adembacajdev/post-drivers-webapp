@@ -1,5 +1,5 @@
 import {
-    GET_ALL_TRANSFERS, GET_SELECTED_TRANSFERS, GET_BALANCE_DETAILS, IS_LOGGED_IN
+    GET_ALL_TRANSFERS, GET_SELECTED_TRANSFERS, GET_BALANCE_DETAILS, IS_LOGGED_IN, SEARCH_TRANSFERS
 } from '../actionTypes';
 import axios from 'axios';
 
@@ -8,6 +8,18 @@ export const getAllTransfers = (limit, page) => async (dispatch) => {
         const data = await axios.get(`transfers/paginate/${limit}?page=${page}`);
         if (data.status === 200) {
             dispatch({ type: GET_ALL_TRANSFERS, data: data.data })
+        }
+    } catch (e) {
+        return Promise.reject(e);
+    }
+}
+
+export const searchTransfers = (type, text) => async (dispatch) => {
+    try {
+        const data = await axios.get(`transfers/?${type}=${text}`);
+        console.log('searchTransfers', data)
+        if (data.status === 200) {
+            dispatch({ type: SEARCH_TRANSFERS, data: data.data })
         }
     } catch (e) {
         return Promise.reject(e);

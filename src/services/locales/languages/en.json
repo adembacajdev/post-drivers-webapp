@@ -104,7 +104,9 @@
         "date": "Date",
         "time": "Time",
         "shopUser": "Shop User",
-        "courierUser": "Courier User"
+        "courierUser": "Courier User",
+        "searchPlaceholder": "Search for a transfer...",
+        "search": "Search"
     },
     "statistics": {
         "title": "Statistics",

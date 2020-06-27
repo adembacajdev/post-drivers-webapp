@@ -33,7 +33,7 @@ export function allCustomers(state = initialState, { type, data }) {
                 hasPrevPage: false,
                 currentPage: 1,
                 data: data,
-                lastPage: 1
+                lastPage: [1]
             }
         case DELETE_CUSTOMER:
             const deletedClients = state.data.filter(item => item.id !== data.id);

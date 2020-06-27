@@ -5,13 +5,20 @@ import Wrapper from '../../containers/wrapper/Wrapper';
 import images from '../../assets/images';
 import i18n from '../../services/locales/i18n';
 import './transfers.scss';
-import { getAllTransfers, getBalanceDetails } from '../../store/actions/transfers';
+import { getAllTransfers, getBalanceDetails, searchTransfers } from '../../store/actions/transfers';
 import { useEffect, useState, useCallback } from 'react';
 import moment from 'moment';
+import { useForm } from "react-hook-form";
 
 const Transfers = (props) => {
     const { filledLeftArrow, unfilledLeftArrow, filledRightArrow, unfilledRightArrow } = images.transfers;
     const [transfers, setTransfers] = useState(props.allTransfers);
+
+    const { register, handleSubmit, watch, errors } = useForm();
+    const onSubmit = ({ type, search }) => {
+        props.searchTransfers(type, search)
+    };
+
     useEffect(() => {
         props.getBalanceDetails();
         props.getAllTransfers(5, 1);
@@ -51,6 +58,14 @@ const Transfers = (props) => {
                 </div>
             </div>
             <div className="strike-transfers">
+                <form onSubmit={handleSubmit(onSubmit)} className="strike-transfers__search">
+                    <select name="type" ref={register({ required: true })} className="strike-transfers__search-select">
+                        <option value="date">{i18n.t('transfers.date')}</option>
+                        <option value="amount">{i18n.t('transfers.amount')}</option>
+                    </select>
+                    <input name="search" ref={register({ required: true })} placeholder={i18n.t('transfers.searchPlaceholder')} className="strike-transfers__search-input" />
+                    <button type="submit" className="strike-transfers__search-button">{i18n.t('transfers.search')}</button>
+                </form>
                 <Table items={transfers.data} />
                 <div className="strike-transfers__pagination">
                     <img onClick={prevPage} src={transfers.hasPrevPage ? filledLeftArrow : unfilledLeftArrow} className='strike-transfers__pagination-leftarrow' />
@@ -65,7 +80,7 @@ const Transfers = (props) => {
 }
 
 const mapStateToProps = ({ allTransfers, balanceDetails }) => ({ allTransfers, balanceDetails });
-const mapDispatchToProps = { getBalanceDetails, getAllTransfers };
+const mapDispatchToProps = { getBalanceDetails, getAllTransfers, searchTransfers };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Transfers));
 
