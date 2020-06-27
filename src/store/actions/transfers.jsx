@@ -16,9 +16,9 @@ export const getAllTransfers = (limit, page) => async (dispatch) => {
 
 export const searchTransfers = (type, text) => async (dispatch) => {
     try {
-        const data = await axios.get(`transfers/?${type}=${text}`);
+        const { data } = await axios.post(`transfers/search/${type}?${type}=${text}`);
         console.log('searchTransfers', data)
-        if (data.status === 200) {
+        if (data.success) {
             dispatch({ type: SEARCH_TRANSFERS, data: data.data })
         }
     } catch (e) {
@@ -31,7 +31,7 @@ export const getTransfer = (id) => async (dispatch) => {
         const { data } = await axios.get(`/transfers/${id}`);
         if (data.success) {
             dispatch({ type: GET_SELECTED_TRANSFERS, data });
-        }else if(data.code === 403){
+        } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
@@ -47,7 +47,7 @@ export const getBalanceDetails = () => async (dispatch) => {
         const { data } = await axios.get('/balance');
         if (data.success) {
             dispatch({ type: GET_BALANCE_DETAILS, data: data.data });
-        }else if(data.code === 403){
+        } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
