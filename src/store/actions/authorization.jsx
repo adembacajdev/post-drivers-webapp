@@ -6,13 +6,12 @@ export const login = (body) => async (dispatch) => {
         const { email, password } = body;
         const { data } = await axios.post('/login', { email, password, device_name: 'web' });
         if (data.success) {
-            console.log('data', data)
             const { plainTextToken } = data.data;
             dispatch({ type: LOG_IN, data: data.data });
             localStorage.setItem('token', plainTextToken);
             dispatch({ type: IS_LOGGED_IN, data: true });
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
-            axios.defaults.headers.common['Authorization'] = `Bearer ${plainTextToken}`
+            axios.defaults.headers.common['Authorization'] = `Bearer ${plainTextToken}`;
         }
     } catch (e) {
         return Promise.reject(e);

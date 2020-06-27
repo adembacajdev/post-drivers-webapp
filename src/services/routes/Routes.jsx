@@ -5,6 +5,7 @@ import Loader from '../../components/loader/Loader';
 import { useSelector } from 'react-redux';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/Sidebar';
+import PrivateRoute from './PrivateRoute';
 
 //pages
 const Home = lazy(() => import('../../pages/home/Home'));
@@ -53,48 +54,22 @@ function Router({ location }) {
         { path: '/edit-user', exact: true, component: EditUser },
     ]
     useEffect(() => { setToken(localStorage.getItem('token')) }, [isLoggedIn])
-    if (token !== null || typeof (token) !== 'undefined') {
-        return (
-            <BaseRouter history={history}>
-                {token && <Navbar />}
-                {token && <Sidebar />}
-                <div>
-                    <Suspense fallback={<Loader />}>
-                        <Switch location={location}>
-                            {isLoggedIn && protectedRoutes.map((route, idx) => {
-                                return route.component ? (
-                                    <Route
-                                        key={idx}
-                                        path={route.path}
-                                        exact={route.exact}
-                                        render={props => (
-                                            <route.component {...props} />
-                                        )} />
-                                ) : (null);
-                            })}
-                            <Route path="/login" component={Login} exact />
-                            {!token ? <Redirect to="/login" /> : <Redirect to="/" />}
-                        </Switch>
-                    </Suspense>
-                </div>
-            </BaseRouter>
-        )
-    } else {
-        return (
-            <BaseRouter history={history}>
-                {token && <Navbar />}
-                {token && <Sidebar />}
-                <div>
-                    <Suspense fallback={<Loader />}>
-                        <Switch location={location}>
-                            <Route path="/login" component={Login} exact />
-                            {!token ? <Redirect to="/login" /> : <Redirect to="/" />}
-                        </Switch>
-                    </Suspense>
-                </div>
-            </BaseRouter>
-        )
-    }
+    return (
+        <BaseRouter history={history}>
+            {token && <Navbar />}
+            {token && <Sidebar />}
+            <div>
+                <Suspense fallback={<Loader />}>
+                    <Switch location={location}>
+                        {protectedRoutes.map((route, idx) => {
+                            return <PrivateRoute {...route} />
+                        })}
+                        <Route path="/login" component={Login} exact />
+                    </Switch>
+                </Suspense>
+            </div>
+        </BaseRouter>
+    )
 }
 
 export default Router;

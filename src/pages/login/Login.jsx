@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { authenticate } from '../../store/actions/authenticate.action';
@@ -8,7 +9,7 @@ import i18n from '../../services/locales/i18n';
 import './login.scss';
 import { LoginSchema } from '../../services/schemas/LoginSchema';
 
-const Login = ({ login, loggedIn, authenticate }) => {
+const Login = ({ login, loggedIn, authenticate, isLoggedIn }) => {
     const { register, handleSubmit, watch, errors } = useForm({ validationSchema: LoginSchema });
     const onSubmit = ({ email, password }) => {
         if (!errors.email && !errors.password) {
@@ -17,6 +18,10 @@ const Login = ({ login, loggedIn, authenticate }) => {
     };
     // useEffect(() => { i18n.changeLanguage('al') }, [])
     return (
+        isLoggedIn
+        ?
+        <Redirect to='/' />
+        :
         <div className="strike-login">
             <div className="strike-login__title">{i18n.t('login.title')}</div>
             <div className="strike-login__inputs">
@@ -32,6 +37,6 @@ const Login = ({ login, loggedIn, authenticate }) => {
     )
 }
 
-const mapStateToProps = ({ loggedIn }) => ({ loggedIn });
+const mapStateToProps = ({ loggedIn, isLoggedIn }) => ({ loggedIn, isLoggedIn });
 const mapDispatchToProps = { authenticate, login };
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login));
