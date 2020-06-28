@@ -181,5 +181,27 @@
         "building": "Building",
         "latitude": "Latitude",
         "longitude": "Longitude"
+    },
+    "addOrder": {
+        "productDetails": "Product Details:",
+        "yourInformation": "Your Information:",
+        "number": "Number",
+        "name": "Name",
+        "description": "Description",
+        "price": "Price",
+        "additionalInfo": "Additional Info",
+        "exSizeColor": "ex.: size, color...",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "phone": "Phone",
+        "country": "Country",
+        "city": "City",
+        "address": "Address",
+        "building": "Building",
+        "putLocation": "Put your location on map (Double tap and drag the marker)",
+        "receiveCode": "You will receive a verification code",
+        "kosovo": "Kosovo",
+        "albania": "Albania",
+        "northMacedonia": "North Macedonia"
     }
 }

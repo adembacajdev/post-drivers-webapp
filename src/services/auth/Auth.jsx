@@ -6,7 +6,7 @@ const Auth = {
         if(token == null || token == undefined || token == 'null' || token == undefined){
             return false;
         }
-        else return true;
+        else return token;
     },
     setToken: (token) => {
         localStorage.setItem('token', token);

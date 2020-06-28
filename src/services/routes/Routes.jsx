@@ -3,8 +3,6 @@ import { Router as BaseRouter, Route, Switch, Redirect } from 'react-router-dom'
 import history from './history';
 import Loader from '../../components/loader/Loader';
 import { useSelector } from 'react-redux';
-import Navbar from '../../components/navbar/Navbar';
-import Sidebar from '../../components/sidebar/Sidebar';
 import PrivateRoute from './PrivateRoute';
 
 //pages
@@ -37,7 +35,6 @@ function Router({ location }) {
         { path: '/customer', exact: true, component: SeeCustomer },
         { path: '/orders', exact: true, component: Orders },
         { path: '/order', exact: true, component: SeeOrder },
-        { path: '/add-order', exact: true, component: AddOrder },
         { path: '/order-by-status', exact: true, component: OrderByStatus },
         { path: '/products', exact: true, component: Products },
         { path: '/product', exact: true, component: SeeProduct },
@@ -52,20 +49,19 @@ function Router({ location }) {
         { path: '/add-user', exact: true, component: AddUser },
         { path: '/edit-user', exact: true, component: EditUser },
     ]
+    useEffect(() => {console.log('location', history.location.pathname)}, [history])
     return (
         <BaseRouter history={history}>
-            {isLoggedIn && <Navbar />}
-            {isLoggedIn && <Sidebar />}
-            <div>
                 <Suspense fallback={<Loader />}>
                     <Switch location={location}>
                         <Route path="/login" component={Login} exact />
+                        <Route path="/add-order/:productId" component={AddOrder} exact />
+                        <Route path="/add-order" component={AddOrder} exact />
                         {protectedRoutes.map((route, idx) => {
                             return <PrivateRoute {...route} />
                         })}
                     </Switch>
                 </Suspense>
-            </div>
         </BaseRouter>
     )
 }

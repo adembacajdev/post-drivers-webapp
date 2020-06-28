@@ -199,25 +199,33 @@ export const deleteOrders = (order_ids) => async (dispatch) => {
 }
 
 export const printOneOrder = (id) => async (dispatch) => {
-    try {
-        const data = await axios.get(`/orders/${id}/print`, { responseType: 'blob' });
-        // console.log('onePrint', data)
-        dispatch({ type: PRINT_ONE_ORDER, data });
-    } catch (e) {
-        return Promise.reject(e);
-    }
+    const token = localStorage.getItem('token');
+    window.open(`https://dxwxjirx.myhook.io/api/orders/${id}/print`, '_blank');
+    // try {
+    //     const data = await axios.get(`/orders/${id}/print`, { responseType: 'blob' });
+    //     // console.log('onePrint', data)
+    //     dispatch({ type: PRINT_ONE_ORDER, data });
+    // } catch (e) {
+    //     return Promise.reject(e);
+    // }
 }
 
 export const printSelectedOrders = (order_ids) => async (dispatch) => {
-    try {
-        var query = '';
-        order_ids.forEach(item => {
-            if (query === '') query = `order_ids[]=${item}`;
-            else query = `${query}&order_ids[]=${item}`;
-        });
-        const { data } = await axios.post(`/orders/print/selected?${query}`, { responseType: 'blob' });
-        dispatch({ type: PRINT_SELECTED_ORDERS, data });
-    } catch (e) {
-        return Promise.reject(e);
-    }
+    var query = '';
+    order_ids.forEach(item => {
+        if (query === '') query = `order_ids[]=${item}`;
+        else query = `${query}&order_ids[]=${item}`;
+    });
+    window.open(`https://dxwxjirx.myhook.io/api/orders/print/selected?${query}`, '_blank');
+    // try {
+    //     var query = '';
+    //     order_ids.forEach(item => {
+    //         if (query === '') query = `order_ids[]=${item}`;
+    //         else query = `${query}&order_ids[]=${item}`;
+    //     });
+    //     const { data } = await axios.post(`/orders/print/selected?${query}`, { responseType: 'blob' });
+    //     dispatch({ type: PRINT_SELECTED_ORDERS, data });
+    // } catch (e) {
+    //     return Promise.reject(e);
+    // }
 }

@@ -1,5 +1,6 @@
 import * as yup from 'yup';
 const phoneRegExp = /^\d{9}$/
+
 export const OrderSchema = yup.object().shape({
   product_id: yup.number().required(),
   latitude: yup.number().required(),
