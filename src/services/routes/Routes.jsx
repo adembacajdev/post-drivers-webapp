@@ -26,6 +26,7 @@ const EditUser = lazy(() => import('../../pages/users/EditUser'));
 const AddTransfer = lazy(() => import('../../pages/transfers/AddTransfer'));
 const AddProduct = lazy(() => import('../../pages/products/AddProduct'));
 const EditProduct = lazy(() => import('../../pages/products/EditProduct'));
+const Profile = lazy(() => import('../../pages/profile/Profile'));
 
 function Router({ location }) {
     const isLoggedIn = useSelector(state => state.isLoggedIn);
@@ -48,6 +49,7 @@ function Router({ location }) {
         { path: '/user', exact: true, component: SeeUser },
         { path: '/add-user', exact: true, component: AddUser },
         { path: '/edit-user', exact: true, component: EditUser },
+        { path: '/profile', exact: true, component: Profile },
     ]
     useEffect(() => {console.log('location', history.location.pathname)}, [history])
     return (
