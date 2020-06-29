@@ -202,7 +202,9 @@
         "receiveCode": "You will receive a verification code",
         "kosovo": "Kosovo",
         "albania": "Albania",
-        "northMacedonia": "North Macedonia"
+        "northMacedonia": "North Macedonia",
+        "errorMessage": "You have entered an invalid product id!",
+        "invalidNumber": "You have entered an invalid phone number!"
     },
     "errorModal": {
         "title": "Error",

@@ -11,7 +11,7 @@ export const ErrorModal = () => {
     const toggle = useCallback(() => { dispatch({ type: TOGGLE_ERROR_MODAL, data: '' }) }, [errorModal])
 
     return (
-        <div>
+        <div className="error-modal">
             <Modal isOpen={errorModal.isOpen} toggle={toggle}>
                 <ModalHeader toggle={toggle}>{errorModal.title}</ModalHeader>
                 <ModalBody>{errorModal.description}</ModalBody>

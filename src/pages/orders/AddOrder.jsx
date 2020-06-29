@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './addOrder.scss';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -10,6 +10,9 @@ import { validateNumber } from '../../services/schemas';
 import { Tooltip } from 'reactstrap';
 import cities from '../../services/constants/Cities';
 import locations from '../../services/constants/Locations';
+import { toggleErrorModal } from '../../store/actions/toggle.error.modal';
+import { getProduct } from '../../store/actions/products';
+import images from '../../assets/images';
 
 const AddOrder = (props) => {
     const productId = props.match.params.productId;
@@ -19,31 +22,22 @@ const AddOrder = (props) => {
     const [popupInfo, setPopupInfo] = useState('');
     const [latitudeMarker, setLatitudeMarker] = useState(42.66758079200047);
     const [longitudeMarker, setLongitudeMarker] = useState(21.165194013322285);
-    // const [numberIsValid, validateNumber] = useState(false);
     const [viewPort, setViewPort] = useState({ width: 1200, height: 600, latitude: 42.66758079200047, longitude: 21.165194013322285, zoom: 14, })
 
     const _renderPopup = () => {
         return popupInfo && (
             <Popup tipSize={5}
-                anchor="bottom-right"
-                longitude={this.state.longitudeMarker}
-                latitude={this.state.latitudeMarker}
-                closeOnClick={false} offsetLeft={-10} offsetTop={-46}
-                onClose={() => setPopupInfo('')} >
+                anchor="bottom-right" longitude={this.state.longitudeMarker} latitude={this.state.latitudeMarker}
+                closeOnClick={false} offsetLeft={-10} offsetTop={-46} onClose={() => setPopupInfo('')} >
                 <div>{popupInfo}</div>
             </Popup>
         );
     }
 
 
-    const onDragStart = (event) => {
-        const { lngLat } = event
-    }
+    const onDragStart = (event) => { const { lngLat } = event }
 
-    const onDragEnd = (event) => {
-        setLatitudeMarker(event.lngLat[1]);
-        setLongitudeMarker(event.lngLat[0]);
-    }
+    const onDragEnd = (event) => { setLatitudeMarker(event.lngLat[1]); setLongitudeMarker(event.lngLat[0]); }
 
     const toggle = () => setTooltipOpen(!tooltipOpen);
 
@@ -73,11 +67,14 @@ const AddOrder = (props) => {
 
     const onSubmit = data => {
         const isNumberValid = validateNumber(data.phone);
-        console.log('isValid', isNumberValid)
-        console.log('watch', watch('phone'))
+        if (isNumberValid) console.log('inputs', data);
+        else props.toggleErrorModal(i18n.t('addOrder.invalidNumber'))
     }
 
-    useEffect(() => { console.log('props', productId) }, [props])
+    useEffect(() => {
+        if (productId === undefined || productId === 'undefined' || productId === null) props.toggleErrorModal(i18n.t('addOrder.errorMessage'))
+        else props.getProduct(productId);
+    }, [])
     return (
         <div className="add-order">
             <div className="add-order__navbar">
@@ -89,15 +86,15 @@ const AddOrder = (props) => {
                     <div is-left="true" className="add-order__wrapper-row-column">
                         <div className="add-order__wrapper-row-column-title">{i18n.t('addOrder.productDetails')}</div>
                         <div className="add-order__wrapper-row-form-label">{i18n.t('addOrder.productId')}</div>
-                        <input has-error={errors.product_id ? 'true' : 'false'} ref={register({ required: true })} name="product_id" className="add-order__wrapper-row-form-input" placeholder={i18n.t('addOrder.productId')} />
+                        <input defaultValue={productId} has-error={errors.product_id ? 'true' : 'false'} ref={register({ required: true })} name="product_id" className="add-order__wrapper-row-form-input" placeholder={i18n.t('addOrder.productId')} />
                         <div className="add-order__wrapper-row-form-label">{i18n.t('addOrder.name')}</div>
-                        <input disabled ref={register({ required: false })} name="name" className="add-order__wrapper-row-form-input" placeholder={i18n.t('addOrder.name')} />
+                        <input defaultValue={props.product && props.product.name} disabled ref={register({ required: false })} name="name" className="add-order__wrapper-row-form-input" placeholder={i18n.t('addOrder.name')} />
                         <div className="add-order__wrapper-row-form-label">{i18n.t('addOrder.description')}</div>
-                        <input disabled ref={register({ required: false })} name="description" className="add-order__wrapper-row-form-input" placeholder={i18n.t('addOrder.description')} />
+                        <input defaultValue={props.product && props.product.description} disabled ref={register({ required: false })} name="firstDescription" className="add-order__wrapper-row-form-input" placeholder={i18n.t('addOrder.description')} />
                         <div className="add-order__wrapper-row-form-label">{i18n.t('addOrder.price')}</div>
-                        <input disabled ref={register({ required: false })} name="price" className="add-order__wrapper-row-form-input" placeholder={i18n.t('addOrder.price')} />
+                        <input defaultValue={props.product && props.product.price} disabled ref={register({ required: false })} name="price" className="add-order__wrapper-row-form-input" placeholder={i18n.t('addOrder.price')} />
                         <div className="add-order__wrapper-row-form-label">{i18n.t('addOrder.additionalInfo')}</div>
-                        <input has-error={errors.additional_info ? 'true' : 'false'} ref={register({ required: true })} name="additional_info" className="add-order__wrapper-row-form-input" placeholder={i18n.t('addOrder.exSizeColor')} />
+                        <input has-error={errors.description ? 'true' : 'false'} ref={register({ required: false })} name="description" className="add-order__wrapper-row-form-input" placeholder={i18n.t('addOrder.exSizeColor')} />
                     </div>
                     <div className="add-order__wrapper-row-column">
                         <div className="add-order__wrapper-row-column-title">{i18n.t('addOrder.yourInformation')}</div>
@@ -136,7 +133,8 @@ const AddOrder = (props) => {
                     onViewportChange={(viewport) => setViewPort(viewport)}
                 >
                     <Marker latitude={latitudeMarker} longitude={longitudeMarker} offsetLeft={-23} offsetTop={-46} draggable={true} onDragStart={onDragStart} onDragEnd={onDragEnd}>
-                        <img src="img/pin.png" width={46} height={46} alt="App Logo" />
+                        <div ><img src={images.orders.pin} width={46} height={46} alt="App Logo" />
+                        </div>
                     </Marker>
                     {_renderPopup()}
 
@@ -149,7 +147,7 @@ const AddOrder = (props) => {
     )
 }
 
-const mapStateToProps = null;
-const mapDispatchToProps = { postOrder };
+const mapStateToProps = ({ product }) => ({ product });
+const mapDispatchToProps = { postOrder, toggleErrorModal, getProduct };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AddOrder));

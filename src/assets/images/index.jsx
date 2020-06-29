@@ -35,6 +35,7 @@ const images = {
         unfilledLeftArrow: require('./unfilledLeftArrow.svg'),
         filledRightArrow: require('./filledRightArrow.svg'),
         unfilledRightArrow: require('./unfilledRightArrow.svg'),
+        pin: require('./marker.svg'),
     },
     customers: {
         infoIcon: require('./infoIcon.svg'),

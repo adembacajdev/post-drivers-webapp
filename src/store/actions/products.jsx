@@ -54,7 +54,8 @@ export const getProduct = (id) => async (dispatch) => {
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
             axios.defaults.headers.common['Authorization'] = ``
         }else{
-            dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
+            console.log('data', data)
+            dispatch({ type: TOGGLE_ERROR_MODAL, data: data.error })
         }
     } catch (e) {
         dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
