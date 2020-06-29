@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import images from '../../assets/images';
 import { useHistory, useLocation } from 'react-router-dom';
 import i18n from '../../services/locales/i18n';
 import { useSelector, useDispatch, connect } from 'react-redux';
 import { TOGGLE_SIDEBAR } from '../../store/actionTypes';
 import './sidebar.scss';
-import { useCallback } from 'react';
 import { logout } from '../../store/actions/authorization';
 
 const Sidebar = ({ logout }) => {

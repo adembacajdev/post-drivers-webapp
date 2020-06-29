@@ -14,11 +14,11 @@ const Navbar = (props) => {
     const { avatar, onNotification, offNotification, downArrow } = images.navbar;
     const [notifications, setNotifications] = useState(false);
     const [profile, setProfile] = useState(false);
+
     const toggleNotifications = useCallback(() => { setNotifications(!notifications) }, [notifications]);
     const toggleProfile = useCallback(() => { setProfile(!profile) }, [profile]);
     const profileBlur = useCallback(() => { setProfile(false) }, [profile]);
     const notificationBlur = useCallback(() => { setNotifications(false) }, [notifications]);
-
     const openSidebar = useCallback(() => { props.toggleSidebar() }, [props.sidebar]);
     const logout = useCallback(() => { props.logout() }, []);
 
@@ -26,6 +26,7 @@ const Navbar = (props) => {
         setShopName(Auth.getShopName());
         setCurrentBalance(Auth.getCurrentBalance());
     }, [props.shopInfo])
+    
     return (
         <div className="strike-navbar">
             <div className="strike-navbar__left">

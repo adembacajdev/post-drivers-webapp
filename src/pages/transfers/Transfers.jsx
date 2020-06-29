@@ -7,8 +7,8 @@ import i18n from '../../services/locales/i18n';
 import './transfers.scss';
 import { getAllTransfers, getBalanceDetails, searchTransfers } from '../../store/actions/transfers';
 import { useEffect, useState, useCallback } from 'react';
-import moment from 'moment';
 import { useForm } from "react-hook-form";
+import Table from './Table';
 
 const Transfers = (props) => {
     const { filledLeftArrow, unfilledLeftArrow, filledRightArrow, unfilledRightArrow } = images.transfers;
@@ -83,43 +83,3 @@ const mapStateToProps = ({ allTransfers, balanceDetails }) => ({ allTransfers, b
 const mapDispatchToProps = { getBalanceDetails, getAllTransfers, searchTransfers };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Transfers));
-
-
-const Table = ({ items }) => {
-    return (
-        <div className="strike-transfers__table">
-            <div className="strike-transfers__table-header">
-                <div className="strike-transfers__table-header-item">
-                    <div className="strike-transfers__table-header-item-text">{i18n.t('transfers.amount')}</div>
-                </div>
-                <div className="strike-transfers__table-header-item">
-                    <div className="strike-transfers__table-header-item-text">{i18n.t('transfers.date')}</div>
-                </div>
-                <div className="strike-transfers__table-header-item">
-                    <div className="strike-transfers__table-header-item-text">{i18n.t('transfers.time')}</div>
-                </div>
-            </div>
-            {items && items.map((item, index) => {
-                return <Item key={index} {...item} />
-            })}
-        </div>
-    )
-}
-
-const Item = ({ amount, updated_at }) => {
-    const date = moment(updated_at).format('DD/MM/YYYY');
-    const time = moment(updated_at).format('HH:MM:ss');
-    return (
-        <div className="strike-transfers__table-item">
-            <div className="strike-transfers__table-item-container">
-                <div className="strike-transfers__table-item-container-text">${amount}</div>
-            </div>
-            <div className="strike-transfers__table-item-container">
-                <div className="strike-transfers__table-item-container-text">{date}</div>
-            </div>
-            <div className="strike-transfers__table-item-container">
-                <div className="strike-transfers__table-item-container-text">{time}</div>
-            </div>
-        </div>
-    )
-}

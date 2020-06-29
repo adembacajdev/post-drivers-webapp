@@ -5,7 +5,8 @@ import { useHistory } from 'react-router-dom';
 
 const Profile = ({ profile, logout }) => {
     const history = useHistory();
-    const navigateToProfile = useCallback(() => { history.push('/profile') }, [])
+    const navigateToProfile = useCallback(() => { history.push('/profile') }, []);
+    
     return (
         <div is-active={profile ? "true" : 'false'} className="navbar-profile">
             <div className="navbar-profile__toparrow" />

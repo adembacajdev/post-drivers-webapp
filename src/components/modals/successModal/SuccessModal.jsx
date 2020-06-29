@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { TOGGLE_SUCCESS_MODAL } from '../../../store/actionTypes';
-import { useCallback } from 'react';
 
 export const SuccessModal = () => {
     const dispatch = useDispatch();
@@ -15,13 +14,13 @@ export const SuccessModal = () => {
             <Modal centered isOpen={successModal.isOpen} toggle={toggle}>
                 <ModalHeader toggle={toggle}>{successModal.title}</ModalHeader>
                 {typeof successModal.description === 'object'
-                ?
-                Object.entries(successModal.description).map((item, index) => {
-                    return <ModalBody key={index}>{item[1]}</ModalBody>
-                })
-                :
-                <ModalBody>{successModal.description}</ModalBody>
-            }
+                    ?
+                    Object.entries(successModal.description).map((item, index) => {
+                        return <ModalBody key={index}>{item[1]}</ModalBody>
+                    })
+                    :
+                    <ModalBody>{successModal.description}</ModalBody>
+                }
                 <ModalFooter>
                     <Button color="secondary" onClick={toggle}>{successModal.button}</Button>
                 </ModalFooter>

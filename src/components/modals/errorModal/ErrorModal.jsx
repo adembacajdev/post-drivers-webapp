@@ -1,8 +1,7 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { TOGGLE_ERROR_MODAL } from '../../../store/actionTypes';
-import { useCallback } from 'react';
 
 export const ErrorModal = () => {
     const dispatch = useDispatch();
