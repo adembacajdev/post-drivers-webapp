@@ -7,7 +7,6 @@ import i18n from '../../services/locales/i18n';
 import { useForm } from "react-hook-form";
 import { updateProduct, getProduct } from '../../store/actions/products';
 import { useState } from 'react';
-import { ProductSchema } from '../../services/schemas/ProductSchema';
 
 const EditProduct = (props) => {
     const [data, setData] = useState({
@@ -16,7 +15,7 @@ const EditProduct = (props) => {
         price: '',
         size: ''
     })
-    const { register, handleSubmit, watch, errors } = useForm({ validationSchema: ProductSchema });
+    const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = ({ description, price, size }) => {
         const { id } = props.location.state;
         if (data.name !== '' && description !== '' && price !== '' && size !== '') {

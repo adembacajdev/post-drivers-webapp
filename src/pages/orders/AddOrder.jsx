@@ -6,7 +6,7 @@ import i18n from '../../services/locales/i18n';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import { useForm } from "react-hook-form";
 import { postOrder } from '../../store/actions/orders';
-import { OrderSchema, validateNumber } from '../../services/schemas';
+import { validateNumber } from '../../services/schemas';
 import { Tooltip } from 'reactstrap';
 import cities from '../../services/constants/Cities';
 import locations from '../../services/constants/Locations';

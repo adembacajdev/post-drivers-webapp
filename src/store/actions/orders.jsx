@@ -3,7 +3,8 @@ import {
     DELETE_ORDERS, GET_TOP_CITIES, GET_TOP_PRODUCTS, IS_LOGGED_IN, PRINT_ONE_ORDER, GET_ALL_ORDERS_PAGINATED, SEARCH_ORDERS,
     PRINT_SELECTED_ORDERS, TOGGLE_ERROR_MODAL
 } from '../actionTypes';
-import axios from 'axios';
+import axios from 'axios'
+import config from '../../config';;
 
 export const getAllOrders = () => async (dispatch) => {
     try {
@@ -236,7 +237,7 @@ export const deleteOrders = (order_ids) => async (dispatch) => {
 
 export const printOneOrder = (id) => async (dispatch) => {
     const token = localStorage.getItem('token');
-    window.open(`https://dxwxjirx.myhook.io/api/orders/${id}/print`, '_blank');
+    window.open(`${config.baseURL}/orders/${id}/print`, '_blank');
     // try {
     //     const data = await axios.get(`/orders/${id}/print`, { responseType: 'blob' });
     //     // console.log('onePrint', data)
@@ -252,7 +253,7 @@ export const printSelectedOrders = (order_ids) => async (dispatch) => {
         if (query === '') query = `order_ids[]=${item}`;
         else query = `${query}&order_ids[]=${item}`;
     });
-    window.open(`https://dxwxjirx.myhook.io/api/orders/print/selected?${query}`, '_blank');
+    window.open(`${config.baseURL}/orders/print/selected?${query}`, '_blank');
     // try {
     //     var query = '';
     //     order_ids.forEach(item => {
