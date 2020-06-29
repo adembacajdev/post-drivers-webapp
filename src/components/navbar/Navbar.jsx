@@ -2,7 +2,6 @@ import React, { useState, useCallback, useEffect } from 'react';
 import images from '../../assets/images';
 import Notifications from './Notifications';
 import Profile from './Profile';
-import i18n from '../../services/locales/i18n';
 import { connect } from 'react-redux';
 import { toggleSidebar } from '../../store/actions/toggle.sidebar';
 import { logout } from '../../store/actions/authorization';
@@ -35,7 +34,7 @@ const Navbar = (props) => {
             </div>
             <div className="strike-navbar__middle">
                 <div onClick={openSidebar} className="strike-navbar__menu-responsive">&#9776;</div>
-                <div className="strike-navbar__middle-text">{i18n.t('navbar.onlineShop')}</div>
+                <div className="strike-navbar__middle-text">{shopName}</div>
             </div>
             <div className="strike-navbar__right">
                 <div tabIndex="0" onBlur={notificationBlur} onClick={toggleNotifications} className="strike-navbar__right-notification">
