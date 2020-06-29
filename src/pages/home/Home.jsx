@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Wrapper from '../../containers/wrapper/Wrapper';
@@ -7,9 +7,8 @@ import { VectorMap } from 'react-jvectormap';
 import i18n from '../../services/locales/i18n';
 import './home.scss';
 import { getTopCities, getTopProducts, getNumberOfOrdersByStatus } from '../../store/actions/orders';
+import { getShopInfo } from '../../store/actions/shop.info';
 import { getAllLocations } from '../../store/actions/location';
-import { useEffect } from 'react';
-import { useState } from 'react';
 
 const Home = (props) => {
     const [markers, setMarkers] = useState([]);
@@ -20,8 +19,9 @@ const Home = (props) => {
         props.getTopProducts();
         props.getNumberOfOrdersByStatus();
         props.getAllLocations();
+        props.getShopInfo();
     }, [])
-    useEffect(() => {setMarkers(props.allLocations)}, [props.allLocations])
+    useEffect(() => { setMarkers(props.allLocations) }, [props.allLocations])
     return (
         <Wrapper>
             <div className="strike-home">
@@ -192,6 +192,6 @@ const Home = (props) => {
 }
 
 const mapStateToProps = ({ topCities, topProducts, numberOfOrdersByStatus, allLocations }) => ({ topCities, topProducts, numberOfOrdersByStatus, allLocations });
-const mapDispatchToProps = { getTopCities, getTopProducts, getNumberOfOrdersByStatus, getAllLocations };
+const mapDispatchToProps = { getTopCities, getTopProducts, getNumberOfOrdersByStatus, getAllLocations, getShopInfo };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home));

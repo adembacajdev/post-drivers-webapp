@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import images from '../../assets/images';
 import Notifications from './Notifications';
 import Profile from './Profile';
@@ -6,9 +6,12 @@ import i18n from '../../services/locales/i18n';
 import { connect } from 'react-redux';
 import { toggleSidebar } from '../../store/actions/toggle.sidebar';
 import { logout } from '../../store/actions/authorization';
+import Auth from '../../services/auth/Auth';
 import './navbar.scss';
 
 const Navbar = (props) => {
+    const [shopName, setShopName] = useState(Auth.getShopName());
+    const [currentBalance, setCurrentBalance] = useState(Auth.getCurrentBalance());
     const { avatar, onNotification, offNotification, downArrow } = images.navbar;
     const [notifications, setNotifications] = useState(false);
     const [profile, setProfile] = useState(false);
@@ -18,12 +21,16 @@ const Navbar = (props) => {
     const notificationBlur = useCallback(() => { setNotifications(false) }, [notifications]);
 
     const openSidebar = useCallback(() => { props.toggleSidebar() }, [props.sidebar]);
-    const logout = useCallback(() => { props.logout() }, [])
+    const logout = useCallback(() => { props.logout() }, []);
 
+    useEffect(() => {
+        setShopName(Auth.getShopName());
+        setCurrentBalance(Auth.getCurrentBalance());
+    }, [props.shopInfo])
     return (
         <div className="strike-navbar">
             <div className="strike-navbar__left">
-                <div className="strike-navbar__left-text">{i18n.t('navbar.onlineShop')}</div>
+                <div className="strike-navbar__left-text">{shopName}</div>
                 <div onClick={openSidebar} className="strike-navbar-left-menu-responsive">&#9776;</div>
             </div>
             <div className="strike-navbar__middle">
@@ -36,7 +43,7 @@ const Navbar = (props) => {
                 </div>
                 <Notifications notifications={notifications} onBlur={notificationBlur} />
                 <div className="strike-navbar__right-amount">
-                    <div className="strike-navbar__right-amount-text">200.50$</div>
+                    <div className="strike-navbar__right-amount-text">{currentBalance}$</div>
                 </div>
                 <div className="line" />
                 <div onClick={toggleProfile} tabIndex="1" onBlur={profileBlur} className="strike-navbar__right-name">
@@ -49,7 +56,7 @@ const Navbar = (props) => {
     )
 }
 
-const mapStateToProps = ({ sidebar }) => ({ sidebar });
+const mapStateToProps = ({ sidebar, shopInfo }) => ({ sidebar, shopInfo });
 const mapDispatchToProps = { toggleSidebar, logout };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

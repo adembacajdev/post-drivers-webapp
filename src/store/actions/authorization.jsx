@@ -27,6 +27,8 @@ export const logout = () => async (dispatch) => {
         dispatch({ type: LOG_OUT });
         dispatch({ type: IS_LOGGED_IN, data: false });
         localStorage.removeItem('token');
+        localStorage.removeItem('shopName');
+        localStorage.removeItem('currentBalance');
     } catch (e) {
         return Promise.reject(e);
     }
