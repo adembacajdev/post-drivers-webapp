@@ -3,6 +3,7 @@ const phoneRegExp = /^\d{9}$/
 
 export const OrderSchema = yup.object().shape({
   product_id: yup.number().required(),
+  name: yup.string().required(),
   latitude: yup.number().required(),
   longitude: yup.number().required(),
   description: yup.string().required(),
@@ -13,4 +14,6 @@ export const OrderSchema = yup.object().shape({
   city: yup.string().required(),
   address: yup.string().required(),
   building: yup.string().required(),
+  price: yup.number().required(),
+  additional_info: yup.string().required(),
 });

@@ -1,6 +1,6 @@
 import {
     GET_ALL_PRODUCTS, GET_PRODUCT, GET_PRODUCT_ORDER, POST_STORE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, DELETE_PRODUCTS, IS_LOGGED_IN,
-    SEARCH_PRODUCTS
+    SEARCH_PRODUCTS, TOGGLE_ERROR_MODAL
 } from '../actionTypes';
 import axios from 'axios';
 
@@ -14,8 +14,11 @@ export const getAllProducts = (limit, page) => async (dispatch) => {
             localStorage.removeItem('token');
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
             axios.defaults.headers.common['Authorization'] = ``
+        }else{
+            dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
+        dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
         return Promise.reject(e);
     }
 }
@@ -31,8 +34,11 @@ export const searchProducts = (search) => async (dispatch) => {
             localStorage.removeItem('token');
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
             axios.defaults.headers.common['Authorization'] = ``
+        }else{
+            dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
+        dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
         return Promise.reject(e);
     }
 }
@@ -47,8 +53,11 @@ export const getProduct = (id) => async (dispatch) => {
             localStorage.removeItem('token');
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
             axios.defaults.headers.common['Authorization'] = ``
+        }else{
+            dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
+        dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
         return Promise.reject(e);
     }
 }
@@ -63,8 +72,11 @@ export const getProductOrder = (id) => async (dispatch) => {
             localStorage.removeItem('token');
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
             axios.defaults.headers.common['Authorization'] = ``
+        }else{
+            dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
+        dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
         return Promise.reject(e);
     }
 }
@@ -81,8 +93,11 @@ export const postStoreProduct = (body) => async (dispatch) => {
             localStorage.removeItem('token');
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
             axios.defaults.headers.common['Authorization'] = ``
+        }else{
+            dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
+        dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
         return Promise.reject(e);
     }
 }
@@ -99,8 +114,11 @@ export const updateProduct = (body) => async (dispatch) => {
             localStorage.removeItem('token');
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
             axios.defaults.headers.common['Authorization'] = ``
+        }else{
+            dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
+        dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
         return Promise.reject(e);
     }
 }
@@ -115,8 +133,11 @@ export const deleteProduct = (id) => async (dispatch) => {
             localStorage.removeItem('token');
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
             axios.defaults.headers.common['Authorization'] = ``
+        }else{
+            dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
+        dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
         return Promise.reject(e);
     }
 }
@@ -139,8 +160,11 @@ export const deleteProducts = (product_ids) => async (dispatch) => {
             localStorage.removeItem('token');
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
             axios.defaults.headers.common['Authorization'] = ``
+        }else{
+            dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
+        dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
         return Promise.reject(e);
     }
 }

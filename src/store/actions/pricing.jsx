@@ -1,4 +1,4 @@
-import { GET_PRICING_TABLE, IS_LOGGED_IN } from '../actionTypes';
+import { GET_PRICING_TABLE, IS_LOGGED_IN, TOGGLE_ERROR_MODAL } from '../actionTypes';
 import axios from 'axios';
 
 export const getAllPricing = () => async (dispatch) => {
@@ -11,8 +11,11 @@ export const getAllPricing = () => async (dispatch) => {
             localStorage.removeItem('token');
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
             axios.defaults.headers.common['Authorization'] = ``
+        }else{
+            dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
+        dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
         return Promise.reject(e);
     }
 }

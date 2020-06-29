@@ -1,5 +1,6 @@
 export const IS_LOGGED_IN = 'IS_LOGGED_IN';
 export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR';
+export const TOGGLE_ERROR_MODAL = 'TOGGLE_ERROR_MODAL';
 
 //Authorization
 export const LOG_IN = 'LOG_IN';

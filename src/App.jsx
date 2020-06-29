@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { authenticate } from './store/actions/authenticate.action';
 import Auth from './services/auth/Auth';
 import config from './config';
+import { ErrorModal } from './components/modals';
 
 const App = ({ authenticate }) => {
   useEffect(() => {
@@ -21,6 +22,7 @@ const App = ({ authenticate }) => {
   }, [])
   return (
     <>
+      <ErrorModal />
       <Router />
     </>
   )

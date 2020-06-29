@@ -185,7 +185,7 @@
     "addOrder": {
         "productDetails": "Product Details:",
         "yourInformation": "Your Information:",
-        "number": "Number",
+        "productId": "Product ID",
         "name": "Name",
         "description": "Description",
         "price": "Price",
@@ -203,5 +203,9 @@
         "kosovo": "Kosovo",
         "albania": "Albania",
         "northMacedonia": "North Macedonia"
+    },
+    "errorModal": {
+        "title": "Error",
+        "button": "Cancel"
     }
 }
