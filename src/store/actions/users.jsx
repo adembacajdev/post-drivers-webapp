@@ -75,6 +75,7 @@ export const updateUser = (id, body, history) => async (dispatch) => {
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
             axios.defaults.headers.common['Authorization'] = ``
         }else{
+            console.log('data', data)
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {

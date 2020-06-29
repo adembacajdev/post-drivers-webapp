@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import isLoggedIn from './authenticate.reducer';
 import sidebar from './toggle.sidebar';
 import errorModal from './toggle.error.modal';
+import successModal from './toggle.success.modal';
 import shopInfo from './shop.info';
 import { loggedIn, newPassword, user } from './authorization';
 import { allProducts, product, productOrder } from './products';
@@ -14,7 +15,7 @@ import { allTransfers, transfer, balanceDetails } from './transfers';
 import { dailyEarnings, dailyOrders } from './statistics';
 
 export default combineReducers({
-    isLoggedIn, sidebar, errorModal,
+    isLoggedIn, sidebar, errorModal, successModal,
     loggedIn, newPassword, user, shopInfo,
     allProducts, product, productOrder,
     allOrders, order, numberOfOrdersByStatus, ordersByCity, ordersByStatus, topCities, topProducts, printOrder, ordersPaginated,

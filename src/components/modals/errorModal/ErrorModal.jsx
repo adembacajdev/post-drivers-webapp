@@ -12,9 +12,16 @@ export const ErrorModal = () => {
 
     return (
         <div className="error-modal">
-            <Modal isOpen={errorModal.isOpen} toggle={toggle}>
+            <Modal centered isOpen={errorModal.isOpen} toggle={toggle}>
                 <ModalHeader toggle={toggle}>{errorModal.title}</ModalHeader>
+                {typeof errorModal.description === 'object'
+                ?
+                Object.entries(errorModal.description).map((item, index) => {
+                    return <ModalBody key={index}>{item[1]}</ModalBody>
+                })
+                :
                 <ModalBody>{errorModal.description}</ModalBody>
+            }
                 <ModalFooter>
                     <Button color="secondary" onClick={toggle}>{errorModal.button}</Button>
                 </ModalFooter>

@@ -208,6 +208,25 @@
     },
     "errorModal": {
         "title": "Error",
-        "button": "Cancel"
+        "button": "Cancel",
+        "oldNewPassSame": "You can not use your old password",
+        "newPassSame": "Your confirmation password should be the same as new password!"
+    },
+    "successModal": {
+        "title": "Success",
+        "button": "Cancel",
+        "changePass": "You have successfully changed your password!"
+    },
+    "profile": {
+        "title": "Profile",
+        "changePass": "Change Password",
+        "name": "Name",
+        "surname": "Surname",
+        "email": "Email",
+        "phone": "Phone",
+        "updateButton": "Update Profile",
+        "oldPassword": "Old Password",
+        "newPassword": "New Password",
+        "confirmNewPassword": "Confirm New Password"
     }
 }

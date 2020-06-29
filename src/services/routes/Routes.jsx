@@ -60,7 +60,7 @@ function Router({ location }) {
                         <Route path="/add-order/:productId" component={AddOrder} exact />
                         <Route path="/add-order" component={AddOrder} exact />
                         {protectedRoutes.map((route, idx) => {
-                            return <PrivateRoute {...route} />
+                            return <PrivateRoute key={idx} {...route} />
                         })}
                     </Switch>
                 </Suspense>
