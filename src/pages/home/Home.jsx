@@ -7,6 +7,7 @@ import { VectorMap } from 'react-jvectormap';
 import i18n from '../../services/locales/i18n';
 import './home.scss';
 import { getTopCities, getTopProducts, getNumberOfOrdersByStatus } from '../../store/actions/orders';
+import { getRecentCustomers } from '../../store/actions/customers';
 import { getShopInfo } from '../../store/actions/shop.info';
 import { getAllLocations } from '../../store/actions/location';
 
@@ -20,6 +21,7 @@ const Home = (props) => {
         props.getNumberOfOrdersByStatus();
         props.getAllLocations();
         props.getShopInfo();
+        props.getRecentCustomers()
     }, [])
     useEffect(() => { setMarkers(props.allLocations) }, [props.allLocations])
     return (
@@ -63,7 +65,6 @@ const Home = (props) => {
                             <div className="strike-home__map-header-left-text">{i18n.t('home.topCities')}</div>
                         </div>
                         <div className="strike-home__map-header-right">
-                            <img className="strike-home__map-header-right-icon" src={infoIcon} />
                         </div>
                     </div>
                     <div className="strike-home__map-body">
@@ -107,7 +108,7 @@ const Home = (props) => {
                             />
                         </div>
                         <div className="strike-home__map-body-right">
-                            <div className="strike-home__map-body-right-title">{i18n.t('home.topCities')}</div>
+                            {/* <div className="strike-home__map-body-right-title">{i18n.t('home.topCities')}</div> */}
                             {props.topCities && Object.entries(props.topCities).map((item, index) => {
                                 return (
                                     <div key={index} className="strike-home__map-body-right-item">
@@ -136,7 +137,6 @@ const Home = (props) => {
                             return (
                                 <div key={index} className="strike-home__bottom-left-table">
                                     <div className="strike-home__bottom-left-table-product">
-                                        <img className="strike-home__bottom-left-table-product-icon" src={testProduct} />
                                         <div className="strike-home__bottom-left-table-product-text">{item.name}</div>
                                     </div>
                                     <div className="strike-home__bottom-left-table-description">{item.description}</div>
@@ -145,6 +145,9 @@ const Home = (props) => {
                                 </div>
                             )
                         })}
+                        <div className="strike-home__bottom-right-footer">
+                            {i18n.t('home.showMore')}
+                        </div>
                     </div>
 
 
@@ -154,30 +157,14 @@ const Home = (props) => {
                             <div className="strike-home__bottom-right-table-header-left">{i18n.t('home.name')}</div>
                             <div className="strike-home__bottom-right-table-header-right">{i18n.t('home.total')}</div>
                         </div>
-                        <div className="strike-home__bottom-right-table-item">
-                            <div className="strike-home__bottom-right-table-item-left">Filan Fisteku</div>
-                            <div className="strike-home__bottom-right-table-item-right">3476</div>
-                        </div>
-                        <div className="strike-home__bottom-right-table-item">
-                            <div className="strike-home__bottom-right-table-item-left">Filan Fisteku</div>
-                            <div className="strike-home__bottom-right-table-item-right">3476</div>
-                        </div>
-                        <div className="strike-home__bottom-right-table-item">
-                            <div className="strike-home__bottom-right-table-item-left">Filan Fisteku</div>
-                            <div className="strike-home__bottom-right-table-item-right">3476</div>
-                        </div>
-                        <div className="strike-home__bottom-right-table-item">
-                            <div className="strike-home__bottom-right-table-item-left">Filan Fisteku</div>
-                            <div className="strike-home__bottom-right-table-item-right">3476</div>
-                        </div>
-                        <div className="strike-home__bottom-right-table-item">
-                            <div className="strike-home__bottom-right-table-item-left">Filan Fisteku</div>
-                            <div className="strike-home__bottom-right-table-item-right">3476</div>
-                        </div>
-                        <div className="strike-home__bottom-right-table-item">
-                            <div className="strike-home__bottom-right-table-item-left">Filan Fisteku</div>
-                            <div className="strike-home__bottom-right-table-item-right">3476</div>
-                        </div>
+                        {props.recentCustomers && props.recentCustomers.map((item, index) => {
+                            return (
+                                <div key={index} className="strike-home__bottom-right-table-item">
+                                    <div className="strike-home__bottom-right-table-item-left">{`${item.first_name} ${item.last_name}`}</div>
+                                    <div className="strike-home__bottom-right-table-item-right">{item.amount}€</div>
+                                </div>
+                            )
+                        })}
                         <div className="strike-home__bottom-right-footer">
                             {i18n.t('home.showMore')}
                         </div>
@@ -188,7 +175,10 @@ const Home = (props) => {
     )
 }
 
-const mapStateToProps = ({ topCities, topProducts, numberOfOrdersByStatus, allLocations }) => ({ topCities, topProducts, numberOfOrdersByStatus, allLocations });
-const mapDispatchToProps = { getTopCities, getTopProducts, getNumberOfOrdersByStatus, getAllLocations, getShopInfo };
+const mapStateToProps = ({ topCities, topProducts, numberOfOrdersByStatus, allLocations, recentCustomers 
+}) => ({ topCities, topProducts, numberOfOrdersByStatus, allLocations, recentCustomers });
+const mapDispatchToProps = {
+    getTopCities, getTopProducts, getNumberOfOrdersByStatus, getAllLocations, getShopInfo, getRecentCustomers
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home));

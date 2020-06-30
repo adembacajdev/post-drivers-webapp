@@ -111,7 +111,6 @@
             &-right{
                 padding: 20px 30px;
                 width: 20%;
-                border-radius: 20px;
                 -webkit-box-shadow: 0px 2px 6px 5px rgba(0,0,0,0.04);
                 -moz-box-shadow: 0px 2px 6px 5px rgba(0,0,0,0.04);
                 box-shadow: 0px 2px 6px 5px rgba(0,0,0,0.04);
@@ -207,7 +206,7 @@
                     flex-direction: row;
                     align-items: center;
                     justify-content: flex-start;
-                    flex: 0.45;
+                    flex: 0.3;
                     color: #A3A6B4;
                     font-size: 11px;
                     line-height: 15px;
@@ -219,7 +218,7 @@
                     flex-direction: row;
                     align-items: center;
                     justify-content: flex-start;
-                    flex: 0.25;
+                    flex: 0.3;
                     color: #A3A6B4;
                     font-size: 11px;
                     line-height: 15px;
@@ -231,7 +230,7 @@
                     flex-direction: row;
                     align-items: center;
                     justify-content: flex-start;
-                    flex: 0.15;
+                    flex: 0.2;
                     color: #A3A6B4;
                     font-size: 11px;
                     line-height: 15px;
@@ -242,8 +241,8 @@
                     display: flex;
                     flex-direction: row;
                     align-items: center;
-                    justify-content: flex-start;
-                    flex: 0.15;
+                    justify-content: center;
+                    flex: 0.2;
                     color: #A3A6B4;
                     font-size: 11px;
                     line-height: 15px;
@@ -255,7 +254,7 @@
                 display: flex;
                 flex-direction: row;
                 align-items: center;
-                height: 80px;
+                height: 50px;
                 background-color: #FFFFFF;
                 border-bottom: 1px solid #F5F6FA;
                 width: 100%;
@@ -266,7 +265,7 @@
                     flex-direction: row;
                     align-items: center;
                     justify-content: flex-start;
-                    flex: 0.45;
+                    flex: 0.3;
                     color: #4D4F5C;
                     font-size: 11px;
                     line-height: 15px;
@@ -288,7 +287,7 @@
                     flex-direction: row;
                     align-items: center;
                     justify-content: flex-start;
-                    flex: 0.25;
+                    flex: 0.3;
                     color: #4D4F5C;
                     font-size: 11px;
                     line-height: 15px;
@@ -299,7 +298,7 @@
                     flex-direction: row;
                     align-items: center;
                     justify-content: flex-start;
-                    flex: 0.15;
+                    flex: 0.2;
                     color: #4D4F5C;
                     font-size: 11px;
                     line-height: 15px;
@@ -309,8 +308,8 @@
                     display: flex;
                     flex-direction: row;
                     align-items: center;
-                    justify-content: flex-start;
-                    flex: 0.15;
+                    justify-content: center;
+                    flex: 0.2;
                     color: #4D4F5C;
                     font-size: 11px;
                     line-height: 15px;
@@ -548,7 +547,6 @@
                 &-right{
                     padding: 20px 30px;
                     width: 100%;
-                    border-radius: 20px;
                     -webkit-box-shadow: 0px 2px 6px 5px rgba(0,0,0,0.04);
                     -moz-box-shadow: 0px 2px 6px 5px rgba(0,0,0,0.04);
                     box-shadow: 0px 2px 6px 5px rgba(0,0,0,0.04);
@@ -656,7 +654,7 @@
                         flex-direction: row;
                         align-items: center;
                         justify-content: flex-start;
-                        // flex: 0.4;
+                        // flex: 0.3;
                         color: #A3A6B4;
                         font-size: 11px;
                         line-height: 15px;
@@ -668,7 +666,7 @@
                         flex-direction: row;
                         align-items: center;
                         justify-content: center;
-                        flex: 0.15;
+                        flex: 0.275;
                         color: #A3A6B4;
                         font-size: 11px;
                         line-height: 15px;
@@ -680,7 +678,7 @@
                         flex-direction: row;
                         align-items: center;
                         justify-content: center;
-                        flex: 0.4;
+                        flex: 0.275;
                         color: #A3A6B4;
                         font-size: 11px;
                         line-height: 15px;
@@ -725,7 +723,7 @@
                         flex-direction: row;
                         align-items: center;
                         justify-content: flex-start;
-                        // flex: 0.4;
+                        // flex: 0.3;
                         color: #4D4F5C;
                         font-size: 11px;
                         line-height: 15px;
@@ -735,8 +733,8 @@
                         display: flex;
                         flex-direction: row;
                         align-items: center;
-                        justify-content: flex-end;
-                        flex: 0.15;
+                        justify-content: center;
+                        flex: 0.275;
                         color: #4D4F5C;
                         font-size: 11px;
                         line-height: 15px;
@@ -747,7 +745,7 @@
                         flex-direction: row;
                         align-items: center;
                         justify-content: center;
-                        flex: 0.4;
+                        flex: 0.275;
                         color: #4D4F5C;
                         font-size: 11px;
                         line-height: 15px;

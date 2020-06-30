@@ -56,9 +56,11 @@ export function customerOrders(state = null, { type, data }) {
     }
 }
 
-export function recentCustomers(state = null, { type, data }) {
+export function recentCustomers(state = [], { type, data }) {
     switch (type) {
-        case GET_RECENT_CUSTOMERS: return data;
+        case GET_RECENT_CUSTOMERS: 
+        data.length = 4;
+        return data;
         default: return state;
     }
 }

@@ -8,16 +8,16 @@ import Context from './Context';
 
 const TableItem = ({ id, serial_number, status, updated_at, deleteItem, price, client, printOne, item }) => {
     const { selected, setSelected } = useContext(Context);
-    const [checked, setChecked] = useState(item.checked)
+    const [checked, setChecked] = useState(false)
     const history = useHistory();
     const { threePoints } = images.orders;
     const date = moment(updated_at).format('DD/MM/YYYY');
     const time = moment(updated_at).format('HH:mm:ss');
     let newStatus;
-    if (status === 'archived:completed') newStatus = 'completed';
-    else if (status === 'archived:ongoing') newStatus = 'ongoing';
-    else if (status === 'archived:cancelled') newStatus = 'cancelled';
-    else if (status === 'archived:pending') newStatus = 'pending';
+    if (status === 'archived:completed') newStatus = 'archived';
+    else if (status === 'archived:ongoing') newStatus = 'archived';
+    else if (status === 'archived:cancelled') newStatus = 'archived';
+    else if (status === 'archived:pending') newStatus = 'archived';
     else newStatus = status;
     const deleteThisItem = () => deleteItem(id);
     const navigate = () => history.push('/order', { id })
@@ -29,7 +29,14 @@ const TableItem = ({ id, serial_number, status, updated_at, deleteItem, price, c
             const deletedCheck = selected.filter(el => el !== id);
             setSelected(deletedCheck);
         }
-    }, [checked])
+    }, [checked]);
+
+    useEffect(() => {
+        const iAmSelected = selected.filter(item => item === id);
+        if(iAmSelected.length === 0){
+            setChecked(false)
+        }
+    }, [selected])
     return (
         <div className="strike-orders__table-item">
             <div className="strike-orders__table-item-container">
@@ -38,7 +45,7 @@ const TableItem = ({ id, serial_number, status, updated_at, deleteItem, price, c
             </div>
             <div onClick={navigate} className="strike-orders__table-item-container">
                 <div className={newStatus} />
-                <div className="strike-orders__table-item-container-text">{newStatus}</div>
+                <div className="strike-orders__table-item-container-text">{status}</div>
             </div>
             <div onClick={navigate} className="strike-orders__table-item-container">
                 <div className="strike-orders__table-item-container-text">{price}€</div>
@@ -60,7 +67,6 @@ const TableItem = ({ id, serial_number, status, updated_at, deleteItem, price, c
                     <img className="strike-orders__table-item-container-dots" src={threePoints} />
                     <div className="dropdown-content">
                         <div className="dropdown-content-text">{i18n.t('orders.openLocation')}</div>
-                        <div className="dropdown-content-text">{i18n.t('orders.share')}</div>
                         <div onClick={printOrder} className="dropdown-content-text">{i18n.t('orders.print')}</div>
                         <div onClick={deleteThisItem} className="dropdown-content-text">{i18n.t('orders.delete')}</div>
                     </div>

@@ -37,6 +37,7 @@
             font-family: "Avenir";
             font-weight: 600;
             margin-left: 50px;
+            cursor: pointer;
         }
     }
     &__middle{
@@ -53,6 +54,7 @@
             font-family: "Avenir";
             font-weight: 600;
             margin-left: 50px;
+            cursor: pointer;
         }
     }
     &__right{
@@ -229,7 +231,6 @@
     right: 10px;
     width: 200px;
     max-height: 110px;
-    overflow-y: scroll;
     background-color: transparent;
     transition: 0.2s linear all;
     display: flex;

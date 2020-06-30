@@ -72,7 +72,9 @@ const AddOrder = (props) => {
     }
 
     useEffect(() => {
-        if (productId === undefined || productId === 'undefined' || productId === null) props.toggleErrorModal(i18n.t('addOrder.errorMessage'))
+        if (productId === undefined || productId === 'undefined' || productId === null) {
+            console.log('no id')
+        }
         else props.getProduct(productId);
     }, [])
     return (
@@ -126,7 +128,7 @@ const AddOrder = (props) => {
                 <div className="add-order__wrapper-row-column-title">{i18n.t('addOrder.putLocation')}</div>
                 <ReactMapGL
                     {...viewPort}
-                    mapStyle={'mapbox://styles/mapbox/streets-v9'}
+                    mapStyle={'mapbox://styles/mapbox/satellite-v9'}
                     mapboxApiAccessToken={'pk.eyJ1IjoiYWRlbWJhY2FqIiwiYSI6ImNrYnF0c3phNjBhd3Iydm50bnIyeHl0d3kifQ.6zDG514PklFKYJTYD32p8Q'}
                     width={"100%"}
                     height={400}

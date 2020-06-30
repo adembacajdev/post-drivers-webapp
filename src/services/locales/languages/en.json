@@ -59,13 +59,14 @@
         "delete": "Delete",
         "search": "Search",
         "searchPlaceholder": "Search for a product...",
-        "deleteProducts": "Delete selected products"
+        "deleteProducts": "Delete",
+        "addProduct": "Add Product"
     },
     "orders": {
         "allOrders": "All Orders",
         "id": "ID",
         "status": "Status",
-        "unitedPrice": "United Price",
+        "unitedPrice": "Price",
         "customerName": "Customer Name",
         "city": "City",
         "actions": "Actions",
@@ -78,8 +79,8 @@
         "serialNumber": "Serial Number",
         "search": "Search",
         "searchPlaceholder": "Search for a order...",
-        "deleteOrders": "Delete selected orders",
-        "printSelected": "Print selected orders"
+        "deleteOrders": "Delete",
+        "printSelected": "Print"
     },
     "customers": {
         "allCustomers": "All Customers",
@@ -95,7 +96,7 @@
         "search": "Search",
         "searchPlaceholder": "Search for a customer...",
         "name": "Name",
-        "deleteCustomers": "Delete selected customers"
+        "deleteCustomers": "Delete"
     },
     "transfers": {
         "currentBalance": "Current Balance",
@@ -150,6 +151,7 @@
         "false": "No"
     },
     "addProductForm": {
+        "productId": "Product ID",
         "title": "Add Product",
         "name": "Name",
         "description": "Description",
@@ -158,7 +160,8 @@
         "medium": "Medium",
         "small": "Small",
         "large": "Large",
-        "addProduct": "Add Product"
+        "addProduct": "Add Product",
+        "editProduct": "Edit Product"
     },
     "addTransferForm": {
         "title": "Add Transfer",

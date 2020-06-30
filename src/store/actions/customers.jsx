@@ -74,9 +74,9 @@ export const getCustomerOrders = (id) => async (dispatch) => {
 
 export const getRecentCustomers = () => async (dispatch) => {
     try {
-        const { data } = await axios.get(`/recent/customers`);
+        const { data } = await axios.get(`/recent/clients`);
         if (data.success) {
-            dispatch({ type: GET_RECENT_CUSTOMERS, data });
+            dispatch({ type: GET_RECENT_CUSTOMERS, data: data.data });
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');

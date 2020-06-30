@@ -20,17 +20,27 @@ const Products = (props) => {
     };
     useEffect(() => { props.getAllProducts(5, 1) }, []);
     useEffect(() => { setData(props.allProducts) }, [props.allProducts]);
-    const deleteSelectedProducts = () => props.deleteProducts(selected)
+    const deleteSelectedProducts = () => {
+        props.deleteProducts(selected);
+        setSelected([])
+    }
 
     const nextPage = useCallback(() => { if (data.hasNextPage) props.getAllProducts(5, data.currentPage + 1) }, [data]);
     const prevPage = useCallback(() => { if (data.hasPrevPage) props.getAllProducts(5, data.currentPage - 1) }, [data]);
     const number = useCallback((page) => { props.getAllProducts(5, page) }, [data]);
+
+    const addProduct = useCallback(() => { props.history.push('/add-product') }, [])
     return (
         <Context.Provider value={{ selected, setSelected }}>
             <Wrapper>
                 <div className="strike-products">
                     <div className="strike-products__header">
-                        <div className="strike-products__header-title">{i18n.t('products.products')}</div>
+                        <div className="strike-products__header-left">
+                            <div className="strike-products__header-left-title">{i18n.t('products.products')}</div>
+                        </div>
+                        <div className="strike-products__header-right">
+                            <div onClick={addProduct} className="strike-products__header-right-text">{i18n.t('products.addProduct')}</div>
+                        </div>
                     </div>
                     <form onSubmit={handleSubmit(onSubmit)} className="strike-products__search">
                         <input name="search" ref={register({ required: true })} placeholder={i18n.t('products.searchPlaceholder')} className="strike-products__search-input" />

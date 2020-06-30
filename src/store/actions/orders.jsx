@@ -35,10 +35,13 @@ export const searchOrders = (type, text) => async (dispatch) => {
         if (type === 'date') url = `/orders/date?date=${text}`;
 
         const { data } = await axios.post(url);
-
-        if (data.success) {
+        console.log('data', data)
+        if (data.success && data.data !== null) {
             dispatch({ type: SEARCH_ORDERS, data: data.data })
-        } else {
+        } else if (data.data === null){
+            dispatch({ type: TOGGLE_ERROR_MODAL, data: 'This ID does not exist' })
+        }
+        else {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
@@ -213,13 +216,22 @@ export const deleteOrder = (id) => async (dispatch) => {
     }
 }
 
-export const deleteOrders = (order_ids) => async (dispatch) => {
+export const deleteOrders = (order_ids, status) => async (dispatch) => {
     try {
-        const { data } = await axios.delete(`/orders/${order_ids}`);
+        var query = '';
+        order_ids.forEach(item => {
+            if (query === '') query = `order_ids[]=${item}`;
+            else query = `${query}&order_ids[]=${item}`;
+        });
+        const { data } = await axios.delete(`/orders?${query}`);
         if (data.success) {
-            const data = await axios.get(`orders/paginate/${5}?page=${1}`);
-            if (data.status === 200) {
-                dispatch({ type: GET_ALL_ORDERS_PAGINATED, data: data.data })
+            const ordersPaginated = await axios.get(`orders/paginate/${5}?page=${1}`);
+            if (ordersPaginated.status === 200) {
+                dispatch({ type: GET_ALL_ORDERS_PAGINATED, data: ordersPaginated.data })
+            }
+            const ordersByStatus = await axios.post(`/orders/status`, { status });
+            if (ordersByStatus.data.success) {
+                dispatch({ type: GET_ORDER_BY_STATUS, data: ordersByStatus.data.data });
             }
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });

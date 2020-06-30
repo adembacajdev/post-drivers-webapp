@@ -12,11 +12,35 @@
         flex-direction: row;
         align-items: center;
         margin-bottom: 20px;
-        &-title{
-            font-size: 18px;
-            line-height: 13px;
-            color: #4D4F5C;
-            font-family: "Avenir";
+        &-left{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            flex: 0.5;
+            &-title{
+                font-size: 18px;
+                line-height: 13px;
+                color: #4D4F5C;
+                font-family: "Avenir";
+            }
+        }
+        &-right{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            flex: 0.5;
+            justify-content: flex-end;
+            &-text{
+                color: #B3B8BD;
+                font-size: 14px;
+                line-height: 40px;
+                font-family: "Avenir";
+                transition: 0.2s linear all;
+                cursor: pointer;
+                &:hover{
+                    color: #000000;
+                }
+            }
         }
     }
     &__search{

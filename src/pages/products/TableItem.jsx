@@ -22,7 +22,14 @@ const TableItem = ({ item, deleteProduct }) => {
             const deletedCheck = selected.filter(el => el !== item.id);
             setSelected(deletedCheck);
         }
-    }, [checked])
+    }, [checked]);
+
+    useEffect(() => {
+        const iAmSelected = selected.filter(el => el === item.id);
+        if(iAmSelected.length === 0){
+            setChecked(false)
+        }
+    }, [selected])
 
     return (
         <div className="strike-products__table-item">
@@ -30,7 +37,7 @@ const TableItem = ({ item, deleteProduct }) => {
                 <input type="checkbox" onChange={check} value={checked} checked={checked} />
             </div>
             <div onClick={navigate} className="strike-products__table-item-content flex-3">
-                <img className="strike-products__table-item-content-icon" src={testProduct} />
+                <div className="strike-products__table-item-content-text ml-15">{item.id}</div>
                 <div className="strike-products__table-item-content-text ml-15">{item.name}</div>
             </div>
             <div onClick={navigate} is-responsive="true" className="strike-products__table-item-content flex-3">

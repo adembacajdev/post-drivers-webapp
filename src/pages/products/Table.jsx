@@ -17,7 +17,6 @@ const Table = ({ items, deleteProduct }) => {
             {items && items.map((item, index) => {
                 return <TableItem key={index} item={item} deleteProduct={deleteProduct} />
             })}
-            <div className="strike-products__showmore">{i18n.t('products.showMore')}</div>
         </div>
     )
 }

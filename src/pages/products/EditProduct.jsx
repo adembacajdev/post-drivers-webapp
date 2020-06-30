@@ -36,21 +36,23 @@ const EditProduct = (props) => {
     return (
         <Wrapper>
             <div className="strike-addproduct">
-                <div className="strike-addproduct__title">{i18n.t('addProductForm.title')}</div>
+                <div className="strike-addproduct__title">{i18n.t('addProductForm.editProduct')}</div>
                 <form className="strike-addproduct__form" onSubmit={handleSubmit(onSubmit)}>
+                    <div className="strike-addproduct__form-label">{i18n.t('addProductForm.productId')}</div>
+                    <input disabled defaultValue={data && data.id} has-error={errors.product_id ? 'true' : 'false'} name="product_id" ref={register({ required: false })} className="strike-addproduct__form-input" placeholder={i18n.t('addProductForm.productId')} />
                     <div className="strike-addproduct__form-label">{i18n.t('addProductForm.name')}</div>
-                    <input disabled defaultValue={data && data.name} has-error={errors.name ? 'true' : 'false'} name="name" ref={register({ required: true })} className="strike-addproduct__form-input" placeholder={i18n.t('addProductForm.name')} />
+                    <input defaultValue={data && data.name} has-error={errors.name ? 'true' : 'false'} name="name" ref={register({ required: true })} className="strike-addproduct__form-input" placeholder={i18n.t('addProductForm.name')} />
                     <div className="strike-addproduct__form-label">{i18n.t('addProductForm.description')}</div>
                     <input defaultValue={data && data.description} has-error={errors.description ? 'true' : 'false'} name="description" ref={register({ required: true })} className="strike-addproduct__form-input" placeholder={i18n.t('addProductForm.description')} />
                     <div className="strike-addproduct__form-label">{i18n.t('addProductForm.price')}</div>
-                    <input defaultValue={data && data.price} has-error={errors.price ? 'true' : 'false'} name="price" ref={register({ required: true })} className="strike-addproduct__form-input" placeholder={i18n.t('addProductForm.price')} />
+                    <input disabled defaultValue={data && data.price} has-error={errors.price ? 'true' : 'false'} name="price" ref={register({ required: true })} className="strike-addproduct__form-input" placeholder={i18n.t('addProductForm.price')} />
                     <div className="strike-addproduct__form-label">{i18n.t('addProductForm.size')}</div>
-                    <select onChange={handleSelect} ref={register({ required: true })} value={data ? data.size : ''} has-error={errors.size ? 'true' : 'false'} name="size" className="strike-addproduct__form-input">
+                    <select disabled onChange={handleSelect} ref={register({ required: true })} value={data ? data.size : ''} has-error={errors.size ? 'true' : 'false'} name="size" className="strike-addproduct__form-input">
                         <option value="small">{i18n.t('addProductForm.small')}</option>
                         <option value="medium">{i18n.t('addProductForm.medium')}</option>
                         <option value="large">{i18n.t('addProductForm.large')}</option>
                     </select>
-                    <button className="strike-addproduct__form-button">{i18n.t('addProductForm.addProduct')}</button>
+                    <button className="strike-addproduct__form-button">{i18n.t('addProductForm.editProduct')}</button>
                 </form>
             </div>
         </Wrapper>

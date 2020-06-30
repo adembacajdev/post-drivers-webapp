@@ -7,6 +7,7 @@ import { toggleSidebar } from '../../store/actions/toggle.sidebar';
 import { logout } from '../../store/actions/authorization';
 import Auth from '../../services/auth/Auth';
 import './navbar.scss';
+import { useHistory } from 'react-router-dom';
 
 const Navbar = (props) => {
     const [shopName, setShopName] = useState(Auth.getShopName());
@@ -14,6 +15,8 @@ const Navbar = (props) => {
     const { avatar, onNotification, offNotification, downArrow } = images.navbar;
     const [notifications, setNotifications] = useState(false);
     const [profile, setProfile] = useState(false);
+
+    const history = useHistory();
 
     const toggleNotifications = useCallback(() => { setNotifications(!notifications) }, [notifications]);
     const toggleProfile = useCallback(() => { setProfile(!profile) }, [profile]);
@@ -25,17 +28,19 @@ const Navbar = (props) => {
     useEffect(() => {
         setShopName(Auth.getShopName());
         setCurrentBalance(Auth.getCurrentBalance());
-    }, [props.shopInfo])
-    
+    }, [props.shopInfo]);
+
+    const goHome = useCallback(() => { history.push('/') }, [])
+
     return (
         <div className="strike-navbar">
             <div className="strike-navbar__left">
-                <div className="strike-navbar__left-text">{shopName}</div>
+                <div onClick={goHome} className="strike-navbar__left-text">{shopName}</div>
                 <div onClick={openSidebar} className="strike-navbar-left-menu-responsive">&#9776;</div>
             </div>
             <div className="strike-navbar__middle">
                 <div onClick={openSidebar} className="strike-navbar__menu-responsive">&#9776;</div>
-                <div className="strike-navbar__middle-text">{shopName}</div>
+                <div onClick={goHome} className="strike-navbar__middle-text">{shopName}</div>
             </div>
             <div className="strike-navbar__right">
                 <div tabIndex="0" onBlur={notificationBlur} onClick={toggleNotifications} className="strike-navbar__right-notification">
@@ -43,7 +48,7 @@ const Navbar = (props) => {
                 </div>
                 <Notifications notifications={notifications} onBlur={notificationBlur} />
                 <div className="strike-navbar__right-amount">
-                    <div className="strike-navbar__right-amount-text">{currentBalance}$</div>
+                    <div className="strike-navbar__right-amount-text">{currentBalance}€</div>
                 </div>
                 <div className="line" />
                 <div onClick={toggleProfile} tabIndex="1" onBlur={profileBlur} className="strike-navbar__right-name">

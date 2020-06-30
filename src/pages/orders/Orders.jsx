@@ -26,8 +26,11 @@ const Orders = (props) => {
     }, [])
 
     useEffect(() => { setOrders(props.ordersPaginated); }, [props.ordersPaginated]);
-    
-    const deleteSelectedOrders = () => props.deleteOrders(selected);
+
+    const deleteSelectedOrders = () => {
+        props.deleteOrders(selected);
+        setSelected([]);
+    }
     const printSelectedOrd = () => props.printSelectedOrders(selected);
 
     const nextPage = useCallback(() => { if (orders.hasNextPage) props.getOrdersPaginated(5, orders.currentPage + 1) }, [orders]);
@@ -43,7 +46,6 @@ const Orders = (props) => {
                             <div className="strike-orders__header-left-text">{title}</div>
                         </div>
                         <div className="strike-orders__header-right">
-                            <img className="strike-orders__header-right-icon" src={infoIcon} />
                         </div>
                     </div>
                     <form onSubmit={handleSubmit(onSubmit)} className="strike-orders__search">
@@ -57,7 +59,7 @@ const Orders = (props) => {
                         <input name="search" ref={register({ required: true })} placeholder={i18n.t('orders.searchPlaceholder')} className="strike-orders__search-input" />
                         <button type="submit" className="strike-orders__search-button">{i18n.t('orders.search')}</button>
                     </form>
-                    <Table printOne={props.printOneOrder} deleteItem={props.deleteOrder} items={orders.data} />
+                    <Table printOne={props.printOneOrder} deleteItem={props.deleteOrder} items={orders && orders.data} />
                     <div className="strike-orders__pagination">
                         <img onClick={prevPage} src={orders.hasPrevPage ? filledLeftArrow : unfilledLeftArrow} className='strike-orders__pagination-leftarrow' />
                         {orders && orders.lastPage.map(item => {

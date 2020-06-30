@@ -36,25 +36,25 @@ const Transfers = (props) => {
                     <div className="strike-transfers-top__left-middle">
                         <div className="strike-transfers-top__left-middle-left">
                             <div className="strike-transfers-top__left-middle-left-title">{i18n.t('transfers.totalAmount')}</div>
-                            <div className="strike-transfers-top__left-middle-left-subtitle">{props.balanceDetails && props.balanceDetails.latest_total_amount}$</div>
+                            <div className="strike-transfers-top__left-middle-left-subtitle">{props.balanceDetails && props.balanceDetails.latest_total_amount}€</div>
                         </div>
                         <div className="strike-transfers-top__left-middle-right">
                             <div className="strike-transfers-top__left-middle-right-title">{i18n.t('transfers.transportCost')}</div>
-                            <div className="strike-transfers-top__left-middle-right-subtitle">{props.balanceDetails && props.balanceDetails.latest_transport_cost}$</div>
+                            <div className="strike-transfers-top__left-middle-right-subtitle">{props.balanceDetails && props.balanceDetails.latest_transport_cost}€</div>
                         </div>
                     </div>
                     <div className="strike-transfers-top__left-subtitle text-center">{i18n.t('transfers.netoAmount')}</div>
-                    <div className="strike-transfers-top__left-price text-center">{props.balanceDetails && props.balanceDetails.latest_neto_amount}$</div>
+                    <div className="strike-transfers-top__left-price text-center">{props.balanceDetails && props.balanceDetails.latest_neto_amount}€</div>
                 </div>
                 <div className="strike-transfers-top__middle">
                     <div className="strike-transfers-top__middle-title">{i18n.t('transfers.currentBalance')}</div>
                     <div className="strike-transfers-top__middle-subtitle">{i18n.t('transfers.totalAmount')}</div>
-                    <div className="strike-transfers-top__middle-price">{props.balanceDetails && props.balanceDetails.current_balance}$</div>
+                    <div className="strike-transfers-top__middle-price">{props.balanceDetails && props.balanceDetails.current_balance}€</div>
                 </div>
                 <div className="strike-transfers-top__right">
                     <div className="strike-transfers-top__right-title">{i18n.t('transfers.allTimeEarning')}</div>
                     <div className="strike-transfers-top__right-subtitle">{i18n.t('transfers.totalAmount')}</div>
-                    <div className="strike-transfers-top__right-price">{props.balanceDetails && props.balanceDetails.all_time_earning}$</div>
+                    <div className="strike-transfers-top__right-price">{props.balanceDetails && props.balanceDetails.all_time_earning}€</div>
                 </div>
             </div>
             <div className="strike-transfers">

@@ -34,7 +34,13 @@ export function ordersByCity(state = null, { type, data }) {
 
 export function ordersByStatus(state = null, { type, data }) {
     switch (type) {
-        case GET_ORDER_BY_STATUS: return data;
+        case GET_ORDER_BY_STATUS:
+            data.forEach(item => item.checked = false);
+            return data;
+        case DELETE_ORDER:
+            const { id } = data;
+            const deletedOrdersByStatus = state.filter(item => item.id !== id);
+            return deletedOrdersByStatus;
         default: return state;
     }
 }
@@ -48,7 +54,9 @@ export function topCities(state = null, { type, data }) {
 
 export function topProducts(state = null, { type, data }) {
     switch (type) {
-        case GET_TOP_PRODUCTS: return data;
+        case GET_TOP_PRODUCTS:
+            data.length = 5;
+            return data;
         default: return state;
     }
 }
@@ -96,7 +104,7 @@ export function ordersPaginated(state = initialState, { type, data }) {
         case DELETE_ORDER:
             const { id } = data
             const newOrders = state.data.filter(item => item.id !== id);
-            return {...state, data: newOrders};
+            return { ...state, data: newOrders };
         default: return state;
     }
 }
