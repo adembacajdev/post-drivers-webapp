@@ -282,6 +282,27 @@
 
 
 @media only screen and (max-width: 700px) {
+
+.navbar-notifications{
+    opacity: 0;
+    visibility: hidden;
+    flex-direction: column;
+    position: absolute;
+    top: 75px;
+    right: 40px;
+    width: 230px;
+    max-height: 320px;
+    overflow-y: scroll;
+    background-color: #FAFAFA;
+    -webkit-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);
+    -moz-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);
+    box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);
+    transition: 0.2s linear all;
+    &[is-active = true]{
+        opacity: 100;
+        visibility: visible;
+    }
+}
     .strike-navbar{
         background-color: #FFFFFF;
         width: 100%;
@@ -348,6 +369,8 @@
                 line-height: 21px;
                 font-family: "Avenir";
                 font-weight: 600;
+                white-space: nowrap;
+                margin-left: 15px;
             }
         }
         &__right{
