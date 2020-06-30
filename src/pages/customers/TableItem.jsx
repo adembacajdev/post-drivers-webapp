@@ -19,13 +19,16 @@ const TableItem = ({ id, first_name, last_name, phone, address, city, deleteCust
             const deletedCheck = selected.filter(el => el !== id);
             setSelected(deletedCheck);
         }
-    }, [checked])
+    }, [checked]);
+
+    useEffect(() => {
+        const iAmSelected = selected.filter(item => item === id);
+        if(iAmSelected.length === 0){
+            setChecked(false)
+        }
+    }, [selected])
     return (
         <div className="strike-customers__table-item">
-            <div is-responsive="true" className="strike-customers__table-item-container">
-                <input onChange={check} value={checked} checked={checked} className="strike-customers__table-item-container-checkbox" type="checkbox" />
-                <div className="strike-customers__table-item-container-text">{id}</div>
-            </div>
             <div onClick={navigate} className="strike-customers__table-item-container">
                 <div className="strike-customers__table-item-container-text">{first_name}</div>
             </div>

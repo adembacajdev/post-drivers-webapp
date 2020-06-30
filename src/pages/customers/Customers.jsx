@@ -22,7 +22,10 @@ const Customers = (props) => {
     useEffect(() => { props.getAllCustomers(5, 1) }, []);
     useEffect(() => { setCustomers(props.allCustomers); }, [props.allCustomers]);
 
-    const deleteSelectedCustomers = () => props.deleteCustomers(selected)
+    const deleteSelectedCustomers = () => {
+        props.deleteCustomers(selected);
+        setSelected([])
+    }
 
     const nextPage = useCallback(() => { if (customers.hasNextPage) props.getAllCustomers(5, customers.currentPage + 1) }, [customers]);
     const prevPage = useCallback(() => { if (customers.hasPrevPage) props.getAllCustomers(5, customers.currentPage - 1) }, [customers]);
@@ -36,7 +39,6 @@ const Customers = (props) => {
                             <div className="strike-customers__header-left-text">{i18n.t('customers.allCustomers')}</div>
                         </div>
                         <div className="strike-customers__header-right">
-                            <img className="strike-customers__header-right-icon" src={infoIcon} />
                         </div>
                     </div>
                     <form onSubmit={handleSubmit(onSubmit)} className="strike-customers__search">

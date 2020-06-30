@@ -9,10 +9,6 @@ const Table = ({ items, deleteCustomer }) => {
     return (
         <div className="strike-customers__table">
             <div className="strike-customers__table-header">
-                <div is-responsive="true" className="strike-customers__table-header-item">
-                    <div className="strike-customers__table-header-item-text">{i18n.t('customers.id')}</div>
-                    <img className="strike-customers__table-header-item-icon" src={tableArrow} />
-                </div>
                 <div className="strike-customers__table-header-item">
                     <div className="strike-customers__table-header-item-text">{i18n.t('customers.firstName')}</div>
                     <img className="strike-customers__table-header-item-icon" src={tableArrow} />
