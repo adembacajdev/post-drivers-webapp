@@ -17,7 +17,6 @@ const TableItem = ({ created_at, email, first_name, last_name, id, phone, delete
     return (
         <div className="strike-users__table-item">
             <div onClick={navigate} is-responsive="true" className="strike-users__table-item-container">
-                <input className="strike-users__table-item-container-checkbox" type="checkbox" />
                 <div className="strike-users__table-item-container-text">{id}</div>
             </div>
             <div onClick={navigate} className="strike-users__table-item-container">

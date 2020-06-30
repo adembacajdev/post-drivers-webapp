@@ -45,6 +45,7 @@ export const postUser = (body, history) => async (dispatch) => {
     try {
         const { first_name, last_name, email, phone } = body;
         const { data } = await axios.post(`/users`, { first_name, last_name, email, phone });
+        console.log('data', data)
         if (data.success) {
             dispatch({ type: POST_USER, data: data.data });
             history.goBack();
@@ -54,7 +55,7 @@ export const postUser = (body, history) => async (dispatch) => {
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
             axios.defaults.headers.common['Authorization'] = ``
         }else{
-            dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
+            dispatch({ type: TOGGLE_ERROR_MODAL, data: data })
         }
     } catch (e) {
         dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
@@ -86,7 +87,7 @@ export const updateUser = (id, body, history) => async (dispatch) => {
 
 export const deleteUser = (id) => async (dispatch) => {
     try {
-        const { data } = await axios.delete(`/users${id}`);
+        const { data } = await axios.delete(`/users/${id}`);
         if (data.success) {
             dispatch({ type: DELETE_USER, data: data.data });
         } else if (data.code === 403) {
