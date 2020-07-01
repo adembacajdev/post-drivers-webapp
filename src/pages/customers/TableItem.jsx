@@ -35,7 +35,7 @@ const TableItem = ({ id, first_name, last_name, phone, address, city, deleteCust
             <div onClick={navigate} className="strike-customers__table-item-container">
                 <div className="strike-customers__table-item-container-text">{last_name}</div>
             </div>
-            <div onClick={navigate} className="strike-customers__table-item-container">
+            <div is-responsive="true" onClick={navigate} className="strike-customers__table-item-container">
                 <div className="strike-customers__table-item-container-text">{phone}</div>
             </div>
             <div onClick={navigate} is-responsive="true" className="strike-customers__table-item-container">
@@ -44,7 +44,7 @@ const TableItem = ({ id, first_name, last_name, phone, address, city, deleteCust
             <div onClick={navigate} className="strike-customers__table-item-container centered">
                 <div className="strike-customers__table-item-container-text">{city}</div>
             </div>
-            <div is-responsive="true" className="strike-customers__table-item-container centered">
+            <div is-responsive="false" className="strike-customers__table-item-container centered">
                 <div className="dropdown">
                     <img className="strike-customers__table-item-container-dots" src={threePoints} />
                     <div className="dropdown-content">
