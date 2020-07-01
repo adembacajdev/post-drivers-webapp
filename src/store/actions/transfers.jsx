@@ -2,6 +2,7 @@ import {
     GET_ALL_TRANSFERS, GET_SELECTED_TRANSFERS, GET_BALANCE_DETAILS, IS_LOGGED_IN, SEARCH_TRANSFERS, TOGGLE_ERROR_MODAL
 } from '../actionTypes';
 import axios from 'axios';
+import moment from 'moment';
 
 export const getAllTransfers = (limit, page) => async (dispatch) => {
     try {
@@ -19,7 +20,15 @@ export const getAllTransfers = (limit, page) => async (dispatch) => {
 
 export const searchTransfers = (type, text) => async (dispatch) => {
     try {
-        const { data } = await axios.post(`transfers/search/${type}?${type}=${text}`);
+        let url = '';
+        if (type === 'amount') url = `/transfers/search/amount?amount=${parseInt(text)}`;
+        if (type === 'date') {
+            const day = moment(text).format('DD');
+            const month = moment(text).format('MM');
+            const year = moment(text).format('YYYY');
+            url = `/transfers/search/date?day=${parseInt(day)}&month=${parseInt(month)}&year=${parseInt(year)}`;
+        }
+        const { data } = await axios.post(url);
         console.log('searchTransfers', data)
         if (data.success) {
             dispatch({ type: SEARCH_TRANSFERS, data: data.data })

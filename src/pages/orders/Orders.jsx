@@ -9,17 +9,18 @@ import { getAllOrders, deleteOrder, printOneOrder, getOrdersPaginated, searchOrd
 import { useForm } from "react-hook-form";
 import Context from './Context';
 import Table from './Table';
+import moment from 'moment';
 
 const Orders = (props) => {
     const [title, setTitle] = useState(i18n.t('orders.allOrders'));
     const [orders, setOrders] = useState(props.ordersPaginated);
     const [selected, setSelected] = useState([]);
+    const [searchSelect, setSearchSelect] = useState('serial_number');
     const { infoIcon, filledLeftArrow, unfilledLeftArrow, filledRightArrow, unfilledRightArrow } = images.orders;
 
     const { register, handleSubmit, watch, errors } = useForm();
-    const onSubmit = ({ type, search }) => {
-        props.searchOrders(type, search)
-    };
+    const onSubmit = ({ type, search }) => { props.searchOrders(type, search); };
+
     useEffect(() => {
         props.getOrdersPaginated(5, 1)
         if (props.location.state && props.location.state.title) setTitle(props.location.state.title);
@@ -37,6 +38,8 @@ const Orders = (props) => {
     const prevPage = useCallback(() => { if (orders.hasPrevPage) props.getOrdersPaginated(5, orders.currentPage - 1) }, [orders]);
     const number = useCallback((page) => { props.getOrdersPaginated(5, page) }, [orders]);
 
+    const handleSearchSelect = useCallback((e) => { setSearchSelect(e.target.value) }, [searchSelect])
+
     return (
         <Context.Provider value={{ selected, setSelected }}>
             <Wrapper>
@@ -49,14 +52,14 @@ const Orders = (props) => {
                         </div>
                     </div>
                     <form onSubmit={handleSubmit(onSubmit)} className="strike-orders__search">
-                        <select name="type" ref={register({ required: true })} className="strike-orders__search-select">
+                        <select defaultValue={searchSelect} onChange={handleSearchSelect} name="type" ref={register({ required: true })} className="strike-orders__search-select">
                             <option value="serial_number">{i18n.t('orders.serialNumber')}</option>
                             <option value="customer_name">{i18n.t('orders.customerName')}</option>
                             <option value="city">{i18n.t('orders.city')}</option>
                             <option value="status">{i18n.t('orders.status')}</option>
                             <option value="date">{i18n.t('orders.date')}</option>
                         </select>
-                        <input name="search" ref={register({ required: true })} placeholder={i18n.t('orders.searchPlaceholder')} className="strike-orders__search-input" />
+                        <input defaultValue={searchSelect === 'date' ? moment().format('yyyy-MM-DD') : ''} type={searchSelect === 'date' ? 'date' : 'text'} name="search" ref={register({ required: true })} placeholder={i18n.t('orders.searchPlaceholder')} className="strike-orders__search-input" />
                         <button type="submit" className="strike-orders__search-button">{i18n.t('orders.search')}</button>
                     </form>
                     <Table printOne={props.printOneOrder} deleteItem={props.deleteOrder} items={orders && orders.data} />

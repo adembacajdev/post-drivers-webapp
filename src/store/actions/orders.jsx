@@ -4,7 +4,8 @@ import {
     PRINT_SELECTED_ORDERS, TOGGLE_ERROR_MODAL
 } from '../actionTypes';
 import axios from 'axios'
-import config from '../../config';;
+import config from '../../config';
+import moment from 'moment'
 
 export const getAllOrders = () => async (dispatch) => {
     try {
@@ -32,8 +33,12 @@ export const searchOrders = (type, text) => async (dispatch) => {
         if (type === 'city') url = `/orders/city?city=${text}`;
         if (type === 'serial_number') url = `/orders/serial/number?serial_number=${text}`;
         if (type === 'customer_name') url = `/orders/customer/name?customer_name=${text}`;
-        if (type === 'date') url = `/orders/date?date=${text}`;
-
+        if (type === 'date') {
+            const day = moment(text).format('DD');
+            const month = moment(text).format('MM');
+            const year = moment(text).format('YYYY');
+            url = `/orders/date?day=${parseInt(day)}&month=${parseInt(month)}&year=${parseInt(year)}`;
+        }
         const { data } = await axios.post(url);
         console.log('data', data)
         if (data.success && data.data !== null) {

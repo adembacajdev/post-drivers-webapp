@@ -10,6 +10,7 @@ import { getTopCities, getTopProducts, getNumberOfOrdersByStatus } from '../../s
 import { getRecentCustomers } from '../../store/actions/customers';
 import { getShopInfo } from '../../store/actions/shop.info';
 import { getAllLocations } from '../../store/actions/location';
+import locations from '../../services/constants/Locations';
 
 const Home = (props) => {
     const [markers, setMarkers] = useState([]);
@@ -19,11 +20,21 @@ const Home = (props) => {
         props.getTopCities();
         props.getTopProducts();
         props.getNumberOfOrdersByStatus();
-        props.getAllLocations();
+        // props.getAllLocations();
         props.getShopInfo();
         props.getRecentCustomers()
     }, [])
-    useEffect(() => { setMarkers(props.allLocations) }, [props.allLocations])
+    // useEffect(() => { setMarkers(props.allLocations) }, [props.allLocations])
+
+    useEffect(() => {
+        if (props.topCities) {
+            let array = [];
+            Object.keys(props.topCities).forEach(city => {
+                array.push({ name: city, latLng: [locations[city][0], locations[city][1]] })
+            })
+            setMarkers(array);
+        }
+    }, [props.topCities])
     return (
         <Wrapper>
             <div className="strike-home">
@@ -82,29 +93,14 @@ const Home = (props) => {
                                 markers={markers}
                                 markerStyle={{
                                     initial: {
-                                        fill: '#508FF4',
-                                        stroke: '#505050',
-                                        "fill-opacity": 1,
-                                        "stroke-width": 1,
-                                        "stroke-opacity": 1,
-                                        r: 5,
+                                        fill: '#508FF4', stroke: '#505050', "fill-opacity": 1,
+                                        "stroke-width": 1, "stroke-opacity": 1, r: 5,
                                     },
-                                    hover: {
-                                        stroke: 'black',
-                                        "stroke-width": 2,
-                                        cursor: 'pointer'
-                                    },
-                                    selected: {
-                                        fill: 'blue'
-                                    },
-                                    selectedHover: {
-                                    }
+                                    hover: { stroke: 'black', "stroke-width": 2, cursor: 'pointer' },
+                                    selected: { fill: 'blue' },
+                                    selectedHover: {}
                                 }}
-                                regionStyle={{
-                                    initial: {
-                                        fill: '#E3E9EF'
-                                    }
-                                }}
+                                regionStyle={{ initial: { fill: '#E3E9EF' } }}
                             />
                         </div>
                         <div className="strike-home__map-body-right">
@@ -175,7 +171,7 @@ const Home = (props) => {
     )
 }
 
-const mapStateToProps = ({ topCities, topProducts, numberOfOrdersByStatus, allLocations, recentCustomers 
+const mapStateToProps = ({ topCities, topProducts, numberOfOrdersByStatus, allLocations, recentCustomers
 }) => ({ topCities, topProducts, numberOfOrdersByStatus, allLocations, recentCustomers });
 const mapDispatchToProps = {
     getTopCities, getTopProducts, getNumberOfOrdersByStatus, getAllLocations, getShopInfo, getRecentCustomers

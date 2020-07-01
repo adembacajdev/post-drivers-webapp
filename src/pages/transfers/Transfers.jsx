@@ -9,10 +9,12 @@ import { getAllTransfers, getBalanceDetails, searchTransfers } from '../../store
 import { useEffect, useState, useCallback } from 'react';
 import { useForm } from "react-hook-form";
 import Table from './Table';
+import moment from 'moment';
 
 const Transfers = (props) => {
     const { filledLeftArrow, unfilledLeftArrow, filledRightArrow, unfilledRightArrow } = images.transfers;
     const [transfers, setTransfers] = useState(props.allTransfers);
+    const [searchType, setSearchType] = useState('date')
 
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = ({ type, search }) => {
@@ -28,6 +30,8 @@ const Transfers = (props) => {
     const nextPage = useCallback(() => { if (transfers.hasNextPage) props.getAllTransfers(5, transfers.currentPage + 1) }, [transfers]);
     const prevPage = useCallback(() => { if (transfers.hasPrevPage) props.getAllTransfers(5, transfers.currentPage - 1) }, [transfers]);
     const number = useCallback((page) => { props.getAllTransfers(5, page) }, [transfers]);
+
+    const handleSearchSelect = useCallback((e) => { setSearchType(e.target.value) }, [searchType])
     return (
         <Wrapper>
             <div className="strike-transfers-top">
@@ -59,11 +63,11 @@ const Transfers = (props) => {
             </div>
             <div className="strike-transfers">
                 <form onSubmit={handleSubmit(onSubmit)} className="strike-transfers__search">
-                    <select name="type" ref={register({ required: true })} className="strike-transfers__search-select">
+                    <select onChange={handleSearchSelect} defaultValue={searchType} name="type" ref={register({ required: true })} className="strike-transfers__search-select">
                         <option value="date">{i18n.t('transfers.date')}</option>
                         <option value="amount">{i18n.t('transfers.amount')}</option>
                     </select>
-                    <input name="search" ref={register({ required: true })} placeholder={i18n.t('transfers.searchPlaceholder')} className="strike-transfers__search-input" />
+                    <input defaultValue={searchType === 'date' ? moment().format('yyyy-MM-DD') : ''} type={searchType === 'date' ? 'date' : 'text'} name="search" ref={register({ required: true })} placeholder={i18n.t('transfers.searchPlaceholder')} className="strike-transfers__search-input" />
                     <button type="submit" className="strike-transfers__search-button">{i18n.t('transfers.search')}</button>
                 </form>
                 <Table items={transfers.data} />

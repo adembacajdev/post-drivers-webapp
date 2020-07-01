@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import images from '../../assets/images';
 import i18n from '../../services/locales/i18n';
@@ -23,13 +23,14 @@ const TableItem = ({ id, first_name, last_name, phone, address, city, deleteCust
 
     useEffect(() => {
         const iAmSelected = selected.filter(item => item === id);
-        if(iAmSelected.length === 0){
+        if (iAmSelected.length === 0) {
             setChecked(false)
         }
     }, [selected])
     return (
         <div className="strike-customers__table-item">
-            <div onClick={navigate} className="strike-customers__table-item-container">
+            <div className="strike-customers__table-item-container">
+                <input onChange={check} value={checked} checked={checked} className="strike-customers__table-item-container-checkbox" type="checkbox" />
                 <div className="strike-customers__table-item-container-text">{first_name}</div>
             </div>
             <div onClick={navigate} className="strike-customers__table-item-container">
