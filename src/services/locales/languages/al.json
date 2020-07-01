@@ -10,7 +10,7 @@
         "accountSettings": "Profili im",
         "feedback": "Feedback",
         "logout": "Shkyqu"
-    },
+    }, 
     "sidebar": {
         "home": "Home",
         "products": "Produktet",
@@ -59,7 +59,14 @@
         "delete": "Fshij",
         "search": "Kërko",
         "searchPlaceholder": "Kërko për ndonjë produkt...",
-        "deleteProducts": "Fshij"
+        "deleteProducts": "Fshij",
+        "addProduct": "Shto produkt",
+        "productDetails": "Detajet e produktit",
+        "id": "ID",
+        "name": "Emri",
+        "description2": "Përshkrimi",
+        "price2": "Çmimi",
+        "size": "Madhësia"
     },
     "orders": {
         "allOrders": "Të gjitha porositë",
@@ -95,7 +102,13 @@
         "search": "Kërko",
         "searchPlaceholder": "Kërko për ndonjë klient...",
         "name": "Emri",
-        "deleteCustomers": "Fshij"
+        "deleteCustomers": "Fshij",
+        "country": "Shteti",
+        "building": "Ndërtesa",
+        "product": "Produkti",
+        "description": "Përshkrimi",
+        "price": "Çmimi",
+        "customerDetails": "Detajet e klientit"
     },
     "transfers": {
         "currentBalance": "Balanci aktual",
@@ -131,7 +144,8 @@
         "edit": "Edito",
         "delete": "Fshij",
         "addUser": "Shto përdorues",
-        "editUser": "Edito përdorues"
+        "editUser": "Edito përdorues",
+        "userDetails": "Detajet e përdoruesit"
     },
     "pricing": {
         "title": "Çmimet",

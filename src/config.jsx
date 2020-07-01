@@ -1,5 +1,5 @@
 const config = {
-    baseURL: 'https://t3w7f8cw.myhook.io/api'
+    baseURL: 'https://benishop.strike-backend.test/api'
 }
 
 export default config;
