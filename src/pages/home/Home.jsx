@@ -18,9 +18,6 @@ const Home = (props) => {
     const [topProductsLength, setTopProductsLength] = useState(4);
     const [recentCustomersLength, setRecentCustomersLength] = useState(4);
     const { blueChart, yellowChart, redChart, greenChart, infoIcon, testProduct } = images.home;
-    const [popupInfo, setPopupInfo] = useState('');
-    const [latitudeMarker, setLatitudeMarker] = useState(42.66758079200047);
-    const [longitudeMarker, setLongitudeMarker] = useState(21.165194013322285);
     const [viewPort, setViewPort] = useState({ width: 1200, height: 600, latitude: 42.66758079200047, longitude: 21.165194013322285, zoom: 5, })
 
     useEffect(() => {

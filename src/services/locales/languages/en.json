@@ -60,7 +60,13 @@
         "search": "Search",
         "searchPlaceholder": "Search for a product...",
         "deleteProducts": "Delete",
-        "addProduct": "Add Product"
+        "addProduct": "Add Product",
+        "productDetails": "Product Details",
+        "id": "ID",
+        "name": "Name",
+        "description2": "Description",
+        "price2": "Price",
+        "size": "Size"
     },
     "orders": {
         "allOrders": "All Orders",
@@ -80,7 +86,21 @@
         "search": "Search",
         "searchPlaceholder": "Search for a order...",
         "deleteOrders": "Delete",
-        "printSelected": "Print"
+        "printSelected": "Print",
+        "orderDetails": "Order Details",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "phone": "Phone",
+        "country": "Country",
+        "address": "Address",
+        "building": "Building",
+        "name": "Name",
+        "description": "Description",
+        "additionalInfo": "Additional Info",
+        "price": "Price",
+        "product": "Product:",
+        "customer": "Customer:",
+        "location": "Location"
     },
     "customers": {
         "allCustomers": "All Customers",
@@ -96,7 +116,14 @@
         "search": "Search",
         "searchPlaceholder": "Search for a customer...",
         "name": "Name",
-        "deleteCustomers": "Delete"
+        "deleteCustomers": "Delete",
+        "country": "Country",
+        "building": "Building",
+        "product": "Product",
+        "description": "Description",
+        "price": "Price",
+        "customerDetails": "Customer Details"
+
     },
     "transfers": {
         "currentBalance": "Current Balance",
@@ -132,7 +159,8 @@
         "edit": "Edit",
         "delete": "Delete",
         "addUser": "Add User",
-        "editUser": "Edit User"
+        "editUser": "Edit User",
+        "userDetails": "User Details"
     },
     "pricing": {
         "title": "Pricing",

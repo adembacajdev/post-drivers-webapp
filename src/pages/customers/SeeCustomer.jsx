@@ -3,23 +3,41 @@ import './customers.scss';
 import Wrapper from '../../containers/wrapper/Wrapper';
 import { connect } from 'react-redux';
 import { getCustomer } from '../../store/actions/customers';
+import i18next from 'i18next';
 
 const SeeCustomer = (props) => {
     useEffect(() => { props.getCustomer(props.location.state.id); }, [])
+    useEffect(() => { console.log('customers', props.customer) }, [props.customer])
     return (
         <Wrapper>
             <div className="strike-customer">
-                <div className="strike-customer__header">{props.customer && props.customer.first_name}</div>
-                <div className="strike-customer__text"><b style={{marginRight: 10}} >ID: </b>{props.customer && props.customer.id}</div>
-                <div className="strike-customer__text"><b style={{marginRight: 10}} >First Name: </b>{props.customer && props.customer.first_name}</div>
-                <div className="strike-customer__text"><b style={{marginRight: 10}} >Last Name: </b>{props.customer && props.customer.last_name}</div>
-                <div className="strike-customer__text"><b style={{marginRight: 10}} >Phone: </b>{props.customer && props.customer.phone}</div>
-                <div className="strike-customer__text"><b style={{marginRight: 10}} >Country: </b>{props.customer && props.customer.country}</div>
-                <div className="strike-customer__text"><b style={{marginRight: 10}} >Address: </b>{props.customer && props.customer.address}</div>
-                <div className="strike-customer__text"><b style={{marginRight: 10}} >City: </b>{props.customer && props.customer.city}</div>
-                <div className="strike-customer__text"><b style={{marginRight: 10}} >Building: </b>{props.customer && props.customer.building}</div>
-                <div className="strike-customer__text"><b style={{marginRight: 10}} >Location: </b>{props.customer && `[${props.customer.latitude}, ${props.customer.longitude}]`}</div>
-                <div className="strike-customer__text"><b style={{marginRight: 10}} >Orders: </b>{props.customer && props.customer.orders}</div>
+                <div className="strike-customer__header">{i18next.t('customers.customerDetails')}</div>
+                <div className="strike-customer__body">
+                    <div className="strike-customer__body-left">
+                        <div className="strike-customer__body-label">{i18next.t('customers.firstName')}</div>
+                        <input disabled defaultValue={props.customer && props.customer.first_name} className="strike-customer__body-input" placeholder="Field" />
+                        <div className="strike-customer__body-label">{i18next.t('customers.lastName')}</div>
+                        <input disabled defaultValue={props.customer && props.customer.last_name} className="strike-customer__body-input" placeholder="Field" />
+                        <div className="strike-customer__body-label">{i18next.t('customers.phone')}</div>
+                        <input disabled defaultValue={props.customer && props.customer.phone} className="strike-customer__body-input" placeholder="Field" />
+                        <div className="strike-customer__body-label">{i18next.t('customers.country')}</div>
+                        <input disabled defaultValue={props.customer && props.customer.country} className="strike-customer__body-input" placeholder="Field" />
+                        <div className="strike-customer__body-label">{i18next.t('customers.city')}</div>
+                        <input disabled defaultValue={props.customer && props.customer.city} className="strike-customer__body-input" placeholder="Field" />
+                        <div className="strike-customer__body-label">{i18next.t('customers.address')}</div>
+                        <input disabled defaultValue={props.customer && props.customer.address} className="strike-customer__body-input" placeholder="Field" />
+                        <div className="strike-customer__body-label">{i18next.t('customers.building')}</div>
+                        <input disabled defaultValue={props.customer && props.customer.building} className="strike-customer__body-input" placeholder="Field" />
+                    </div>
+                    <div className="strike-customer__body-right">
+                        <div className="strike-customer__body-label">{i18next.t('customers.product')}</div>
+                        <input disabled defaultValue={props.customer && props.customer.product.name} className="strike-customer__body-input" placeholder="Field" />
+                        <div className="strike-customer__body-label">{i18next.t('customers.description')}</div>
+                        <input disabled defaultValue={props.customer && props.customer.product.description} className="strike-customer__body-input" placeholder="Field" />
+                        <div className="strike-customer__body-label">{i18next.t('customers.price')}</div>
+                        <input disabled defaultValue={props.customer && props.customer.product.price} className="strike-customer__body-input" placeholder="Field" />
+                    </div>
+                </div>
             </div>
         </Wrapper>
     )
