@@ -54,8 +54,8 @@ const Navbar = (props) => {
                 <div onClick={toggleProfile} tabIndex="1" onBlur={profileBlur} className="strike-navbar__right-name">
                     <div className="strike-navbar__right-name-text">Filan Fisteku</div>
                     <img is-active={profile ? 'true' : 'false'} className="strike-navbar__right-name-downarrow" src={downArrow} />
-                </div>
                 <Profile logout={logout} profile={profile} />
+                </div>
             </div>
         </div>
     )

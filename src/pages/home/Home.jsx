@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import Wrapper from '../../containers/wrapper/Wrapper';
 import images from '../../assets/images';
 import { VectorMap } from 'react-jvectormap';
+import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import i18n from '../../services/locales/i18n';
 import './home.scss';
 import { getTopCities, getTopProducts, getNumberOfOrdersByStatus } from '../../store/actions/orders';
@@ -14,7 +15,13 @@ import locations from '../../services/constants/Locations';
 
 const Home = (props) => {
     const [markers, setMarkers] = useState([]);
+    const [topProductsLength, setTopProductsLength] = useState(4);
+    const [recentCustomersLength, setRecentCustomersLength] = useState(4);
     const { blueChart, yellowChart, redChart, greenChart, infoIcon, testProduct } = images.home;
+    const [popupInfo, setPopupInfo] = useState('');
+    const [latitudeMarker, setLatitudeMarker] = useState(42.66758079200047);
+    const [longitudeMarker, setLongitudeMarker] = useState(21.165194013322285);
+    const [viewPort, setViewPort] = useState({ width: 1200, height: 600, latitude: 42.66758079200047, longitude: 21.165194013322285, zoom: 5, })
 
     useEffect(() => {
         props.getTopCities();
@@ -30,11 +37,11 @@ const Home = (props) => {
         if (props.topCities) {
             let array = [];
             Object.keys(props.topCities).forEach(city => {
-                array.push({ name: city, latLng: [locations[city][0], locations[city][1]] })
+                array.push({ latitude: locations[city][0], longitude: locations[city][1] })
             })
             setMarkers(array);
         }
-    }, [props.topCities])
+    }, [props.topCities]);
     return (
         <Wrapper>
             <div className="strike-home">
@@ -80,28 +87,23 @@ const Home = (props) => {
                     </div>
                     <div className="strike-home__map-body">
                         <div className="strike-home__map-body-map">
-                            <VectorMap
-                                map={'world_mill'}
-                                backgroundColor="#fff"
-                                regionStyle={{
-                                    initial: { fill: '#707070', "fill-opacity": 1, stroke: 'none', "stroke-width": 0, "stroke-opacity": 1 },
-                                    hover: { "fill-opacity": 0.8, cursor: 'pointer' },
-                                    selected: { fill: 'yellow' },
-                                }}
-                                containerStyle={{ width: '100%', height: '100%' }}
-                                containerClassName="map"
-                                markers={markers}
-                                markerStyle={{
-                                    initial: {
-                                        fill: '#508FF4', stroke: '#505050', "fill-opacity": 1,
-                                        "stroke-width": 1, "stroke-opacity": 1, r: 5,
-                                    },
-                                    hover: { stroke: 'black', "stroke-width": 2, cursor: 'pointer' },
-                                    selected: { fill: 'blue' },
-                                    selectedHover: {}
-                                }}
-                                regionStyle={{ initial: { fill: '#E3E9EF' } }}
-                            />
+                            <ReactMapGL
+                                {...viewPort}
+                                mapStyle={'mapbox://styles/mapbox/satellite-v9'}
+                                // mapStyle={'mapbox://styles/mapbox/streets-v9'}
+                                mapboxApiAccessToken={'pk.eyJ1IjoiYWRlbWJhY2FqIiwiYSI6ImNrYnF0c3phNjBhd3Iydm50bnIyeHl0d3kifQ.6zDG514PklFKYJTYD32p8Q'}
+                                width={"100%"}
+                                height={'100%'}
+                                onViewportChange={(viewport) => setViewPort(viewport)}
+                            >
+                                {markers && markers.map((item, index) => {
+                                    return (
+                                        <Marker key={index} latitude={item.latitude} longitude={item.longitude} offsetLeft={-23} offsetTop={-46} draggable={false}>
+                                            <div style={{ width: 20, height: 20, borderRadius: 10, backgroundColor: '#40B9E9' }} />
+                                        </Marker>
+                                    )
+                                })}
+                            </ReactMapGL>
                         </div>
                         <div className="strike-home__map-body-right">
                             {/* <div className="strike-home__map-body-right-title">{i18n.t('home.topCities')}</div> */}
@@ -121,7 +123,7 @@ const Home = (props) => {
                 </div>
 
                 <div className="strike-home__bottom">
-                    <div className="strike-home__bottom-left">
+                    <div id="products-table" className="strike-home__bottom-left">
                         <div className="strike-home__bottom-left-title">{i18n.t('home.topProducts')}</div>
                         <div className="strike-home__bottom-left-tableheader">
                             <div className="strike-home__bottom-left-tableheader-product">{i18n.t('home.product')}</div>
@@ -130,38 +132,42 @@ const Home = (props) => {
                             <div className="strike-home__bottom-left-tableheader-noorders">{i18n.t('home.noOrders')}</div>
                         </div>
                         {props.topProducts && props.topProducts.map((item, index) => {
-                            return (
-                                <div key={index} className="strike-home__bottom-left-table">
-                                    <div className="strike-home__bottom-left-table-product">
-                                        <div className="strike-home__bottom-left-table-product-text">{item.name}</div>
+                            if (index <= topProductsLength) {
+                                return (
+                                    <div key={index} className="strike-home__bottom-left-table">
+                                        <div className="strike-home__bottom-left-table-product">
+                                            <div className="strike-home__bottom-left-table-product-text">{item.name}</div>
+                                        </div>
+                                        <div className="strike-home__bottom-left-table-description">{item.description}</div>
+                                        <div className="strike-home__bottom-left-table-price">{item.price}</div>
+                                        <div className="strike-home__bottom-left-table-noorders">{item.orders}</div>
                                     </div>
-                                    <div className="strike-home__bottom-left-table-description">{item.description}</div>
-                                    <div className="strike-home__bottom-left-table-price">{item.price}</div>
-                                    <div className="strike-home__bottom-left-table-noorders">{item.orders}</div>
-                                </div>
-                            )
+                                )
+                            }
                         })}
-                        <div className="strike-home__bottom-right-footer">
+                        <div onClick={() => { setTopProductsLength(9) }} className="strike-home__bottom-right-footer">
                             {i18n.t('home.showMore')}
                         </div>
                     </div>
 
 
-                    <div className="strike-home__bottom-right">
+                    <div id="customers-table" className="strike-home__bottom-right">
                         <div className="strike-home__bottom-right-title">{i18n.t('home.recentCustomers')}</div>
                         <div className="strike-home__bottom-right-table-header">
                             <div className="strike-home__bottom-right-table-header-left">{i18n.t('home.name')}</div>
                             <div className="strike-home__bottom-right-table-header-right">{i18n.t('home.total')}</div>
                         </div>
                         {props.recentCustomers && props.recentCustomers.map((item, index) => {
-                            return (
-                                <div key={index} className="strike-home__bottom-right-table-item">
-                                    <div className="strike-home__bottom-right-table-item-left">{`${item.first_name} ${item.last_name}`}</div>
-                                    <div className="strike-home__bottom-right-table-item-right">{item.amount}€</div>
-                                </div>
-                            )
+                            if (index <= recentCustomersLength) {
+                                return (
+                                    <div key={index} className="strike-home__bottom-right-table-item">
+                                        <div className="strike-home__bottom-right-table-item-left">{`${item.first_name} ${item.last_name}`}</div>
+                                        <div className="strike-home__bottom-right-table-item-right">{item.amount}€</div>
+                                    </div>
+                                )
+                            }
                         })}
-                        <div className="strike-home__bottom-right-footer">
+                        <div onClick={() => { setRecentCustomersLength(9) }} className="strike-home__bottom-right-footer">
                             {i18n.t('home.showMore')}
                         </div>
                     </div>

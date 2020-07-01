@@ -55,7 +55,7 @@ export function topCities(state = null, { type, data }) {
 export function topProducts(state = null, { type, data }) {
     switch (type) {
         case GET_TOP_PRODUCTS:
-            data.length = 5;
+            // data.length = 5;
             return data;
         default: return state;
     }

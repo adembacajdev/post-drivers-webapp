@@ -9,6 +9,7 @@ import { ErrorModal, SuccessModal } from './components/modals';
 
 const App = ({ authenticate }) => {
   useEffect(() => {
+    Auth.setLanguage();
     const token = Auth.getToken();
     axios.defaults.baseURL = config.baseURL;
     if (token) {
@@ -19,6 +20,7 @@ const App = ({ authenticate }) => {
       axios.defaults.headers.common = { 'Content-Type': 'applicaton/json' };
       authenticate(false);
     }
+    const language = localStorage.getItem('language');
   }, [])
   return (
     <>

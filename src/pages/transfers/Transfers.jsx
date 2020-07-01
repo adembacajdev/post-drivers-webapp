@@ -39,11 +39,11 @@ const Transfers = (props) => {
                     <div className="strike-transfers-top__left-title">{i18n.t('transfers.latestEarning')}</div>
                     <div className="strike-transfers-top__left-middle">
                         <div className="strike-transfers-top__left-middle-left">
-                            <div className="strike-transfers-top__left-middle-left-title">{i18n.t('transfers.totalAmount')}</div>
+                            <div className="strike-transfers-top__left-subtitle">{i18n.t('transfers.totalAmount')}</div>
                             <div className="strike-transfers-top__left-middle-left-subtitle">{props.balanceDetails && props.balanceDetails.latest_total_amount}€</div>
                         </div>
                         <div className="strike-transfers-top__left-middle-right">
-                            <div className="strike-transfers-top__left-middle-right-title">{i18n.t('transfers.transportCost')}</div>
+                            <div className="strike-transfers-top__left-subtitle">{i18n.t('transfers.transportCost')}</div>
                             <div className="strike-transfers-top__left-middle-right-subtitle">{props.balanceDetails && props.balanceDetails.latest_transport_cost}€</div>
                         </div>
                     </div>
