@@ -18,6 +18,7 @@ const Home = (props) => {
     const [markers, setMarkers] = useState([]);
     const [topProductsLength, setTopProductsLength] = useState(4);
     const [recentCustomersLength, setRecentCustomersLength] = useState(4);
+    const [recentTopProductsLength, setrecentTopProductsLength] = useState(6);
     const { blueChart, yellowChart, redChart, greenChart, infoIcon, testProduct } = images.home;
     const [viewPort, setViewPort] = useState({ width: 1200, height: 600, latitude: 42.66758079200047, longitude: 21.165194013322285, zoom: 5, })
 
@@ -30,7 +31,12 @@ const Home = (props) => {
         props.getRecentCustomers();
         props.getUser();
     }, [])
-    useEffect(() => { if(props.user) localStorage.setItem('username', `${props.user.first_name} ${props.user.last_name}`) }, [props.user])
+    useEffect(() => {
+        if (props.user) {
+            localStorage.setItem('username', `${props.user.first_name} ${props.user.last_name}`);
+            localStorage.setItem('isAdmin', props.user.is_admin)
+        }
+    }, [props.user])
 
     useEffect(() => {
         if (props.topCities) {
@@ -105,16 +111,17 @@ const Home = (props) => {
                             </ReactMapGL>
                         </div>
                         <div className="strike-home__map-body-right">
-                            {/* <div className="strike-home__map-body-right-title">{i18n.t('home.topCities')}</div> */}
                             {props.topCities && Object.entries(props.topCities).map((item, index) => {
-                                return (
-                                    <div key={index} className="strike-home__map-body-right-item">
-                                        <div className="strike-home__map-body-right-item-left">{item[0]}</div>
-                                        <div className="strike-home__map-body-right-item-right">{item[1]}</div>
-                                    </div>
-                                )
+                                if (index <= recentTopProductsLength) {
+                                    return (
+                                        <div key={index} className="strike-home__map-body-right-item">
+                                            <div className="strike-home__map-body-right-item-left">{item[0]}</div>
+                                            <div className="strike-home__map-body-right-item-right">{item[1]}</div>
+                                        </div>
+                                    )
+                                }
                             })}
-                            <div className="strike-home__map-body-right-footer">
+                            <div onClick={() => setrecentTopProductsLength(100)} className="strike-home__map-body-right-footer">
                                 {i18n.t('home.viewAll')}
                             </div>
                         </div>

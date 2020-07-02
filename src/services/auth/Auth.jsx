@@ -41,6 +41,19 @@ const Auth = {
             const en = 'en'
             return en;
         }
+    },
+    checkIsAdmin: () => {
+        const isAdmin = localStorage.getItem('isAdmin');
+        if (isAdmin !== undefined || isAdmin !== 'undefined' || isAdmin !== null || isAdmin !== 'null') {
+            if (isAdmin === '1') {
+                return true;
+            }
+            else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 }
 

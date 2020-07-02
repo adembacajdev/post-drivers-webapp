@@ -20,7 +20,11 @@ const Products = (props) => {
         props.searchProducts(search);
     };
     useEffect(() => { props.getAllProducts(5, 1) }, []);
-    useEffect(() => { setData(props.allProducts); console.log('allProducts', props.allProducts) }, [props.allProducts]);
+    useEffect(() => {
+        setData(props.allProducts);
+        selectAll(false);
+        setSelected([])
+    }, [props.allProducts]);
     const deleteSelectedProducts = () => {
         props.deleteProducts(selected);
         selectAll(false);
@@ -40,7 +44,7 @@ const Products = (props) => {
                 newArray.push(elem.id)
             })
             setSelected(newArray)
-        }else{
+        } else {
             setSelected([])
         }
     }, [selectedAll])

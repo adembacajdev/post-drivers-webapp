@@ -27,7 +27,11 @@ const Orders = (props) => {
         if (props.location.state && props.location.state.title) setTitle(props.location.state.title);
     }, [])
 
-    useEffect(() => { setOrders(props.ordersPaginated); }, [props.ordersPaginated]);
+    useEffect(() => { 
+        setOrders(props.ordersPaginated);
+        selectAll(false);
+        setSelected([])
+     }, [props.ordersPaginated]);
 
     const deleteSelectedOrders = () => {
         props.deleteOrders(selected);

@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useCallback, createContext, useContext} from 'react';
+import React, { useEffect, useState, useCallback, createContext, useContext } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, useHistory } from 'react-router-dom';
 import Wrapper from '../../containers/wrapper/Wrapper';
@@ -21,7 +21,11 @@ const Customers = (props) => {
         props.searchCustomers(type, search)
     };
     useEffect(() => { props.getAllCustomers(5, 1) }, []);
-    useEffect(() => { setCustomers(props.allCustomers); }, [props.allCustomers]);
+    useEffect(() => {
+        setCustomers(props.allCustomers);
+        selectAll(false);
+        setSelected([])
+    }, [props.allCustomers]);
 
     const deleteSelectedCustomers = () => {
         props.deleteCustomers(selected);
@@ -39,7 +43,7 @@ const Customers = (props) => {
                 newArray.push(elem.id)
             })
             setSelected(newArray)
-        }else{
+        } else {
             setSelected([])
         }
     }, [selectedAll])
