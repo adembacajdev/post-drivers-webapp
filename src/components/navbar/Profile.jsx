@@ -22,7 +22,7 @@ const Profile = ({ profile, logout }) => {
                 <div style={{ borderBottom: 'none' }} className="navbar-profile__body-item">
                     <select defaultValue={language} onChange={changeLanguage} className="navbar-profile__body-item-select">
                         <option value="en">English</option>
-                        <option value="al">Albania</option>
+                        <option value="al">Shqip</option>
                     </select>
                 </div>
                 <div onClick={logout} style={{ borderBottom: 'none' }} className="navbar-profile__body-item">

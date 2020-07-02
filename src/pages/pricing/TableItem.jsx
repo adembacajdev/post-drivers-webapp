@@ -11,10 +11,10 @@ const TableItem = ({cancellation_price, country, shipment_price, size}) => {
                 <div className="strike-pricing__table-item-container-text">{size}</div>
             </div>
             <div className="strike-pricing__table-item-container">
-                <div className="strike-pricing__table-item-container-text">{shipment_price}</div>
+                <div className="strike-pricing__table-item-container-text">{shipment_price}€</div>
             </div>
             <div className="strike-pricing__table-item-container">
-                <div className="strike-pricing__table-item-container-text">{cancellation_price}</div>
+                <div className="strike-pricing__table-item-container-text">{cancellation_price}€</div>
             </div>
         </div>
     )

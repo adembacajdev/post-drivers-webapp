@@ -9,6 +9,7 @@ const Table = ({ items, deleteProduct }) => {
         <div className="strike-products__table">
             <div className="strike-products__table-header">
                 <div className="strike-products__table-header-item flex-1">#</div>
+                <div className="strike-products__table-header-item flex-1">{i18n.t('products.id')}</div>
                 <div className="strike-products__table-header-item flex-3">{i18n.t('products.product')}</div>
                 <div is-responsive="true" className="strike-products__table-header-item flex-3">{i18n.t('products.description')}</div>
                 <div className="strike-products__table-header-item flex-15">{i18n.t('products.price')}</div>

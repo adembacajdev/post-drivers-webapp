@@ -22,8 +22,9 @@
                 flex: 1.6;
                 &-text{
                     color:#B3B8BD;
-                    font-size: 12px;
+                    font-size: 13px;
                     line-height: 14px;
+                    font-weight: 600;
                     font-family: "Avenir";
                 }
                 &-icon{
@@ -53,7 +54,7 @@
                 }
                 &-text{
                     color: #52575D;
-                    font-size: 12px;
+                    font-size: 14px;
                     font-family: "Avenir";
                     line-height: 60px;
                 }
@@ -726,7 +727,7 @@
           &__left{
               display: flex;
               flex-direction: column;
-              width: 80%;
+              width: 90%;
               background-color: white;
               margin-bottom: 25px;
               padding: 25px 30px;
@@ -752,7 +753,7 @@
                       }
                       &-subtitle{
                         color: #3D3D3D;
-                        font-size: 16px;
+                        font-size: 38px;
                         line-height: 28px;
                         font-family: "Rajdhani";
                         font-weight: bold;
@@ -773,7 +774,7 @@
                     }
                     &-subtitle{
                       color: red;
-                      font-size: 16px;
+                      font-size: 38px;
                       line-height: 28px;
                       font-family: "Rajdhani";
                       font-weight: bold;
@@ -827,10 +828,10 @@
           &__middle{
               display: flex;
               flex-direction: column;
-              width: 80%;
+              width: 100%;
               background-color: white;
               margin-bottom: 25px;
-              padding: 25px 30px;
+              padding: 25px 10px;
               -webkit-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);
               -moz-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);
               box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);
@@ -882,10 +883,10 @@
           &__right{
             display: flex;
             flex-direction: column;
-            width: 80%;
+            width: 100%;
             background-color: white;
             margin-bottom: 25px;
-            padding: 25px 30px;
+            padding: 25px 10px;
             -webkit-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);
             -moz-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);
             box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.04);

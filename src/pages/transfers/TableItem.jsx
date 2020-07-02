@@ -9,7 +9,7 @@ const TableItem = ({ amount, updated_at }) => {
     return (
         <div className="strike-transfers__table-item">
             <div className="strike-transfers__table-item-container">
-                <div className="strike-transfers__table-item-container-text">${amount}</div>
+                <div className="strike-transfers__table-item-container-text">{amount}€</div>
             </div>
             <div className="strike-transfers__table-item-container">
                 <div className="strike-transfers__table-item-container-text">{date}</div>
