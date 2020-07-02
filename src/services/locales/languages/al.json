@@ -153,13 +153,15 @@
         "phone": "Telefoni",
         "email": "Email",
         "createdAt": "Krijuar më",
-        "role": "Roli",
+        "isAdmin": "Admin",
         "actions": "Veprimet",
         "edit": "Edito",
         "delete": "Fshij",
         "addUser": "Shto përdorues",
         "editUser": "Edito përdorues",
-        "userDetails": "Detajet e përdoruesit"
+        "userDetails": "Detajet e përdoruesit",
+        "yes": "Po",
+        "no": "No"
     },
     "pricing": {
         "title": "Çmimet",

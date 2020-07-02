@@ -52,7 +52,7 @@ const Navbar = (props) => {
                 </div>
                 <div className="line" />
                 <div onClick={toggleProfile} tabIndex="1" onBlur={profileBlur} className="strike-navbar__right-name">
-                    <div className="strike-navbar__right-name-text">Filan Fisteku</div>
+                    <div className="strike-navbar__right-name-text">{localStorage.getItem('username')}</div>
                     <img is-active={profile ? 'true' : 'false'} className="strike-navbar__right-name-downarrow" src={downArrow} />
                 <Profile logout={logout} profile={profile} />
                 </div>

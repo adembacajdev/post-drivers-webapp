@@ -7,7 +7,7 @@ import { useCallback } from 'react';
 import moment from 'moment';
 
 
-const TableItem = ({ created_at, email, first_name, last_name, id, phone, deleteUser }) => {
+const TableItem = ({ created_at, email, first_name, last_name, id, phone, deleteUser, is_admin }) => {
     const history = useHistory();
     const { threePoints } = images.customers;
     const date = moment(created_at).format('DD/MM/YYYY')
@@ -35,7 +35,7 @@ const TableItem = ({ created_at, email, first_name, last_name, id, phone, delete
                 <div className="strike-users__table-item-container-text">{date}</div>
             </div>
             <div onClick={navigate} is-responsive="true" className="strike-users__table-item-container centered">
-                <div className="strike-users__table-item-container-text">TBD</div>
+                {<div className="strike-users__table-item-container-text">{is_admin ? i18n.t('users.yes') : i18n.t('users.no')}</div>}
             </div>
             <div is-responsive="false" className="strike-users__table-item-container centered">
                 <div className="dropdown">

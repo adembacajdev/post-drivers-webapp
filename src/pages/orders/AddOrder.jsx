@@ -13,6 +13,7 @@ import locations from '../../services/constants/Locations';
 import { toggleErrorModal } from '../../store/actions/toggle.error.modal';
 import { getProduct } from '../../store/actions/products';
 import images from '../../assets/images';
+import Auth from '../../services/auth/Auth';
 
 const AddOrder = (props) => {
     const productId = props.match.params.productId;
@@ -65,10 +66,25 @@ const AddOrder = (props) => {
         })
     }
 
-    const onSubmit = data => {
-        const isNumberValid = validateNumber(data.phone);
-        if (isNumberValid) console.log('inputs', data);
-        else props.toggleErrorModal(i18n.t('addOrder.invalidNumber'))
+    const onSubmit = ({ product_id, description, first_name, last_name, phone, country, city, address, building }) => {
+        const body = {
+            product_id,
+            description,
+            first_name,
+            last_name,
+            phone,
+            country,
+            city,
+            address,
+            building,
+            latitude: latitudeMarker,
+            longitude: longitudeMarker,
+            verification_code: 654350
+        }
+        props.postOrder(body)
+        // const isNumberValid = validateNumber(data.phone);
+        // if (isNumberValid) console.log('inputs', data);
+        // else props.toggleErrorModal(i18n.t('addOrder.invalidNumber'))
     }
 
     useEffect(() => {
@@ -80,7 +96,7 @@ const AddOrder = (props) => {
     return (
         <div className="add-order">
             <div className="add-order__navbar">
-                Online Shop
+                {Auth.getShopName()}
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="add-order__wrapper">

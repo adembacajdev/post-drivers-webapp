@@ -30,6 +30,7 @@ export const logout = () => async (dispatch) => {
         localStorage.removeItem('token');
         localStorage.removeItem('shopName');
         localStorage.removeItem('currentBalance');
+        localStorage.removeItem('username');
     } catch (e) {
         return Promise.reject(e);
     }

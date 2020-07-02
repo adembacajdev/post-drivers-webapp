@@ -11,6 +11,7 @@ import { getTopCities, getTopProducts, getNumberOfOrdersByStatus } from '../../s
 import { getRecentCustomers } from '../../store/actions/customers';
 import { getShopInfo } from '../../store/actions/shop.info';
 import { getAllLocations } from '../../store/actions/location';
+import { getUser } from '../../store/actions/authorization';
 import locations from '../../services/constants/Locations';
 
 const Home = (props) => {
@@ -26,9 +27,10 @@ const Home = (props) => {
         props.getNumberOfOrdersByStatus();
         // props.getAllLocations();
         props.getShopInfo();
-        props.getRecentCustomers()
+        props.getRecentCustomers();
+        props.getUser();
     }, [])
-    // useEffect(() => { setMarkers(props.allLocations) }, [props.allLocations])
+    useEffect(() => { if(props.user) localStorage.setItem('username', `${props.user.first_name} ${props.user.last_name}`) }, [props.user])
 
     useEffect(() => {
         if (props.topCities) {
@@ -174,10 +176,13 @@ const Home = (props) => {
     )
 }
 
-const mapStateToProps = ({ topCities, topProducts, numberOfOrdersByStatus, allLocations, recentCustomers
-}) => ({ topCities, topProducts, numberOfOrdersByStatus, allLocations, recentCustomers });
+const mapStateToProps = ({
+    topCities, topProducts, numberOfOrdersByStatus, allLocations, recentCustomers, user
+}) => ({
+    topCities, topProducts, numberOfOrdersByStatus, allLocations, recentCustomers, user
+});
 const mapDispatchToProps = {
-    getTopCities, getTopProducts, getNumberOfOrdersByStatus, getAllLocations, getShopInfo, getRecentCustomers
+    getTopCities, getTopProducts, getNumberOfOrdersByStatus, getAllLocations, getShopInfo, getRecentCustomers, getUser
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home));

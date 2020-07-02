@@ -107,9 +107,9 @@ export const getNumberOfOrdersByStatus = () => async (dispatch) => {
     }
 }
 
-export const postOrder = (body) => async (dispatch) => {
+export const postOrder = (params) => async (dispatch) => {
     try {
-        const { data } = await axios.post(`/orders`, body);
+        const { data } = await axios.post(`/orders`, params);
         if (data.success) {
             dispatch({ type: POST_ORDER, data });
         } else if (data.code === 403) {
@@ -118,7 +118,7 @@ export const postOrder = (body) => async (dispatch) => {
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
             axios.defaults.headers.common['Authorization'] = ``
         } else {
-            dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
+            dispatch({ type: TOGGLE_ERROR_MODAL, data: data.error })
         }
     } catch (e) {
         dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })

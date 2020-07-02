@@ -28,7 +28,7 @@ const Table = ({ items, deleteUser }) => {
                     <div className="strike-users__table-header-item-text">{i18n.t('users.createdAt')}</div>
                 </div>
                 <div is-responsive="true" className="strike-users__table-header-item centered">
-                    <div className="strike-users__table-header-item-text">{i18n.t('users.role')}</div>
+                    <div className="strike-users__table-header-item-text">{i18n.t('users.isAdmin')}</div>
                 </div>
                 <div is-responsive="true" className="strike-users__table-header-item centered">
                     <div className="strike-users__table-header-item-text">{i18n.t('users.actions')}</div>

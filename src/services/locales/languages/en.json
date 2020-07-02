@@ -153,13 +153,15 @@
         "phone": "Phone",
         "email": "Email",
         "createdAt": "Created At",
-        "role": "Role",
+        "isAdmin": "Admin",
         "actions": "Actions",
         "edit": "Edit",
         "delete": "Delete",
         "addUser": "Add User",
         "editUser": "Edit User",
-        "userDetails": "User Details"
+        "userDetails": "User Details",
+        "yes": "Yes",
+        "no": "No"
     },
     "pricing": {
         "title": "Pricing",
