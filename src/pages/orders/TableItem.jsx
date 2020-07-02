@@ -63,6 +63,8 @@ const TableItem = ({ id, serial_number, status, updated_at, deleteItem, price, c
         const iAmSelected = selected.filter(item => item === id);
         if (iAmSelected.length === 0) {
             setChecked(false)
+        }else{
+            setChecked(true)
         }
     }, [selected])
     return (

@@ -6,7 +6,7 @@ import './products.scss';
 import Context from './Context';
 
 const TableItem = ({ item, deleteProduct }) => {
-    const { selected, setSelected } = useContext(Context);
+    const { selected, setSelected, selectedAll } = useContext(Context);
     const [checked, setChecked] = useState(item.checked)
     const history = useHistory()
     const { testProduct, threePoints } = images.products;
@@ -26,8 +26,10 @@ const TableItem = ({ item, deleteProduct }) => {
 
     useEffect(() => {
         const iAmSelected = selected.filter(el => el === item.id);
-        if(iAmSelected.length === 0){
+        if (iAmSelected.length === 0) {
             setChecked(false)
+        }else{
+            setChecked(true);
         }
     }, [selected])
 

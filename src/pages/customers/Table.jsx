@@ -3,13 +3,18 @@ import images from '../../assets/images';
 import i18n from '../../services/locales/i18n';
 import './customers.scss';
 import TableItem from './TableItem';
+import Context from './Context';
+import { useContext, useCallback } from 'react';
 
 const Table = ({ items, deleteCustomer }) => {
+    const { selectedAll, selectAll } = useContext(Context);
     const { tableArrow } = images.customers;
+    const selectAllCustomers = useCallback(() => { selectAll(!selectedAll) }, [selectedAll]);
     return (
         <div className="strike-customers__table">
             <div className="strike-customers__table-header">
                 <div className="strike-customers__table-header-item">
+                    <input style={{marginRight: 15}} type="checkbox" onChange={selectAllCustomers} value={selectedAll} checked={selectedAll} />
                     <div className="strike-customers__table-header-item-text">{i18n.t('customers.firstName')}</div>
                     <img className="strike-customers__table-header-item-icon responsive" src={tableArrow} />
                 </div>

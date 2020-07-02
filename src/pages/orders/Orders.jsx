@@ -15,6 +15,7 @@ const Orders = (props) => {
     const [title, setTitle] = useState(i18n.t('orders.allOrders'));
     const [orders, setOrders] = useState(props.ordersPaginated);
     const [selected, setSelected] = useState([]);
+    const [selectedAll, selectAll] = useState(false)
     const [searchSelect, setSearchSelect] = useState('serial_number');
     const { infoIcon, filledLeftArrow, unfilledLeftArrow, filledRightArrow, unfilledRightArrow } = images.orders;
 
@@ -30,6 +31,7 @@ const Orders = (props) => {
 
     const deleteSelectedOrders = () => {
         props.deleteOrders(selected);
+        selectAll(false);
         setSelected([]);
     }
     const printSelectedOrd = () => props.printSelectedOrders(selected);
@@ -39,9 +41,19 @@ const Orders = (props) => {
     const number = useCallback((page) => { props.getOrdersPaginated(5, page) }, [orders]);
 
     const handleSearchSelect = useCallback((e) => { setSearchSelect(e.target.value) }, [searchSelect])
-
+    useEffect(() => {
+        if (selectedAll) {
+            let newArray = [];
+            orders.data.forEach(elem => {
+                newArray.push(elem.id)
+            })
+            setSelected(newArray)
+        }else{
+            setSelected([])
+        }
+    }, [selectedAll])
     return (
-        <Context.Provider value={{ selected, setSelected }}>
+        <Context.Provider value={{ selected, setSelected, selectedAll, selectAll }}>
             <Wrapper>
                 <div className="strike-orders">
                     <div className="strike-orders__header">

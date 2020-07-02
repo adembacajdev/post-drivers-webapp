@@ -14,14 +14,16 @@ const Products = (props) => {
     const { infoIcon, filledLeftArrow, unfilledLeftArrow, filledRightArrow, unfilledRightArrow } = images.customers;
     const [data, setData] = useState(props.allProducts);
     const [selected, setSelected] = useState([]);
+    const [selectedAll, selectAll] = useState(false)
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = ({ search }) => {
         props.searchProducts(search);
     };
     useEffect(() => { props.getAllProducts(5, 1) }, []);
-    useEffect(() => { setData(props.allProducts) }, [props.allProducts]);
+    useEffect(() => { setData(props.allProducts); console.log('allProducts', props.allProducts) }, [props.allProducts]);
     const deleteSelectedProducts = () => {
         props.deleteProducts(selected);
+        selectAll(false);
         setSelected([])
     }
 
@@ -29,9 +31,21 @@ const Products = (props) => {
     const prevPage = useCallback(() => { if (data.hasPrevPage) props.getAllProducts(5, data.currentPage - 1) }, [data]);
     const number = useCallback((page) => { props.getAllProducts(5, page) }, [data]);
 
-    const addProduct = useCallback(() => { props.history.push('/add-product') }, [])
+    const addProduct = useCallback(() => { props.history.push('/add-product') }, []);
+
+    useEffect(() => {
+        if (selectedAll) {
+            let newArray = [];
+            data.data.forEach(elem => {
+                newArray.push(elem.id)
+            })
+            setSelected(newArray)
+        }else{
+            setSelected([])
+        }
+    }, [selectedAll])
     return (
-        <Context.Provider value={{ selected, setSelected }}>
+        <Context.Provider value={{ selected, setSelected, selectedAll, selectAll }}>
             <Wrapper>
                 <div className="strike-products">
                     <div className="strike-products__header">

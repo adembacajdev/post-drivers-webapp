@@ -13,6 +13,7 @@ import Table from './Table';
 const Customers = (props) => {
     const [customers, setCustomers] = useState(props.allCustomers);
     const [selected, setSelected] = useState([]);
+    const [selectedAll, selectAll] = useState(false)
     const { infoIcon, filledLeftArrow, unfilledLeftArrow, filledRightArrow, unfilledRightArrow } = images.customers;
 
     const { register, handleSubmit, watch, errors } = useForm();
@@ -24,14 +25,26 @@ const Customers = (props) => {
 
     const deleteSelectedCustomers = () => {
         props.deleteCustomers(selected);
+        selectAll(false);
         setSelected([])
     }
 
     const nextPage = useCallback(() => { if (customers.hasNextPage) props.getAllCustomers(5, customers.currentPage + 1) }, [customers]);
     const prevPage = useCallback(() => { if (customers.hasPrevPage) props.getAllCustomers(5, customers.currentPage - 1) }, [customers]);
     const number = useCallback((page) => { props.getAllCustomers(5, page) }, [customers]);
+    useEffect(() => {
+        if (selectedAll) {
+            let newArray = [];
+            customers.data.forEach(elem => {
+                newArray.push(elem.id)
+            })
+            setSelected(newArray)
+        }else{
+            setSelected([])
+        }
+    }, [selectedAll])
     return (
-        <Context.Provider value={{ selected, setSelected }}>
+        <Context.Provider value={{ selected, setSelected, selectedAll, selectAll }}>
             <Wrapper>
                 <div className="strike-customers">
                     <div className="strike-customers__header">

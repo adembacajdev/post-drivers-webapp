@@ -1,6 +1,6 @@
 import {
     GET_ALL_PRODUCTS, GET_PRODUCT, GET_PRODUCT_ORDER,
-    POST_STORE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, DELETE_PRODUCTS, SEARCH_PRODUCTS //for these types,we should add later when we console all data
+    POST_STORE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, SELECT_ALL_PRODUCTS, SEARCH_PRODUCTS //for these types,we should add later when we console all data
 } from '../actionTypes';
 
 const initialState = {
@@ -42,6 +42,10 @@ export function allProducts(state = initialState, { type, data }) {
             let storeProduct = state;
             storeProduct.push(data);
             return storeProduct;
+        case SELECT_ALL_PRODUCTS:
+            let selectProduct = state;
+            selectProduct.data.forEach(item => item.checked = data);
+            return selectProduct;
         default: return state;
     }
 }

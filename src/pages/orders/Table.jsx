@@ -3,14 +3,18 @@ import images from '../../assets/images';
 import i18n from '../../services/locales/i18n';
 import './orders.scss';
 import TableItem from './TableItem';
+import Context from './Context';
+import { useContext, useCallback } from 'react';
 
 const Table = ({ items, deleteItem, printOne }) => {
+    const { selectedAll, selectAll } = useContext(Context);
     const { tableArrow } = images.orders;
+    const selectAllOrders = useCallback(() => { selectAll(!selectedAll) }, [selectedAll]);
     return (
         <div className="strike-orders__table">
             <div className="strike-orders__table-header">
                 <div className="strike-orders__table-header-item">
-                    <div className="strike-orders__table-header-item-text">{i18n.t('orders.id')}</div>
+                    <input type="checkbox" onChange={selectAllOrders} value={selectedAll} checked={selectedAll} />
                     <img className="strike-orders__table-header-item-icon" src={tableArrow} />
                 </div>
                 <div className="strike-orders__table-header-item">

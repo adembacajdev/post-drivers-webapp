@@ -1,6 +1,6 @@
 import {
     GET_ALL_PRODUCTS, GET_PRODUCT, GET_PRODUCT_ORDER, POST_STORE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, DELETE_PRODUCTS, IS_LOGGED_IN,
-    SEARCH_PRODUCTS, TOGGLE_ERROR_MODAL
+    SEARCH_PRODUCTS, TOGGLE_ERROR_MODAL, SELECT_ALL_PRODUCTS
 } from '../actionTypes';
 import axios from 'axios';
 
@@ -168,4 +168,8 @@ export const deleteProducts = (product_ids) => async (dispatch) => {
         dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
         return Promise.reject(e);
     }
+}
+
+export const selectAllProducts = (data) => (dispatch) => {
+    dispatch({type: SELECT_ALL_PRODUCTS, data})
 }
