@@ -19,7 +19,7 @@
         "transfers": "Barazimet",
         "statistics": "Statistikat",
         "users": "Përdoruesit",
-        "pricing": "Çmimet"
+        "pricing": "Çmimet" 
     },
     "login": {
         "title": "Strike App",
@@ -86,7 +86,21 @@
         "search": "Kërko",
         "searchPlaceholder": "Kërko për ndonjë porosi...",
         "deleteOrders": "Fshij",
-        "printSelected": "Printo"
+        "printSelected": "Printo",
+        "orderDetails": "Detajet e porosisë",
+        "firstName": "Emri",
+        "lastName": "Mbiemri",
+        "phone": "Telefoni",
+        "country": "Shteti",
+        "address": "Adresa",
+        "building": "Ndërtesa",
+        "name": "Emri",
+        "description": "Përshkrimi",
+        "additionalInfo": "Informata shtesë",
+        "price": "Çmimi",
+        "product": "Produkti:",
+        "customer": "Klienti:",
+        "location": "Lokacioni"
     },
     "customers": {
         "allCustomers": "Të gjithë klientat",
@@ -159,11 +173,12 @@
         "lastName": "Mbiemri",
         "email": "Email",
         "phone": "Telefoni",
-        "isAdmin": "Është menaxher?",
+        "isAdmin": "Është admin?",
         "true": "Po",
         "false": "Jo"
     },
     "addProductForm": {
+        "productId": "Produkt ID",
         "title": "Shto produkt",
         "name": "Emri",
         "description": "Përshkrimi",
@@ -172,7 +187,8 @@
         "medium": "E mesme",
         "small": "E vogël",
         "large": "E madhe",
-        "addProduct": "Shto"
+        "addProduct": "Shto",
+        "editProduct": "Edito"
     },
     "addTransferForm": {
         "title": "Shto barazim",
