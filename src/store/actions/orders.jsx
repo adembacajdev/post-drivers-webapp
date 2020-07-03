@@ -1,7 +1,7 @@
 import {
     GET_ALL_ORDERS, GET_ORDER, NUMBER_OF_ORDERS_BY_STATUS, POST_ORDER, GET_ORDERS_BY_CITY, GET_ORDER_BY_STATUS, DELETE_ORDER,
     DELETE_ORDERS, GET_TOP_CITIES, GET_TOP_PRODUCTS, IS_LOGGED_IN, PRINT_ONE_ORDER, GET_ALL_ORDERS_PAGINATED, SEARCH_ORDERS,
-    PRINT_SELECTED_ORDERS, TOGGLE_ERROR_MODAL
+    PRINT_SELECTED_ORDERS, TOGGLE_ERROR_MODAL, TOGGLE_SUCCESS_MODAL
 } from '../actionTypes';
 import axios from 'axios'
 import config from '../../config';
@@ -40,7 +40,6 @@ export const searchOrders = (type, text) => async (dispatch) => {
             url = `/orders/date?day=${parseInt(day)}&month=${parseInt(month)}&year=${parseInt(year)}`;
         }
         const { data } = await axios.post(url);
-        console.log('data', data)
         if (data.success && data.data !== null) {
             dispatch({ type: SEARCH_ORDERS, data: data.data })
         } else if (data.data === null){
@@ -111,6 +110,7 @@ export const postOrder = (params) => async (dispatch) => {
     try {
         const { data } = await axios.post(`/orders`, params);
         if (data.success) {
+            dispatch({ type: TOGGLE_SUCCESS_MODAL, data: 'Porosia u dergua me sukses!' });
             dispatch({ type: POST_ORDER, data });
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
@@ -257,7 +257,6 @@ export const printOneOrder = (id) => async (dispatch) => {
     window.open(`${config.baseURL}/orders/${id}/print`, '_blank');
     // try {
     //     const data = await axios.get(`/orders/${id}/print`, { responseType: 'blob' });
-    //     // console.log('onePrint', data)
     //     dispatch({ type: PRINT_ONE_ORDER, data });
     // } catch (e) {
     //     return Promise.reject(e);

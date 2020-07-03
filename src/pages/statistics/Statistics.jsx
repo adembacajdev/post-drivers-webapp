@@ -6,6 +6,7 @@ import i18n from '../../services/locales/i18n';
 import './statistics.scss';
 import moment from 'moment'
 import { getDailyEarnings, getDailyOrders } from '../../store/actions/statistics';
+import { Line } from "react-chartjs-2";
 
 //Chartist
 import 'matchmedia/index.js';
@@ -77,7 +78,8 @@ const Statistics = (props) => {
                         </div>
                     </div>
                     <div className="strike-statistics__chart-body">
-                        <ChartistGraph data={props.dailyOrders} options={options} listener={events} type={'Line'} />
+                        <Line data={data} />
+                        {/* <ChartistGraph data={props.dailyOrders} options={options} listener={events} type={'Line'} /> */}
                     </div>
                 </div>
             </div>
@@ -89,3 +91,22 @@ const mapStateToProps = ({ dailyEarnings, dailyOrders }) => ({ dailyEarnings, da
 const mapDispatchToProps = { getDailyEarnings, getDailyOrders };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Statistics));
+
+const data = {
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    datasets: [
+        {
+            label: "",
+            data: [6, 3, 7, 8, ,9, 4],
+            fill: true,
+            backgroundColor: "rgba(75,192,192,0.2)",
+            borderColor: "rgba(75,192,192,1)"
+        },
+        {
+            label: "12/04/2020",
+            data: [8],
+            fill: false,
+            borderColor: "#742774"
+        }
+    ]
+};

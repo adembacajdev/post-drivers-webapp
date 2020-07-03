@@ -11,7 +11,6 @@ import Table from './Table'
 const Pricing = (props) => {
     const { history } = images.transfers;
     useEffect(() => { props.getAllPricing() }, []);
-    useEffect(() => { console.log('pricing', props.pricingTable) }, [props.pricingTable]);
     return (
         <Wrapper>
             <div className="strike-pricing">

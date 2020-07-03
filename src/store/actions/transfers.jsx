@@ -29,7 +29,6 @@ export const searchTransfers = (type, text) => async (dispatch) => {
             url = `/transfers/search/date?day=${parseInt(day)}&month=${parseInt(month)}&year=${parseInt(year)}`;
         }
         const { data } = await axios.post(url);
-        console.log('searchTransfers', data)
         if (data.success) {
             dispatch({ type: SEARCH_TRANSFERS, data: data.data })
         }else{

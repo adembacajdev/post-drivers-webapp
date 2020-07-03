@@ -15,27 +15,43 @@ const OrdersByStatus = (props) => {
     const [title, setTitle] = useState(i18n.t('orders.allOrders'));
     const [orders, setOrders] = useState(props.ordersByStatus);
     const [selected, setSelected] = useState([]);
+    const [selectedAll, selectAll] = useState(false)
 
     useEffect(() => {
         if (props.location.state && props.location.state.title) {
             setTitle(props.location.state.title);
-            console.log('slug', props.location.state.slug)
             props.getOrderByStatus(props.location.state.slug);
         }
     }, [])
 
     useEffect(() => { if (props.printOrder) saveAs(props.printOrder, 'newFile.pdf'); }, [props.printOrder]);
 
-    useEffect(() => { setOrders(props.ordersByStatus) }, [props.ordersByStatus]);
+    useEffect(() => { 
+        setOrders(props.ordersByStatus)
+        selectAll(false);
+        setSelected([])
+     }, [props.ordersByStatus]);
 
     const deleteSelectedOrders = () => {
         props.deleteOrders(selected, props.location.state.slug);
         setSelected([])
+        selectAll(false);
     }
     const printSelectedOrd = () => props.printSelectedOrders(selected);
 
+    useEffect(() => {
+        if (selectedAll && props.ordersByStatus) {
+            let newArray = [];
+            props.ordersByStatus.forEach(elem => {
+                newArray.push(elem.id)
+            })
+            setSelected(newArray)
+        }else{
+            setSelected([])
+        }
+    }, [selectedAll])
     return (
-        <Context.Provider value={{ selected, setSelected }}>
+        <Context.Provider value={{ selected, setSelected, selectAll, selectedAll }}>
             <Wrapper>
                 <div className="strike-orders">
                     <div className="strike-orders__header">

@@ -22,7 +22,6 @@ export const getAllCustomers = (limit, page) => async (dispatch) => {
 export const searchCustomers = (type, text) => async (dispatch) => {
     try {
         const { data } = await axios.post(`clients/search/${type}?${type}=${text}`);
-        console.log('data', data)
         if (data.success) {
             dispatch({ type: SEARCH_CUSTOMERS, data: data.data })
         } else {

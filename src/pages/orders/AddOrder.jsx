@@ -144,7 +144,8 @@ const AddOrder = (props) => {
                 <div className="add-order__wrapper-row-column-title">{i18n.t('addOrder.putLocation')}</div>
                 <ReactMapGL
                     {...viewPort}
-                    mapStyle={'mapbox://styles/mapbox/satellite-v9'}
+                    mapStyle={'mapbox://styles/mapbox/streets-v9'}
+                    // mapStyle={'mapbox://styles/mapbox/satellite-v9'}
                     mapboxApiAccessToken={'pk.eyJ1IjoiYWRlbWJhY2FqIiwiYSI6ImNrYnF0c3phNjBhd3Iydm50bnIyeHl0d3kifQ.6zDG514PklFKYJTYD32p8Q'}
                     width={"100%"}
                     height={400}
@@ -158,7 +159,7 @@ const AddOrder = (props) => {
 
                 </ReactMapGL>
                 <div className="add-order__wrapper-footer">
-                    <button type="submit">Send order</button>
+                    <button type="submit">{i18n.t('addOrder.button')}</button>
                 </div>
             </form>
         </div>

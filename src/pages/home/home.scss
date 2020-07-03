@@ -133,17 +133,18 @@
                     border-bottom: 1px solid #EBF2F7;
                     &-left{
                         display: flex;
-                        flex: 0.5;
+                        flex: 0.8;
                         flex-direction: row;
                         align-items: center;
                         font-size: 16px;
                         line-height: 41px;
                         font-family: 'Rajdhani';
                         color: #333333;
+                        white-space: nowrap;
                     }
                     &-right{
                         display: flex;
-                        flex: 0.5;
+                        flex: 0.2;
                         flex-direction: row;
                         align-items: center;
                         justify-content: flex-end;

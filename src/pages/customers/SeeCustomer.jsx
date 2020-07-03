@@ -7,7 +7,6 @@ import i18next from 'i18next';
 
 const SeeCustomer = (props) => {
     useEffect(() => { props.getCustomer(props.location.state.id); }, [])
-    useEffect(() => { console.log('customers', props.customer) }, [props.customer])
     return (
         <Wrapper>
             <div className="strike-customer">

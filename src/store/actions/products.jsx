@@ -27,7 +27,6 @@ export const searchProducts = (search) => async (dispatch) => {
     try {
         const { data } = await axios.post(`/products/search?name=${search}`);
         if (data.success) {
-            console.log('searchs', data)
             dispatch({ type: SEARCH_PRODUCTS, data: data.data });
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
@@ -54,7 +53,6 @@ export const getProduct = (id) => async (dispatch) => {
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
             axios.defaults.headers.common['Authorization'] = ``
         }else{
-            console.log('data', data)
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.error })
         }
     } catch (e) {

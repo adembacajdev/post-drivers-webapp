@@ -45,7 +45,6 @@ export const postUser = (body, history) => async (dispatch) => {
     try {
         const { first_name, last_name, email, phone } = body;
         const { data } = await axios.post(`/users`, { first_name, last_name, email, phone });
-        console.log('data', data)
         if (data.success) {
             dispatch({ type: POST_USER, data: data.data });
             history.goBack();
@@ -76,7 +75,6 @@ export const updateUser = (id, body, history) => async (dispatch) => {
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
             axios.defaults.headers.common['Authorization'] = ``
         }else{
-            console.log('data', data)
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {

@@ -51,7 +51,6 @@ function Router({ location }) {
         { path: '/edit-user', exact: true, component: EditUser },
         { path: '/profile', exact: true, component: Profile },
     ]
-    useEffect(() => {console.log('location', history.location.pathname)}, [history])
     return (
         <BaseRouter history={history}>
                 <Suspense fallback={<Loader />}>

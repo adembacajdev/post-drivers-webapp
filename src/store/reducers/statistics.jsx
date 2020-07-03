@@ -8,6 +8,7 @@ const initialState = {
 export function dailyEarnings(state = initialState, { type, data }) {
     switch (type) {
         case GET_DAILY_EARNINGS:
+            console.log('dailyEarningsReducer', data)
             let labels = [];
             let series = [[]];
             Object.keys(data).forEach(item => labels.push(moment(item).format('MMMM')));
@@ -20,6 +21,7 @@ export function dailyEarnings(state = initialState, { type, data }) {
 export function dailyOrders(state = initialState, { type, data }) {
     switch (type) {
         case GET_DAILY_ORDERS: 
+        console.log('dailyOrdersReducer', data)
         let labels = [];
         let series = [[],[]];
         Object.keys(data).forEach(item => labels.push(item));

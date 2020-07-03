@@ -6,7 +6,6 @@ export const login = (body) => async (dispatch) => {
     try {
         const { email, password } = body;
         const { data } = await axios.post('/login', { email, password, device_name: 'web' });
-        console.log('data', data)
         if (data.success) {
             const { plainTextToken } = data.data;
             dispatch({ type: LOG_IN, data: data.data });
@@ -25,6 +24,7 @@ export const login = (body) => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
     try {
+        await axios.post('/logout');
         dispatch({ type: LOG_OUT });
         dispatch({ type: IS_LOGGED_IN, data: false });
         localStorage.removeItem('token');
@@ -32,6 +32,7 @@ export const logout = () => async (dispatch) => {
         localStorage.removeItem('currentBalance');
         localStorage.removeItem('username');
         localStorage.removeItem('isAdmin');
+        localStorage.clear()
     } catch (e) {
         return Promise.reject(e);
     }
@@ -40,7 +41,6 @@ export const logout = () => async (dispatch) => {
 export const getUser = () => async (dispatch) => {
     try {
         const { data } = await axios.get('/user');
-        console.log('data', data)
         if (data) {
             dispatch({ type: GET_USER, data });
         } else if (data.code === 403) {

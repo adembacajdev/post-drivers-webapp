@@ -30,7 +30,7 @@ const Table = ({ items, deleteUser }) => {
                 <div is-responsive="true" className="strike-users__table-header-item centered">
                     <div className="strike-users__table-header-item-text">{i18n.t('users.isAdmin')}</div>
                 </div>
-                <div is-responsive="true" className="strike-users__table-header-item centered">
+                <div is-responsive="false" className="strike-users__table-header-item centered">
                     <div className="strike-users__table-header-item-text">{i18n.t('users.actions')}</div>
                 </div>
             </div>

@@ -13,7 +13,8 @@ const App = ({ authenticate }) => {
     const token = Auth.getToken();
     axios.defaults.baseURL = config.baseURL;
     if (token) {
-      axios.defaults.headers.common['Content-Type'] = "applicaton/json"
+      axios.defaults.headers.common['Content-Type'] = "applicaton/json";
+      // axios.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       authenticate(true);
     } else {
@@ -22,6 +23,8 @@ const App = ({ authenticate }) => {
     }
     const language = localStorage.getItem('language');
   }, [])
+
+  
   return (
     <>
       <ErrorModal />

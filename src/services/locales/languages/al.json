@@ -236,7 +236,8 @@
         "albania": "Shqipëri",
         "northMacedonia": "Maqedoni",
         "errorMessage": "ID e produktit është shënuar gabim!",
-        "invalidNumber": "Numri i telefonit është shënuar gabim!"
+        "invalidNumber": "Numri i telefonit është shënuar gabim!",
+        "button": "Porosit"
     },
     "errorModal": {
         "title": "Error",

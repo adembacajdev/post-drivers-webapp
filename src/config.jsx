@@ -1,5 +1,5 @@
 const config = {
-    baseURL: 'https://gr0462a0.myhook.io/api'
+    baseURL: 'https://rs81i0s6.myhook.io/api'
 }
 
 export default config;
