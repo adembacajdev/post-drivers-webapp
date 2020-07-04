@@ -2,12 +2,15 @@ import React, { useEffect } from 'react';
 import './style.scss';
 import Wrapper from '../../containers/wrapper/Wrapper';
 import { connect } from 'react-redux';
-import { getUser } from '../../store/actions/users';
-import moment from 'moment';
+import { getUser, deleteUser } from '../../store/actions/users';
 import i18next from '../../services/locales/i18n';
 
-const SeeUser = ({ location, selectedUser, getUser }) => {
+const SeeUser = ({ location, selectedUser, getUser, deleteUser, history }) => {
     useEffect(() => { getUser(location.state.id); }, []);
+    const delUser = () => {
+        deleteUser(location.state.id);
+        history.goBack();
+    }
     return (
         <Wrapper>
             <div className="strike-user">
@@ -24,12 +27,13 @@ const SeeUser = ({ location, selectedUser, getUser }) => {
                         <input disabled defaultValue={selectedUser && selectedUser.email} className="strike-user__body-input" placeholder="Field" />
                     </div>
                 </div>
+                <button onClick={delUser} className="strike-user__body-button">{i18next.t('users.delete')}</button>
             </div>
         </Wrapper>
     )
 }
 
 const mapStateToProps = ({ selectedUser }) => ({ selectedUser });
-const mapDispatchToProps = { getUser };
+const mapDispatchToProps = { getUser, deleteUser };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SeeUser);

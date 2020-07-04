@@ -37,7 +37,7 @@ const TableItem = ({ created_at, email, first_name, last_name, id, phone, delete
             <div onClick={navigate} is-responsive="true" className="strike-users__table-item-container centered">
                 {<div className="strike-users__table-item-container-text">{is_admin ? i18n.t('users.yes') : i18n.t('users.no')}</div>}
             </div>
-            <div is-responsive="false" className="strike-users__table-item-container centered">
+            <div is-responsive="true" className="strike-users__table-item-container centered">
                 <div className="dropdown">
                     <img className="strike-users__table-item-container-dots" src={threePoints} />
                     <div className="dropdown-content">

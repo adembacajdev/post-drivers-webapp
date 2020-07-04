@@ -34,7 +34,7 @@ const Table = ({ items, deleteCustomer }) => {
                     <div className="strike-customers__table-header-item-text">{i18n.t('customers.city')}</div>
                     <img className="strike-customers__table-header-item-icon responsive" src={tableArrow} />
                 </div>
-                <div is-responsive="false" className="strike-customers__table-header-item centered">
+                <div is-responsive="true" className="strike-customers__table-header-item centered">
                     <div className="strike-customers__table-header-item-text">{i18n.t('customers.actions')}</div>
                 </div>
             </div>

@@ -254,6 +254,22 @@
     &__body{
         display: flex;
         flex-direction: row;
+        &-button{
+            width: 100%;
+            height: 40px;
+            border-radius: 5px;
+            outline: none;
+            border: none;
+            transition: 0.2s linear all;
+            &:active{
+                outline: none;
+                border: none;
+                background-color: white;
+            }
+            &:focus{
+                outline: none;
+            }
+        }
         &-left{
             display: flex;
             flex: 1;

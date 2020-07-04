@@ -2,7 +2,7 @@ import React from 'react';
 import './orders.scss';
 import Wrapper from '../../containers/wrapper/Wrapper';
 import { useEffect, useState } from 'react';
-import { getOrder } from '../../store/actions/orders';
+import { getOrder, deleteOrder } from '../../store/actions/orders';
 import { connect } from 'react-redux';
 import moment from 'moment'
 import i18next from '../../services/locales/i18n';
@@ -16,6 +16,11 @@ const SeeOrder = (props) => {
             setViewPort({ width: 1200, height: 600, latitude: props.order && props.order.location.latitude, longitude: props.order && props.order.location.longitude, zoom: 5, })
         }
     }, [props.order])
+
+    const delOrder = () => {
+        props.deleteOrder(props.location.state.id);
+        props.history.goBack();
+    }
     return (
         <Wrapper>
             <div className="strike-order">
@@ -70,8 +75,8 @@ const SeeOrder = (props) => {
                 <div>
                     <ReactMapGL
                         {...viewPort}
-                        mapStyle={'mapbox://styles/mapbox/satellite-v9'}
-                        // mapStyle={'mapbox://styles/mapbox/streets-v9'}
+                        // mapStyle={'mapbox://styles/mapbox/satellite-v9'}
+                        mapStyle={'mapbox://styles/mapbox/streets-v9'}
                         mapboxApiAccessToken={'pk.eyJ1IjoiYWRlbWJhY2FqIiwiYSI6ImNrYnF0c3phNjBhd3Iydm50bnIyeHl0d3kifQ.6zDG514PklFKYJTYD32p8Q'}
                         width={"100%"}
                         height={400}
@@ -84,12 +89,13 @@ const SeeOrder = (props) => {
                         )}
                     </ReactMapGL>
                 </div>
+                <button onClick={delOrder} className="strike-order__body-delete">{i18next.t('orders.delete')}</button>
             </div>
         </Wrapper>
     )
 }
 
 const mapStateToProps = ({ order }) => ({ order });
-const mapDispatchToProps = { getOrder };
+const mapDispatchToProps = { getOrder, deleteOrder };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SeeOrder);

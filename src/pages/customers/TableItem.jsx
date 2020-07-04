@@ -33,7 +33,7 @@ const TableItem = ({ id, first_name, last_name, phone, address, city, deleteCust
         <div className="strike-customers__table-item">
             <div className="strike-customers__table-item-container">
                 <input onChange={check} value={checked} checked={checked} className="strike-customers__table-item-container-checkbox" type="checkbox" />
-                <div className="strike-customers__table-item-container-text">{first_name}</div>
+                <div onClick={navigate} className="strike-customers__table-item-container-text">{first_name}</div>
             </div>
             <div onClick={navigate} className="strike-customers__table-item-container">
                 <div className="strike-customers__table-item-container-text">{last_name}</div>
@@ -47,7 +47,7 @@ const TableItem = ({ id, first_name, last_name, phone, address, city, deleteCust
             <div onClick={navigate} className="strike-customers__table-item-container centered">
                 <div className="strike-customers__table-item-container-text">{city}</div>
             </div>
-            <div is-responsive="false" className="strike-customers__table-item-container centered">
+            <div is-responsive="true" className="strike-customers__table-item-container centered">
                 <div className="dropdown">
                     <img className="strike-customers__table-item-container-dots" src={threePoints} />
                     <div className="dropdown-content">
