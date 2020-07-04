@@ -51,7 +51,6 @@ const TableItem = ({ id, first_name, last_name, phone, address, city, deleteCust
                 <div className="dropdown">
                     <img className="strike-customers__table-item-container-dots" src={threePoints} />
                     <div className="dropdown-content">
-                        <div className="dropdown-content-text">{i18n.t('customers.openLocation')}</div>
                         <div onClick={deleteClient} className="dropdown-content-text">{i18n.t('customers.delete')}</div>
                     </div>
                 </div>

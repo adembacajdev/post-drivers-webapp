@@ -96,7 +96,6 @@ const TableItem = ({ id, serial_number, status, updated_at, deleteItem, price, c
                 <div className="dropdown">
                     <img className="strike-orders__table-item-container-dots" src={threePoints} />
                     <div className="dropdown-content">
-                        <div className="dropdown-content-text">{i18n.t('orders.openLocation')}</div>
                         <div onClick={printOrder} className="dropdown-content-text">{i18n.t('orders.print')}</div>
                         <div onClick={deleteThisItem} className="dropdown-content-text">{i18n.t('orders.delete')}</div>
                     </div>
