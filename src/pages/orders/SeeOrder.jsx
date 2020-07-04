@@ -84,7 +84,7 @@ const SeeOrder = (props) => {
                     >
                         {props.order && (
                             <Marker latitude={props.order.location.latitude} longitude={props.order.location.longitude} offsetLeft={-23} offsetTop={-46} draggable={false}>
-                                <div style={{ width: 20, height: 20, borderRadius: 10, backgroundColor: '#40B9E9' }} />
+                                <div status={props.order.status} className="map-marker" />
                             </Marker>
                         )}
                     </ReactMapGL>
