@@ -1,6 +1,6 @@
 import {
     GET_ALL_PRODUCTS, GET_PRODUCT, GET_PRODUCT_ORDER, POST_STORE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, DELETE_PRODUCTS, IS_LOGGED_IN,
-    SEARCH_PRODUCTS, TOGGLE_ERROR_MODAL, SELECT_ALL_PRODUCTS
+    SEARCH_PRODUCTS, TOGGLE_ERROR_MODAL, SELECT_ALL_PRODUCTS, DELETE_ORDER
 } from '../actionTypes';
 import axios from 'axios';
 
@@ -125,15 +125,16 @@ export const updateProduct = (body) => async (dispatch) => {
 export const deleteProduct = (id) => async (dispatch) => {
     try {
         const { data } = await axios.delete(`/products/${id}`);
+        console.log('data', data)
         if (data.success) {
-            dispatch({ type: DELETE_PRODUCT, data: data.data });
+            dispatch({ type: DELETE_PRODUCT, data: data.success });
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
             axios.defaults.headers.common['Authorization'] = ``
         }else{
-            dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
+            dispatch({ type: TOGGLE_ERROR_MODAL, data: data.error })
         }
     } catch (e) {
         dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
@@ -149,11 +150,9 @@ export const deleteProducts = (product_ids) => async (dispatch) => {
             else query = `${query}&product_ids[]=${item}`;
         });
         const { data } = await axios.delete(`/products?${query}`);
+        console.log('data', data)
         if (data.success) {
-            const data = await axios.get(`/products/paginate/${5}?page=${1}`);
-            if (data.status === 200) {
-                dispatch({ type: GET_ALL_PRODUCTS, data: data.data });
-            }
+            window.location.reload();
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');

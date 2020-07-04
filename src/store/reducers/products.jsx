@@ -34,10 +34,6 @@ export function allProducts(state = initialState, { type, data }) {
                 data: data,
                 lastPage: [1]
             }
-        case DELETE_PRODUCT:
-            const { id } = data
-            const newProducts = state.data.filter(item => item.id !== id);
-            return {...state, data: newProducts};
         case POST_STORE_PRODUCT:
             let storeProduct = state;
             storeProduct.push(data);
@@ -61,5 +57,12 @@ export function productOrder(state = null, { type, data }) {
     switch (type) {
         case GET_PRODUCT_ORDER: return data;
         default: return state;
+    }
+}
+
+export function deletedProduct(state=false, {type, data}){
+    switch(type){
+        case DELETE_PRODUCT: return data;
+        default: return false;
     }
 }

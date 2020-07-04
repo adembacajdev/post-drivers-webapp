@@ -209,7 +209,7 @@ export const deleteOrder = (id) => async (dispatch) => {
     try {
         const { data } = await axios.delete(`/orders/${id}`);
         if (data.success) {
-            dispatch({ type: DELETE_ORDER, data: data.data });
+            dispatch({ type: DELETE_ORDER, data: data.success });
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');
@@ -233,14 +233,7 @@ export const deleteOrders = (order_ids, status) => async (dispatch) => {
         });
         const { data } = await axios.delete(`/orders?${query}`);
         if (data.success) {
-            const ordersPaginated = await axios.get(`orders/paginate/${5}?page=${1}`);
-            if (ordersPaginated.status === 200) {
-                dispatch({ type: GET_ALL_ORDERS_PAGINATED, data: ordersPaginated.data })
-            }
-            const ordersByStatus = await axios.post(`/orders/status`, { status });
-            if (ordersByStatus.data.success) {
-                dispatch({ type: GET_ORDER_BY_STATUS, data: ordersByStatus.data.data });
-            }
+            window.location.reload();
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');

@@ -26,12 +26,13 @@ const Orders = (props) => {
         props.getOrdersPaginated(10, 1)
         if (props.location.state && props.location.state.title) setTitle(props.location.state.title);
     }, [])
+    useEffect(() => { if (props.deletedOrder) window.location.reload() }, [props.deletedOrder])
 
-    useEffect(() => { 
+    useEffect(() => {
         setOrders(props.ordersPaginated);
         selectAll(false);
         setSelected([])
-     }, [props.ordersPaginated]);
+    }, [props.ordersPaginated]);
 
     const deleteSelectedOrders = () => {
         props.deleteOrders(selected);
@@ -52,7 +53,7 @@ const Orders = (props) => {
                 newArray.push(elem.id)
             })
             setSelected(newArray)
-        }else{
+        } else {
             setSelected([])
         }
     }, [selectedAll])
@@ -96,7 +97,7 @@ const Orders = (props) => {
     )
 }
 
-const mapStateToProps = ({ allOrders, ordersPaginated }) => ({ allOrders, ordersPaginated });
+const mapStateToProps = ({ allOrders, ordersPaginated, deletedOrder }) => ({ allOrders, ordersPaginated, deletedOrder });
 const mapDispatchToProps = { getAllOrders, deleteOrder, printOneOrder, getOrdersPaginated, searchOrders, printSelectedOrders, deleteOrders };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Orders));

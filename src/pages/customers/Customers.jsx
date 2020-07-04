@@ -21,6 +21,7 @@ const Customers = (props) => {
         props.searchCustomers(type, search)
     };
     useEffect(() => { props.getAllCustomers(10, 1) }, []);
+    useEffect(() => {if(props.deletedCustomer){window.location.reload()}}, [props.deletedCustomer])
     useEffect(() => {
         setCustomers(props.allCustomers);
         selectAll(false);
@@ -82,7 +83,7 @@ const Customers = (props) => {
     )
 }
 
-const mapStateToProps = ({ allCustomers }) => ({ allCustomers });
+const mapStateToProps = ({ allCustomers, deletedCustomer }) => ({ allCustomers, deletedCustomer });
 const mapDispatchToProps = { getAllCustomers, deleteCustomer, searchCustomers, deleteCustomers };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Customers));

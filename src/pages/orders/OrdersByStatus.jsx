@@ -24,13 +24,15 @@ const OrdersByStatus = (props) => {
         }
     }, [])
 
+    useEffect(() => { if (props.deletedOrder) { window.location.reload() } }, [props.deletedOrder])
+
     useEffect(() => { if (props.printOrder) saveAs(props.printOrder, 'newFile.pdf'); }, [props.printOrder]);
 
-    useEffect(() => { 
+    useEffect(() => {
         setOrders(props.ordersByStatus)
         selectAll(false);
         setSelected([])
-     }, [props.ordersByStatus]);
+    }, [props.ordersByStatus]);
 
     const deleteSelectedOrders = () => {
         props.deleteOrders(selected, props.location.state.slug);
@@ -46,7 +48,7 @@ const OrdersByStatus = (props) => {
                 newArray.push(elem.id)
             })
             setSelected(newArray)
-        }else{
+        } else {
             setSelected([])
         }
     }, [selectedAll])
@@ -73,7 +75,7 @@ const OrdersByStatus = (props) => {
     )
 }
 
-const mapStateToProps = ({ printOrder, ordersPaginated, ordersByStatus }) => ({ printOrder, ordersPaginated, ordersByStatus });
+const mapStateToProps = ({ printOrder, ordersPaginated, ordersByStatus, deletedOrder }) => ({ printOrder, ordersPaginated, ordersByStatus, deletedOrder });
 const mapDispatchToProps = { deleteOrder, printOneOrder, getOrderByStatus, deleteOrders, printSelectedOrders };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(OrdersByStatus))

@@ -38,7 +38,7 @@ const TableItem = ({ item, deleteProduct }) => {
             <div className="strike-products__table-item-content flex-1">
                 <input type="checkbox" onChange={check} value={checked} checked={checked} />
             </div>
-            <div className="strike-products__table-item-content flex-1">
+            <div onClick={navigate} className="strike-products__table-item-content flex-1">
                 <div className="strike-products__table-item-content-text">{item.id}</div>
             </div>
             <div onClick={navigate} className="strike-products__table-item-content flex-3">

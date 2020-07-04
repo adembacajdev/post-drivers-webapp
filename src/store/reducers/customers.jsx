@@ -34,10 +34,6 @@ export function allCustomers(state = initialState, { type, data }) {
                 data: data,
                 lastPage: [1]
             }
-        case DELETE_CUSTOMER:
-            const { id } = data
-            const newCustomers = state.data.filter(item => item.id !== id);
-            return {...state, data: newCustomers};
         default: return state;
     }
 }
@@ -58,9 +54,16 @@ export function customerOrders(state = null, { type, data }) {
 
 export function recentCustomers(state = [], { type, data }) {
     switch (type) {
-        case GET_RECENT_CUSTOMERS: 
-        data.length = 4;
-        return data;
+        case GET_RECENT_CUSTOMERS:
+            data.length = 4;
+            return data;
         default: return state;
+    }
+}
+
+export function deletedCustomer(state = false, { type, data }) {
+    switch (type) {
+        case DELETE_CUSTOMER: return data;
+        default: return false;
     }
 }

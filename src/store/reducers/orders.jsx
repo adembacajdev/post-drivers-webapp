@@ -2,7 +2,6 @@ import {
     GET_ALL_ORDERS, GET_ORDER, NUMBER_OF_ORDERS_BY_STATUS, GET_ORDERS_BY_CITY, GET_ORDER_BY_STATUS, GET_ALL_ORDERS_PAGINATED,
     GET_TOP_CITIES, GET_TOP_PRODUCTS, POST_ORDER, DELETE_ORDER, DELETE_ORDERS, PRINT_ONE_ORDER, SEARCH_ORDERS, PRINT_SELECTED_ORDERS //I will check other types after I console all api
 } from '../actionTypes';
-import { deleteCustomer } from '../actions/customers';
 
 export function allOrders(state = null, { type, data }) {
     switch (type) {
@@ -37,10 +36,6 @@ export function ordersByStatus(state = null, { type, data }) {
         case GET_ORDER_BY_STATUS:
             data.forEach(item => item.checked = false);
             return data;
-        case DELETE_ORDER:
-            const { id } = data;
-            const deletedOrdersByStatus = state.filter(item => item.id !== id);
-            return deletedOrdersByStatus;
         default: return state;
     }
 }
@@ -101,10 +96,6 @@ export function ordersPaginated(state = initialState, { type, data }) {
                 data: isArray ? data : [data],
                 lastPage: [1]
             }
-        case DELETE_ORDER:
-            const { id } = data
-            const newOrders = state.data.filter(item => item.id !== id);
-            return { ...state, data: newOrders };
         default: return state;
     }
 }
@@ -112,6 +103,13 @@ export function ordersPaginated(state = initialState, { type, data }) {
 export function orderPosted(state = false, { type, data }) {
     switch (type) {
         case POST_ORDER: return true;
+        default: return false;
+    }
+}
+
+export function deletedOrder(state = false, { type, data }) {
+    switch (type) {
+        case DELETE_ORDER: return data;
         default: return false;
     }
 }

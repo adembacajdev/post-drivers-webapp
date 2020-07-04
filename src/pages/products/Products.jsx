@@ -20,6 +20,7 @@ const Products = (props) => {
         props.searchProducts(search);
     };
     useEffect(() => { props.getAllProducts(10, 1) }, []);
+    useEffect(() => { if (props.deletedProduct) window.location.reload() }, [props.deletedProduct])
     useEffect(() => {
         setData(props.allProducts);
         selectAll(false);
@@ -79,7 +80,7 @@ const Products = (props) => {
     )
 }
 
-const mapStateToProps = ({ allProducts }) => ({ allProducts });
+const mapStateToProps = ({ allProducts, deletedProduct }) => ({ allProducts, deletedProduct });
 const mapDispatchToProps = { getAllProducts, deleteProduct, searchProducts, deleteProducts };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Products));

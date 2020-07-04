@@ -94,7 +94,7 @@ export const deleteCustomer = (id) => async (dispatch) => {
     try {
         const { data } = await axios.delete(`/clients/${id}`);
         if (data.success) {
-            dispatch({ type: DELETE_CUSTOMER, data: data.data });
+            dispatch({ type: DELETE_CUSTOMER, data: data.success });
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');
@@ -118,10 +118,7 @@ export const deleteCustomers = (client_ids) => async (dispatch) => {
         });
         const { data } = await axios.delete(`/clients?${query}`);
         if (data.success) {
-            const data = await axios.get(`clients/paginate/${5}?page=${1}`);
-            if (data.status === 200) {
-                dispatch({ type: GET_ALL_CUSTOMERS, data: data.data })
-            }
+            window.location.reload();
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');

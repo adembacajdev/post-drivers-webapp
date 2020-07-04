@@ -3,13 +3,18 @@ import './products.scss';
 import Wrapper from '../../containers/wrapper/Wrapper';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getProduct } from '../../store/actions/products';
+import { getProduct, deleteProduct } from '../../store/actions/products';
 import i18next from '../../services/locales/i18n';
+import { useCallback } from 'react';
 
 const SeeProduct = (props) => {
     useEffect(() => {
         const { id } = props.location.state;
         props.getProduct(id)
+    }, [])
+    const delProduct = useCallback(() => {
+        props.deleteProduct(props.location.state);
+        props.history.goBack();
     }, [])
     return (
         <Wrapper>
@@ -27,6 +32,7 @@ const SeeProduct = (props) => {
                         <input disabled defaultValue={props.product && props.product.price} className="strike-product__body-input" placeholder="Field" />
                         <div className="strike-product__body-label">{i18next.t('products.size')}</div>
                         <input disabled defaultValue={props.product && props.product.size} className="strike-product__body-input" placeholder="Field" />
+                        <button onClick={delProduct} className="strike-product__body-button">{i18next.t('products.delete')}</button>
                     </div>
                 </div>
             </div>
@@ -35,6 +41,6 @@ const SeeProduct = (props) => {
 }
 
 const mapStateToProps = ({ product }) => ({ product });
-const mapDispatchToProps = { getProduct };
+const mapDispatchToProps = { getProduct, deleteProduct };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SeeProduct);
