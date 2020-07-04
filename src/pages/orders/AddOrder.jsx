@@ -100,10 +100,18 @@ const AddOrder = (props) => {
         window.onkeyup = (e) => {
             clearTimeout(timeout);
             timeout = setTimeout(async () => {
-                props.getProduct(e.target.value);
+                if (e.target.name === 'product_id') {
+                    props.getProduct(e.target.value);
+                }
             }, 500)
         }
     }
+
+    useEffect(() => {
+        if (props.orderPosted) {
+            window.location.reload()
+        }
+    }, [props.orderPosted])
     return (
         <div className="add-order">
             <div className="add-order__navbar">
@@ -177,7 +185,7 @@ const AddOrder = (props) => {
     )
 }
 
-const mapStateToProps = ({ product }) => ({ product });
+const mapStateToProps = ({ product, orderPosted }) => ({ product, orderPosted });
 const mapDispatchToProps = { postOrder, toggleErrorModal, getProduct };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AddOrder));

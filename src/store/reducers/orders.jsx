@@ -108,3 +108,10 @@ export function ordersPaginated(state = initialState, { type, data }) {
         default: return state;
     }
 }
+
+export function orderPosted(state = false, { type, data }) {
+    switch (type) {
+        case POST_ORDER: return true;
+        default: return false;
+    }
+}
