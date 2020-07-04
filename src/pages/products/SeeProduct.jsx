@@ -13,7 +13,7 @@ const SeeProduct = (props) => {
         props.getProduct(id)
     }, [])
     const delProduct = useCallback(() => {
-        props.deleteProduct(props.location.state);
+        props.deleteProduct(props.location.state.id);
         props.history.goBack();
     }, [])
     return (
