@@ -87,7 +87,7 @@ export const deleteUser = (id) => async (dispatch) => {
     try {
         const { data } = await axios.delete(`/users/${id}`);
         if (data.success) {
-            dispatch({ type: DELETE_USER, data: data.data });
+            window.location.reload();
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');

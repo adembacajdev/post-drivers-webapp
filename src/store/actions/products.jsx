@@ -127,7 +127,7 @@ export const deleteProduct = (id) => async (dispatch) => {
         const { data } = await axios.delete(`/products/${id}`);
         console.log('data', data)
         if (data.success) {
-            dispatch({ type: DELETE_PRODUCT, data: data.success });
+            window.location.reload();
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');
