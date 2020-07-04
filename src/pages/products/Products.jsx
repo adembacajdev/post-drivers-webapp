@@ -19,7 +19,7 @@ const Products = (props) => {
     const onSubmit = ({ search }) => {
         props.searchProducts(search);
     };
-    useEffect(() => { props.getAllProducts(5, 1) }, []);
+    useEffect(() => { props.getAllProducts(10, 1) }, []);
     useEffect(() => {
         setData(props.allProducts);
         selectAll(false);
@@ -31,9 +31,9 @@ const Products = (props) => {
         setSelected([])
     }
 
-    const nextPage = useCallback(() => { if (data.hasNextPage) props.getAllProducts(5, data.currentPage + 1) }, [data]);
-    const prevPage = useCallback(() => { if (data.hasPrevPage) props.getAllProducts(5, data.currentPage - 1) }, [data]);
-    const number = useCallback((page) => { props.getAllProducts(5, page) }, [data]);
+    const nextPage = useCallback(() => { if (data.hasNextPage) props.getAllProducts(10, data.currentPage + 1) }, [data]);
+    const prevPage = useCallback(() => { if (data.hasPrevPage) props.getAllProducts(10, data.currentPage - 1) }, [data]);
+    const number = useCallback((page) => { props.getAllProducts(10, page) }, [data]);
 
     const addProduct = useCallback(() => { props.history.push('/add-product') }, []);
 

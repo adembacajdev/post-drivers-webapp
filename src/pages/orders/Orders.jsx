@@ -23,7 +23,7 @@ const Orders = (props) => {
     const onSubmit = ({ type, search }) => { props.searchOrders(type, search); };
 
     useEffect(() => {
-        props.getOrdersPaginated(5, 1)
+        props.getOrdersPaginated(10, 1)
         if (props.location.state && props.location.state.title) setTitle(props.location.state.title);
     }, [])
 
@@ -40,9 +40,9 @@ const Orders = (props) => {
     }
     const printSelectedOrd = () => props.printSelectedOrders(selected);
 
-    const nextPage = useCallback(() => { if (orders.hasNextPage) props.getOrdersPaginated(5, orders.currentPage + 1) }, [orders]);
-    const prevPage = useCallback(() => { if (orders.hasPrevPage) props.getOrdersPaginated(5, orders.currentPage - 1) }, [orders]);
-    const number = useCallback((page) => { props.getOrdersPaginated(5, page) }, [orders]);
+    const nextPage = useCallback(() => { if (orders.hasNextPage) props.getOrdersPaginated(10, orders.currentPage + 1) }, [orders]);
+    const prevPage = useCallback(() => { if (orders.hasPrevPage) props.getOrdersPaginated(10, orders.currentPage - 1) }, [orders]);
+    const number = useCallback((page) => { props.getOrdersPaginated(10, page) }, [orders]);
 
     const handleSearchSelect = useCallback((e) => { setSearchSelect(e.target.value) }, [searchSelect])
     useEffect(() => {

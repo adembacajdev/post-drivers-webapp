@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useCallback, createContext, useContext } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, useHistory } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import Wrapper from '../../containers/wrapper/Wrapper';
 import images from '../../assets/images';
 import i18n from '../../services/locales/i18n';
@@ -20,7 +20,7 @@ const Customers = (props) => {
     const onSubmit = ({ type, search }) => {
         props.searchCustomers(type, search)
     };
-    useEffect(() => { props.getAllCustomers(5, 1) }, []);
+    useEffect(() => { props.getAllCustomers(10, 1) }, []);
     useEffect(() => {
         setCustomers(props.allCustomers);
         selectAll(false);
@@ -33,9 +33,9 @@ const Customers = (props) => {
         setSelected([])
     }
 
-    const nextPage = useCallback(() => { if (customers.hasNextPage) props.getAllCustomers(5, customers.currentPage + 1) }, [customers]);
-    const prevPage = useCallback(() => { if (customers.hasPrevPage) props.getAllCustomers(5, customers.currentPage - 1) }, [customers]);
-    const number = useCallback((page) => { props.getAllCustomers(5, page) }, [customers]);
+    const nextPage = useCallback(() => { if (customers.hasNextPage) props.getAllCustomers(10, customers.currentPage + 1) }, [customers]);
+    const prevPage = useCallback(() => { if (customers.hasPrevPage) props.getAllCustomers(10, customers.currentPage - 1) }, [customers]);
+    const number = useCallback((page) => { props.getAllCustomers(10, page) }, [customers]);
     useEffect(() => {
         if (selectedAll) {
             let newArray = [];

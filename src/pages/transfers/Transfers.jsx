@@ -23,13 +23,13 @@ const Transfers = (props) => {
 
     useEffect(() => {
         props.getBalanceDetails();
-        props.getAllTransfers(5, 1);
+        props.getAllTransfers(10, 1);
     }, [])
     useEffect(() => { setTransfers(props.allTransfers); }, [props.allTransfers]);
 
-    const nextPage = useCallback(() => { if (transfers.hasNextPage) props.getAllTransfers(5, transfers.currentPage + 1) }, [transfers]);
-    const prevPage = useCallback(() => { if (transfers.hasPrevPage) props.getAllTransfers(5, transfers.currentPage - 1) }, [transfers]);
-    const number = useCallback((page) => { props.getAllTransfers(5, page) }, [transfers]);
+    const nextPage = useCallback(() => { if (transfers.hasNextPage) props.getAllTransfers(10, transfers.currentPage + 1) }, [transfers]);
+    const prevPage = useCallback(() => { if (transfers.hasPrevPage) props.getAllTransfers(10, transfers.currentPage - 1) }, [transfers]);
+    const number = useCallback((page) => { props.getAllTransfers(10, page) }, [transfers]);
 
     const handleSearchSelect = useCallback((e) => { setSearchType(e.target.value) }, [searchType])
     return (
