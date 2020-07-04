@@ -17,13 +17,6 @@ const Auth = {
             return i18n.t('navbar.onlineShop');
         } else return shopName;
     },
-    getCurrentBalance: () => {
-        let defaultValue = '-//-';
-        const currentBalance = localStorage.getItem('currentBalance');
-        if (currentBalance == null || currentBalance == undefined || currentBalance == 'null' || currentBalance == 'undefined') {
-            return defaultValue;
-        } else return currentBalance;
-    },
     setLanguage: () => {
         const language = localStorage.getItem('language');
         if (language !== null || language !== 'null' || language !== undefined || language !== 'undefined') {
@@ -54,6 +47,22 @@ const Auth = {
         } else {
             return false;
         }
+    },
+    getFirstName: () => {
+        const firstName = localStorage.getItem('firstName');
+        return firstName ?? null;
+    },
+    getLastName: () => {
+        const lastName = localStorage.getItem('lastName');
+        return lastName ?? null
+    },
+    getShopName: () => {
+        const shopName = localStorage.getItem('shopName');
+        return shopName ?? null;
+    },
+    getCurrentBalance: () => {
+        const getCurrentBalance = localStorage.getItem('currentBalance');
+        return getCurrentBalance ?? '-//-';
     }
 }
 

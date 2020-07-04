@@ -2,6 +2,7 @@ export const IS_LOGGED_IN = 'IS_LOGGED_IN';
 export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR';
 export const TOGGLE_ERROR_MODAL = 'TOGGLE_ERROR_MODAL';
 export const TOGGLE_SUCCESS_MODAL = 'TOGGLE_SUCCESS_MODAL';
+export const MY_PROFILE = 'MY_PROFILE';
 
 //ShopInfo
 export const GET_SHOP_INFO = 'GET_SHOP_INFO'

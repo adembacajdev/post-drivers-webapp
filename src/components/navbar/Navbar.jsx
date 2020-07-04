@@ -10,8 +10,9 @@ import './navbar.scss';
 import { useHistory } from 'react-router-dom';
 
 const Navbar = (props) => {
-    const [shopName, setShopName] = useState(Auth.getShopName());
-    const [currentBalance, setCurrentBalance] = useState(Auth.getCurrentBalance());
+    const [shopName, setShopName] = useState('');
+    const [currentBalance, setCurrentBalance] = useState('');
+    const [name, setName] = useState('');
     const { avatar, onNotification, offNotification, downArrow } = images.navbar;
     const [notifications, setNotifications] = useState(false);
     const [profile, setProfile] = useState(false);
@@ -29,8 +30,16 @@ const Navbar = (props) => {
         setShopName(Auth.getShopName());
         setCurrentBalance(Auth.getCurrentBalance());
     }, [props.shopInfo]);
+    useEffect(() => {
+        if(props.myProfile){
+            console.log('hini')
+            setShopName(props.myProfile.shop_name);
+            setCurrentBalance(props.myProfile.current_balance);
+            setName(`${props.myProfile.first_name} ${props.myProfile.last_name}`)
+        }
+    }, [props.myProfile])
 
-    const goHome = useCallback(() => { history.push('/') }, [])
+    const goHome = useCallback(() => { history.push('/') }, []);
 
     return (
         <div className="strike-navbar">
@@ -52,7 +61,7 @@ const Navbar = (props) => {
                 </div>
                 <div className="line" />
                 <div onClick={toggleProfile} tabIndex="1" onBlur={profileBlur} className="strike-navbar__right-name">
-                    <div className="strike-navbar__right-name-text">{localStorage.getItem('username')}</div>
+                    <div className="strike-navbar__right-name-text">{name}</div>
                     <img is-active={profile ? 'true' : 'false'} className="strike-navbar__right-name-downarrow" src={downArrow} />
                 <Profile logout={logout} profile={profile} />
                 </div>
@@ -61,7 +70,7 @@ const Navbar = (props) => {
     )
 }
 
-const mapStateToProps = ({ sidebar, shopInfo }) => ({ sidebar, shopInfo });
+const mapStateToProps = ({ sidebar, shopInfo, myProfile }) => ({ sidebar, shopInfo, myProfile });
 const mapDispatchToProps = { toggleSidebar, logout };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

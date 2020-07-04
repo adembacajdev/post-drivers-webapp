@@ -95,6 +95,7 @@ export const getNumberOfOrdersByStatus = () => async (dispatch) => {
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');
+            localStorage.clear()
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
             axios.defaults.headers.common['Authorization'] = ``
         } else {
@@ -172,6 +173,7 @@ export const getTopCities = () => async (dispatch) => {
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');
+            localStorage.clear()
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
             axios.defaults.headers.common['Authorization'] = ``
         } else {
@@ -191,6 +193,7 @@ export const getTopProducts = () => async (dispatch) => {
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');
+            localStorage.clear()
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
             axios.defaults.headers.common['Authorization'] = ``
         } else {

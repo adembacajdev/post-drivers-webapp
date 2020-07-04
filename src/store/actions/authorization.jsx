@@ -1,4 +1,4 @@
-import { LOG_IN, LOG_OUT, GET_USER, RESET_PASSWORD, IS_LOGGED_IN, TOGGLE_ERROR_MODAL, TOGGLE_SUCCESS_MODAL } from '../actionTypes';
+import { LOG_IN, LOG_OUT, GET_USER, MY_PROFILE, IS_LOGGED_IN, TOGGLE_ERROR_MODAL, TOGGLE_SUCCESS_MODAL } from '../actionTypes';
 import axios from 'axios';
 import i18n from '../../services/locales/i18n';
 
@@ -7,9 +7,15 @@ export const login = (body) => async (dispatch) => {
         const { email, password } = body;
         const { data } = await axios.post('/login', { email, password, device_name: 'web' });
         if (data.success) {
-            const { plainTextToken } = data.data;
-            dispatch({ type: LOG_IN, data: data.data });
+            const { plainTextToken, user, shop_name, current_balance } = data.data;
             localStorage.setItem('token', plainTextToken);
+            localStorage.setItem('firstName', user.first_name);
+            localStorage.setItem('lastName', user.last_name);
+            localStorage.setItem('isAdmin', user.is_admin);
+            localStorage.setItem('shopName', shop_name);
+            localStorage.setItem('currentBalance', current_balance);
+            dispatch({ type: MY_PROFILE, data: { first_name: user.first_name, last_name: user.last_name, is_admin: user.is_admin, shop_name, current_balance } })
+            dispatch({ type: LOG_IN, data: data.data });
             dispatch({ type: IS_LOGGED_IN, data: true });
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
             axios.defaults.headers.common['Authorization'] = `Bearer ${plainTextToken}`;
@@ -24,16 +30,23 @@ export const login = (body) => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
     try {
-        await axios.post('/logout');
+        const data = await axios.post('/logout');
+        console.log('logout', data)
         dispatch({ type: LOG_OUT });
         dispatch({ type: IS_LOGGED_IN, data: false });
+        localStorage.clear();
         localStorage.removeItem('token');
+        localStorage.removeItem('firstName');
+        localStorage.removeItem('lastName');
+        localStorage.removeItem('isAdmin');
         localStorage.removeItem('shopName');
         localStorage.removeItem('currentBalance');
-        localStorage.removeItem('username');
-        localStorage.removeItem('isAdmin');
-        localStorage.clear()
     } catch (e) {
+        if (e.message.includes('401')) {
+            dispatch({ type: LOG_OUT });
+            dispatch({ type: IS_LOGGED_IN, data: false });
+            localStorage.clear()
+        }
         return Promise.reject(e);
     }
 }
@@ -45,7 +58,7 @@ export const getUser = () => async (dispatch) => {
             dispatch({ type: GET_USER, data });
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
-            localStorage.removeItem('token');
+            localStorage.clear()
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
             axios.defaults.headers.common['Authorization'] = ``
         } else {
@@ -70,15 +83,13 @@ export const resetPassword = (body) => async (dispatch) => {
                 dispatch({ type: TOGGLE_SUCCESS_MODAL, data: i18n.t('successModal.changePass') });
                 dispatch({ type: LOG_OUT });
                 dispatch({ type: IS_LOGGED_IN, data: false });
-                localStorage.removeItem('token');
-                localStorage.removeItem('shopName');
-                localStorage.removeItem('currentBalance');
+                localStorage.clear()
             } else if (data.code === 403) {
                 dispatch({ type: IS_LOGGED_IN, data: false });
-                localStorage.removeItem('token');
+                localStorage.clear()
                 axios.defaults.headers.common['Content-Type'] = "applicaton/json"
                 axios.defaults.headers.common['Authorization'] = ``
-            }else{
+            } else {
                 dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
             }
         }

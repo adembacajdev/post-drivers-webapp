@@ -3,15 +3,12 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Wrapper from '../../containers/wrapper/Wrapper';
 import images from '../../assets/images';
-import { VectorMap } from 'react-jvectormap';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import i18n from '../../services/locales/i18n';
 import './home.scss';
 import { getTopCities, getTopProducts, getNumberOfOrdersByStatus } from '../../store/actions/orders';
 import { getRecentCustomers } from '../../store/actions/customers';
 import { getShopInfo } from '../../store/actions/shop.info';
-import { getAllLocations } from '../../store/actions/location';
-import { getUser } from '../../store/actions/authorization';
 import locations from '../../services/constants/Locations';
 
 const Home = (props) => {
@@ -26,17 +23,9 @@ const Home = (props) => {
         props.getTopCities();
         props.getTopProducts();
         props.getNumberOfOrdersByStatus();
-        // props.getAllLocations();
         props.getShopInfo();
         props.getRecentCustomers();
-        props.getUser();
-    }, [])
-    useEffect(() => {
-        if (props.user) {
-            localStorage.setItem('username', `${props.user.first_name} ${props.user.last_name}`);
-            localStorage.setItem('isAdmin', props.user.is_admin)
-        }
-    }, [props.user])
+    }, []);
 
     useEffect(() => {
         if (props.topCities) {
@@ -184,12 +173,12 @@ const Home = (props) => {
 }
 
 const mapStateToProps = ({
-    topCities, topProducts, numberOfOrdersByStatus, allLocations, recentCustomers, user
+    topCities, topProducts, numberOfOrdersByStatus, allLocations, recentCustomers
 }) => ({
-    topCities, topProducts, numberOfOrdersByStatus, allLocations, recentCustomers, user
+    topCities, topProducts, numberOfOrdersByStatus, allLocations, recentCustomers
 });
 const mapDispatchToProps = {
-    getTopCities, getTopProducts, getNumberOfOrdersByStatus, getAllLocations, getShopInfo, getRecentCustomers, getUser
+    getTopCities, getTopProducts, getNumberOfOrdersByStatus, getShopInfo, getRecentCustomers
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home));

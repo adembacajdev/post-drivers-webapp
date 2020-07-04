@@ -13,10 +13,11 @@ import { allUsers, selectedUser } from './users';
 import { pricingTable } from './pricing';
 import { allTransfers, transfer, balanceDetails } from './transfers';
 import { dailyEarnings, dailyOrders } from './statistics';
+import myProfile from './my.profile';
 
 export default combineReducers({
     isLoggedIn, sidebar, errorModal, successModal,
-    loggedIn, newPassword, user, shopInfo,
+    loggedIn, newPassword, user, shopInfo, myProfile,
     allProducts, product, productOrder,
     allOrders, order, numberOfOrdersByStatus, ordersByCity, ordersByStatus, topCities, topProducts, printOrder, ordersPaginated,
     allCustomers, customer, recentCustomers, customerOrders,

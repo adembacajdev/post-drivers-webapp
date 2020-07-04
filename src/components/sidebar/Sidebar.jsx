@@ -9,13 +9,16 @@ import { logout } from '../../store/actions/authorization';
 import Auth from '../../services/auth/Auth';
 
 const Sidebar = (props) => {
-    const [isAdmin, setIsAdmin] = useState(Auth.checkIsAdmin());
+    const [isAdmin, setIsAdmin] = useState(false);
     const sidebar = useSelector(state => state.sidebar);
     const dispatch = useDispatch();
     const history = useHistory();
     const location = useLocation();
     const { homeIcon, customersIcon, statisticsIcon, productsIcon, transfersIcon, usersIcon, pricingIcon, ordersIcon } = images.sidebar;
-    useEffect(() => { setIsAdmin(Auth.checkIsAdmin()) }, [props])
+    useEffect(() => { 
+        if (props.myProfile) {
+            setIsAdmin(props.myProfile.is_admin == 1 ? true : false)
+        } }, [props.myProfile])
     const menu = [
         { name: i18n.t('sidebar.home'), path: '/', icon: homeIcon, show: true },
         { name: i18n.t('sidebar.products'), path: '/products', icon: productsIcon, show: true },
@@ -46,7 +49,7 @@ const Sidebar = (props) => {
     )
 }
 
-const mapStateToProps = ({ user }) => ({ user });
+const mapStateToProps = ({ user, myProfile }) => ({ user, myProfile });
 const mapDispatchToProps = { logout }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
