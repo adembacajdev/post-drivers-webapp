@@ -143,7 +143,13 @@
     "statistics": {
         "title": "Statistika",
         "earning": "Përfitimet",
-        "orders": "Porositë"
+        "orders": "Porositë",
+        "cities": "Qytetet",
+        "oneMonth": "1 muaj",
+        "threeMonths": "3 muaj",
+        "sixMonths": "6 muaj",
+        "oneYear": "1 vit",
+        "selectPlaceholder": "Select a month"
     },
     "users": {
         "title": "Përdoruesit",

@@ -1,46 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Wrapper from '../../containers/wrapper/Wrapper';
 import i18n from '../../services/locales/i18n';
 import './statistics.scss';
-import moment from 'moment'
-import { getDailyEarnings, getDailyOrders } from '../../store/actions/statistics';
-import { Line } from "react-chartjs-2";
-
-//Chartist
-import 'matchmedia/index.js';
-import 'chartist/dist/chartist.min.css';
-import ChartistGraph from 'react-chartist';
-import Chartist from 'chartist';
-import { useEffect } from 'react';
+import { getDailyEarnings, getDailyOrders, getDailyCities } from '../../store/actions/statistics';
+// import { Line } from "react-chartjs-2";
+import { Line, Bar } from 'react-chartjs-2';
 
 const Statistics = (props) => {
     useEffect(() => {
-        props.getDailyEarnings()
+        props.getDailyEarnings();
         props.getDailyOrders();
+        props.getDailyCities();
     }, []);
 
-    useEffect(() => {
-        console.log('dailyEarning', props.dailyEarnings);
-        console.log('dailyOrders', props.dailyOrders);
-    }, [props.dailyEarnings, props.dailyOrders]);
+    const handleEarningsMonth = (e) => { 
+        if(e.target.value !== '0') props.getDailyEarnings(e.target.value);
+        else props.getDailyEarnings();
+     };
+    const handleOrdersMonth = (e) => { 
+        if(e.target.value !== '0') props.getDailyOrders(e.target.value);
+        else props.getDailyOrders();
+     };
 
-    const options = { low: 0, showArea: true, showPoint: false, fullWidth: true, height: 300 }
-
-    const events = {
-        draw: function (data) {
-            if (data.type === 'line' || data.type === 'area') {
-                data.element.animate({
-                    d: {
-                        begin: 2000 * data.index, dur: 2000,
-                        from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
-                        to: data.path.clone().stringify(), easing: Chartist.Svg.Easing.easeOutQuint
-                    }
-                });
-            }
-        }
-    }
     return (
         <Wrapper>
             <div className="strike-statistics">
@@ -51,16 +34,17 @@ const Statistics = (props) => {
                             <div className="strike-statistics__chart-header-left-text">{i18n.t('statistics.earning')}</div>
                         </div>
                         <div className="strike-statistics__chart-header-right">
-                            <select>
-                                <option>1 month</option>
-                                <option>3 months</option>
-                                <option>6 months</option>
-                                <option>1 year</option>
+                            <select onChange={handleEarningsMonth}>
+                                <option value={0}>{i18n.t('statistics.selectPlaceholder')}</option>
+                                <option value={1}>{i18n.t('statistics.oneMonth')}</option>
+                                <option value={3}>{i18n.t('statistics.threeMonths')}</option>
+                                <option value={6}>{i18n.t('statistics.sixMonths')}</option>
+                                <option value={12}>{i18n.t('statistics.oneYear')}</option>
                             </select>
                         </div>
                     </div>
                     <div className="strike-statistics__chart-body">
-                        <ChartistGraph data={props.dailyEarnings} options={options} listener={events} type={'Line'} />
+                        <Line height={90} data={props.dailyEarnings && props.dailyEarnings.data} options={props.dailyEarnings && props.dailyEarnings.options} />
                     </div>
                 </div>
                 <div className="strike-statistics__chart">
@@ -69,17 +53,35 @@ const Statistics = (props) => {
                             <div className="strike-statistics__chart-header-left-text">{i18n.t('statistics.orders')}</div>
                         </div>
                         <div className="strike-statistics__chart-header-right">
-                            <select>
-                                <option>1 month</option>
-                                <option>3 months</option>
-                                <option>6 months</option>
-                                <option>1 year</option>
+                            <select onChange={handleOrdersMonth}>
+                                <option value={0}>{i18n.t('statistics.selectPlaceholder')}</option>
+                                <option value={1}>{i18n.t('statistics.oneMonth')}</option>
+                                <option value={3}>{i18n.t('statistics.threeMonths')}</option>
+                                <option value={6}>{i18n.t('statistics.sixMonths')}</option>
+                                <option value={12}>{i18n.t('statistics.oneYear')}</option>
                             </select>
                         </div>
                     </div>
                     <div className="strike-statistics__chart-body">
-                        <Line data={data} />
-                        {/* <ChartistGraph data={props.dailyOrders} options={options} listener={events} type={'Line'} /> */}
+                        <Line height={90} data={props.dailyOrders && props.dailyOrders.data} options={props.dailyOrders && props.dailyOrders.options} />
+                    </div>
+                </div>
+                <div className="strike-statistics__chart">
+                    <div className="strike-statistics__chart-header">
+                        <div className="strike-statistics__chart-header-left">
+                            <div className="strike-statistics__chart-header-left-text">{i18n.t('statistics.cities')}</div>
+                        </div>
+                        <div className="strike-statistics__chart-header-right">
+                            {/* <select>
+                                <option>1 month</option>
+                                <option>3 months</option>
+                                <option>6 months</option>
+                                <option>1 year</option>
+                            </select> */}
+                        </div>
+                    </div>
+                    <div className="strike-statistics__chart-body">
+                        <Bar height={90} data={props.dailyCities && props.dailyCities.data} options={props.dailyCities && props.dailyCities.options} />
                     </div>
                 </div>
             </div>
@@ -87,26 +89,32 @@ const Statistics = (props) => {
     )
 }
 
-const mapStateToProps = ({ dailyEarnings, dailyOrders }) => ({ dailyEarnings, dailyOrders });
-const mapDispatchToProps = { getDailyEarnings, getDailyOrders };
+const mapStateToProps = ({ dailyEarnings, dailyOrders, dailyCities }) => ({ dailyEarnings, dailyOrders, dailyCities });
+const mapDispatchToProps = { getDailyEarnings, getDailyOrders, getDailyCities };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Statistics));
 
 const data = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    datasets: [
-        {
-            label: "",
-            data: [6, 3, 7, 8, ,9, 4],
-            fill: true,
-            backgroundColor: "rgba(75,192,192,0.2)",
-            borderColor: "rgba(75,192,192,1)"
-        },
-        {
-            label: "12/04/2020",
-            data: [8],
-            fill: false,
-            borderColor: "#742774"
-        }
-    ]
-};
+    data: {
+      labels: ['Janar', 'Shkurt', 'Mars', 'Prill', 'Maj', 'Qershor', 'Korrik', 'Gusht', 'Shtator', 'Tetor', 'Nëntor', 'Dhjetor'],
+      datasets: [{
+        label: 'Totali Paga Bazë',
+        backgroundColor: 'rgba(14,52,64,0.2)',
+        borderColor: 'rgba(14,52,64,1)',
+        pointBorderColor: '#fff',
+        data: [9,4,6,7,1,3]
+      },
+      {
+        label: 'Totali Paga Bruto',
+        backgroundColor: 'rgba(114,102,186,0.2)',
+        borderColor: 'rgba(114,102,186,1)',
+        pointBorderColor: '#fff',
+        data: [5,2,7,9,2,4]
+      },]
+    },
+    options: {
+      legend: {
+        display: true
+      }
+    }
+  }

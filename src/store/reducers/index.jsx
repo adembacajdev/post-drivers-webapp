@@ -15,7 +15,7 @@ import { allLocations, location } from './location';
 import { allUsers, selectedUser } from './users';
 import { pricingTable } from './pricing';
 import { allTransfers, transfer, balanceDetails } from './transfers';
-import { dailyEarnings, dailyOrders } from './statistics';
+import { dailyEarnings, dailyOrders, dailyCities } from './statistics';
 import myProfile from './my.profile';
 
 export default combineReducers({
@@ -37,5 +37,5 @@ export default combineReducers({
     //transfers
     allTransfers, transfer, balanceDetails,
     //daily
-    dailyEarnings, dailyOrders
+    dailyEarnings, dailyOrders, dailyCities
 });

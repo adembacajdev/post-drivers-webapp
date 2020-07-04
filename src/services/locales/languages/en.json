@@ -143,7 +143,13 @@
     "statistics": {
         "title": "Statistics",
         "earning": "Earning",
-        "orders": "Orders"
+        "orders": "Orders",
+        "cities": "Cities",
+        "oneMonth": "1 month",
+        "threeMonths": "3 months",
+        "sixMonths": "6 months",
+        "oneYear": "1 year",
+        "selectPlaceholder": "Select a month"
     },
     "users": {
         "title": "Users",
