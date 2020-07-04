@@ -36,10 +36,8 @@ const TableItem = ({ item, deleteProduct }) => {
         }
     }, [selected])
 
-    const copyLink = () => {
-        copy(copyText);
-        document.getElementById('dropdown-content').style.display = 'none';
-    }
+    const copyLink = () => copy(copyText);
+
     return (
         <div className="strike-products__table-item">
             <div className="strike-products__table-item-content flex-1">

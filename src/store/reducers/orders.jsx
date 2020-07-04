@@ -1,6 +1,7 @@
 import {
     GET_ALL_ORDERS, GET_ORDER, NUMBER_OF_ORDERS_BY_STATUS, GET_ORDERS_BY_CITY, GET_ORDER_BY_STATUS, GET_ALL_ORDERS_PAGINATED,
-    GET_TOP_CITIES, GET_TOP_PRODUCTS, POST_ORDER, DELETE_ORDER, DELETE_ORDERS, PRINT_ONE_ORDER, SEARCH_ORDERS, PRINT_SELECTED_ORDERS //I will check other types after I console all api
+    GET_TOP_CITIES, GET_TOP_PRODUCTS, POST_ORDER, DELETE_ORDER, DELETE_ORDERS, PRINT_ONE_ORDER, SEARCH_ORDERS, PRINT_SELECTED_ORDERS,
+    GET_ORDER_IN_MAP,  //I will check other types after I console all api
 } from '../actionTypes';
 
 export function allOrders(state = null, { type, data }) {
@@ -111,5 +112,12 @@ export function deletedOrder(state = false, { type, data }) {
     switch (type) {
         case DELETE_ORDER: return data;
         default: return false;
+    }
+}
+
+export function ordersByMap(state = [], { type, data }) {
+    switch (type) {
+        case GET_ORDER_IN_MAP: return data;
+        default: return state;
     }
 }

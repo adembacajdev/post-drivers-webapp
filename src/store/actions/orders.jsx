@@ -1,7 +1,7 @@
 import {
     GET_ALL_ORDERS, GET_ORDER, NUMBER_OF_ORDERS_BY_STATUS, POST_ORDER, GET_ORDERS_BY_CITY, GET_ORDER_BY_STATUS, DELETE_ORDER,
     DELETE_ORDERS, GET_TOP_CITIES, GET_TOP_PRODUCTS, IS_LOGGED_IN, PRINT_ONE_ORDER, GET_ALL_ORDERS_PAGINATED, SEARCH_ORDERS,
-    PRINT_SELECTED_ORDERS, TOGGLE_ERROR_MODAL, TOGGLE_SUCCESS_MODAL
+    PRINT_SELECTED_ORDERS, TOGGLE_ERROR_MODAL, TOGGLE_SUCCESS_MODAL, GET_ORDER_IN_MAP
 } from '../actionTypes';
 import axios from 'axios'
 import config from '../../config';
@@ -42,7 +42,7 @@ export const searchOrders = (type, text) => async (dispatch) => {
         const { data } = await axios.post(url);
         if (data.success && data.data !== null) {
             dispatch({ type: SEARCH_ORDERS, data: data.data })
-        } else if (data.data === null){
+        } else if (data.data === null) {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: 'This ID does not exist' })
         }
         else {
@@ -277,4 +277,18 @@ export const printSelectedOrders = (order_ids) => async (dispatch) => {
     // } catch (e) {
     //     return Promise.reject(e);
     // }
+}
+
+export const getOrdersInMap = () => async (dispatch) => {
+    try {
+        const { data } = await axios.get('/orders/map');
+        if (data.success) {
+            dispatch({ type: GET_ORDER_IN_MAP, data: data.data })
+        } else {
+            dispatch({ type: TOGGLE_ERROR_MODAL, data: data.error })
+        }
+    } catch (e) {
+        dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
+        return Promise.reject(e);
+    }
 }

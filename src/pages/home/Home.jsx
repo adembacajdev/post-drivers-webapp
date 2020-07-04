@@ -6,13 +6,12 @@ import images from '../../assets/images';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import i18n from '../../services/locales/i18n';
 import './home.scss';
-import { getTopCities, getTopProducts, getNumberOfOrdersByStatus } from '../../store/actions/orders';
+import { getTopCities, getTopProducts, getNumberOfOrdersByStatus, getOrdersInMap } from '../../store/actions/orders';
 import { getRecentCustomers } from '../../store/actions/customers';
 import { getShopInfo } from '../../store/actions/shop.info';
 import locations from '../../services/constants/Locations';
 
 const Home = (props) => {
-    const [markers, setMarkers] = useState([]);
     const [topProductsLength, setTopProductsLength] = useState(4);
     const [recentCustomersLength, setRecentCustomersLength] = useState(4);
     const [recentTopProductsLength, setrecentTopProductsLength] = useState(6);
@@ -25,17 +24,8 @@ const Home = (props) => {
         props.getNumberOfOrdersByStatus();
         props.getShopInfo();
         props.getRecentCustomers();
+        props.getOrdersInMap()
     }, []);
-
-    useEffect(() => {
-        if (props.topCities) {
-            let array = [];
-            Object.keys(props.topCities).forEach(city => {
-                array.push({ latitude: locations[city][0], longitude: locations[city][1] })
-            })
-            setMarkers(array);
-        }
-    }, [props.topCities]);
     return (
         <Wrapper>
             <div className="strike-home">
@@ -88,12 +78,11 @@ const Home = (props) => {
                                 mapboxApiAccessToken={'pk.eyJ1IjoiYWRlbWJhY2FqIiwiYSI6ImNrYnF0c3phNjBhd3Iydm50bnIyeHl0d3kifQ.6zDG514PklFKYJTYD32p8Q'}
                                 width={"100%"}
                                 height={'100%'}
-                                onViewportChange={(viewport) => setViewPort(viewport)}
-                            >
-                                {markers && markers.map((item, index) => {
+                                onViewportChange={(viewport) => setViewPort(viewport)} >
+                                {props.ordersByMap && props.ordersByMap.map((item) => {
                                     return (
-                                        <Marker key={index} latitude={item.latitude} longitude={item.longitude} offsetLeft={-23} offsetTop={-46} draggable={false}>
-                                            <div style={{ width: 20, height: 20, borderRadius: 10, backgroundColor: '#40B9E9' }} />
+                                        <Marker key={item.id} latitude={item.latitude} longitude={item.longitude} offsetLeft={-23} offsetTop={-46} draggable={false}>
+                                            <div status={item.status} className="map-marker" />
                                         </Marker>
                                     )
                                 })}
@@ -173,12 +162,12 @@ const Home = (props) => {
 }
 
 const mapStateToProps = ({
-    topCities, topProducts, numberOfOrdersByStatus, allLocations, recentCustomers
+    topCities, topProducts, numberOfOrdersByStatus, allLocations, recentCustomers, ordersByMap
 }) => ({
-    topCities, topProducts, numberOfOrdersByStatus, allLocations, recentCustomers
+    topCities, topProducts, numberOfOrdersByStatus, allLocations, recentCustomers, ordersByMap
 });
 const mapDispatchToProps = {
-    getTopCities, getTopProducts, getNumberOfOrdersByStatus, getShopInfo, getRecentCustomers
+    getTopCities, getTopProducts, getNumberOfOrdersByStatus, getShopInfo, getRecentCustomers, getOrdersInMap
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home));

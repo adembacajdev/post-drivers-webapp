@@ -862,3 +862,24 @@
         }
     }
 }
+
+.map-marker{
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    &[status=cancelled]{
+        background-color: red;
+    }
+    &[status=completed]{
+        background-color: green;
+    }
+    &[status=ongoing]{
+        background-color: orange;
+    }
+    &[status=pending]{
+        background-color: #259cdb;
+    }
+    &[status=archived]{
+        background-color: grey;
+    }
+}

@@ -6,7 +6,10 @@ import successModal from './toggle.success.modal';
 import shopInfo from './shop.info';
 import { loggedIn, newPassword, user } from './authorization';
 import { allProducts, product, productOrder, deletedProduct } from './products';
-import { allOrders, order, numberOfOrdersByStatus, ordersByCity, ordersByStatus, topCities, topProducts, printOrder, ordersPaginated, orderPosted, deletedOrder } from './orders';
+import {
+    allOrders, order, numberOfOrdersByStatus, ordersByCity, ordersByStatus, topCities, topProducts, printOrder,
+    ordersPaginated, orderPosted, deletedOrder, ordersByMap
+} from './orders';
 import { allCustomers, customer, recentCustomers, customerOrders, deletedCustomer } from './customers';
 import { allLocations, location } from './location';
 import { allUsers, selectedUser } from './users';
@@ -21,7 +24,8 @@ export default combineReducers({
     //products
     allProducts, product, productOrder, deletedProduct,
     //orders
-    allOrders, order, numberOfOrdersByStatus, ordersByCity, ordersByStatus, topCities, topProducts, printOrder, ordersPaginated, orderPosted, deletedOrder,
+    allOrders, order, numberOfOrdersByStatus, ordersByCity, ordersByStatus, topCities, topProducts, printOrder, 
+    ordersPaginated, orderPosted, deletedOrder, ordersByMap,
     //customers
     allCustomers, customer, recentCustomers, customerOrders, deletedCustomer,
     //lcoations
