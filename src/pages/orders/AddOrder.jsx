@@ -100,7 +100,7 @@ const AddOrder = (props) => {
         window.onkeyup = (e) => {
             clearTimeout(timeout);
             timeout = setTimeout(async () => {
-                if (e.target.name === 'product_id') {
+                if (e.target.name === 'product_id' && e.target.value.length === 6) {
                     props.getProduct(e.target.value);
                 }
             }, 500)
@@ -122,6 +122,7 @@ const AddOrder = (props) => {
                 <div className="add-order__wrapper-row">
                     <div is-left="true" className="add-order__wrapper-row-column">
                         <div className="add-order__wrapper-row-column-title">{i18n.t('addOrder.productDetails')}</div>
+                        {props.product && <div style={{fontSize: 10, color: 'red'}}>{props.product && props.product.error}</div>}
                         <div className="add-order__wrapper-row-form-label">{i18n.t('addOrder.productId')}</div>
                         <input onChange={handleIdChange} defaultValue={productId} has-error={errors.product_id ? 'true' : 'false'} ref={register({ required: true })} name="product_id" className="add-order__wrapper-row-form-input" placeholder={i18n.t('addOrder.productId')} />
                         <div className="add-order__wrapper-row-form-label">{i18n.t('addOrder.name')}</div>
