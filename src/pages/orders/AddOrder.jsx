@@ -15,6 +15,8 @@ import { getProduct } from '../../store/actions/products';
 import images from '../../assets/images';
 import Auth from '../../services/auth/Auth';
 
+var timeout = null // timeout for searchBox
+
 const AddOrder = (props) => {
     const productId = props.match.params.productId;
     const [country, setCountry] = useState('Kosovë');
@@ -93,6 +95,15 @@ const AddOrder = (props) => {
         }
         else props.getProduct(productId);
     }, [])
+
+    const handleIdChange = (e) => {
+        window.onkeyup = (e) => {
+            clearTimeout(timeout);
+            timeout = setTimeout(async () => {
+                props.getProduct(e.target.value);
+            }, 500)
+        }
+    }
     return (
         <div className="add-order">
             <div className="add-order__navbar">
@@ -104,7 +115,7 @@ const AddOrder = (props) => {
                     <div is-left="true" className="add-order__wrapper-row-column">
                         <div className="add-order__wrapper-row-column-title">{i18n.t('addOrder.productDetails')}</div>
                         <div className="add-order__wrapper-row-form-label">{i18n.t('addOrder.productId')}</div>
-                        <input defaultValue={productId} has-error={errors.product_id ? 'true' : 'false'} ref={register({ required: true })} name="product_id" className="add-order__wrapper-row-form-input" placeholder={i18n.t('addOrder.productId')} />
+                        <input onChange={handleIdChange} defaultValue={productId} has-error={errors.product_id ? 'true' : 'false'} ref={register({ required: true })} name="product_id" className="add-order__wrapper-row-form-input" placeholder={i18n.t('addOrder.productId')} />
                         <div className="add-order__wrapper-row-form-label">{i18n.t('addOrder.name')}</div>
                         <input defaultValue={props.product && props.product.name} disabled ref={register({ required: false })} name="name" className="add-order__wrapper-row-form-input" placeholder={i18n.t('addOrder.name')} />
                         <div className="add-order__wrapper-row-form-label">{i18n.t('addOrder.description')}</div>
