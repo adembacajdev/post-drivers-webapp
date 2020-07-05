@@ -15,33 +15,34 @@ const Table = ({ items, deleteItem, printOne }) => {
             <div className="strike-orders__table-header">
                 <div className="strike-orders__table-header-item">
                     <input type="checkbox" onChange={selectAllOrders} value={selectedAll} checked={selectedAll} />
-                    <img className="strike-orders__table-header-item-icon" src={tableArrow} />
+                    <div style={{marginLeft: 15}} className="strike-orders__table-header-item-text">{i18n.t('orders.serialNumber')}</div>
+                    {/* <img className="strike-orders__table-header-item-icon" src={tableArrow} /> */}
                 </div>
                 <div className="strike-orders__table-header-item">
                     <div className="strike-orders__table-header-item-text">{i18n.t('orders.status')}</div>
-                    <img className="strike-orders__table-header-item-icon" src={tableArrow} />
+                    {/* <img className="strike-orders__table-header-item-icon" src={tableArrow} /> */}
                 </div>
                 <div className="strike-orders__table-header-item">
                     <div className="strike-orders__table-header-item-text">{i18n.t('orders.unitedPrice')}</div>
-                    <img className="strike-orders__table-header-item-icon" src={tableArrow} />
+                    {/* <img className="strike-orders__table-header-item-icon" src={tableArrow} /> */}
                 </div>
                 <div is-responsive="true" className="strike-orders__table-header-item">
                     <div className="strike-orders__table-header-item-text">{i18n.t('orders.date')}</div>
-                    <img className="strike-orders__table-header-item-icon" src={tableArrow} />
+                    {/* <img className="strike-orders__table-header-item-icon" src={tableArrow} /> */}
                 </div>
                 <div is-responsive="true" className="strike-orders__table-header-item">
                     <div className="strike-orders__table-header-item-text">{i18n.t('orders.time')}</div>
-                    <img className="strike-orders__table-header-item-icon" src={tableArrow} />
+                    {/* <img className="strike-orders__table-header-item-icon" src={tableArrow} /> */}
                 </div>
                 <div is-responsive="true" className="strike-orders__table-header-item">
                     <div className="strike-orders__table-header-item-text">{i18n.t('orders.customerName')}</div>
-                    <img className="strike-orders__table-header-item-icon" src={tableArrow} />
+                    {/* <img className="strike-orders__table-header-item-icon" src={tableArrow} /> */}
                 </div>
                 <div is-responsive="true" className="strike-orders__table-header-item centered">
                     <div className="strike-orders__table-header-item-text">{i18n.t('orders.city')}</div>
-                    <img className="strike-orders__table-header-item-icon" src={tableArrow} />
+                    {/* <img className="strike-orders__table-header-item-icon" src={tableArrow} /> */}
                 </div>
-                <div is-responsive="false" className="strike-orders__table-header-item centered">
+                <div is-responsive="true" className="strike-orders__table-header-item centered">
                     <div className="strike-orders__table-header-item-text">{i18n.t('orders.actions')}</div>
                 </div>
             </div>

@@ -21,10 +21,21 @@ const SeeOrder = (props) => {
         props.deleteOrder(props.location.state.id);
         props.history.goBack();
     }
+    const printOrd = () => {
+        localStorage.setItem('printOne', props.location.state.id)
+        window.open(`http://${window.location.host}/print/one`, 'Print Orders') //this should be https://
+    }
     return (
         <Wrapper>
             <div className="strike-order">
-                <div className="strike-order__header">{i18next.t('orders.orderDetails')}</div>
+                <div className="strike-order__header">
+                    <div className="strike-order__header-left">
+                        <div className="strike-order__header-left-text">{i18next.t('orders.orderDetails')}</div>
+                    </div>
+                    <div className="strike-order__header-right">
+                        <button onClick={printOrd} className="strike-orders__print-selected">{i18next.t('orders.printSelected')}</button>
+                    </div>
+                </div>
                 <div className="strike-order__body">
                     <div className="strike-order__body-left">
                         <div className="strike-order__body-left-top">

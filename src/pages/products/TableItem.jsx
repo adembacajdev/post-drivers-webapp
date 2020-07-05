@@ -17,7 +17,6 @@ const TableItem = ({ item, deleteProduct }) => {
     const [isOpen, open] = useState(false);
     
     const toggle = useCallback(() => { open(!isOpen) }, [isOpen]);
-    const navigate = useCallback(() => { history.push('/product', { id: item.id }) }, []);
     const edit = useCallback(() => { history.push('/edit-product', { id: item.id }) }, []);
     const deleteProd = useCallback(() => { deleteProduct(item.id) }, []);
     const check = () => setChecked(!checked);
@@ -45,16 +44,16 @@ const TableItem = ({ item, deleteProduct }) => {
             <div className="strike-products__table-item-content flex-1">
                 <input type="checkbox" onChange={check} value={checked} checked={checked} />
             </div>
-            <div onClick={navigate} className="strike-products__table-item-content flex-1">
+            <div onClick={edit} className="strike-products__table-item-content flex-1">
                 <div className="strike-products__table-item-content-text">{item.id}</div>
             </div>
-            <div onClick={navigate} className="strike-products__table-item-content flex-3">
+            <div onClick={edit} className="strike-products__table-item-content flex-3">
                 <div className="strike-products__table-item-content-text ml-15">{item.name}</div>
             </div>
-            <div onClick={navigate} is-responsive="true" className="strike-products__table-item-content flex-3">
+            <div onClick={edit} is-responsive="true" className="strike-products__table-item-content flex-3">
                 <div className="strike-products__table-item-content-text">{item.description}</div>
             </div>
-            <div onClick={navigate} className="strike-products__table-item-content flex-15">
+            <div onClick={edit} className="strike-products__table-item-content flex-15">
                 <div className="strike-products__table-item-content-text">{`${item.price}€`}</div>
             </div>
             <div is-responsive="true" onClick={toggle} className="strike-products__table-item-content flex-15 text-end">

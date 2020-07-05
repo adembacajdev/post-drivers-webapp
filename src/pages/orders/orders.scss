@@ -287,11 +287,30 @@
     &__header{
         display: flex;
         flex-direction: row;
-        align-items: center;
-        font-size: 37px;
-        font-family: 'Rajdhani';
+        width: 100%;
         margin-bottom: 20px;
-        color: #4D4F5C;
+        &-left{
+            display: flex;
+            flex: 1;
+            flex-direction: row;
+            align-items: center;
+            &-text{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                font-size: 37px;
+                font-family: 'Rajdhani';
+                margin-bottom: 20px;
+                color: #4D4F5C;
+            }
+        }
+        &-right{
+            display: flex;
+            flex: 1;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-end;
+        }
     }
     &__text{
         display: flex;

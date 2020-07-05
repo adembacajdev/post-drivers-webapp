@@ -95,7 +95,7 @@ const TableItem = ({ id, serial_number, status, updated_at, deleteItem, price, c
             <div onClick={navigate} is-responsive="true" className="strike-orders__table-item-container centered">
                 <div className="strike-orders__table-item-container-text">{client.city}</div>
             </div>
-            <div is-responsive="false" className="strike-orders__table-item-container centered">
+            <div is-responsive="true" className="strike-orders__table-item-container centered">
                 <div className="dropdown">
                     <img className="strike-orders__table-item-container-dots" src={threePoints} />
                     <div className="dropdown-content">

@@ -16,25 +16,25 @@ const TableItem = ({ created_at, email, first_name, last_name, id, phone, delete
     const editUsr = () => history.push('/edit-user', { id });
     return (
         <div className="strike-users__table-item">
-            <div onClick={navigate} is-responsive="true" className="strike-users__table-item-container">
+            <div onClick={editUsr} is-responsive="true" className="strike-users__table-item-container">
                 <div className="strike-users__table-item-container-text">{id}</div>
             </div>
-            <div onClick={navigate} className="strike-users__table-item-container">
+            <div onClick={editUsr} className="strike-users__table-item-container">
                 <div className="strike-users__table-item-container-text">{first_name}</div>
             </div>
-            <div onClick={navigate} className="strike-users__table-item-container">
+            <div onClick={editUsr} className="strike-users__table-item-container">
                 <div className="strike-users__table-item-container-text">{last_name}</div>
             </div>
-            <div onClick={navigate} className="strike-users__table-item-container">
+            <div onClick={editUsr} className="strike-users__table-item-container">
                 <div className="strike-users__table-item-container-text">{phone}</div>
             </div>
-            <div onClick={navigate} is-responsive="true" className="strike-users__table-item-container">
+            <div onClick={editUsr} is-responsive="true" className="strike-users__table-item-container">
                 <div className="strike-users__table-item-container-text">{email}</div>
             </div>
-            <div onClick={navigate} is-responsive="true" className="strike-users__table-item-container centered">
+            <div onClick={editUsr} is-responsive="true" className="strike-users__table-item-container centered">
                 <div className="strike-users__table-item-container-text">{date}</div>
             </div>
-            <div onClick={navigate} is-responsive="true" className="strike-users__table-item-container centered">
+            <div onClick={editUsr} is-responsive="true" className="strike-users__table-item-container centered">
                 {<div className="strike-users__table-item-container-text">{is_admin ? i18n.t('users.yes') : i18n.t('users.no')}</div>}
             </div>
             <div is-responsive="true" className="strike-users__table-item-container centered">
