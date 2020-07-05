@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet, Image } from '@react-pdf/renderer';
 
 // Create Document Component
-const PdfItem = ({ serial_number, client, product }) => (
+const PdfItem = ({ serial_number, seller, buyer, product }) => (
     <View style={styles.container}>
         <View style={styles.top}>
             <View style={styles.topLeft}>
@@ -23,7 +23,7 @@ const PdfItem = ({ serial_number, client, product }) => (
                         <Text style={styles.title}>Emri</Text>
                     </View>
                     <View style={styles.col}>
-                        <Text style={styles.subtitle}>Beni Shop</Text>
+                        <Text style={styles.subtitle}>{seller.name && seller.name}</Text>
                     </View>
                 </View>
                 <View style={styles.row}>
@@ -31,7 +31,7 @@ const PdfItem = ({ serial_number, client, product }) => (
                         <Text style={styles.title}>Telefoni</Text>
                     </View>
                     <View style={styles.col}>
-                        <Text style={styles.subtitle}>044xxxxxx</Text>
+                        <Text style={styles.subtitle}>{seller.phone && seller.phone}</Text>
                     </View>
                 </View>
                 <View style={styles.row}>
@@ -39,7 +39,7 @@ const PdfItem = ({ serial_number, client, product }) => (
                         <Text style={styles.title}>Qyteti</Text>
                     </View>
                     <View style={styles.col}>
-                        <Text style={styles.subtitle}>Prishtine</Text>
+                        <Text style={styles.subtitle}>{seller.city && seller.city}</Text>
                     </View>
                 </View>
                 <View style={styles.row}>
@@ -47,7 +47,7 @@ const PdfItem = ({ serial_number, client, product }) => (
                         <Text style={styles.title}>Adresa</Text>
                     </View>
                     <View style={styles.col}>
-                        <Text style={styles.subtitle}>Rruga Hasan Prishtina nr 15</Text>
+                        <Text style={styles.subtitle}>{seller.address && seller.address}</Text>
                     </View>
                 </View>
             </View>
@@ -60,7 +60,7 @@ const PdfItem = ({ serial_number, client, product }) => (
                         <Text style={styles.title}>Emri</Text>
                     </View>
                     <View style={styles.col}>
-                        <Text style={styles.subtitle}>{client&& client.first_name} {client && client.last_name}</Text>
+                        <Text style={styles.subtitle}>{buyer.name && buyer.name}</Text>
                     </View>
                 </View>
                 <View style={styles.row}>
@@ -68,7 +68,7 @@ const PdfItem = ({ serial_number, client, product }) => (
                         <Text style={styles.title}>Telefoni</Text>
                     </View>
                     <View style={styles.col}>
-                        <Text style={styles.subtitle}>{client && client.phone}</Text>
+                        <Text style={styles.subtitle}>{buyer.phone && buyer.phone}</Text>
                     </View>
                 </View>
                 <View style={styles.row}>
@@ -76,7 +76,7 @@ const PdfItem = ({ serial_number, client, product }) => (
                         <Text style={styles.title}>Qyteti</Text>
                     </View>
                     <View style={styles.col}>
-                        <Text style={styles.subtitle}>{client && client.city}</Text>
+                        <Text style={styles.subtitle}>{buyer.city && buyer.city}</Text>
                     </View>
                 </View>
                 <View style={styles.row}>
@@ -84,7 +84,7 @@ const PdfItem = ({ serial_number, client, product }) => (
                         <Text style={styles.title}>Adresa</Text>
                     </View>
                     <View style={styles.col}>
-                        <Text style={styles.subtitle}>{client && client.address}</Text>
+                        <Text style={styles.subtitle}>{buyer.address && buyer.address}</Text>
                     </View>
                 </View>
             </View>
@@ -101,10 +101,10 @@ const PdfItem = ({ serial_number, client, product }) => (
                 </View>
                 <View style={styles.bottomLeftItem}>
                     <View style={styles.bottomLeftItemLeft}>
-                        <Text style={styles.subtitle}>{product && product.name}</Text>
+                        <Text style={styles.subtitle}>{product.name && product.name}</Text>
                     </View>
                     <View style={styles.bottomLeftItemRight}>
-                        <Text style={styles.subtitle}>{product && product.description}</Text>
+                        <Text style={styles.subtitle}>{product.description && product.description}</Text>
                     </View>
                 </View>
             </View>
@@ -119,10 +119,10 @@ const PdfItem = ({ serial_number, client, product }) => (
                 </View>
                 <View style={styles.bottomRightItem}>
                     <View style={styles.bottomLeftItemLeft}>
-                        <Text style={styles.subtitle}>{product && product.additional_info}</Text>
+                        <Text style={styles.subtitle}>{product.additional_info && product.additional_info}</Text>
                     </View>
                     <View style={styles.bottomLeftItemRight}>
-                        <Text style={styles.subtitle}>{product && product.price}€</Text>
+                        <Text style={styles.subtitle}>{product.price && product.price}€</Text>
                     </View>
                 </View>
             </View>

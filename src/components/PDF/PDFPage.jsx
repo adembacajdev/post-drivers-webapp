@@ -1,5 +1,5 @@
 import React from 'react';
-import { Page, Document, StyleSheet } from '@react-pdf/renderer';
+import { Page, Document, StyleSheet, View } from '@react-pdf/renderer';
 import PdfItem from './PdfItem';
 
 const PDF = ({ items }) => {
@@ -7,7 +7,12 @@ const PDF = ({ items }) => {
         <Document>
             <Page size="A4" style={styles.page}>
                 {items.map(item => {
-                    return <PdfItem key={item.id} {...item} />
+                    return (
+                        <View style={styles.item}>
+                            <PdfItem key={item.id} {...item} />
+                            <View style={styles.line} />
+                        </View>
+                    )
                 })}
             </Page>
         </Document>
@@ -25,5 +30,14 @@ const styles = StyleSheet.create({
         height: '100%',
         padding: 15
     },
+    item: {
+        width: '100%'
+    },
+    line: {
+        width: '100%',
+        height: 3,
+        backgroundColor: 'grey',
+        marginVertical: 15
+    }
 });
 
