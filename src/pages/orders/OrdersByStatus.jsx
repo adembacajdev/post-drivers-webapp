@@ -47,7 +47,11 @@ const OrdersByStatus = (props) => {
         setSelected([])
         selectAll(false);
     }
-    const printSelectedOrd = () => props.printSelectedOrders(selected);
+    const printSelectedOrd = () => {
+        const stringSelected = JSON.stringify(selected);
+        localStorage.setItem('printMultiple', stringSelected);
+        window.open(`http://${window.location.host}/print/multiple`, 'Print Orders') //this should be https://
+    }
 
     return (
         <Context.Provider value={{ selected, setSelected, selectAll, selectedAll }}>
