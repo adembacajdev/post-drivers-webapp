@@ -3,12 +3,8 @@ import { PDFViewer } from '@react-pdf/renderer';
 import PDFPage from '../../components/PDF/PDFPage';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { useEffect } from 'react';
 
 const Viewer = (props) => {
-    useEffect(() => {
-        console.log('printOrder', props.printOrder)
-    }, [props.printOrder])
     return (
         <div style={{ width: '100%', height: '100%' }}>
             <PDFViewer style={{ width: '100%', height: '100vh' }}>

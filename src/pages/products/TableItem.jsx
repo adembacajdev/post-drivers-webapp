@@ -8,17 +8,21 @@ import config from '../../config';
 import copy from "copy-to-clipboard";
 
 const TableItem = ({ item, deleteProduct }) => {
-    const [copyText, setCopyText] = useState(`${config.addOrder}/${item.id}`)
     const { selected, setSelected, selectedAll } = useContext(Context);
+    const history = useHistory();
+    const { threePoints } = images.products;
+
+    const [copyText, setCopyText] = useState(`${config.addOrder}/${item.id}`)
     const [checked, setChecked] = useState(item.checked)
-    const history = useHistory()
-    const { testProduct, threePoints } = images.products;
     const [isOpen, open] = useState(false);
+    
     const toggle = useCallback(() => { open(!isOpen) }, [isOpen]);
     const navigate = useCallback(() => { history.push('/product', { id: item.id }) }, []);
     const edit = useCallback(() => { history.push('/edit-product', { id: item.id }) }, []);
     const deleteProd = useCallback(() => { deleteProduct(item.id) }, []);
     const check = () => setChecked(!checked);
+    const copyLink = () => copy(copyText);
+
     useEffect(() => {
         if (checked) setSelected([...selected, item.id])
         else if (!checked) {
@@ -35,8 +39,6 @@ const TableItem = ({ item, deleteProduct }) => {
             setChecked(true);
         }
     }, [selected])
-
-    const copyLink = () => copy(copyText);
 
     return (
         <div className="strike-products__table-item">

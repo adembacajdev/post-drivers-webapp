@@ -23,24 +23,13 @@ const OrdersByStatus = (props) => {
             props.getOrderByStatus(props.location.state.slug);
         }
     }, [])
-
     useEffect(() => { if (props.deletedOrder) { window.location.reload() } }, [props.deletedOrder])
-
     useEffect(() => { if (props.printOrder) saveAs(props.printOrder, 'newFile.pdf'); }, [props.printOrder]);
-
     useEffect(() => {
         setOrders(props.ordersByStatus)
         selectAll(false);
         setSelected([])
     }, [props.ordersByStatus]);
-
-    const deleteSelectedOrders = () => {
-        props.deleteOrders(selected, props.location.state.slug);
-        setSelected([])
-        selectAll(false);
-    }
-    const printSelectedOrd = () => props.printSelectedOrders(selected);
-
     useEffect(() => {
         if (selectedAll && props.ordersByStatus) {
             let newArray = [];
@@ -52,6 +41,14 @@ const OrdersByStatus = (props) => {
             setSelected([])
         }
     }, [selectedAll])
+
+    const deleteSelectedOrders = () => {
+        props.deleteOrders(selected, props.location.state.slug);
+        setSelected([])
+        selectAll(false);
+    }
+    const printSelectedOrd = () => props.printSelectedOrders(selected);
+
     return (
         <Context.Provider value={{ selected, setSelected, selectAll, selectedAll }}>
             <Wrapper>
@@ -75,7 +72,11 @@ const OrdersByStatus = (props) => {
     )
 }
 
-const mapStateToProps = ({ printOrder, ordersPaginated, ordersByStatus, deletedOrder }) => ({ printOrder, ordersPaginated, ordersByStatus, deletedOrder });
+const mapStateToProps = ({
+    printOrder, ordersPaginated, ordersByStatus, deletedOrder
+}) => ({
+    printOrder, ordersPaginated, ordersByStatus, deletedOrder
+});
 const mapDispatchToProps = { deleteOrder, printOneOrder, getOrderByStatus, deleteOrders, printSelectedOrders };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(OrdersByStatus))

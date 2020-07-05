@@ -8,10 +8,7 @@ import i18next from '../../services/locales/i18n';
 import { useCallback } from 'react';
 
 const SeeProduct = (props) => {
-    useEffect(() => {
-        const { id } = props.location.state;
-        props.getProduct(id)
-    }, [])
+    useEffect(() => { props.getProduct(props.location.state.id) }, [])
     const delProduct = useCallback(() => {
         props.deleteProduct(props.location.state.id);
         props.history.goBack();

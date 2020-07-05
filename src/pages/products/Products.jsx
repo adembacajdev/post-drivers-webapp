@@ -11,7 +11,7 @@ import Context from './Context';
 import Table from './Table';
 
 const Products = (props) => {
-    const { infoIcon, filledLeftArrow, unfilledLeftArrow, filledRightArrow, unfilledRightArrow } = images.customers;
+    const { filledLeftArrow, unfilledLeftArrow, filledRightArrow, unfilledRightArrow } = images.customers;
     const [data, setData] = useState(props.allProducts);
     const [selected, setSelected] = useState([]);
     const [selectedAll, selectAll] = useState(false)
@@ -31,13 +31,6 @@ const Products = (props) => {
         selectAll(false);
         setSelected([])
     }
-
-    const nextPage = useCallback(() => { if (data.hasNextPage) props.getAllProducts(10, data.currentPage + 1) }, [data]);
-    const prevPage = useCallback(() => { if (data.hasPrevPage) props.getAllProducts(10, data.currentPage - 1) }, [data]);
-    const number = useCallback((page) => { props.getAllProducts(10, page) }, [data]);
-
-    const addProduct = useCallback(() => { props.history.push('/add-product') }, []);
-
     useEffect(() => {
         if (selectedAll) {
             let newArray = [];
@@ -49,6 +42,13 @@ const Products = (props) => {
             setSelected([])
         }
     }, [selectedAll])
+
+    const nextPage = useCallback(() => { if (data.hasNextPage) props.getAllProducts(10, data.currentPage + 1) }, [data]);
+    const prevPage = useCallback(() => { if (data.hasPrevPage) props.getAllProducts(10, data.currentPage - 1) }, [data]);
+    const number = useCallback((page) => { props.getAllProducts(10, page) }, [data]);
+
+    const addProduct = useCallback(() => { props.history.push('/add-product') }, []);
+    
     return (
         <Context.Provider value={{ selected, setSelected, selectedAll, selectAll }}>
             <Wrapper>

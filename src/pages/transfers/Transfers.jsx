@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Wrapper from '../../containers/wrapper/Wrapper';
@@ -6,7 +6,6 @@ import images from '../../assets/images';
 import i18n from '../../services/locales/i18n';
 import './transfers.scss';
 import { getAllTransfers, getBalanceDetails, searchTransfers } from '../../store/actions/transfers';
-import { useEffect, useState, useCallback } from 'react';
 import { useForm } from "react-hook-form";
 import Table from './Table';
 import moment from 'moment';

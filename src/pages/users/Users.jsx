@@ -2,14 +2,12 @@ import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Wrapper from '../../containers/wrapper/Wrapper';
-import images from '../../assets/images';
 import i18n from '../../services/locales/i18n';
 import './style.scss';
 import { getAllUsers, deleteUser } from '../../store/actions/users';
 import Table from './Table';
 
 const Customers = (props) => {
-    const { infoIcon, filledLeftArrow, unfilledLeftArrow, filledRightArrow, unfilledRightArrow } = images.customers;
     const addUser = useCallback(() => { props.history.push('/add-user') }, []);
     useEffect(() => { props.getAllUsers() }, []);
     return (

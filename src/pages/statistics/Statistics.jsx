@@ -5,7 +5,6 @@ import Wrapper from '../../containers/wrapper/Wrapper';
 import i18n from '../../services/locales/i18n';
 import './statistics.scss';
 import { getDailyEarnings, getDailyOrders, getDailyCities } from '../../store/actions/statistics';
-// import { Line } from "react-chartjs-2";
 import { Line, Bar } from 'react-chartjs-2';
 
 const Statistics = (props) => {
@@ -72,12 +71,6 @@ const Statistics = (props) => {
                             <div className="strike-statistics__chart-header-left-text">{i18n.t('statistics.cities')}</div>
                         </div>
                         <div className="strike-statistics__chart-header-right">
-                            {/* <select>
-                                <option>1 month</option>
-                                <option>3 months</option>
-                                <option>6 months</option>
-                                <option>1 year</option>
-                            </select> */}
                         </div>
                     </div>
                     <div className="strike-statistics__chart-body">

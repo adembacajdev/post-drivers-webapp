@@ -9,7 +9,6 @@ import { getAllPricing } from '../../store/actions/pricing';
 import Table from './Table'
 
 const Pricing = (props) => {
-    const { history } = images.transfers;
     useEffect(() => { props.getAllPricing() }, []);
     return (
         <Wrapper>

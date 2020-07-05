@@ -12,6 +12,7 @@ const Profile = (props) => {
     const [surname, setSurname] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
+
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = ({ first_name, last_name, email, phone }) => {
         props.updateUser(props.user.id, { first_name, last_name, email, phone }, props.history)
@@ -19,6 +20,7 @@ const Profile = (props) => {
     const changePassword = ({ old_password, new_password, new_password_confirmation }) => {
         props.resetPassword({ old_password, new_password, new_password_confirmation })
     };
+    
     useEffect(() => { props.getUser() }, []);
     useEffect(() => {
         if (props.user) {

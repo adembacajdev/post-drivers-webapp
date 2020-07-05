@@ -10,15 +10,21 @@ import Auth from '../../services/auth/Auth';
 
 const Sidebar = (props) => {
     const [isAdmin, setIsAdmin] = useState(false);
-    const sidebar = useSelector(state => state.sidebar);
+    const {
+        homeIcon, customersIcon, statisticsIcon, productsIcon, transfersIcon, usersIcon, pricingIcon, ordersIcon
+    } = images.sidebar;
+
     const dispatch = useDispatch();
+    const sidebar = useSelector(state => state.sidebar);
     const history = useHistory();
     const location = useLocation();
-    const { homeIcon, customersIcon, statisticsIcon, productsIcon, transfersIcon, usersIcon, pricingIcon, ordersIcon } = images.sidebar;
-    useEffect(() => { 
+
+    useEffect(() => {
         if (props.myProfile) {
             setIsAdmin(props.myProfile.is_admin == 1 ? true : false)
-        } }, [props.myProfile])
+        }
+    }, [props.myProfile])
+
     const menu = [
         { name: i18n.t('sidebar.home'), path: '/', icon: homeIcon, show: true },
         { name: i18n.t('sidebar.products'), path: '/products', icon: productsIcon, show: true },

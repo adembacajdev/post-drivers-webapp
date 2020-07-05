@@ -14,19 +14,27 @@ const Customers = (props) => {
     const [customers, setCustomers] = useState(props.allCustomers);
     const [selected, setSelected] = useState([]);
     const [selectedAll, selectAll] = useState(false)
-    const { infoIcon, filledLeftArrow, unfilledLeftArrow, filledRightArrow, unfilledRightArrow } = images.customers;
+    const { filledLeftArrow, unfilledLeftArrow, filledRightArrow, unfilledRightArrow } = images.customers;
 
-    const { register, handleSubmit, watch, errors } = useForm();
-    const onSubmit = ({ type, search }) => {
-        props.searchCustomers(type, search)
-    };
+    const { register, handleSubmit } = useForm();
+    const onSubmit = ({ type, search }) => { props.searchCustomers(type, search) };
+
     useEffect(() => { props.getAllCustomers(10, 1) }, []);
-    useEffect(() => {if(props.deletedCustomer){window.location.reload()}}, [props.deletedCustomer])
+    useEffect(() => { if (props.deletedCustomer) { window.location.reload() } }, [props.deletedCustomer])
     useEffect(() => {
         setCustomers(props.allCustomers);
         selectAll(false);
         setSelected([])
     }, [props.allCustomers]);
+    useEffect(() => {
+        if (selectedAll) {
+            let newArray = [];
+            customers.data.forEach(elem => {
+                newArray.push(elem.id)
+            })
+            setSelected(newArray)
+        } else { setSelected([]) }
+    }, [selectedAll])
 
     const deleteSelectedCustomers = () => {
         props.deleteCustomers(selected);
@@ -37,17 +45,6 @@ const Customers = (props) => {
     const nextPage = useCallback(() => { if (customers.hasNextPage) props.getAllCustomers(10, customers.currentPage + 1) }, [customers]);
     const prevPage = useCallback(() => { if (customers.hasPrevPage) props.getAllCustomers(10, customers.currentPage - 1) }, [customers]);
     const number = useCallback((page) => { props.getAllCustomers(10, page) }, [customers]);
-    useEffect(() => {
-        if (selectedAll) {
-            let newArray = [];
-            customers.data.forEach(elem => {
-                newArray.push(elem.id)
-            })
-            setSelected(newArray)
-        } else {
-            setSelected([])
-        }
-    }, [selectedAll])
     return (
         <Context.Provider value={{ selected, setSelected, selectedAll, selectAll }}>
             <Wrapper>

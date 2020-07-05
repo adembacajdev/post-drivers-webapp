@@ -1,9 +1,7 @@
 import React from 'react';
 import { Page, Document, StyleSheet } from '@react-pdf/renderer';
 import PdfItem from './PdfItem';
-import { useEffect } from 'react';
 
-// Create Document Component
 const PDF = ({ items }) => {
     return (
         <Document>

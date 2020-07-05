@@ -35,12 +35,6 @@ export const logout = () => async (dispatch) => {
         dispatch({ type: LOG_OUT });
         dispatch({ type: IS_LOGGED_IN, data: false });
         localStorage.clear();
-        localStorage.removeItem('token');
-        localStorage.removeItem('firstName');
-        localStorage.removeItem('lastName');
-        localStorage.removeItem('isAdmin');
-        localStorage.removeItem('shopName');
-        localStorage.removeItem('currentBalance');
     } catch (e) {
         if (e.message.includes('401')) {
             dispatch({ type: LOG_OUT });

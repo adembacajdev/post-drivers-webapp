@@ -7,12 +7,14 @@ import Context from './Context';
 
 const TableItem = ({ id, first_name, last_name, phone, address, city, deleteCustomer, item }) => {
     const { selected, setSelected } = useContext(Context);
-    const [checked, setChecked] = useState(item.checked)
     const history = useHistory()
+    const [checked, setChecked] = useState(item.checked);
     const { threePoints } = images.customers;
+
     const deleteClient = () => deleteCustomer(id);
     const navigate = () => history.push('/customer', { id });
     const check = () => setChecked(!checked);
+
     useEffect(() => {
         if (checked) setSelected([...selected, id])
         else if (!checked) {
@@ -25,10 +27,11 @@ const TableItem = ({ id, first_name, last_name, phone, address, city, deleteCust
         const iAmSelected = selected.filter(item => item === id);
         if (iAmSelected.length === 0) {
             setChecked(false)
-        }else{
+        } else {
             setChecked(true)
         }
     }, [selected])
+
     return (
         <div className="strike-customers__table-item">
             <div className="strike-customers__table-item-container">

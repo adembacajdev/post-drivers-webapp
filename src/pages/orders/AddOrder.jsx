@@ -21,67 +21,34 @@ const AddOrder = (props) => {
     const productId = props.match.params.productId;
     const [country, setCountry] = useState('Kosovë');
     const [tooltipOpen, setTooltipOpen] = useState(false);
-    const { register, handleSubmit, watch, errors } = useForm();
     const [popupInfo, setPopupInfo] = useState('');
     const [latitudeMarker, setLatitudeMarker] = useState(42.66758079200047);
     const [longitudeMarker, setLongitudeMarker] = useState(21.165194013322285);
     const [viewPort, setViewPort] = useState({ width: 1200, height: 600, latitude: 42.66758079200047, longitude: 21.165194013322285, zoom: 14, })
 
-    const _renderPopup = () => {
-        return popupInfo && (
-            <Popup tipSize={5}
-                anchor="bottom-right" longitude={this.state.longitudeMarker} latitude={this.state.latitudeMarker}
-                closeOnClick={false} offsetLeft={-10} offsetTop={-46} onClose={() => setPopupInfo('')} >
-                <div>{popupInfo}</div>
-            </Popup>
-        );
-    }
+    const { register, handleSubmit, watch, errors } = useForm();
 
 
     const onDragStart = (event) => { const { lngLat } = event }
-
     const onDragEnd = (event) => { setLatitudeMarker(event.lngLat[1]); setLongitudeMarker(event.lngLat[0]); }
-
     const toggle = () => setTooltipOpen(!tooltipOpen);
 
     const handleSelectCountry = (e) => {
         setCountry(e.target.value);
         setLatitudeMarker(locations[e.target.value][0]);
         setLongitudeMarker(locations[e.target.value][1]);
-        setViewPort({
-            width: 1200,
-            height: 600,
-            latitude: locations[e.target.value][0],
-            longitude: locations[e.target.value][1],
-            zoom: 14,
-        })
+        setViewPort({ width: 1200, height: 600, latitude: locations[e.target.value][0], longitude: locations[e.target.value][1], zoom: 14, })
     }
     const handleSelectCity = (e) => {
         setLatitudeMarker(locations[e.target.value][0]);
         setLongitudeMarker(locations[e.target.value][1]);
-        setViewPort({
-            width: 1200,
-            height: 600,
-            latitude: locations[e.target.value][0],
-            longitude: locations[e.target.value][1],
-            zoom: 14,
-        })
+        setViewPort({ width: 1200, height: 600, latitude: locations[e.target.value][0], longitude: locations[e.target.value][1], zoom: 14, })
     }
 
     const onSubmit = ({ product_id, description, first_name, last_name, phone, country, city, address, building }) => {
         const body = {
-            product_id,
-            description,
-            first_name,
-            last_name,
-            phone,
-            country,
-            city,
-            address,
-            building,
-            latitude: latitudeMarker,
-            longitude: longitudeMarker,
-            verification_code: 654350
+            product_id, description, first_name, last_name, phone, country, city, address, building,
+            latitude: latitudeMarker, longitude: longitudeMarker, verification_code: 654350
         }
         props.postOrder(body)
         // const isNumberValid = validateNumber(data.phone);
@@ -108,10 +75,9 @@ const AddOrder = (props) => {
     }
 
     useEffect(() => {
-        if (props.orderPosted) {
-            window.location.reload()
-        }
-    }, [props.orderPosted])
+        if (props.orderPosted) { window.location.reload() }
+    }, [props.orderPosted]);
+
     return (
         <div className="add-order">
             <div className="add-order__navbar">
@@ -122,7 +88,7 @@ const AddOrder = (props) => {
                 <div className="add-order__wrapper-row">
                     <div is-left="true" className="add-order__wrapper-row-column">
                         <div className="add-order__wrapper-row-column-title">{i18n.t('addOrder.productDetails')}</div>
-                        {props.product && <div style={{fontSize: 10, color: 'red'}}>{props.product && props.product.error}</div>}
+                        {props.product && <div style={{ fontSize: 10, color: 'red' }}>{props.product && props.product.error}</div>}
                         <div className="add-order__wrapper-row-form-label">{i18n.t('addOrder.productId')}</div>
                         <input onChange={handleIdChange} defaultValue={productId} has-error={errors.product_id ? 'true' : 'false'} ref={register({ required: true })} name="product_id" className="add-order__wrapper-row-form-input" placeholder={i18n.t('addOrder.productId')} />
                         <div className="add-order__wrapper-row-form-label">{i18n.t('addOrder.name')}</div>
@@ -169,14 +135,11 @@ const AddOrder = (props) => {
                     mapboxApiAccessToken={'pk.eyJ1IjoiYWRlbWJhY2FqIiwiYSI6ImNrYnF0c3phNjBhd3Iydm50bnIyeHl0d3kifQ.6zDG514PklFKYJTYD32p8Q'}
                     width={"100%"}
                     height={400}
-                    onViewportChange={(viewport) => setViewPort(viewport)}
-                >
+                    onViewportChange={(viewport) => setViewPort(viewport)}>
                     <Marker latitude={latitudeMarker} longitude={longitudeMarker} offsetLeft={-23} offsetTop={-46} draggable={true} onDragStart={onDragStart} onDragEnd={onDragEnd}>
                         <div ><img src={images.orders.pin} width={46} height={46} alt="App Logo" />
                         </div>
                     </Marker>
-                    {_renderPopup()}
-
                 </ReactMapGL>
                 <div className="add-order__wrapper-footer">
                     <button type="submit">{i18n.t('addOrder.button')}</button>

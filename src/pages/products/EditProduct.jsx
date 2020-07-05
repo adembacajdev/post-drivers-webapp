@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './products.scss';
 import Wrapper from '../../containers/wrapper/Wrapper';
 import { withRouter } from 'react-router-dom';
@@ -6,15 +6,9 @@ import { connect } from 'react-redux';
 import i18n from '../../services/locales/i18n';
 import { useForm } from "react-hook-form";
 import { updateProduct, getProduct } from '../../store/actions/products';
-import { useState } from 'react';
 
 const EditProduct = (props) => {
-    const [data, setData] = useState({
-        name: '',
-        decription: '',
-        price: '',
-        size: ''
-    })
+    const [data, setData] = useState({ name: '', decription: '', price: '', size: '' })
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = ({ description, price, size }) => {
         const { id } = props.location.state;
@@ -23,16 +17,11 @@ const EditProduct = (props) => {
         }
     };
 
-    useEffect(() => {
-        const { id } = props.location.state;
-        props.getProduct(id)
-    }, [])
-
-    useEffect(() => {
-        setData(props.product)
-    }, [props.product]);
+    useEffect(() => { props.getProduct(props.location.state.id) }, [])
+    useEffect(() => { setData(props.product) }, [props.product]);
 
     const handleSelect = (e) => setData({ ...data, size: e.target.value })
+
     return (
         <Wrapper>
             <div className="strike-addproduct">

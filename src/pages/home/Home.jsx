@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Wrapper from '../../containers/wrapper/Wrapper';
 import images from '../../assets/images';
-import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import ReactMapGL, { Marker } from 'react-map-gl';
 import i18n from '../../services/locales/i18n';
 import './home.scss';
 import { getTopCities, getTopProducts, getNumberOfOrdersByStatus, getOrdersInMap } from '../../store/actions/orders';

@@ -15,7 +15,6 @@ const Login = ({ login, loggedIn, authenticate, isLoggedIn }) => {
             login({ email, password })
         }
     };
-    // useEffect(() => { i18n.changeLanguage('al') }, [])
     return (
         isLoggedIn
         ?

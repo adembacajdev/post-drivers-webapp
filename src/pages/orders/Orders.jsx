@@ -5,7 +5,9 @@ import Wrapper from '../../containers/wrapper/Wrapper';
 import images from '../../assets/images';
 import i18n from '../../services/locales/i18n';
 import './orders.scss';
-import { getAllOrders, deleteOrder, printOneOrder, getOrdersPaginated, searchOrders, printSelectedOrders, deleteOrders } from '../../store/actions/orders';
+import {
+    getAllOrders, deleteOrder, printOneOrder, getOrdersPaginated, searchOrders, printSelectedOrders, deleteOrders
+} from '../../store/actions/orders';
 import { useForm } from "react-hook-form";
 import Context from './Context';
 import Table from './Table';
@@ -17,7 +19,7 @@ const Orders = (props) => {
     const [selected, setSelected] = useState([]);
     const [selectedAll, selectAll] = useState(false)
     const [searchSelect, setSearchSelect] = useState('serial_number');
-    const { infoIcon, filledLeftArrow, unfilledLeftArrow, filledRightArrow, unfilledRightArrow } = images.orders;
+    const { filledLeftArrow, unfilledLeftArrow, filledRightArrow, unfilledRightArrow } = images.orders;
 
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = ({ type, search }) => { props.searchOrders(type, search); };
@@ -27,12 +29,22 @@ const Orders = (props) => {
         if (props.location.state && props.location.state.title) setTitle(props.location.state.title);
     }, [])
     useEffect(() => { if (props.deletedOrder) window.location.reload() }, [props.deletedOrder])
-
     useEffect(() => {
         setOrders(props.ordersPaginated);
         selectAll(false);
         setSelected([])
     }, [props.ordersPaginated]);
+    useEffect(() => {
+        if (selectedAll) {
+            let newArray = [];
+            orders.data.forEach(elem => {
+                newArray.push(elem.id)
+            })
+            setSelected(newArray)
+        } else {
+            setSelected([])
+        }
+    }, [selectedAll])
 
     const deleteSelectedOrders = () => {
         props.deleteOrders(selected);
@@ -49,17 +61,7 @@ const Orders = (props) => {
     const number = useCallback((page) => { props.getOrdersPaginated(10, page) }, [orders]);
 
     const handleSearchSelect = useCallback((e) => { setSearchSelect(e.target.value) }, [searchSelect])
-    useEffect(() => {
-        if (selectedAll) {
-            let newArray = [];
-            orders.data.forEach(elem => {
-                newArray.push(elem.id)
-            })
-            setSelected(newArray)
-        } else {
-            setSelected([])
-        }
-    }, [selectedAll])
+
     return (
         <Context.Provider value={{ selected, setSelected, selectedAll, selectAll }}>
             <Wrapper>
@@ -100,7 +102,13 @@ const Orders = (props) => {
     )
 }
 
-const mapStateToProps = ({ allOrders, ordersPaginated, deletedOrder, printOrder }) => ({ allOrders, ordersPaginated, deletedOrder, printOrder });
-const mapDispatchToProps = { getAllOrders, deleteOrder, printOneOrder, getOrdersPaginated, searchOrders, printSelectedOrders, deleteOrders };
+const mapStateToProps = ({
+    allOrders, ordersPaginated, deletedOrder, printOrder
+}) => ({
+    allOrders, ordersPaginated, deletedOrder, printOrder
+});
+const mapDispatchToProps = {
+    getAllOrders, deleteOrder, printOneOrder, getOrdersPaginated, searchOrders, printSelectedOrders, deleteOrders
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Orders));

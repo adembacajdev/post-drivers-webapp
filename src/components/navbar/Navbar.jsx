@@ -53,7 +53,7 @@ const Navbar = (props) => {
             </div>
             <div className="strike-navbar__right">
                 <div tabIndex="0" onBlur={notificationBlur} onClick={toggleNotifications} className="strike-navbar__right-notification">
-                    <img className="strike-navbar__right-notification-icon" src={onNotification} />
+                    <img className="strike-navbar__right-notification-icon" src={offNotification} />
                 </div>
                 <Notifications notifications={notifications} onBlur={notificationBlur} />
                 <div className="strike-navbar__right-amount">
