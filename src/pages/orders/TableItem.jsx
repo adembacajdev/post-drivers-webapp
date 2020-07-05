@@ -49,7 +49,10 @@ const TableItem = ({ id, serial_number, status, updated_at, deleteItem, price, c
 
     const deleteThisItem = () => deleteItem(id);
     const navigate = () => history.push('/order', { id })
-    const printOrder = () => printOne(id);
+    const printOrder = () => {
+        printOne(id);
+        history.push('/print');
+    };
     const check = () => setChecked(!checked);
     useEffect(() => {
         if (checked) setSelected([...selected, id])

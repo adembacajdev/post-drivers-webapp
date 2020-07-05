@@ -1,4 +1,5 @@
 const images = {
+    logo: require('./Strike_LOGO.svg'),
     navbar: {
         avatar: require('./avatar.svg'),
         downArrow: require('./downarrow.svg'),

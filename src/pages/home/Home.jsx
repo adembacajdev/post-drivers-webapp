@@ -9,9 +9,9 @@ import './home.scss';
 import { getTopCities, getTopProducts, getNumberOfOrdersByStatus, getOrdersInMap } from '../../store/actions/orders';
 import { getRecentCustomers } from '../../store/actions/customers';
 import { getShopInfo } from '../../store/actions/shop.info';
-import locations from '../../services/constants/Locations';
 
 const Home = (props) => {
+    const [showMap, setShowMap] = useState(false);
     const [topProductsLength, setTopProductsLength] = useState(4);
     const [recentCustomersLength, setRecentCustomersLength] = useState(4);
     const [recentTopProductsLength, setrecentTopProductsLength] = useState(6);
@@ -25,6 +25,7 @@ const Home = (props) => {
         props.getShopInfo();
         props.getRecentCustomers();
         props.getOrdersInMap()
+        setTimeout(() => { setShowMap(true); }, 300) //due to a map issue, which blocks scroll for the first time, I have to set this timeout
     }, []);
     return (
         <Wrapper>
@@ -71,7 +72,8 @@ const Home = (props) => {
                     </div>
                     <div className="strike-home__map-body">
                         <div className="strike-home__map-body-map">
-                            <ReactMapGL
+                            {showMap && <ReactMapGL
+                            zoom={9}
                                 {...viewPort}
                                 // mapStyle={'mapbox://styles/mapbox/satellite-v9'}
                                 mapStyle={'mapbox://styles/mapbox/streets-v9'}
@@ -86,7 +88,7 @@ const Home = (props) => {
                                         </Marker>
                                     )
                                 })}
-                            </ReactMapGL>
+                            </ReactMapGL>}
                         </div>
                         <div className="strike-home__map-body-right">
                             {props.topCities && Object.entries(props.topCities).map((item, index) => {

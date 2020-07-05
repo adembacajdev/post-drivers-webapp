@@ -39,7 +39,10 @@ const Orders = (props) => {
         selectAll(false);
         setSelected([]);
     }
-    const printSelectedOrd = () => props.printSelectedOrders(selected);
+    const printSelectedOrd = () => {
+        props.printSelectedOrders(selected);
+        props.history.push('/print')
+    }
 
     const nextPage = useCallback(() => { if (orders.hasNextPage) props.getOrdersPaginated(10, orders.currentPage + 1) }, [orders]);
     const prevPage = useCallback(() => { if (orders.hasPrevPage) props.getOrdersPaginated(10, orders.currentPage - 1) }, [orders]);
@@ -97,7 +100,7 @@ const Orders = (props) => {
     )
 }
 
-const mapStateToProps = ({ allOrders, ordersPaginated, deletedOrder }) => ({ allOrders, ordersPaginated, deletedOrder });
+const mapStateToProps = ({ allOrders, ordersPaginated, deletedOrder, printOrder }) => ({ allOrders, ordersPaginated, deletedOrder, printOrder });
 const mapDispatchToProps = { getAllOrders, deleteOrder, printOneOrder, getOrdersPaginated, searchOrders, printSelectedOrders, deleteOrders };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Orders));

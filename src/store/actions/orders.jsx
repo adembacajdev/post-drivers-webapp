@@ -249,14 +249,14 @@ export const deleteOrders = (order_ids, status) => async (dispatch) => {
 }
 
 export const printOneOrder = (id) => async (dispatch) => {
-    const token = localStorage.getItem('token');
-    window.open(`${config.baseURL}/orders/${id}/print`, '_blank');
-    // try {
-    //     const data = await axios.get(`/orders/${id}/print`, { responseType: 'blob' });
-    //     dispatch({ type: PRINT_ONE_ORDER, data });
-    // } catch (e) {
-    //     return Promise.reject(e);
-    // }
+    try {
+        const { data } = await axios.post(`/orders/print?order_id=${id}`,);
+        if(data.success){
+            dispatch({ type: PRINT_ONE_ORDER, data: [data.data] });
+        }
+    } catch (e) {
+        return Promise.reject(e);
+    }
 }
 
 export const printSelectedOrders = (order_ids) => async (dispatch) => {
@@ -265,18 +265,19 @@ export const printSelectedOrders = (order_ids) => async (dispatch) => {
         if (query === '') query = `order_ids[]=${item}`;
         else query = `${query}&order_ids[]=${item}`;
     });
-    window.open(`${config.baseURL}/orders/print/selected?${query}`, '_blank');
-    // try {
-    //     var query = '';
-    //     order_ids.forEach(item => {
-    //         if (query === '') query = `order_ids[]=${item}`;
-    //         else query = `${query}&order_ids[]=${item}`;
-    //     });
-    //     const { data } = await axios.post(`/orders/print/selected?${query}`, { responseType: 'blob' });
-    //     dispatch({ type: PRINT_SELECTED_ORDERS, data });
-    // } catch (e) {
-    //     return Promise.reject(e);
-    // }
+    try {
+        var query = '';
+        order_ids.forEach(item => {
+            if (query === '') query = `order_ids[]=${item}`;
+            else query = `${query}&order_ids[]=${item}`;
+        });
+        const { data } = await axios.post(`/orders/print/selected?${query}`);
+        if (data.success) {
+            dispatch({ type: PRINT_SELECTED_ORDERS, data: data.data });
+        }
+    } catch (e) {
+        return Promise.reject(e);
+    }
 }
 
 export const getOrdersInMap = () => async (dispatch) => {

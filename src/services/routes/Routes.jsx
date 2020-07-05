@@ -27,6 +27,7 @@ const AddTransfer = lazy(() => import('../../pages/transfers/AddTransfer'));
 const AddProduct = lazy(() => import('../../pages/products/AddProduct'));
 const EditProduct = lazy(() => import('../../pages/products/EditProduct'));
 const Profile = lazy(() => import('../../pages/profile/Profile'));
+const PDFViewer = lazy(() => import('../../pages/PDF/PDFViewer'));
 
 function Router({ location }) {
     const isLoggedIn = useSelector(state => state.isLoggedIn);
@@ -58,6 +59,7 @@ function Router({ location }) {
                         <Route path="/login" component={Login} exact />
                         <Route path="/add-order/:productId" component={AddOrder} exact />
                         <Route path="/add-order" component={AddOrder} exact />
+                        <Route path="/print" component={PDFViewer} exact />
                         {protectedRoutes.map((route, idx) => {
                             return <PrivateRoute key={idx} {...route} />
                         })}
