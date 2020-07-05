@@ -155,7 +155,8 @@ const styles = StyleSheet.create({
     },
     topLeft: {
         flex: 0.5,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        paddingLeft: 10
     },
     topRight: {
         flex: 0.5,
