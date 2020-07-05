@@ -1,11 +1,12 @@
 import Echo from 'laravel-echo';
 const options = {
   broadcaster: 'pusher',
-  key: config.pusher.key,
-  cluster: config.pusher.cluster,
-  forceTLS: config.pusher.tls,
+  key: 'ABCD',
+  secret: "EFGJ",
+  cluster: 'mt1',
+  forceTLS: false,
   //authEndpoint is your apiUrl + /broadcasting/auth
-  authEndpoint: config.pusher.authEndpoint, 
+  authEndpoint: 'https://kn2jxedj.myhook.io/api', 
   // As I'm using JWT tokens, I need to manually set up the headers.
   auth: {
     headers: {
