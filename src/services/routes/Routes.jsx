@@ -59,6 +59,7 @@ function Router({ location }) {
                         <Route path="/login" component={Login} exact />
                         <Route path="/add-order/:productId" component={AddOrder} exact />
                         <Route path="/add-order" component={AddOrder} exact />
+                        <Route path="/print/:type" component={PDFViewer} exact />
                         <Route path="/print" component={PDFViewer} exact />
                         {protectedRoutes.map((route, idx) => {
                             return <PrivateRoute key={idx} {...route} />

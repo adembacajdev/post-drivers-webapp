@@ -50,8 +50,8 @@ const TableItem = ({ id, serial_number, status, updated_at, deleteItem, price, c
     const deleteThisItem = () => deleteItem(id);
     const navigate = () => history.push('/order', { id })
     const printOrder = () => {
-        printOne(id);
-        history.push('/print');
+        localStorage.setItem('printOne', id)
+        window.open(`http://${window.location.host}/print/one`, 'Print Orders') //this should be https://
     };
     const check = () => setChecked(!checked);
     useEffect(() => {

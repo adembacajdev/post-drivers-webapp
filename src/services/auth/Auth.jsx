@@ -63,7 +63,15 @@ const Auth = {
     getCurrentBalance: () => {
         const getCurrentBalance = localStorage.getItem('currentBalance');
         return getCurrentBalance ?? '-//-';
-    }
+    },
+    getOnePrintOrder: () => {
+        const printOne = localStorage.getItem('printOne');
+        return printOne ?? false;
+    },
+    getMultiplePrintOrder: () => {
+        const printMultiple = localStorage.getItem('printMultiple');
+        return printMultiple ?? false;
+    },
 }
 
 export default Auth;

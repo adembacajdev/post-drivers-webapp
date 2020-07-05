@@ -52,8 +52,9 @@ const Orders = (props) => {
         setSelected([]);
     }
     const printSelectedOrd = () => {
-        props.printSelectedOrders(selected);
-        props.history.push('/print')
+        const stringSelected = JSON.stringify(selected);
+        localStorage.setItem('printMultiple', stringSelected);
+        window.open(`http://${window.location.host}/print/multiple`, 'Print Orders') //this should be https://
     }
 
     const nextPage = useCallback(() => { if (orders.hasNextPage) props.getOrdersPaginated(10, orders.currentPage + 1) }, [orders]);
