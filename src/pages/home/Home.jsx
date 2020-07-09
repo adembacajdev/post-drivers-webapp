@@ -9,6 +9,7 @@ import './home.scss';
 import { getTopCities, getTopProducts, getNumberOfOrdersByStatus, getOrdersInMap } from '../../store/actions/orders';
 import { getRecentCustomers } from '../../store/actions/customers';
 import { getShopInfo } from '../../store/actions/shop.info';
+import Auth from '../../services/auth/Auth';
 
 const Home = (props) => {
     const [showMap, setShowMap] = useState(false);
@@ -19,12 +20,14 @@ const Home = (props) => {
     const [viewPort, setViewPort] = useState({ width: 1200, height: 600, latitude: 42.66758079200047, longitude: 21.165194013322285, zoom: 5, })
 
     useEffect(() => {
-        props.getTopCities();
-        props.getTopProducts();
-        props.getNumberOfOrdersByStatus();
-        props.getShopInfo();
-        props.getRecentCustomers();
-        props.getOrdersInMap()
+        const token = Auth.getToken();
+        if (token) {
+            props.getTopCities();
+            props.getTopProducts();
+            props.getNumberOfOrdersByStatus();
+            props.getRecentCustomers();
+            props.getOrdersInMap()
+        }
         setTimeout(() => { setShowMap(true); }, 300) //due to a map issue, which blocks scroll for the first time, I have to set this timeout
     }, []);
     return (

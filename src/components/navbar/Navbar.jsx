@@ -41,7 +41,10 @@ const Navbar = (props) => {
 
     const goHome = useCallback(() => { history.push('/') }, []);
 
-    useEffect(() => { props.getShopInfo() }, []);
+    useEffect(() => {
+        const token = Auth.getToken();
+        if (token) { props.getShopInfo() }
+    }, []);
     useEffect(() => { if (props.shopInfo) { setCurrentBalance(props.shopInfo.current_balance); } }, [props.shopInfo]);
 
     return (
