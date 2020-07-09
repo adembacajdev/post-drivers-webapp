@@ -13,10 +13,10 @@ const EditProduct = (props) => {
     const [copyText, setCopyText] = useState(`${config.addOrder}/${props.location.state.id}`)
     const [data, setData] = useState({ name: '', decription: '', price: '', size: '' })
     const { register, handleSubmit, watch, errors } = useForm();
-    const onSubmit = ({ description, price, size }) => {
+    const onSubmit = ({ name, description, price, size }) => {
         const { id } = props.location.state;
-        if (data.name !== '' && description !== '' && price !== '' && size !== '') {
-            props.updateProduct({ name: data.name, description, size, id, history: props.history });
+        if (name !== '' && description !== '' && price !== '' && size !== '') {
+            props.updateProduct({ name: name, description, size, id, history: props.history });
         }
     };
 

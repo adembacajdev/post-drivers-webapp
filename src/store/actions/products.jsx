@@ -107,6 +107,7 @@ export const updateProduct = (body) => async (dispatch) => {
         const { name, description, size, id, history } = body;
         const { data } = await axios.put(`/products/${id}`, { name, description, size });
         if (data.success) {
+            console.log('updatedProduct', data)
             dispatch({ type: UPDATE_PRODUCT, data });
             history.goBack();
         } else if (data.code === 403) {
