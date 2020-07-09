@@ -20,7 +20,6 @@ const App = ({ authenticate, setMyProfile }) => {
       const current_balance = Auth.getCurrentBalance();
       setMyProfile({ first_name, last_name, is_admin, shop_name, current_balance })
     } else {
-      axios.defaults.headers.common = { 'Content-Type': 'applicaton/json' };
       authenticate(false);
     }
   }, [])
