@@ -1,5 +1,5 @@
 const config = {
-    baseURL: 'https://kn2jxedj.myhook.io/api',
+    baseURL: 'https://nnt9cfso.myhook.io/api',
     addOrder: 'http://localhost:3000/add-order'
 }
 

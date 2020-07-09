@@ -86,7 +86,7 @@ export const postStoreProduct = (body) => async (dispatch) => {
         const { name, description, price, size, history } = body;
         const { data } = await axios.post(`/products`, { name, description, price, size });
         if (data.success) {
-            dispatch({ type: POST_STORE_PRODUCT, data: data.data });
+            // dispatch({ type: POST_STORE_PRODUCT, data: data.data });
             history.goBack()
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
