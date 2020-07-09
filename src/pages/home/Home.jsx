@@ -27,6 +27,9 @@ const Home = (props) => {
         props.getOrdersInMap()
         setTimeout(() => { setShowMap(true); }, 300) //due to a map issue, which blocks scroll for the first time, I have to set this timeout
     }, []);
+
+    useEffect(() => { console.log('recentCustomers', props.recentCustomers) }, [props.recentCustomers]);
+    useEffect(() => { console.log('topProducts', props.topProducts) }, [props.topProducts]);
     return (
         <Wrapper>
             <div className="strike-home">
@@ -73,7 +76,7 @@ const Home = (props) => {
                     <div className="strike-home__map-body">
                         <div className="strike-home__map-body-map">
                             {showMap && <ReactMapGL
-                            zoom={9}
+                                zoom={9}
                                 {...viewPort}
                                 // mapStyle={'mapbox://styles/mapbox/satellite-v9'}
                                 mapStyle={'mapbox://styles/mapbox/streets-v9'}
