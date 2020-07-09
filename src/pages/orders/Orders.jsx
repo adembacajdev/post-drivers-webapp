@@ -21,7 +21,7 @@ const Orders = (props) => {
     const [searchSelect, setSearchSelect] = useState('serial_number');
     const { filledLeftArrow, unfilledLeftArrow, filledRightArrow, unfilledRightArrow } = images.orders;
 
-    const { register, handleSubmit, watch, errors } = useForm();
+    const { register, handleSubmit, errors } = useForm();
     const onSubmit = ({ type, search }) => { props.searchOrders(type, search); };
 
     useEffect(() => {

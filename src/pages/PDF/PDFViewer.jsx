@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { PDFViewer } from '@react-pdf/renderer';
 import PDFPage from '../../components/PDF/PDFPage';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { useEffect } from 'react';
 import { printOneOrder, printSelectedOrders } from '../../store/actions/orders';
 import Auth from '../../services/auth/Auth';
 

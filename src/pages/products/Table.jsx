@@ -1,9 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useCallback } from 'react';
 import i18n from '../../services/locales/i18n';
 import './products.scss';
 import TableItem from './TableItem';
 import Context from './Context';
-import { useCallback } from 'react';
 
 const Table = ({ items, deleteProduct }) => {
     const { selectedAll, selectAll } = useContext(Context);

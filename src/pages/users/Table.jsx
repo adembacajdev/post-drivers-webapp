@@ -1,11 +1,9 @@
 import React from 'react';
-import images from '../../assets/images';
 import i18n from '../../services/locales/i18n';
 import './style.scss';
 import TableItem from './TableItem';
 
 const Table = ({ items, deleteUser }) => {
-    const { tableArrow } = images.customers;
     return (
         <div className="strike-users__table">
             <div className="strike-users__table-header">

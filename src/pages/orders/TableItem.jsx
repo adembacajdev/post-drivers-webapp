@@ -64,11 +64,8 @@ const TableItem = ({ id, serial_number, status, updated_at, deleteItem, price, c
 
     useEffect(() => {
         const iAmSelected = selected.filter(item => item === id);
-        if (iAmSelected.length === 0) {
-            setChecked(false)
-        }else{
-            setChecked(true)
-        }
+        if (iAmSelected.length === 0) { setChecked(false) }
+        else { setChecked(true) }
     }, [selected])
     return (
         <div className="strike-orders__table-item">

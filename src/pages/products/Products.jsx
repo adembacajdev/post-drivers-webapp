@@ -15,10 +15,11 @@ const Products = (props) => {
     const [data, setData] = useState(props.allProducts);
     const [selected, setSelected] = useState([]);
     const [selectedAll, selectAll] = useState(false)
-    const { register, handleSubmit, watch, errors } = useForm();
+    const { register, handleSubmit, errors } = useForm();
     const onSubmit = ({ search }) => {
         props.searchProducts(search);
     };
+
     useEffect(() => { props.getAllProducts(10, 1) }, []);
     useEffect(() => { if (props.deletedProduct) window.location.reload() }, [props.deletedProduct])
     useEffect(() => {
@@ -26,11 +27,6 @@ const Products = (props) => {
         selectAll(false);
         setSelected([])
     }, [props.allProducts]);
-    const deleteSelectedProducts = () => {
-        props.deleteProducts(selected);
-        selectAll(false);
-        setSelected([])
-    }
     useEffect(() => {
         if (selectedAll) {
             let newArray = [];
@@ -42,6 +38,12 @@ const Products = (props) => {
             setSelected([])
         }
     }, [selectedAll])
+
+    const deleteSelectedProducts = () => {
+        props.deleteProducts(selected);
+        selectAll(false);
+        setSelected([])
+    }
 
     const nextPage = useCallback(() => { if (data.hasNextPage) props.getAllProducts(10, data.currentPage + 1) }, [data]);
     const prevPage = useCallback(() => { if (data.hasPrevPage) props.getAllProducts(10, data.currentPage - 1) }, [data]);

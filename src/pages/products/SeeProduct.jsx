@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import './products.scss';
 import Wrapper from '../../containers/wrapper/Wrapper';
-import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getProduct, deleteProduct } from '../../store/actions/products';
 import i18next from '../../services/locales/i18n';
-import { useCallback } from 'react';
 
 const SeeProduct = (props) => {
     useEffect(() => { props.getProduct(props.location.state.id) }, [])

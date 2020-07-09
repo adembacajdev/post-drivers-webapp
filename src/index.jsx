@@ -6,6 +6,10 @@ import { Provider } from 'react-redux';
 import store from './store';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import config from './config';
+import axios from 'axios';
+
+axios.defaults.baseURL = config.baseURL;
 
 ReactDOM.render(
   <Provider store={store}>

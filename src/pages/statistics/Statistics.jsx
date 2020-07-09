@@ -86,28 +86,3 @@ const mapStateToProps = ({ dailyEarnings, dailyOrders, dailyCities }) => ({ dail
 const mapDispatchToProps = { getDailyEarnings, getDailyOrders, getDailyCities };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Statistics));
-
-const data = {
-    data: {
-      labels: ['Janar', 'Shkurt', 'Mars', 'Prill', 'Maj', 'Qershor', 'Korrik', 'Gusht', 'Shtator', 'Tetor', 'Nëntor', 'Dhjetor'],
-      datasets: [{
-        label: 'Totali Paga Bazë',
-        backgroundColor: 'rgba(14,52,64,0.2)',
-        borderColor: 'rgba(14,52,64,1)',
-        pointBorderColor: '#fff',
-        data: [9,4,6,7,1,3]
-      },
-      {
-        label: 'Totali Paga Bruto',
-        backgroundColor: 'rgba(114,102,186,0.2)',
-        borderColor: 'rgba(114,102,186,1)',
-        pointBorderColor: '#fff',
-        data: [5,2,7,9,2,4]
-      },]
-    },
-    options: {
-      legend: {
-        display: true
-      }
-    }
-  }

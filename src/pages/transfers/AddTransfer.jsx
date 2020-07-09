@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import i18n from '../../services/locales/i18n';
 
-const AddTransfer = (props) => {
+const AddTransfer = () => {
     return (
         <Wrapper>
             <div className="strike-addtransfer">

@@ -8,7 +8,7 @@ import { postUser } from '../../store/actions/users';
 import { useForm } from "react-hook-form";
 
 const AddUser = (props) => {
-    const { register, handleSubmit, watch, errors } = useForm();
+    const { register, handleSubmit, errors } = useForm();
     const onSubmit = data => props.postUser(data, props.history)
     return (
         <Wrapper>

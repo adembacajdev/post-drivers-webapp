@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import images from '../../assets/images';
 import i18n from '../../services/locales/i18n';
 import './style.scss';
-import { useCallback } from 'react';
 import moment from 'moment';
 
 
@@ -11,7 +10,6 @@ const TableItem = ({ created_at, email, first_name, last_name, id, phone, delete
     const history = useHistory();
     const { threePoints } = images.customers;
     const date = moment(created_at).format('DD/MM/YYYY')
-    const navigate = useCallback(() => { history.push('/user', { id }) }, []);
     const deleteUsr = () => deleteUser(id);
     const editUsr = () => history.push('/edit-user', { id });
     return (

@@ -3,7 +3,7 @@ import './addOrder.scss';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import i18n from '../../services/locales/i18n';
-import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import ReactMapGL, { Marker } from 'react-map-gl';
 import { useForm } from "react-hook-form";
 import { postOrder } from '../../store/actions/orders';
 import { validateNumber } from '../../services/schemas';
@@ -18,16 +18,13 @@ import Auth from '../../services/auth/Auth';
 var timeout = null // timeout for searchBox
 
 const AddOrder = (props) => {
+    const { register, handleSubmit, errors } = useForm();
     const productId = props.match.params.productId;
     const [country, setCountry] = useState('Kosovë');
     const [tooltipOpen, setTooltipOpen] = useState(false);
-    const [popupInfo, setPopupInfo] = useState('');
     const [latitudeMarker, setLatitudeMarker] = useState(42.66758079200047);
     const [longitudeMarker, setLongitudeMarker] = useState(21.165194013322285);
     const [viewPort, setViewPort] = useState({ width: 1200, height: 600, latitude: 42.66758079200047, longitude: 21.165194013322285, zoom: 14, })
-
-    const { register, handleSubmit, watch, errors } = useForm();
-
 
     const onDragStart = (event) => { const { lngLat } = event }
     const onDragEnd = (event) => { setLatitudeMarker(event.lngLat[1]); setLongitudeMarker(event.lngLat[0]); }

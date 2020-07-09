@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import './style.scss';
 import Wrapper from '../../containers/wrapper/Wrapper';
+import i18n from '../../services/locales/i18n';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import i18n from '../../services/locales/i18n';
 import { updateUser, getUser, deleteUser } from '../../store/actions/users';
 import { useForm } from "react-hook-form";
+import './style.scss';
 
 const EditUser = (props) => {
     const [data, setData] = useState(props.selectedUser)

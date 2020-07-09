@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import i18n from '../../services/locales/i18n';
 import './login.scss';
 
-const Login = ({ login, loggedIn, authenticate, isLoggedIn }) => {
+const Login = ({ login, isLoggedIn }) => {
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = ({ email, password }) => {
         if (!errors.email && !errors.password) {

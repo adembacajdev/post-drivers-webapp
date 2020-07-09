@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Wrapper from '../../containers/wrapper/Wrapper';
-import images from '../../assets/images';
 import i18n from '../../services/locales/i18n';
 import './style.scss';
 import { getAllPricing } from '../../store/actions/pricing';

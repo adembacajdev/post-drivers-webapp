@@ -3,19 +3,14 @@ import i18n from '../locales/i18n';
 const Auth = {
     getToken: () => {
         const token = localStorage.getItem('token');
-        if (token == null || token == undefined || token == 'null' || token == 'undefined') {
-            return false;
-        }
-        else return token;
+        return token ?? false;
     },
     setToken: (token) => {
         localStorage.setItem('token', token);
     },
     getShopName: () => {
         const shopName = localStorage.getItem('shopName');
-        if (shopName == null || shopName == undefined || shopName == 'null' || shopName == 'undefined') {
-            return i18n.t('navbar.onlineShop');
-        } else return shopName;
+        return shopName ?? null;
     },
     setLanguage: () => {
         const language = localStorage.getItem('language');
@@ -28,25 +23,14 @@ const Auth = {
     },
     getLanguage: () => {
         const language = localStorage.getItem('language');
-        if (language !== null || language !== 'null' || language !== undefined || language !== 'undefined') {
-            return language;
-        } else {
-            const en = 'en'
-            return en;
-        }
+        return language ?? 'en';
     },
     checkIsAdmin: () => {
         const isAdmin = localStorage.getItem('isAdmin');
         if (isAdmin !== undefined || isAdmin !== 'undefined' || isAdmin !== null || isAdmin !== 'null') {
-            if (isAdmin === '1') {
-                return true;
-            }
-            else {
-                return false;
-            }
-        } else {
-            return false;
-        }
+            if (isAdmin === '1') { return true; }
+            else { return false; }
+        } else { return false; }
     },
     getFirstName: () => {
         const firstName = localStorage.getItem('firstName');

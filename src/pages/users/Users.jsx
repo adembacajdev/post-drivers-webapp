@@ -22,14 +22,6 @@ const Customers = (props) => {
                     </div>
                 </div>
                 <Table deleteUser={props.deleteUser} items={props.allUsers} />
-                {/* <div className="strike-users__pagination">
-                    <img src={unfilledLeftArrow} className='strike-users__pagination-leftarrow' />
-                    <div is-active="true" className="strike-users__pagination-number">1</div>
-                    <div className="strike-users__pagination-number">2</div>
-                    <div className="strike-users__pagination-number">3</div>
-                    <div className="strike-users__pagination-number">4</div>
-                    <img src={filledRightArrow} className='strike-users__pagination-rightArrow' />
-                </div> */}
             </div>
         </Wrapper>
     )

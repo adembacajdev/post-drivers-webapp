@@ -13,7 +13,7 @@ const Profile = (props) => {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
 
-    const { register, handleSubmit, watch, errors } = useForm();
+    const { register, handleSubmit, errors } = useForm();
     const onSubmit = ({ first_name, last_name, email, phone }) => {
         props.updateUser(props.user.id, { first_name, last_name, email, phone }, props.history)
     };

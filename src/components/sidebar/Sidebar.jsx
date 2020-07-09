@@ -6,7 +6,6 @@ import { useSelector, useDispatch, connect } from 'react-redux';
 import { TOGGLE_SIDEBAR } from '../../store/actionTypes';
 import './sidebar.scss';
 import { logout } from '../../store/actions/authorization';
-import Auth from '../../services/auth/Auth';
 
 const Sidebar = (props) => {
     const [isAdmin, setIsAdmin] = useState(false);
