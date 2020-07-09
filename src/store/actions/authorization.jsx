@@ -31,7 +31,6 @@ export const login = (body) => async (dispatch) => {
 export const logout = () => async (dispatch) => {
     try {
         const data = await axios.post('/logout');
-        console.log('logout', data)
         dispatch({ type: LOG_OUT });
         dispatch({ type: IS_LOGGED_IN, data: false });
         localStorage.clear();

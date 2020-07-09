@@ -8,6 +8,7 @@ import { logout } from '../../store/actions/authorization';
 import Auth from '../../services/auth/Auth';
 import './navbar.scss';
 import { useHistory } from 'react-router-dom';
+import { getShopInfo } from '../../store/actions/shop.info';
 
 const Navbar = (props) => {
     const [shopName, setShopName] = useState('');
@@ -31,8 +32,7 @@ const Navbar = (props) => {
         setCurrentBalance(Auth.getCurrentBalance());
     }, [props.shopInfo]);
     useEffect(() => {
-        if(props.myProfile){
-            console.log('hini')
+        if (props.myProfile) {
             setShopName(props.myProfile.shop_name);
             setCurrentBalance(props.myProfile.current_balance);
             setName(`${props.myProfile.first_name} ${props.myProfile.last_name}`)
@@ -40,6 +40,9 @@ const Navbar = (props) => {
     }, [props.myProfile])
 
     const goHome = useCallback(() => { history.push('/') }, []);
+
+    useEffect(() => { props.getShopInfo() }, []);
+    useEffect(() => { if (props.shopInfo) { setCurrentBalance(props.shopInfo.current_balance); } }, [props.shopInfo]);
 
     return (
         <div className="strike-navbar">
@@ -63,7 +66,7 @@ const Navbar = (props) => {
                 <div onClick={toggleProfile} tabIndex="1" onBlur={profileBlur} className="strike-navbar__right-name">
                     <div className="strike-navbar__right-name-text">{name}</div>
                     <img is-active={profile ? 'true' : 'false'} className="strike-navbar__right-name-downarrow" src={downArrow} />
-                <Profile logout={logout} profile={profile} />
+                    <Profile logout={logout} profile={profile} />
                 </div>
             </div>
         </div>
@@ -71,6 +74,6 @@ const Navbar = (props) => {
 }
 
 const mapStateToProps = ({ sidebar, shopInfo, myProfile }) => ({ sidebar, shopInfo, myProfile });
-const mapDispatchToProps = { toggleSidebar, logout };
+const mapDispatchToProps = { toggleSidebar, logout, getShopInfo };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

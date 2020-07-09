@@ -107,7 +107,6 @@ export const updateProduct = (body) => async (dispatch) => {
         const { name, description, size, id, history } = body;
         const { data } = await axios.put(`/products/${id}`, { name, description, size });
         if (data.success) {
-            console.log('updatedProduct', data)
             dispatch({ type: UPDATE_PRODUCT, data });
             history.goBack();
         } else if (data.code === 403) {
@@ -127,7 +126,6 @@ export const updateProduct = (body) => async (dispatch) => {
 export const deleteProduct = (id) => async (dispatch) => {
     try {
         const { data } = await axios.delete(`/products/${id}`);
-        console.log('data', data)
         if (data.success) {
             window.location.reload();
         } else if (data.code === 403) {
@@ -152,7 +150,6 @@ export const deleteProducts = (product_ids) => async (dispatch) => {
             else query = `${query}&product_ids[]=${item}`;
         });
         const { data } = await axios.delete(`/products?${query}`);
-        console.log('data', data)
         if (data.success) {
             window.location.reload();
         } else if (data.code === 403) {
