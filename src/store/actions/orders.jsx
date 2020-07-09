@@ -21,7 +21,6 @@ export const getAllOrders = () => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
         return Promise.reject(e);
     }
 }
@@ -49,7 +48,6 @@ export const searchOrders = (type, text) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
         return Promise.reject(e);
     }
 }
@@ -63,7 +61,6 @@ export const getOrdersPaginated = (limit, page) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
         return Promise.reject(e);
     }
 }
@@ -82,7 +79,6 @@ export const getOrder = (id) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
         return Promise.reject(e);
     }
 }
@@ -102,7 +98,6 @@ export const getNumberOfOrdersByStatus = () => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
         return Promise.reject(e);
     }
 }
@@ -122,7 +117,6 @@ export const postOrder = (params) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.error })
         }
     } catch (e) {
-        dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
         return Promise.reject(e);
     }
 }
@@ -141,7 +135,6 @@ export const getOrderByStatus = (status) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
         return Promise.reject(e);
     }
 }
@@ -160,7 +153,6 @@ export const getOrderByCity = (city) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
         return Promise.reject(e);
     }
 }
@@ -180,7 +172,6 @@ export const getTopCities = () => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
         return Promise.reject(e);
     }
 }
@@ -200,7 +191,6 @@ export const getTopProducts = () => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
         return Promise.reject(e);
     }
 }
@@ -219,7 +209,6 @@ export const deleteOrder = (id) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
         return Promise.reject(e);
     }
 }
@@ -243,7 +232,6 @@ export const deleteOrders = (order_ids, status) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
         return Promise.reject(e);
     }
 }
@@ -289,7 +277,6 @@ export const getOrdersInMap = () => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.error })
         }
     } catch (e) {
-        dispatch({ type: TOGGLE_ERROR_MODAL, data: e.message })
         return Promise.reject(e);
     }
 }
