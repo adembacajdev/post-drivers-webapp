@@ -12,9 +12,6 @@ const App = ({ authenticate, setMyProfile }) => {
     Auth.setLanguage();
     const token = Auth.getToken();
     if (token) {
-      axios.defaults.headers.common['Content-Type'] = "applicaton/json";
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      // axios.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
       authenticate(true);
       const first_name = Auth.getFirstName();
       const last_name = Auth.getLastName();

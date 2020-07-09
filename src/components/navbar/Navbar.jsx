@@ -63,7 +63,7 @@ const Navbar = (props) => {
                 </div>
                 <Notifications notifications={notifications} onBlur={notificationBlur} />
                 <div className="strike-navbar__right-amount">
-                    <div className="strike-navbar__right-amount-text">{currentBalance}€</div>
+                    <div className="strike-navbar__right-amount-text">{props.shopInfo && props.shopInfo.current_balance}€</div>
                 </div>
                 <div className="line" />
                 <div onClick={toggleProfile} tabIndex="1" onBlur={profileBlur} className="strike-navbar__right-name">

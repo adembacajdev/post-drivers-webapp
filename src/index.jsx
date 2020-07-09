@@ -8,6 +8,14 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import config from './config';
 import axios from 'axios';
+import Auth from './services/auth/Auth';
+
+const token = Auth.getToken();
+
+if(token){
+  axios.defaults.headers.common['Content-Type'] = "applicaton/json";
+  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+}
 
 axios.defaults.baseURL = config.baseURL;
 
