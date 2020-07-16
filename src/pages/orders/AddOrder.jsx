@@ -72,7 +72,11 @@ const AddOrder = (props) => {
     }
 
     useEffect(() => {
-        if (props.orderPosted) { window.location.reload() }
+        if (props.orderPosted) { 
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000)
+         }
     }, [props.orderPosted]);
 
     return (
