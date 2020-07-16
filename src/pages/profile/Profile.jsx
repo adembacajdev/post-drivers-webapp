@@ -37,14 +37,13 @@ const Profile = (props) => {
                 <div className="strike-profile__title">{i18n.t('profile.title')}</div>
                 <form className="strike-profile__form" onSubmit={handleSubmit(onSubmit)}>
                     <div className="strike-profile__form-label">{i18n.t('profile.name')}</div>
-                    <input defaultValue={name} has-error={errors.first_name ? 'true' : 'false'} name="first_name" ref={register({ required: true })} className="strike-profile__form-input" placeholder={i18n.t('profile.name')} />
+                    <input disabled defaultValue={name} has-error={errors.first_name ? 'true' : 'false'} name="first_name" ref={register({ required: true })} className="strike-profile__form-input" placeholder={i18n.t('profile.name')} />
                     <div className="strike-profile__form-label">{i18n.t('profile.surname')}</div>
-                    <input defaultValue={surname} has-error={errors.last_name ? 'true' : 'false'} name="last_name" ref={register({ required: true })} className="strike-profile__form-input" placeholder={i18n.t('profile.surname')} />
+                    <input disabled defaultValue={surname} has-error={errors.last_name ? 'true' : 'false'} name="last_name" ref={register({ required: true })} className="strike-profile__form-input" placeholder={i18n.t('profile.surname')} />
                     <div className="strike-profile__form-label">{i18n.t('profile.email')}</div>
-                    <input defaultValue={email} has-error={errors.email ? 'true' : 'false'} name="email" ref={register({ required: true })} className="strike-profile__form-input" placeholder={i18n.t('profile.email')} />
+                    <input disabled defaultValue={email} has-error={errors.email ? 'true' : 'false'} name="email" ref={register({ required: true })} className="strike-profile__form-input" placeholder={i18n.t('profile.email')} />
                     <div className="strike-profile__form-label">{i18n.t('profile.phone')}</div>
-                    <input defaultValue={phone} has-error={errors.phone ? 'true' : 'false'} name="phone" ref={register({ required: true })} className="strike-profile__form-input" placeholder={i18n.t('profile.phone')} />
-                    <button type="submit" className="strike-profile__form-button">{i18n.t('profile.updateButton')}</button>
+                    <input disabled defaultValue={phone} has-error={errors.phone ? 'true' : 'false'} name="phone" ref={register({ required: true })} className="strike-profile__form-input" placeholder={i18n.t('profile.phone')} />
                 </form>
             </div>
             <div className="strike-profile">
