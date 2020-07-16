@@ -12,6 +12,7 @@ const Sidebar = (props) => {
     const {
         homeIcon, customersIcon, statisticsIcon, productsIcon, transfersIcon, usersIcon, pricingIcon, ordersIcon
     } = images.sidebar;
+    const { logoWithoutText } = images;
 
     const dispatch = useDispatch();
     const sidebar = useSelector(state => state.sidebar);
@@ -50,6 +51,10 @@ const Sidebar = (props) => {
                     )
                 }
             })}
+            <footer className="strike-sidebar__footer">
+                <img className="strike-sidebar__footer-logo" src={logoWithoutText} />
+                <div className="strike-sidebar__footer-text">Powered by Strike™</div>
+            </footer>
         </div>
     )
 }
