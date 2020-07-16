@@ -7,8 +7,10 @@ import { login } from '../../store/actions/authorization';
 import { useForm } from "react-hook-form";
 import i18n from '../../services/locales/i18n';
 import './login.scss';
+import images from '../../assets/images';
 
-const Login = ({ login, isLoggedIn }) => {
+const Login = ({ login, loggedIn, authenticate, isLoggedIn }) => {
+    const { logoWithoutText } = images;
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = ({ email, password }) => {
         if (!errors.email && !errors.password) {
@@ -17,21 +19,24 @@ const Login = ({ login, isLoggedIn }) => {
     };
     return (
         isLoggedIn
-        ?
-        <Redirect to='/' />
-        :
-        <div className="strike-login">
-            <div className="strike-login__title">{i18n.t('login.title')}</div>
-            <div className="strike-login__inputs">
-                <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={handleSubmit(onSubmit)}>
-                    <div className="strike-login__inputs-label">{i18n.t('login.emailLabel')}</div>
-                    <input has-error={errors.email ? 'true' : 'false'} name="email" ref={register({ required: true })} className="strike-login__inputs-input" type="text" placeholder={i18n.t('login.emailPlaceholder')} />
-                    <div className="strike-login__inputs-label">{i18n.t('login.passwordLabel')}</div>
-                    <input has-error={errors.password ? "true" : 'false'} name="password" ref={register({ required: true })} className="strike-login__inputs-input" type="password" placeholder={i18n.t('login.passwordPlaceholder')} />
-                    <button type="submit" className="strike-login__inputs-button">{i18n.t('login.loginButton')}</button>
-                </form>
+            ?
+            <Redirect to='/' />
+            :
+            <div className="strike-login">
+                <div className="strike-login__header">
+                    <img className="strike-login__header-logo" src={logoWithoutText} />
+                <div className="strike-login__header-title">{i18n.t('login.title')}</div>
+                </div>
+                <div className="strike-login__inputs">
+                    <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={handleSubmit(onSubmit)}>
+                        <div className="strike-login__inputs-label">{i18n.t('login.emailLabel')}</div>
+                        <input has-error={errors.email ? 'true' : 'false'} name="email" ref={register({ required: true })} className="strike-login__inputs-input" type="text" placeholder={i18n.t('login.emailPlaceholder')} />
+                        <div className="strike-login__inputs-label">{i18n.t('login.passwordLabel')}</div>
+                        <input has-error={errors.password ? "true" : 'false'} name="password" ref={register({ required: true })} className="strike-login__inputs-input" type="password" placeholder={i18n.t('login.passwordPlaceholder')} />
+                        <button type="submit" className="strike-login__inputs-button">{i18n.t('login.loginButton')}</button>
+                    </form>
+                </div>
             </div>
-        </div>
     )
 }
 
