@@ -6,6 +6,7 @@ export const MY_PROFILE = 'MY_PROFILE';
 
 //Notifications
 export const GET_NOTIFICATIONS = 'GET_NOTIFICATIONS';
+export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION';
 
 //ShopInfo
 export const GET_SHOP_INFO = 'GET_SHOP_INFO'
