@@ -109,7 +109,7 @@ const AddOrder = (props) => {
                         <input has-error={errors.last_name ? 'true' : 'false'} ref={register({ required: true })} name="last_name" className="add-order__wrapper-row-form-input" placeholder={i18n.t('addOrder.lastName')} />
                         <div className="add-order__wrapper-row-form-label">{i18n.t('addOrder.phone')}</div>
                         <input href="#" id="TooltipExample" has-error={errors.phone ? 'true' : 'false'} ref={register({ required: true })} name="phone" className="add-order__wrapper-row-form-input" placeholder={i18n.t('addOrder.phone')} />
-                        <Tooltip placement="left" isOpen={tooltipOpen} target="TooltipExample" toggle={toggle}>{i18n.t('addOrder.receiveCode')}</Tooltip>
+                        {/* <Tooltip placement="left" isOpen={tooltipOpen} target="TooltipExample" toggle={toggle}>{i18n.t('addOrder.receiveCode')}</Tooltip> */}
                         <div className="add-order__wrapper-row-form-label">{i18n.t('addOrder.country')}</div>
                         <select name="country" has-error={errors.country ? 'true' : 'false'} ref={register({ required: true })} onChange={handleSelectCountry} className="add-order__wrapper-row-form-input">
                             <option value="Kosovë">{i18n.t('addOrder.kosovo')}</option>
