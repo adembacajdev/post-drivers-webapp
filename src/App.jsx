@@ -36,7 +36,7 @@ const App = ({ authenticate, setMyProfile, isLoggedIn, storeNotifications }) => 
     let host = window.location.host;
     let parts = host.split(".");
     if (isLoggedIn) {
-      echo.channel(`${parts[0]}.strike`).listen('.NewOrder', (res) => {
+      echo.channel(`${parts[0]}`).listen('.NewOrder', (res) => {
         storeNotifications(res);
         console.log('res', res)
       });
