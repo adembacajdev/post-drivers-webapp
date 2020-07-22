@@ -17,6 +17,7 @@ import { pricingTable } from './pricing';
 import { allTransfers, transfer, balanceDetails } from './transfers';
 import { dailyEarnings, dailyOrders, dailyCities } from './statistics';
 import myProfile from './my.profile';
+import { allNotifications } from './notifications';
 
 export default combineReducers({
     isLoggedIn, sidebar, errorModal, successModal,
@@ -37,5 +38,7 @@ export default combineReducers({
     //transfers
     allTransfers, transfer, balanceDetails,
     //daily
-    dailyEarnings, dailyOrders, dailyCities
+    dailyEarnings, dailyOrders, dailyCities,
+    //Notifications
+    allNotifications,
 });

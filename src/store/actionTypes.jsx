@@ -4,6 +4,9 @@ export const TOGGLE_ERROR_MODAL = 'TOGGLE_ERROR_MODAL';
 export const TOGGLE_SUCCESS_MODAL = 'TOGGLE_SUCCESS_MODAL';
 export const MY_PROFILE = 'MY_PROFILE';
 
+//Notifications
+export const GET_NOTIFICATIONS = 'GET_NOTIFICATIONS';
+
 //ShopInfo
 export const GET_SHOP_INFO = 'GET_SHOP_INFO'
 

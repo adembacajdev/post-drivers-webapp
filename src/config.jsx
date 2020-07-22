@@ -1,6 +1,10 @@
+
+let host = window.location.host;
+let parts = host.split(".");
+
 const config = {
-    baseURL: 'https://nnt9cfso.myhook.io/api',
-    addOrder: 'http://localhost:3000/add-order'
+    baseURL: `https://${parts[0]}.strikecourier.com/api`,
+    addOrder: 'http://localhost:3000/add-order' //this should be fixed
 }
 
 export default config;

@@ -8,14 +8,15 @@ import config from '../../config';
 import copy from "copy-to-clipboard";
 
 const TableItem = ({ item, deleteProduct }) => {
+    let host = window.location.host;
     const { selected, setSelected, selectedAll } = useContext(Context);
     const history = useHistory();
     const { threePoints } = images.products;
 
-    const [copyText, setCopyText] = useState(`${config.addOrder}/${item.id}`)
+    const [copyText, setCopyText] = useState(`${host}/add-order/${item.id}`)
     const [checked, setChecked] = useState(item.checked)
     const [isOpen, open] = useState(false);
-    
+
     const toggle = useCallback(() => { open(!isOpen) }, [isOpen]);
     const edit = useCallback(() => { history.push('/edit-product', { id: item.id }) }, []);
     const deleteProd = useCallback(() => { deleteProduct(item.id) }, []);

@@ -17,6 +17,7 @@ const Navbar = (props) => {
     const { avatar, onNotification, offNotification, downArrow } = images.navbar;
     const [notifications, setNotifications] = useState(false);
     const [profile, setProfile] = useState(false);
+    const [notificationIcon, setNotificationIcon] = useState(offNotification);
 
     const history = useHistory();
 
@@ -47,6 +48,15 @@ const Navbar = (props) => {
     }, []);
     useEffect(() => { if (props.shopInfo) { setCurrentBalance(props.shopInfo.current_balance); } }, [props.shopInfo]);
 
+    useEffect(() => {
+        if (props.allNotifications.length) {
+            setNotificationIcon(onNotification)
+        }
+        else {
+            setNotificationIcon(offNotification)
+        }
+    }, [props.allNotifications])
+
     return (
         <div className="strike-navbar">
             <div className="strike-navbar__left">
@@ -59,9 +69,9 @@ const Navbar = (props) => {
             </div>
             <div className="strike-navbar__right">
                 <div tabIndex="0" onBlur={notificationBlur} onClick={toggleNotifications} className="strike-navbar__right-notification">
-                    <img className="strike-navbar__right-notification-icon" src={offNotification} />
+                    <img className="strike-navbar__right-notification-icon" src={notificationIcon} />
                 </div>
-                <Notifications notifications={notifications} onBlur={notificationBlur} />
+                <Notifications data={props.allNotifications} notifications={notifications} onBlur={notificationBlur} />
                 <div className="strike-navbar__right-amount">
                     <div className="strike-navbar__right-amount-text">{props.shopInfo && props.shopInfo.current_balance}€</div>
                 </div>
@@ -76,7 +86,7 @@ const Navbar = (props) => {
     )
 }
 
-const mapStateToProps = ({ sidebar, shopInfo, myProfile }) => ({ sidebar, shopInfo, myProfile });
+const mapStateToProps = ({ sidebar, shopInfo, myProfile, allNotifications }) => ({ sidebar, shopInfo, myProfile, allNotifications });
 const mapDispatchToProps = { toggleSidebar, logout, getShopInfo };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
