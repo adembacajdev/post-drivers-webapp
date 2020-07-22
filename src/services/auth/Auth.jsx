@@ -56,6 +56,11 @@ const Auth = {
         const printMultiple = localStorage.getItem('printMultiple');
         return printMultiple ?? false;
     },
+    getNotifications: () => {
+        const previousNotifications = localStorage.getItem('notifications');
+        const parsedNotifications = JSON.parse(previousNotifications);
+        return parsedNotifications ?? null;
+    }
 }
 
 export default Auth;

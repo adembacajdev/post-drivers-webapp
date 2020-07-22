@@ -5,7 +5,7 @@ import { authenticate } from './store/actions/authenticate.action';
 import { setMyProfile } from './store/actions/my.profile';
 import Auth from './services/auth/Auth';
 import { ErrorModal, SuccessModal } from './components/modals';
-import { storeNotifications } from './store/actions/notifications';
+import { storeNotifications, setStorageNotificaions } from './store/actions/notifications';
 import Echo from 'laravel-echo'
 window.io = require('socket.io-client');
 
@@ -15,7 +15,7 @@ const echo = new Echo({
   encrypted: true
 });
 
-const App = ({ authenticate, setMyProfile, isLoggedIn, storeNotifications }) => {
+const App = ({ authenticate, setMyProfile, isLoggedIn, storeNotifications, setStorageNotificaions }) => {
   useEffect(() => {
     Auth.setLanguage();
     const token = Auth.getToken();
@@ -26,7 +26,9 @@ const App = ({ authenticate, setMyProfile, isLoggedIn, storeNotifications }) => 
       const is_admin = Auth.checkIsAdmin();
       const shop_name = Auth.getShopName();
       const current_balance = Auth.getCurrentBalance();
-      setMyProfile({ first_name, last_name, is_admin, shop_name, current_balance })
+      setMyProfile({ first_name, last_name, is_admin, shop_name, current_balance });
+      const getNotifications = Auth.getNotifications();
+      if (getNotifications) setStorageNotificaions(getNotifications);
     } else {
       authenticate(false);
     }
@@ -38,12 +40,10 @@ const App = ({ authenticate, setMyProfile, isLoggedIn, storeNotifications }) => 
     if (isLoggedIn) {
       echo.channel(`${parts[0]}`).listen('.NewOrder', (res) => {
         storeNotifications(res);
-        console.log('res', res)
       });
-      console.log('socket', echo)
     } else {
-      echo.leave('strike');
-      echo.leaveChannel('strike');
+      echo.leave(`${parts[0]}`);
+      echo.leaveChannel(`${parts[0]}`);
     }
   }, [isLoggedIn])
 
@@ -57,5 +57,5 @@ const App = ({ authenticate, setMyProfile, isLoggedIn, storeNotifications }) => 
 }
 
 const mapStateToProps = ({ isLoggedIn }) => ({ isLoggedIn });
-const mapDispatchToProps = { authenticate, setMyProfile, storeNotifications };
+const mapDispatchToProps = { authenticate, setMyProfile, storeNotifications, setStorageNotificaions };
 export default connect(mapStateToProps, mapDispatchToProps)(App);

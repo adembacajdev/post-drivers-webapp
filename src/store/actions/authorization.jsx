@@ -1,4 +1,4 @@
-import { LOG_IN, LOG_OUT, GET_USER, MY_PROFILE, IS_LOGGED_IN, TOGGLE_ERROR_MODAL, TOGGLE_SUCCESS_MODAL } from '../actionTypes';
+import { LOG_IN, LOG_OUT, GET_USER, MY_PROFILE, IS_LOGGED_IN, TOGGLE_ERROR_MODAL, TOGGLE_SUCCESS_MODAL, CLEAR_NOTIFICATION } from '../actionTypes';
 import axios from 'axios';
 import i18n from '../../services/locales/i18n';
 
@@ -32,6 +32,7 @@ export const logout = () => async (dispatch) => {
         const data = await axios.post('/logout');
         dispatch({ type: LOG_OUT });
         dispatch({ type: IS_LOGGED_IN, data: false });
+        dispatch({ type: CLEAR_NOTIFICATION })
         localStorage.clear();
     } catch (e) {
         if (e.message.includes('401')) {
