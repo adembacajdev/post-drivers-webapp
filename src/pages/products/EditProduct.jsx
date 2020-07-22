@@ -10,7 +10,8 @@ import copy from "copy-to-clipboard";
 import config from '../../config';
 
 const EditProduct = (props) => {
-    const [copyText, setCopyText] = useState(`${config.addOrder}/${props.location.state.id}`)
+    let host = window.location.host;
+    const [copyText, setCopyText] = useState(`${host}/add-order/${props.location.state.id}`)
     const [data, setData] = useState({ name: '', decription: '', price: '', size: '' })
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = ({ name, description, price, size }) => {
