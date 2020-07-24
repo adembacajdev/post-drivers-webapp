@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form";
 import { updateProduct, getProduct, deleteProduct } from '../../store/actions/products';
 import copy from "copy-to-clipboard";
 import config from '../../config';
+import toast from 'toasted-notes'
+import 'toasted-notes/src/styles.css';
 
 const EditProduct = (props) => {
     let host = window.location.host;
@@ -30,7 +32,10 @@ const EditProduct = (props) => {
         props.history.goBack();
     }, [])
 
-    const copyLink = () => copy(copyText);
+    const copyLink = () => {
+        toast.notify('Link copied!', { position: 'bottom-right' });
+        copy(copyText);
+    }
 
     return (
         <Wrapper>
