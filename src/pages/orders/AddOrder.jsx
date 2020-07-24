@@ -14,10 +14,12 @@ import { toggleErrorModal } from '../../store/actions/toggle.error.modal';
 import { getProduct } from '../../store/actions/products';
 import images from '../../assets/images';
 import Auth from '../../services/auth/Auth';
+import { useCallback } from 'react';
 
 var timeout = null // timeout for searchBox
 
 const AddOrder = (props) => {
+    const { logoWithoutText } = images;
     const { register, handleSubmit, errors } = useForm();
     const productId = props.match.params.productId;
     const [country, setCountry] = useState('Kosovë');
@@ -72,12 +74,14 @@ const AddOrder = (props) => {
     }
 
     useEffect(() => {
-        if (props.orderPosted) { 
+        if (props.orderPosted) {
             setTimeout(() => {
                 window.location.reload();
             }, 1000)
-         }
+        }
     }, [props.orderPosted]);
+
+    const goHome = useCallback(() => { props.history.push('/') }, [])
 
     return (
         <div className="add-order">
@@ -144,6 +148,10 @@ const AddOrder = (props) => {
                 </ReactMapGL>
                 <div className="add-order__wrapper-footer">
                     <button type="submit">{i18n.t('addOrder.button')}</button>
+                </div>
+                <div onClick={goHome} className="add-order__footer">
+                    <img className="add-order__footer-logo" src={logoWithoutText} />
+                    <div className="add-order__footer-text">Powered by Strike™</div>
                 </div>
             </form>
         </div>

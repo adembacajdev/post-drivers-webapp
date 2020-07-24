@@ -125,6 +125,24 @@
             }
         }
     }
+    &__footer{
+        margin-top: 50px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        &-logo{
+            width: 70px;
+            height: 30px;
+        }
+        &-text{
+            font-size: 13px;
+            line-height: 19px;
+            font-family: 'Avenir';
+            color: #43425D;
+        }
+    }
 }
 
 @media only screen and (max-width: 700px) {
@@ -228,6 +246,24 @@
                     }
                 }
             }  
+        }
+    }
+    &__footer{
+        margin-top: 50px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        &-logo{
+            width: 70px;
+            height: 30px;
+        }
+        &-text{
+            font-size: 13px;
+            line-height: 19px;
+            font-family: 'Avenir';
+            color: #43425D;
         }
     }
 }
