@@ -6,6 +6,8 @@ import './products.scss';
 import Context from './Context';
 import config from '../../config';
 import copy from "copy-to-clipboard";
+import toast from 'toasted-notes'
+import 'toasted-notes/src/styles.css';
 
 const TableItem = ({ item, deleteProduct }) => {
     let host = window.location.host;
@@ -21,7 +23,10 @@ const TableItem = ({ item, deleteProduct }) => {
     const edit = useCallback(() => { history.push('/edit-product', { id: item.id }) }, []);
     const deleteProd = useCallback(() => { deleteProduct(item.id) }, []);
     const check = () => setChecked(!checked);
-    const copyLink = () => copy(copyText);
+    const copyLink = () => {
+        toast.notify('Link copied!', { position: 'bottom-right' });
+        copy(copyText);
+    }
 
     useEffect(() => {
         if (checked) setSelected([...selected, item.id])
