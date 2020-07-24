@@ -5,13 +5,13 @@ export function allNotifications(state = null, { type, data }) {
         case GET_NOTIFICATIONS:
             if (state) {
                 let currentState = state;
-                currentState.push(data);
+                currentState.unshift(data);
                 let stringState = JSON.stringify(currentState);
                 localStorage.setItem('notifications', stringState);
                 return currentState;
             } else {
                 let currentState = [];
-                currentState.push(data);
+                currentState.unshift(data);
                 let stringState = JSON.stringify(currentState);
                 localStorage.setItem('notifications', stringState);
                 return currentState;
