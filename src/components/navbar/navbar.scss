@@ -472,4 +472,79 @@
             }
         }
     }
+
+    .navbar-profile {
+        opacity: 0;
+        visibility: hidden;
+        flex-direction: column;
+        position: absolute;
+        align-items: center;
+        top: 70px;
+        right: 10px;
+        width: 200px;
+        max-height: 110px;
+        background-color: transparent;
+        transition: 0.2s linear all;
+        display: flex;
+        align-items: flex-end;
+    
+        &[is-active=true] {
+            opacity: 100;
+            visibility: visible;
+        }
+    
+        &__toparrow {
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid white;
+            margin-right: 50px;
+        }
+    
+        &__body {
+            display: flex;
+            width: 200px;
+            height: 165px;
+            min-height: 165px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            background-color: white;
+            -webkit-box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.04);
+            -moz-box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.04);
+            box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.04);
+            padding: 20px 0;
+    
+            &-item {
+                cursor: pointer;
+                width: 150px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 40px;
+                min-height: 40px;
+                margin-bottom: 10px;
+                padding-bottom: 10px;
+                border-bottom: 1px solid #F1F1F3;
+    
+                &-text {
+                    font-size: 13px;
+                    line-height: 24px;
+                    color: #4D565C;
+                    font-family: "Avenir";
+                }
+    
+                &-select {
+                    outline: none;
+                    border: none;
+                    font-size: 13px;
+                    line-height: 24px;
+                    color: #4D565C;
+                    font-family: "Avenir";
+                }
+            }
+        }
+    }
 }
