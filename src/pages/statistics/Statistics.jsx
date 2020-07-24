@@ -5,7 +5,9 @@ import Wrapper from '../../containers/wrapper/Wrapper';
 import i18n from '../../services/locales/i18n';
 import './statistics.scss';
 import { getDailyEarnings, getDailyOrders, getDailyCities } from '../../store/actions/statistics';
-import { Line, Bar } from 'react-chartjs-2';
+import { Line, Bar, defaults } from 'react-chartjs-2';
+
+defaults.global.maintainAspectRatio = false;
 
 const Statistics = (props) => {
     useEffect(() => {
@@ -42,9 +44,9 @@ const Statistics = (props) => {
                             </select>
                         </div>
                     </div>
-                    <div className="strike-statistics__chart-body">
+                    <article className="strike-statistics__chart-body">
                         <Line height={90} data={props.dailyEarnings && props.dailyEarnings.data} options={props.dailyEarnings && props.dailyEarnings.options} />
-                    </div>
+                    </article>
                 </div>
                 <div className="strike-statistics__chart">
                     <div className="strike-statistics__chart-header">
