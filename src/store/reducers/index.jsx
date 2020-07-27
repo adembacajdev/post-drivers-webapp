@@ -8,7 +8,7 @@ import { loggedIn, newPassword, user } from './authorization';
 import { allProducts, product, productOrder, deletedProduct } from './products';
 import {
     allOrders, order, numberOfOrdersByStatus, ordersByCity, ordersByStatus, topCities, topProducts, printOrder,
-    ordersPaginated, orderPosted, deletedOrder, ordersByMap
+    ordersPaginated, orderPosted, deletedOrder, ordersByMap, verification_code
 } from './orders';
 import { allCustomers, customer, recentCustomers, customerOrders, deletedCustomer } from './customers';
 import { allLocations, location } from './location';
@@ -26,7 +26,7 @@ export default combineReducers({
     allProducts, product, productOrder, deletedProduct,
     //orders
     allOrders, order, numberOfOrdersByStatus, ordersByCity, ordersByStatus, topCities, topProducts, printOrder, 
-    ordersPaginated, orderPosted, deletedOrder, ordersByMap,
+    ordersPaginated, orderPosted, deletedOrder, ordersByMap, verification_code,
     //customers
     allCustomers, customer, recentCustomers, customerOrders, deletedCustomer,
     //lcoations

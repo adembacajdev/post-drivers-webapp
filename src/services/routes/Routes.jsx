@@ -1,8 +1,7 @@
-import React, { Suspense, lazy, useEffect, useState } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Router as BaseRouter, Route, Switch, Redirect } from 'react-router-dom';
 import history from './history';
 import Loader from '../../components/loader/Loader';
-import { useSelector } from 'react-redux';
 import PrivateRoute from './PrivateRoute';
 
 //pages
@@ -13,6 +12,7 @@ const Login = lazy(() => import('../../pages/login/Login'));
 const Orders = lazy(() => import('../../pages/orders/Orders'));
 const SeeOrder = lazy(() => import('../../pages/orders/SeeOrder'));
 const AddOrder = lazy(() => import('../../pages/orders/AddOrder'));
+const VerifyOrder = lazy(() => import('../../pages/orders/VerifyOrder'));
 const OrderByStatus = lazy(() => import('../../pages/orders/OrdersByStatus'));
 const Products = lazy(() => import('../../pages/products/Products'));
 const SeeProduct = lazy(() => import('../../pages/products/SeeProduct'));
@@ -30,7 +30,6 @@ const Profile = lazy(() => import('../../pages/profile/Profile'));
 const PDFViewer = lazy(() => import('../../pages/PDF/PDFViewer'));
 
 function Router({ location }) {
-    const isLoggedIn = useSelector(state => state.isLoggedIn);
     const protectedRoutes = [
         { path: '/', exact: true, component: Home },
         { path: '/customers', exact: true, component: Customers },
@@ -59,6 +58,7 @@ function Router({ location }) {
                         <Route path="/login" component={Login} exact />
                         <Route path="/add-order/:productId" component={AddOrder} exact />
                         <Route path="/add-order" component={AddOrder} exact />
+                        <Route path="/order/verify" component={VerifyOrder} exact />
                         <Route path="/print/:type" component={PDFViewer} exact />
                         <Route path="/print" component={PDFViewer} exact />
                         {protectedRoutes.map((route, idx) => {

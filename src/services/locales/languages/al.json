@@ -274,5 +274,11 @@
         "oldPassword": "Fjalëkalimi aktual",
         "newPassword": "Fjalëkalimi i ri",
         "confirmNewPassword": "Konfirmo fjalëkalimin e ri"
+    },
+    "verifyOrder": {
+        "title": "Verifikimi i kodit",
+        "verificationCode": "Verifikimi i kodit",
+        "verificationPlaceholder": "Shënoni kodin tuaj të verifikimit këtu...",
+        "verify": "Verifiko"
     }
 }

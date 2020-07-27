@@ -274,5 +274,11 @@
         "oldPassword": "Old Password",
         "newPassword": "New Password",
         "confirmNewPassword": "Confirm New Password"
+    },
+    "verifyOrder": {
+        "title": "Code Verification",
+        "verificationCode": "Verification Code",
+        "verificationPlaceholder": "Type your verification code here...",
+        "verify": "Verify"
     }
 }

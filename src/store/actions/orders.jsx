@@ -1,7 +1,7 @@
 import {
     GET_ALL_ORDERS, GET_ORDER, NUMBER_OF_ORDERS_BY_STATUS, POST_ORDER, GET_ORDERS_BY_CITY, GET_ORDER_BY_STATUS, DELETE_ORDER,
     DELETE_ORDERS, GET_TOP_CITIES, GET_TOP_PRODUCTS, IS_LOGGED_IN, PRINT_ONE_ORDER, GET_ALL_ORDERS_PAGINATED, SEARCH_ORDERS,
-    PRINT_SELECTED_ORDERS, TOGGLE_ERROR_MODAL, TOGGLE_SUCCESS_MODAL, GET_ORDER_IN_MAP
+    PRINT_SELECTED_ORDERS, TOGGLE_ERROR_MODAL, TOGGLE_SUCCESS_MODAL, GET_ORDER_IN_MAP, SENT_VERIFICATION_CODE
 } from '../actionTypes';
 import axios from 'axios'
 import config from '../../config';
@@ -108,6 +108,9 @@ export const postOrder = (params) => async (dispatch) => {
         if (data.success) {
             dispatch({ type: TOGGLE_SUCCESS_MODAL, data: 'Porosia u dergua me sukses!' });
             dispatch({ type: POST_ORDER, data });
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000)
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
             localStorage.removeItem('token');
@@ -239,7 +242,7 @@ export const deleteOrders = (order_ids, status) => async (dispatch) => {
 export const printOneOrder = (id) => async (dispatch) => {
     try {
         const { data } = await axios.post(`/orders/print?order_id=${id}`,);
-        if(data.success){
+        if (data.success) {
             dispatch({ type: PRINT_ONE_ORDER, data: [data.data] });
         }
     } catch (e) {
@@ -273,6 +276,20 @@ export const getOrdersInMap = () => async (dispatch) => {
         const { data } = await axios.get('/orders/map');
         if (data.success) {
             dispatch({ type: GET_ORDER_IN_MAP, data: data.data })
+        } else {
+            dispatch({ type: TOGGLE_ERROR_MODAL, data: data.error })
+        }
+    } catch (e) {
+        return Promise.reject(e);
+    }
+}
+
+export const sendCodeVerification = (number) => async (dispatch) => {
+    try {
+        const { data } = await axios.post(`/orders/verify?phone=${number}`);
+        if (data.success) {
+            console.log('data', data)
+            dispatch({ type: SENT_VERIFICATION_CODE, data: data.data });
         } else {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.error })
         }

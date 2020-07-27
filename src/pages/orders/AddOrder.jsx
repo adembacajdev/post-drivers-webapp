@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import i18n from '../../services/locales/i18n';
 import ReactMapGL, { Marker } from 'react-map-gl';
 import { useForm } from "react-hook-form";
-import { postOrder } from '../../store/actions/orders';
+import { postOrder, sendCodeVerification } from '../../store/actions/orders';
 import { validateNumber } from '../../services/schemas';
 import { Tooltip } from 'reactstrap';
 import cities from '../../services/constants/Cities';
@@ -26,6 +26,7 @@ const AddOrder = (props) => {
     const [tooltipOpen, setTooltipOpen] = useState(false);
     const [latitudeMarker, setLatitudeMarker] = useState(42.66758079200047);
     const [longitudeMarker, setLongitudeMarker] = useState(21.165194013322285);
+    const [validNumber, setValidNumber] = useState(false);
     const [viewPort, setViewPort] = useState({ width: 1200, height: 600, latitude: 42.66758079200047, longitude: 21.165194013322285, zoom: 14, })
 
     const onDragStart = (event) => { const { lngLat } = event }
@@ -44,15 +45,17 @@ const AddOrder = (props) => {
         setViewPort({ width: 1200, height: 600, latitude: locations[e.target.value][0], longitude: locations[e.target.value][1], zoom: 14, })
     }
 
-    const onSubmit = ({ product_id, description, first_name, last_name, phone, country, city, address, building }) => {
+    const onSubmit = ({ product_id, description, first_name, last_name, country, city, address, building, prefix, phone }) => {
         const body = {
             product_id, description, first_name, last_name, phone, country, city, address, building,
-            latitude: latitudeMarker, longitude: longitudeMarker, verification_code: 654350
+            latitude: latitudeMarker, longitude: longitudeMarker
         }
-        props.postOrder(body)
-        // const isNumberValid = validateNumber(data.phone);
-        // if (isNumberValid) console.log('inputs', data);
-        // else props.toggleErrorModal(i18n.t('addOrder.invalidNumber'))
+        const isNumberValid = validateNumber(prefix, phone);
+        if (isNumberValid) {
+            props.sendCodeVerification(`${prefix}${phone}`);
+            props.history.push('/order/verify', { ...body, phone: `${prefix}${phone}` })
+        }
+        else props.toggleErrorModal(i18n.t('addOrder.invalidNumber'))
     }
 
     useEffect(() => {
@@ -113,12 +116,12 @@ const AddOrder = (props) => {
                         <input has-error={errors.last_name ? 'true' : 'false'} ref={register({ required: true })} name="last_name" className="add-order__wrapper-row-form-input" placeholder={i18n.t('addOrder.lastName')} />
                         <div className="add-order__wrapper-row-form-label">{i18n.t('addOrder.phone')}</div>
                         <div className="flex-row">
-                            <select className="add-order__wrapper-row-form-input w-10">
-                                <option value="00383">+383</option>
-                                <option value="00355">+355</option>
-                                <option value="00389">+389</option>
+                            <select name="prefix" ref={register({ required: false })} className="add-order__wrapper-row-form-input w-10">
+                                <option value="383">+383</option>
+                                <option value="355">+355</option>
+                                <option value="389">+389</option>
                             </select>
-                            <input href="#" id="TooltipExample" has-error={errors.phone ? 'true' : 'false'} ref={register({ required: true })} name="phone" className="add-order__wrapper-row-form-input" placeholder={i18n.t('addOrder.phone')} />
+                            <input href="#" id="TooltipExample" has-error={(errors.phone || validNumber) ? 'true' : 'false'} ref={register({ required: true })} name="phone" className="add-order__wrapper-row-form-input" placeholder={i18n.t('addOrder.phone')} />
                         </div>
                         <Tooltip placement="left" isOpen={tooltipOpen} target="TooltipExample" toggle={toggle}>{i18n.t('addOrder.receiveCode')}</Tooltip>
                         <div className="add-order__wrapper-row-form-label">{i18n.t('addOrder.country')}</div>
@@ -166,6 +169,6 @@ const AddOrder = (props) => {
 }
 
 const mapStateToProps = ({ product, orderPosted }) => ({ product, orderPosted });
-const mapDispatchToProps = { postOrder, toggleErrorModal, getProduct };
+const mapDispatchToProps = { postOrder, toggleErrorModal, getProduct, sendCodeVerification };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AddOrder));
