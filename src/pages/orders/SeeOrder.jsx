@@ -86,6 +86,7 @@ const SeeOrder = (props) => {
                 <div>
                     <ReactMapGL
                         {...viewPort}
+                        maxZoom={13}
                         // mapStyle={'mapbox://styles/mapbox/satellite-v9'}
                         mapStyle={'mapbox://styles/mapbox/streets-v9'}
                         mapboxApiAccessToken={'pk.eyJ1IjoiYWRlbWJhY2FqIiwiYSI6ImNrYnF0c3phNjBhd3Iydm50bnIyeHl0d3kifQ.6zDG514PklFKYJTYD32p8Q'}
