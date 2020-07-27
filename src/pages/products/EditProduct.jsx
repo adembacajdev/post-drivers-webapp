@@ -37,6 +37,8 @@ const EditProduct = (props) => {
         copy(copyText);
     }
 
+    const addOrder = () => props.history.push('/add-order-by-shop', { id: props.location.state.id })
+
     return (
         <Wrapper>
             <div className="strike-addproduct">
@@ -77,6 +79,7 @@ const EditProduct = (props) => {
                         </select>
                         <button className="strike-addproduct__form-button">{i18n.t('addProductForm.editProduct')}</button>
                     </form>
+                    <button onClick={addOrder} className="strike-addproduct__form-button">{i18n.t('products.addOrder')}</button>
                     <button onClick={copyLink} className="strike-addproduct__form-button">{i18n.t('products.copyLink')}</button>
                     <button onClick={delProduct} className="strike-addproduct__form-button">{i18n.t('products.delete')}</button>
                 </div>

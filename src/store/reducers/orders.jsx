@@ -1,7 +1,7 @@
 import {
     GET_ALL_ORDERS, GET_ORDER, NUMBER_OF_ORDERS_BY_STATUS, GET_ORDERS_BY_CITY, GET_ORDER_BY_STATUS, GET_ALL_ORDERS_PAGINATED,
     GET_TOP_CITIES, GET_TOP_PRODUCTS, POST_ORDER, DELETE_ORDER, DELETE_ORDERS, PRINT_ONE_ORDER, SEARCH_ORDERS, PRINT_SELECTED_ORDERS,
-    GET_ORDER_IN_MAP, SENT_VERIFICATION_CODE  //I will check other types after I console all api
+    GET_ORDER_IN_MAP, SENT_VERIFICATION_CODE, POST_ORDER_BY_SHOP  //I will check other types after I console all api
 } from '../actionTypes';
 
 export function allOrders(state = null, { type, data }) {

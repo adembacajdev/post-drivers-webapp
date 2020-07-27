@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import './addOrder.scss';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -14,7 +14,6 @@ import { toggleErrorModal } from '../../store/actions/toggle.error.modal';
 import { getProduct } from '../../store/actions/products';
 import images from '../../assets/images';
 import Auth from '../../services/auth/Auth';
-import { useCallback } from 'react';
 
 var timeout = null // timeout for searchBox
 

@@ -12,6 +12,7 @@ const Login = lazy(() => import('../../pages/login/Login'));
 const Orders = lazy(() => import('../../pages/orders/Orders'));
 const SeeOrder = lazy(() => import('../../pages/orders/SeeOrder'));
 const AddOrder = lazy(() => import('../../pages/orders/AddOrder'));
+const AddOrderByShop = lazy(() => import('../../pages/orders/AddOrderByShop'));
 const VerifyOrder = lazy(() => import('../../pages/orders/VerifyOrder'));
 const OrderByStatus = lazy(() => import('../../pages/orders/OrdersByStatus'));
 const Products = lazy(() => import('../../pages/products/Products'));
@@ -50,6 +51,7 @@ function Router({ location }) {
         { path: '/add-user', exact: true, component: AddUser },
         { path: '/edit-user', exact: true, component: EditUser },
         { path: '/profile', exact: true, component: Profile },
+        { path: '/add-order-by-shop', exact: true, component: AddOrderByShop },
     ]
     return (
         <BaseRouter history={history}>

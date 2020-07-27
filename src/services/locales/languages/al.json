@@ -67,7 +67,8 @@
         "name": "Emri",
         "description2": "Përshkrimi",
         "price2": "Çmimi",
-        "size": "Madhësia"
+        "size": "Madhësia",
+        "addOrder": "Shto porosi"
     },
     "orders": {
         "allOrders": "Të gjitha porositë",

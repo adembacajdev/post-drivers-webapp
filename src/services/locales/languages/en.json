@@ -67,7 +67,8 @@
         "name": "Name",
         "description2": "Description",
         "price2": "Price",
-        "size": "Size"
+        "size": "Size",
+        "addOrder": "Add Order"
     },
     "orders": {
         "allOrders": "All Orders",

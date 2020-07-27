@@ -1,7 +1,7 @@
 import {
     GET_ALL_ORDERS, GET_ORDER, NUMBER_OF_ORDERS_BY_STATUS, POST_ORDER, GET_ORDERS_BY_CITY, GET_ORDER_BY_STATUS, DELETE_ORDER,
     DELETE_ORDERS, GET_TOP_CITIES, GET_TOP_PRODUCTS, IS_LOGGED_IN, PRINT_ONE_ORDER, GET_ALL_ORDERS_PAGINATED, SEARCH_ORDERS,
-    PRINT_SELECTED_ORDERS, TOGGLE_ERROR_MODAL, TOGGLE_SUCCESS_MODAL, GET_ORDER_IN_MAP, SENT_VERIFICATION_CODE
+    PRINT_SELECTED_ORDERS, TOGGLE_ERROR_MODAL, TOGGLE_SUCCESS_MODAL, GET_ORDER_IN_MAP, SENT_VERIFICATION_CODE, POST_ORDER_BY_SHOP
 } from '../actionTypes';
 import axios from 'axios'
 import config from '../../config';
@@ -110,6 +110,29 @@ export const postOrder = (params) => async (dispatch) => {
             dispatch({ type: POST_ORDER, data });
             setTimeout(() => {
                 window.location.reload();
+            }, 2000)
+        } else if (data.code === 403) {
+            dispatch({ type: IS_LOGGED_IN, data: false });
+            localStorage.removeItem('token');
+            axios.defaults.headers.common['Content-Type'] = "applicaton/json"
+            axios.defaults.headers.common['Authorization'] = ``
+        } else {
+            dispatch({ type: TOGGLE_ERROR_MODAL, data: data.error })
+        }
+    } catch (e) {
+        return Promise.reject(e);
+    }
+}
+
+export const postOrderByShop = (params, history) => async (dispatch) => {
+    try {
+        const { data } = await axios.post(`/orders/add`, params);
+        console.log('data', data)
+        if (data.success) {
+            dispatch({ type: TOGGLE_SUCCESS_MODAL, data: 'Porosia u dergua me sukses!' });
+            dispatch({ type: POST_ORDER_BY_SHOP, data });
+            setTimeout(() => {
+                history.goBack();
             }, 2000)
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
