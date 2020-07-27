@@ -197,7 +197,13 @@
         "small": "E vogël",
         "large": "E madhe",
         "addProduct": "Shto",
-        "editProduct": "Edito"
+        "editProduct": "Edito",
+        "ks": "Kosovë",
+        "al": "Shqipëri",
+        "mk": "Maqedoni e Veriut",
+        "true": "Po",
+        "false": "Jo",
+        "openable": "A mund të hapet pako?"
     },
     "addTransferForm": {
         "title": "Shto barazim",

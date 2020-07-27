@@ -7,19 +7,18 @@ import i18n from '../../services/locales/i18n';
 import { useForm } from "react-hook-form";
 import { updateProduct, getProduct, deleteProduct } from '../../store/actions/products';
 import copy from "copy-to-clipboard";
-import config from '../../config';
 import toast from 'toasted-notes'
 import 'toasted-notes/src/styles.css';
 
 const EditProduct = (props) => {
     let host = window.location.host;
     const [copyText, setCopyText] = useState(`${host}/add-order/${props.location.state.id}`)
-    const [data, setData] = useState({ name: '', decription: '', price: '', size: '' })
+    const [data, setData] = useState({ name: '', decription: '', size: '', openable: '', ks_price: '', al_price: '', mk_price: '' })
     const { register, handleSubmit, watch, errors } = useForm();
-    const onSubmit = ({ name, description, price, size }) => {
+    const onSubmit = ({ name, description, size, ks_price, al_price, mk_price, openable }) => {
         const { id } = props.location.state;
-        if (name !== '' && description !== '' && price !== '' && size !== '') {
-            props.updateProduct({ name: name, description, size, id, history: props.history });
+        if (name !== '' && description !== '' && size !== '' && ks_price !== '' && al_price !== '' && mk_price !== '' && openable !== '') {
+            props.updateProduct({ name: name, description, size, ks_price, al_price, mk_price, openable, id, history: props.history });
         }
     };
 
@@ -27,6 +26,7 @@ const EditProduct = (props) => {
     useEffect(() => { setData(props.product) }, [props.product]);
 
     const handleSelect = (e) => setData({ ...data, size: e.target.value });
+    const handleOpenable = (e) => setData({ ...data, openable: e.target.value });
     const delProduct = useCallback(() => {
         props.deleteProduct(props.location.state.id);
         props.history.goBack();
@@ -50,7 +50,25 @@ const EditProduct = (props) => {
                         <div className="strike-addproduct__form-label">{i18n.t('addProductForm.description')}</div>
                         <input defaultValue={data && data.description} has-error={errors.description ? 'true' : 'false'} name="description" ref={register({ required: true })} className="strike-addproduct__form-input" placeholder={i18n.t('addProductForm.description')} />
                         <div className="strike-addproduct__form-label">{i18n.t('addProductForm.price')}</div>
-                        <input disabled defaultValue={data && data.price} has-error={errors.price ? 'true' : 'false'} name="price" ref={register({ required: true })} className="strike-addproduct__form-input" placeholder={i18n.t('addProductForm.price')} />
+                        <div className="strike-addproduct__form-input-multiple">
+                            <div className="strike-addproduct__form-input-multiple-item">
+                                <div className="strike-addproduct__form-input-multiple-item-label">{i18n.t('addProductForm.ks')}</div>
+                                <input defaultValue={data && data.ks_price} disabled has-error={errors.ks_price ? 'true' : 'false'} name="ks_price" ref={register({ required: true })} className="strike-addproduct__form-input-multiple-item-input" placeholder={i18n.t('addProductForm.price')} />
+                            </div>
+                            <div className="strike-addproduct__form-input-multiple-item ml-15">
+                                <div className="strike-addproduct__form-input-multiple-item-label">{i18n.t('addProductForm.al')}</div>
+                                <input defaultValue={data && data.al_price} disabled has-error={errors.al_price ? 'true' : 'false'} name="al_price" ref={register({ required: true })} className="strike-addproduct__form-input-multiple-item-input" placeholder={i18n.t('addProductForm.price')} />
+                            </div>
+                            <div className="strike-addproduct__form-input-multiple-item ml-15">
+                                <div className="strike-addproduct__form-input-multiple-item-label">{i18n.t('addProductForm.mk')}</div>
+                                <input defaultValue={data && data.mk_price} disabled has-error={errors.mk_price ? 'true' : 'false'} name="mk_price" ref={register({ required: true })} className="strike-addproduct__form-input-multiple-item-input" placeholder={i18n.t('addProductForm.price')} />
+                            </div>
+                        </div>
+                        <div className="strike-addproduct__form-label">{i18n.t('addProductForm.openable')}</div>
+                        <select value={data ? data.openable : ''} onChange={handleOpenable} has-error={errors.openable ? 'true' : 'false'} name="openable" ref={register({ required: true })} className="strike-addproduct__form-input">
+                            <option value={true}>{i18n.t('addProductForm.true')}</option>
+                            <option value={false}>{i18n.t('addProductForm.false')}</option>
+                        </select>
                         <div className="strike-addproduct__form-label">{i18n.t('addProductForm.size')}</div>
                         <select disabled onChange={handleSelect} ref={register({ required: true })} value={data ? data.size : ''} has-error={errors.size ? 'true' : 'false'} name="size" className="strike-addproduct__form-input">
                             <option value="small">{i18n.t('addProductForm.small')}</option>

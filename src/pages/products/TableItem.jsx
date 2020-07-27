@@ -60,7 +60,7 @@ const TableItem = ({ item, deleteProduct }) => {
                 <div className="strike-products__table-item-content-text">{item.description}</div>
             </div>
             <div onClick={edit} className="strike-products__table-item-content flex-15">
-                <div className="strike-products__table-item-content-text">{`${item.price}€`}</div>
+                <div className="strike-products__table-item-content-text">{`${item.ks_price}€`}</div>
             </div>
             <div is-responsive="true" onClick={toggle} className="strike-products__table-item-content flex-15 text-center">
                 <div className="dropdown">

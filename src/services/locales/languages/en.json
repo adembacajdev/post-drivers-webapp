@@ -197,7 +197,13 @@
         "small": "Small",
         "large": "Large",
         "addProduct": "Add Product",
-        "editProduct": "Edit Product"
+        "editProduct": "Edit Product",
+        "ks": "Kosovo",
+        "al": "Albania",
+        "mk": "North Macedonia",
+        "true": "Yes",
+        "false": "No",
+        "openable": "Can the package be opened?"
     },
     "addTransferForm": {
         "title": "Add Transfer",

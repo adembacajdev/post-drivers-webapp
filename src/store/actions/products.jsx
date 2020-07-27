@@ -78,11 +78,12 @@ export const getProductOrder = (id) => async (dispatch) => {
 }
 
 export const postStoreProduct = (body) => async (dispatch) => {
+    console.log('body', body)
     try {
-        const { name, description, price, size, history } = body;
-        const { data } = await axios.post(`/products`, { name, description, price, size });
+        const { name, description, size, ks_price, al_price, mk_price, openable, history } = body;
+        const parsedOpenable = JSON.parse(openable);
+        const { data } = await axios.post(`/products`, { name, description, size, ks_price, al_price, mk_price, openable: parsedOpenable });
         if (data.success) {
-            // dispatch({ type: POST_STORE_PRODUCT, data: data.data });
             history.goBack()
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
