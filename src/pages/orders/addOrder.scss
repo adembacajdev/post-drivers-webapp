@@ -145,6 +145,17 @@
     }
 }
 
+.flex-row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.w-10{
+    width: 100px;
+    margin-right: 2px;
+}
+
 @media only screen and (max-width: 700px) {
     .add-order{
     display: flex;
@@ -266,5 +277,11 @@
             color: #43425D;
         }
     }
+}
+
+
+
+.w-10{
+    width: 90px;
 }
 }
