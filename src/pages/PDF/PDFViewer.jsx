@@ -25,6 +25,8 @@ const Viewer = (props) => {
             localStorage.removeItem('printMultiple');
         }
     }, [])
+
+    useEffect(() => {console.log('printOrder', props.printOrder)}, [props.printOrder])
     return (
         <div style={{ width: '100%', height: '100%' }}>
             <PDFViewer style={{ width: '100%', height: '100vh' }}>

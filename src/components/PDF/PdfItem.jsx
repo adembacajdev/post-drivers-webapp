@@ -2,11 +2,14 @@ import React from 'react';
 import { Text, View, StyleSheet, Image } from '@react-pdf/renderer';
 
 // Create Document Component
-const PdfItem = ({ serial_number, seller, buyer, product }) => (
+const PdfItem = ({ serial_number, seller, buyer, product, openable }) => (
     <View style={styles.container}>
         <View style={styles.top}>
             <View style={styles.topLeft}>
                 <Image style={{ width: 110, height: 30 }} src="/logo.png" />
+            </View>
+            <View style={styles.topMiddle}>
+                <Text style={styles.title}>044 257 900</Text>
             </View>
             <View style={styles.topRight}>
                 <Text style={styles.subtitle}>Numri i porosise</Text>
@@ -127,6 +130,13 @@ const PdfItem = ({ serial_number, seller, buyer, product }) => (
                 </View>
             </View>
         </View>
+        <View style={styles.veryBottom}>
+            <View style={styles.veryBottomLeft}>
+                <Text style={styles.title}>A mund të hapet pako?</Text>
+            </View>
+            <View style={styles.veryBottomRight}>
+                <Text style={styles.subtitle}>{openable === 1 ? 'Po' : 'Jo'}</Text></View>
+        </View>
     </View>
 );
 
@@ -154,12 +164,20 @@ const styles = StyleSheet.create({
         borderColor: '#ebebeb'
     },
     topLeft: {
-        flex: 0.5,
+        flex: 1,
         justifyContent: 'center',
+        alignItems: 'flex-start',
         paddingLeft: 10
     },
-    topRight: {
+    topMiddle: {
         flex: 0.5,
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        paddingLeft: 10,
+        flexDirection: 'column',
+    },
+    topRight: {
+        flex: 1,
         flexDirection: 'column',
         alignItems: 'flex-end',
         justifyContent: 'center',
@@ -201,12 +219,33 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingLeft: 10
     },
+    veryBottom: {
+        width: '100%',
+        height: 25,
+        borderWidth: 1,
+        borderColor: '#ebebeb',
+        flexDirection: 'row'
+    },
+    veryBottomLeft: {
+        flex: 0.5,
+        flexDirection: 'column',
+        borderRightWidth: 1,
+        borderColor: '#ebebeb',
+        justifyContent: 'center',
+        paddingLeft: 10
+    },
+    veryBottomRight: {
+        flex: 0.5,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        paddingLeft: 10
+    },
     bottom: {
         width: '100%',
         height: 50,
         borderWidth: 1,
         borderColor: '#ebebeb',
-        marginTop: 20,
+        marginTop: 10,
         flexDirection: 'row'
     },
     bottomLeft: {
