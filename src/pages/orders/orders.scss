@@ -254,8 +254,8 @@
 }
 
 .map-marker{
-    width: 5px;
-    height: 5px;
+    width: 17px;
+    height: 17px;
     border-radius: 15px;
     &[status=cancelled]{
         background-color: red;
