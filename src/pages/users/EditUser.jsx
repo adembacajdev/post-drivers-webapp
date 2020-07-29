@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, isValidElement } from 'react';
 import Wrapper from '../../containers/wrapper/Wrapper';
 import i18n from '../../services/locales/i18n';
 import { withRouter } from 'react-router-dom';
@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import './style.scss';
 
 const EditUser = (props) => {
+    const [isEmailValid, validateEmail] = useState(false);
     const [data, setData] = useState(props.selectedUser)
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = data => props.updateUser(props.location.state.id, data, props.history);
@@ -18,6 +19,12 @@ const EditUser = (props) => {
         deleteUser(props.location.state.id);
         props.history.goBack();
     }
+
+    useEffect(() => {
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if (reg.test(watch('email')) === false) validateEmail(false);
+        else validateEmail(true);
+    }, [watch('email'), data])
     return (
         <Wrapper>
             <div className="strike-adduser">
@@ -29,7 +36,7 @@ const EditUser = (props) => {
                         <div className="strike-adduser__form-label">{i18n.t('addUserForm.lastName')}</div>
                         <input defaultValue={data && data.last_name} has-error={errors.last_name ? 'true' : 'false'} ref={register({ required: true })} name="last_name" className="strike-adduser__form-input" placeholder={i18n.t('addUserForm.lastName')} />
                         <div className="strike-adduser__form-label">{i18n.t('addUserForm.email')}</div>
-                        <input defaultValue={data && data.email} has-error={errors.email ? 'true' : 'false'} ref={register({ required: true })} name="email" className="strike-adduser__form-input" placeholder={i18n.t('addUserForm.email')} />
+                        <input defaultValue={data && data.email} has-error={!isEmailValid ? 'true' : 'false'} ref={register({ required: true })} name="email" className="strike-adduser__form-input" placeholder={i18n.t('addUserForm.email')} />
                         <div className="strike-adduser__form-label">{i18n.t('addUserForm.phone')}</div>
                         <input defaultValue={data && data.phone} has-error={errors.phone ? 'true' : 'false'} ref={register({ required: true })} name="phone" className="strike-adduser__form-input" placeholder={i18n.t('addUserForm.phone')} />
                         {/* <div className="strike-adduser__form-label">{i18n.t('addUserForm.isAdmin')}</div> */}

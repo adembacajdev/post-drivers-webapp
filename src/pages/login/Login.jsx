@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -10,13 +10,20 @@ import './login.scss';
 import images from '../../assets/images';
 
 const Login = ({ login, loggedIn, authenticate, isLoggedIn }) => {
+    const [isEmailValid, validateEmail] = useState(false);
     const { logoWithoutText } = images;
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = ({ email, password }) => {
-        if (!errors.email && !errors.password) {
+        if (!errors.email && !errors.password && isEmailValid) {
             login({ email, password })
         }
     };
+
+    useEffect(() => {
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if (reg.test(watch('email')) === false) validateEmail(false);
+        else validateEmail(true);
+    }, [watch('email')])
     return (
         isLoggedIn
             ?
@@ -25,12 +32,12 @@ const Login = ({ login, loggedIn, authenticate, isLoggedIn }) => {
             <div className="strike-login">
                 <div className="strike-login__header">
                     <img className="strike-login__header-logo" src={logoWithoutText} />
-                <div className="strike-login__header-title">{i18n.t('login.title')}</div>
+                    <div className="strike-login__header-title">{i18n.t('login.title')}</div>
                 </div>
                 <div className="strike-login__inputs">
                     <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={handleSubmit(onSubmit)}>
                         <div className="strike-login__inputs-label">{i18n.t('login.emailLabel')}</div>
-                        <input has-error={errors.email ? 'true' : 'false'} name="email" ref={register({ required: true })} className="strike-login__inputs-input" type="text" placeholder={i18n.t('login.emailPlaceholder')} />
+                        <input has-error={!isEmailValid ? 'true' : 'false'} name="email" ref={register({ required: true })} className="strike-login__inputs-input" type="text" placeholder={i18n.t('login.emailPlaceholder')} />
                         <div className="strike-login__inputs-label">{i18n.t('login.passwordLabel')}</div>
                         <input has-error={errors.password ? "true" : 'false'} name="password" ref={register({ required: true })} className="strike-login__inputs-input" type="password" placeholder={i18n.t('login.passwordPlaceholder')} />
                         <button type="submit" className="strike-login__inputs-button">{i18n.t('login.loginButton')}</button>

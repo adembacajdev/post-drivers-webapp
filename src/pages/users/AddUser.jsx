@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './style.scss';
 import Wrapper from '../../containers/wrapper/Wrapper';
 import { withRouter } from 'react-router-dom';
@@ -8,8 +8,14 @@ import { postUser } from '../../store/actions/users';
 import { useForm } from "react-hook-form";
 
 const AddUser = (props) => {
-    const { register, handleSubmit, errors } = useForm();
-    const onSubmit = data => props.postUser(data, props.history)
+    const [isEmailValid, validateEmail] = useState(false);
+    const { register, handleSubmit, errors, watch } = useForm();
+    const onSubmit = data => props.postUser(data, props.history);
+    useEffect(() => {
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if (reg.test(watch('email')) === false) validateEmail(false);
+        else validateEmail(true);
+    }, [watch('email')])
     return (
         <Wrapper>
             <div className="strike-adduser">
@@ -20,7 +26,7 @@ const AddUser = (props) => {
                     <div className="strike-adduser__form-label">{i18n.t('addUserForm.lastName')}</div>
                     <input has-error={errors.last_name ? 'true' : 'false'} ref={register({ required: true })} name="last_name" className="strike-adduser__form-input" placeholder={i18n.t('addUserForm.lastName')} />
                     <div className="strike-adduser__form-label">{i18n.t('addUserForm.email')}</div>
-                    <input has-error={errors.email ? 'true' : 'false'} ref={register({ required: true })} name="email" className="strike-adduser__form-input" placeholder={i18n.t('addUserForm.email')} />
+                    <input has-error={!isEmailValid ? 'true' : 'false'} ref={register({ required: true })} name="email" className="strike-adduser__form-input" placeholder={i18n.t('addUserForm.email')} />
                     <div className="strike-adduser__form-label">{i18n.t('addUserForm.phone')}</div>
                     <input has-error={errors.phone ? 'true' : 'false'} ref={register({ required: true })} name="phone" className="strike-adduser__form-input" placeholder={i18n.t('addUserForm.phone')} />
                     {/* <div className="strike-adduser__form-label">{i18n.t('addUserForm.isAdmin')}</div> */}

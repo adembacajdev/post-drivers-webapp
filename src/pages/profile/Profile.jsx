@@ -8,12 +8,13 @@ import { updateUser } from '../../store/actions/users';
 import './style.scss';
 
 const Profile = (props) => {
+    const [isEmailValid, validateEmail] = useState(false);
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
 
-    const { register, handleSubmit, errors } = useForm();
+    const { register, handleSubmit, errors, watch } = useForm();
     const onSubmit = ({ first_name, last_name, email, phone }) => {
         props.updateUser(props.user.id, { first_name, last_name, email, phone }, props.history)
     };
@@ -31,6 +32,12 @@ const Profile = (props) => {
         }
     }, [props.user]);
 
+    useEffect(() => {
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if (reg.test(watch('email')) === false) validateEmail(false);
+        else validateEmail(true);
+    }, [watch('email'), email])
+
     return (
         <Wrapper>
             <div className="strike-profile">
@@ -41,7 +48,7 @@ const Profile = (props) => {
                     <div className="strike-profile__form-label">{i18n.t('profile.surname')}</div>
                     <input disabled defaultValue={surname} has-error={errors.last_name ? 'true' : 'false'} name="last_name" ref={register({ required: true })} className="strike-profile__form-input" placeholder={i18n.t('profile.surname')} />
                     <div className="strike-profile__form-label">{i18n.t('profile.email')}</div>
-                    <input disabled defaultValue={email} has-error={errors.email ? 'true' : 'false'} name="email" ref={register({ required: true })} className="strike-profile__form-input" placeholder={i18n.t('profile.email')} />
+                    <input disabled defaultValue={email} has-error={!isEmailValid ? 'true' : 'false'} name="email" ref={register({ required: true })} className="strike-profile__form-input" placeholder={i18n.t('profile.email')} />
                     <div className="strike-profile__form-label">{i18n.t('profile.phone')}</div>
                     <input disabled defaultValue={phone} has-error={errors.phone ? 'true' : 'false'} name="phone" ref={register({ required: true })} className="strike-profile__form-input" placeholder={i18n.t('profile.phone')} />
                 </form>
