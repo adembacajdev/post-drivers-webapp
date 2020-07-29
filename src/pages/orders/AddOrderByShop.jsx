@@ -95,7 +95,7 @@ const AddOrderByShop = (props) => {
                         <div className="strike-addorderbyshop__fields-row-form-label">{i18n.t('addOrder.description')}</div>
                         <input defaultValue={props.product && props.product.description} disabled ref={register({ required: false })} name="firstDescription" className="strike-addorderbyshop__fields-row-form-input" placeholder={i18n.t('addOrder.description')} />
                         <div className="strike-addorderbyshop__fields-row-form-label">{i18n.t('addOrder.price')}</div>
-                        <input defaultValue={props.product && props.product.price} disabled ref={register({ required: false })} name="price" className="strike-addorderbyshop__fields-row-form-input" placeholder={i18n.t('addOrder.price')} />
+                        <input defaultValue={props.product && props.product.ks_price} disabled ref={register({ required: false })} name="price" className="strike-addorderbyshop__fields-row-form-input" placeholder={i18n.t('addOrder.price')} />
                         <div className="strike-addorderbyshop__fields-row-form-label">{i18n.t('addOrder.additionalInfo')}</div>
                         <input has-error={errors.description ? 'true' : 'false'} ref={register({ required: false })} name="description" className="strike-addorderbyshop__fields-row-form-input" placeholder={i18n.t('addOrder.exSizeColor')} />
                         <div className="strike-addorderbyshop__fields-row-column-title">{i18n.t('addOrder.yourInformation')}</div>
@@ -112,7 +112,7 @@ const AddOrderByShop = (props) => {
                             </select>
                             <input href="#" id="TooltipExample" has-error={errors.phone ? 'true' : 'false'} ref={register({ required: true })} name="phone" className="strike-addorderbyshop__fields-row-form-input" placeholder={i18n.t('addOrder.phone')} />
                         </div>
-                        <Tooltip placement="left" isOpen={tooltipOpen} target="TooltipExample" toggle={toggle}>{i18n.t('addOrder.receiveCode')}</Tooltip>
+                        {/* <Tooltip placement="left" isOpen={tooltipOpen} target="TooltipExample" toggle={toggle}>{i18n.t('addOrder.receiveCode')}</Tooltip> */}
                         <div className="strike-addorderbyshop__fields-row-form-label">{i18n.t('addOrder.country')}</div>
                         <select name="country" has-error={errors.country ? 'true' : 'false'} ref={register({ required: true })} onChange={handleSelectCountry} className="strike-addorderbyshop__fields-row-form-input">
                             <option value="Kosovë">{i18n.t('addOrder.kosovo')}</option>
