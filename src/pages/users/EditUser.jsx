@@ -11,7 +11,9 @@ const EditUser = (props) => {
     const [isEmailValid, validateEmail] = useState(false);
     const [data, setData] = useState(props.selectedUser)
     const { register, handleSubmit, watch, errors } = useForm();
-    const onSubmit = data => props.updateUser(props.location.state.id, data, props.history);
+    const onSubmit = data => {
+        if (isEmailValid) props.updateUser(props.location.state.id, data, props.history);
+    }
 
     useEffect(() => { props.getUser(props.location.state.id); }, []);
     useEffect(() => { setData(props.selectedUser) }, [props.selectedUser]);

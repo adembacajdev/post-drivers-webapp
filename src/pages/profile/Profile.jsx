@@ -16,12 +16,14 @@ const Profile = (props) => {
 
     const { register, handleSubmit, errors, watch } = useForm();
     const onSubmit = ({ first_name, last_name, email, phone }) => {
-        props.updateUser(props.user.id, { first_name, last_name, email, phone }, props.history)
+        if (isEmailValid) {
+            props.updateUser(props.user.id, { first_name, last_name, email, phone }, props.history)
+        }
     };
     const changePassword = ({ old_password, new_password, new_password_confirmation }) => {
         props.resetPassword({ old_password, new_password, new_password_confirmation })
     };
-    
+
     useEffect(() => { props.getUser() }, []);
     useEffect(() => {
         if (props.user) {

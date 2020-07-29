@@ -10,12 +10,14 @@ import { useForm } from "react-hook-form";
 const AddUser = (props) => {
     const [isEmailValid, validateEmail] = useState(false);
     const { register, handleSubmit, errors, watch } = useForm();
-    const onSubmit = data => props.postUser(data, props.history);
+    const onSubmit = data => {
+        if (isEmailValid) props.postUser(data, props.history);
+    }
     useEffect(() => {
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (reg.test(watch('email')) === false) validateEmail(false);
         else validateEmail(true);
-    }, [watch('email')])
+    }, [watch('email')]);
     return (
         <Wrapper>
             <div className="strike-adduser">
