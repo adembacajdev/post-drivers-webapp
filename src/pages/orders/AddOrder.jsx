@@ -14,12 +14,14 @@ import { toggleErrorModal } from '../../store/actions/toggle.error.modal';
 import { getProduct } from '../../store/actions/products';
 import images from '../../assets/images';
 import Auth from '../../services/auth/Auth';
+import { waitForDomChange } from '@testing-library/react';
 
 var timeout = null // timeout for searchBox
 
 const AddOrder = (props) => {
+    const [phonePlaceholder, setPhonePlaceholder] = useState('4x xxx xxx');
     const { logoWithoutText } = images;
-    const { register, handleSubmit, errors } = useForm();
+    const { register, handleSubmit, errors, watch } = useForm();
     const productId = props.match.params.productId;
     const [country, setCountry] = useState('Kosovë');
     const [tooltipOpen, setTooltipOpen] = useState(false);
@@ -82,6 +84,13 @@ const AddOrder = (props) => {
             }, 1000)
         }
     }, [props.orderPosted]);
+    
+    useEffect(() => {
+        if (watch('prefix') === '383') setPhonePlaceholder('4x xxx xxx')
+        else if (watch('prefix') === '355') setPhonePlaceholder('xx xxx xxxx')
+        else if (watch('prefix') === '389') setPhonePlaceholder('xxxxxxxx')
+        else setPhonePlaceholder('4x xxx xxx')
+    }, [watch('prefix')])
 
     return (
         <div className="add-order">
@@ -118,7 +127,7 @@ const AddOrder = (props) => {
                                 <option value="355">+355</option>
                                 <option value="389">+389</option>
                             </select>
-                            <input href="#" id="TooltipExample" has-error={(errors.phone || validNumber) ? 'true' : 'false'} ref={register({ required: true })} name="phone" className="add-order__wrapper-row-form-input" placeholder={i18n.t('addOrder.phone')} />
+                            <input href="#" id="TooltipExample" has-error={(errors.phone || validNumber) ? 'true' : 'false'} ref={register({ required: true })} name="phone" className="add-order__wrapper-row-form-input" placeholder={phonePlaceholder} />
                         </div>
                         <Tooltip placement="left" isOpen={tooltipOpen} target="TooltipExample" toggle={toggle}>{i18n.t('addOrder.receiveCode')}</Tooltip>
                         <div className="add-order__wrapper-row-form-label">{i18n.t('addOrder.country')}</div>
