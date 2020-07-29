@@ -10,7 +10,7 @@ const VerifyOrder = (props) => {
     const [data, setData] = useState([]);
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = ({ verification_code }) => {
-        props.postOrder({ ...data, verification_code })
+        props.postOrder({ ...data, verification_code }, props.history)
     };
 
     useEffect(() => {

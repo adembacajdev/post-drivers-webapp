@@ -102,14 +102,14 @@ export const getNumberOfOrdersByStatus = () => async (dispatch) => {
     }
 }
 
-export const postOrder = (params) => async (dispatch) => {
+export const postOrder = (params, history) => async (dispatch) => {
     try {
         const { data } = await axios.post(`/orders`, params);
         if (data.success) {
             dispatch({ type: TOGGLE_SUCCESS_MODAL, data: 'Porosia u dergua me sukses!' });
             dispatch({ type: POST_ORDER, data });
             setTimeout(() => {
-                window.location.reload();
+                history.push(`/add-order/${params.product_id}`)
             }, 2000)
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });
@@ -117,7 +117,7 @@ export const postOrder = (params) => async (dispatch) => {
             axios.defaults.headers.common['Content-Type'] = "applicaton/json"
             axios.defaults.headers.common['Authorization'] = ``
         } else {
-            dispatch({ type: TOGGLE_ERROR_MODAL, data: data.error })
+            dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
         return Promise.reject(e);
