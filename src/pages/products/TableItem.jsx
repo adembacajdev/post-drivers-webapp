@@ -27,6 +27,7 @@ const TableItem = ({ item, deleteProduct }) => {
         toast.notify('Link copied!', { position: 'bottom-right' });
         copy(copyText);
     }
+    const addOrder = () => history.push('/add-order-by-shop', { id: item.id })
 
     useEffect(() => {
         if (checked) setSelected([...selected, item.id])
@@ -68,6 +69,7 @@ const TableItem = ({ item, deleteProduct }) => {
                     <div id="dropdown-content" className="dropdown-content">
                         <div onClick={copyLink} className="dropdown-content-text">{i18n.t('products.copyLink')}</div>
                         <div onClick={edit} className="dropdown-content-text">{i18n.t('products.edit')}</div>
+                        <div onClick={addOrder} className="dropdown-content-text">{i18n.t('products.addOrder')}</div>
                         <div onClick={deleteProd} className="dropdown-content-text">{i18n.t('products.delete')}</div>
                     </div>
                 </div>
