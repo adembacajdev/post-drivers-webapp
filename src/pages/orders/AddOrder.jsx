@@ -103,7 +103,7 @@ const AddOrder = (props) => {
                         <div className="add-order__wrapper-row-form-label">{i18n.t('addOrder.description')}</div>
                         <input defaultValue={props.product && props.product.description} disabled ref={register({ required: false })} name="firstDescription" className="add-order__wrapper-row-form-input" placeholder={i18n.t('addOrder.description')} />
                         <div className="add-order__wrapper-row-form-label">{i18n.t('addOrder.price')}</div>
-                        <input defaultValue={props.product && props.product.price} disabled ref={register({ required: false })} name="price" className="add-order__wrapper-row-form-input" placeholder={i18n.t('addOrder.price')} />
+                        <input defaultValue={props.product && props.product.ks_price} disabled ref={register({ required: false })} name="price" className="add-order__wrapper-row-form-input" placeholder={i18n.t('addOrder.price')} />
                         <div className="add-order__wrapper-row-form-label">{i18n.t('addOrder.additionalInfo')}</div>
                         <input has-error={errors.description ? 'true' : 'false'} ref={register({ required: false })} name="description" className="add-order__wrapper-row-form-input" placeholder={i18n.t('addOrder.exSizeColor')} />
                     </div>
