@@ -132,7 +132,7 @@ export const postOrderByShop = (params, history) => async (dispatch) => {
             dispatch({ type: TOGGLE_SUCCESS_MODAL, data: 'Porosia u dergua me sukses!' });
             dispatch({ type: POST_ORDER_BY_SHOP, data });
             setTimeout(() => {
-                history.goBack();
+                history.push('/products');
             }, 2000)
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });

@@ -230,7 +230,7 @@
     },
     "addOrder": {
         "productDetails": "Detajet e produktit:",
-        "yourInformation": "Të dhënat e juaja:",
+        "yourInformation": "Të dhënat e klientit:",
         "productId": "Produkt ID",
         "name": "Emri",
         "description": "Përshkrimi",

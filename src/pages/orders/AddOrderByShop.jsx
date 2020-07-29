@@ -6,8 +6,6 @@ import { connect } from 'react-redux';
 import i18n from '../../services/locales/i18n';
 import { useForm } from "react-hook-form";
 import ReactMapGL, { Marker } from 'react-map-gl';
-import { validateNumber } from '../../services/schemas';
-import { Tooltip } from 'reactstrap';
 import cities from '../../services/constants/Cities';
 import locations from '../../services/constants/Locations';
 import { getProduct } from '../../store/actions/products';
@@ -47,17 +45,10 @@ const AddOrderByShop = (props) => {
             latitude: latitudeMarker, longitude: longitudeMarker
         }
         props.postOrderByShop(body, props.history);
-        // const isNumberValid = validateNumber(prefix, phone);
-        // if (isNumberValid) {
-        //     props.sendCodeVerification(`${prefix}${phone}`);
-        //     props.history.push('/order/verify', { ...body, phone: `${prefix}${phone}` })
-        // }
-        // else props.toggleErrorModal(i18n.t('addOrder.invalidNumber'))
     }
 
     useEffect(() => {
         props.location.state?.id ? props.getProduct(props.location.state.id) : console.log('no id')
-        console.log('props', props.location.state.id)
     }, [])
 
     const handleIdChange = (e) => {
