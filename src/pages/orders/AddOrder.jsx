@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import './addOrder.scss';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import i18n from '../../services/locales/i18n';
 import ReactMapGL, { Marker } from 'react-map-gl';
@@ -83,8 +83,6 @@ const AddOrder = (props) => {
         }
     }, [props.orderPosted]);
 
-    const goHome = useCallback(() => { props.history.push('/') }, [])
-
     return (
         <div className="add-order">
             <div className="add-order__navbar">
@@ -159,10 +157,12 @@ const AddOrder = (props) => {
                 <div className="add-order__wrapper-footer">
                     <button type="submit">{i18n.t('addOrder.button')}</button>
                 </div>
-                <div onClick={goHome} className="add-order__footer">
-                    <img className="add-order__footer-logo" src={logoWithoutText} />
-                    <div className="add-order__footer-text">Powered by Strike™</div>
-                </div>
+                <a href="https://strikecourier.com">
+                    <div className="add-order__footer">
+                        <img className="add-order__footer-logo" src={logoWithoutText} />
+                        <div className="add-order__footer-text">Powered by Strike™</div>
+                    </div>
+                </a>
             </form>
         </div>
     )
