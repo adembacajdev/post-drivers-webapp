@@ -8,7 +8,7 @@ import { updateUser } from '../../store/actions/users';
 import './style.scss';
 
 const Profile = (props) => {
-    const [isEmailValid, validateEmail] = useState(false);
+    const [isEmailValid, validateEmail] = useState(true);
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [email, setEmail] = useState('');
@@ -34,11 +34,12 @@ const Profile = (props) => {
         }
     }, [props.user]);
 
-    useEffect(() => {
+    const handleEmail = (e) => {
+        console.log('email', e.target.value)
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if (reg.test(watch('email')) === false) validateEmail(false);
+        if (reg.test(e.target.value) === false) validateEmail(false);
         else validateEmail(true);
-    }, [watch('email'), email])
+    }
 
     return (
         <Wrapper>
@@ -50,7 +51,7 @@ const Profile = (props) => {
                     <div className="strike-profile__form-label">{i18n.t('profile.surname')}</div>
                     <input disabled defaultValue={surname} has-error={errors.last_name ? 'true' : 'false'} name="last_name" ref={register({ required: true })} className="strike-profile__form-input" placeholder={i18n.t('profile.surname')} />
                     <div className="strike-profile__form-label">{i18n.t('profile.email')}</div>
-                    <input disabled defaultValue={email} has-error={!isEmailValid ? 'true' : 'false'} name="email" ref={register({ required: true })} className="strike-profile__form-input" placeholder={i18n.t('profile.email')} />
+                    <input disabled onChange={handleEmail} defaultValue={email} has-error={!isEmailValid ? 'true' : 'false'} name="email" ref={register({ required: true })} className="strike-profile__form-input" placeholder={i18n.t('profile.email')} />
                     <div className="strike-profile__form-label">{i18n.t('profile.phone')}</div>
                     <input disabled defaultValue={phone} has-error={errors.phone ? 'true' : 'false'} name="phone" ref={register({ required: true })} className="strike-profile__form-input" placeholder={i18n.t('profile.phone')} />
                 </form>

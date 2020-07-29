@@ -10,7 +10,7 @@ import './login.scss';
 import images from '../../assets/images';
 
 const Login = ({ login, loggedIn, authenticate, isLoggedIn }) => {
-    const [isEmailValid, validateEmail] = useState(false);
+    const [isEmailValid, validateEmail] = useState(true);
     const { logoWithoutText } = images;
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = ({ email, password }) => {
@@ -19,11 +19,12 @@ const Login = ({ login, loggedIn, authenticate, isLoggedIn }) => {
         }
     };
 
-    useEffect(() => {
+    const handleEmail = (e) => {
+        console.log('email', e.target.value)
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if (reg.test(watch('email')) === false) validateEmail(false);
+        if (reg.test(e.target.value) === false) validateEmail(false);
         else validateEmail(true);
-    }, [watch('email')])
+    }
     return (
         isLoggedIn
             ?
@@ -37,7 +38,7 @@ const Login = ({ login, loggedIn, authenticate, isLoggedIn }) => {
                 <div className="strike-login__inputs">
                     <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={handleSubmit(onSubmit)}>
                         <div className="strike-login__inputs-label">{i18n.t('login.emailLabel')}</div>
-                        <input has-error={!isEmailValid ? 'true' : 'false'} name="email" ref={register({ required: true })} className="strike-login__inputs-input" type="text" placeholder={i18n.t('login.emailPlaceholder')} />
+                        <input onChange={handleEmail} has-error={!isEmailValid ? 'true' : 'false'} name="email" ref={register({ required: true })} className="strike-login__inputs-input" type="text" placeholder={i18n.t('login.emailPlaceholder')} />
                         <div className="strike-login__inputs-label">{i18n.t('login.passwordLabel')}</div>
                         <input has-error={errors.password ? "true" : 'false'} name="password" ref={register({ required: true })} className="strike-login__inputs-input" type="password" placeholder={i18n.t('login.passwordPlaceholder')} />
                         <button type="submit" className="strike-login__inputs-button">{i18n.t('login.loginButton')}</button>
