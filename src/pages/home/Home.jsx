@@ -77,7 +77,7 @@ const Home = (props) => {
                         <div className="strike-home__map-body-map">
                             {showMap && <ReactMapGL
                                 zoom={9}
-                                maxZoom={13}
+                                maxZoom={18}
                                 {...viewPort}
                                 // mapStyle={'mapbox://styles/mapbox/satellite-v9'}
                                 mapStyle={'mapbox://styles/mapbox/streets-v9'}

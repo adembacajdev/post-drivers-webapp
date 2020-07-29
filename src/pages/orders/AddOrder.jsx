@@ -142,7 +142,7 @@ const AddOrder = (props) => {
                 <div className="add-order__wrapper-row-column-title">{i18n.t('addOrder.putLocation')}</div>
                 <ReactMapGL
                     {...viewPort}
-                    maxZoom={13}
+                    maxZoom={18}
                     mapStyle={'mapbox://styles/mapbox/streets-v9'}
                     // mapStyle={'mapbox://styles/mapbox/satellite-v9'}
                     mapboxApiAccessToken={'pk.eyJ1IjoiYWRlbWJhY2FqIiwiYSI6ImNrYnF0c3phNjBhd3Iydm50bnIyeHl0d3kifQ.6zDG514PklFKYJTYD32p8Q'}
