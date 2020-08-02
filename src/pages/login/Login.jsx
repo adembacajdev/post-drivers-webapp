@@ -20,19 +20,19 @@ const Login = ({ login, loggedIn, authenticate, isLoggedIn }) => {
         }
     };
 
-    const handleEmail = (e) => {
-        window.onkeyup = (e) => {
-            clearTimeout(timeout);
-            timeout = setTimeout(async () => {
-                let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-                if (reg.test(e.target.value) === false) validateEmail(false);
-                else validateEmail(true);
-            }, 200)
-        }
-        // let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        // if (reg.test(e.target.value) === false) validateEmail(false);
-        // else validateEmail(true);
-    }
+    // const handleEmail = (e) => {
+    //     window.onkeyup = (e) => {
+    //         clearTimeout(timeout);
+    //         timeout = setTimeout(async () => {
+    //             let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    //             if (reg.test(e.target.value) === false) validateEmail(false);
+    //             else validateEmail(true);
+    //         }, 200)
+    //     }
+    //     // let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    //     // if (reg.test(e.target.value) === false) validateEmail(false);
+    //     // else validateEmail(true);
+    // }
     return (
         isLoggedIn
             ?
@@ -46,7 +46,7 @@ const Login = ({ login, loggedIn, authenticate, isLoggedIn }) => {
                 <div className="strike-login__inputs">
                     <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={handleSubmit(onSubmit)}>
                         <div className="strike-login__inputs-label">{i18n.t('login.emailLabel')}</div>
-                        <input onChange={handleEmail} has-error={!isEmailValid ? 'true' : 'false'} name="email" ref={register({ required: true })} className="strike-login__inputs-input" type="text" placeholder={i18n.t('login.emailPlaceholder')} />
+                        <input has-error={errors.email ? 'true' : 'false'} name="email" ref={register({ required: true })} className="strike-login__inputs-input" type="text" placeholder={i18n.t('login.emailPlaceholder')} />
                         <div className="strike-login__inputs-label">{i18n.t('login.passwordLabel')}</div>
                         <input has-error={errors.password ? "true" : 'false'} name="password" ref={register({ required: true })} className="strike-login__inputs-input" type="password" placeholder={i18n.t('login.passwordPlaceholder')} />
                         <button type="submit" className="strike-login__inputs-button">{i18n.t('login.loginButton')}</button>
