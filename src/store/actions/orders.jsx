@@ -140,7 +140,8 @@ export const postOrder = (params, history) => async (dispatch) => {
             dispatch({ type: TOGGLE_SUCCESS_MODAL, data: 'Porosia u dergua me sukses!' });
             dispatch({ type: POST_ORDER, data });
             setTimeout(() => {
-                history.push(`/add-order/${params.product_id}`)
+                // history.push(`/add-order/${params.product_id}`)
+                window.location.reload()
             }, 2000)
         } else if (data.code === 403) {
             dispatch({ type: IS_LOGGED_IN, data: false });

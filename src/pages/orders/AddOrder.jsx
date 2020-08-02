@@ -14,7 +14,6 @@ import { toggleErrorModal } from '../../store/actions/toggle.error.modal';
 import { getProduct } from '../../store/actions/products';
 import images from '../../assets/images';
 import Auth from '../../services/auth/Auth';
-import { waitForDomChange } from '@testing-library/react';
 
 var timeout = null // timeout for searchBox
 
@@ -51,12 +50,13 @@ const AddOrder = (props) => {
             product_id, description, first_name, last_name, phone, country, city, address, building,
             latitude: latitudeMarker, longitude: longitudeMarker
         }
-        const isNumberValid = validateNumber(prefix, phone);
-        if (isNumberValid) {
-            props.sendCodeVerification(`${prefix}${phone}`);
-            props.history.push('/order/verify', { ...body, phone: `${prefix}${phone}` })
-        }
-        else props.toggleErrorModal(i18n.t('addOrder.invalidNumber'))
+        props.postOrder(body, props.history);
+        // const isNumberValid = validateNumber(prefix, phone);
+        // if (isNumberValid) {
+        //     props.sendCodeVerification(`${prefix}${phone}`);
+        //     props.history.push('/order/verify', { ...body, phone: `${prefix}${phone}` })
+        // }
+        // else props.toggleErrorModal(i18n.t('addOrder.invalidNumber'))
     }
 
     useEffect(() => {
@@ -84,7 +84,7 @@ const AddOrder = (props) => {
             }, 1000)
         }
     }, [props.orderPosted]);
-    
+
     useEffect(() => {
         if (watch('prefix') === '383') setPhonePlaceholder('4x xxx xxx')
         else if (watch('prefix') === '355') setPhonePlaceholder('xx xxx xxxx')
@@ -129,7 +129,7 @@ const AddOrder = (props) => {
                             </select>
                             <input href="#" id="TooltipExample" has-error={(errors.phone || validNumber) ? 'true' : 'false'} ref={register({ required: true })} name="phone" className="add-order__wrapper-row-form-input" placeholder={phonePlaceholder} />
                         </div>
-                        <Tooltip placement="left" isOpen={tooltipOpen} target="TooltipExample" toggle={toggle}>{i18n.t('addOrder.receiveCode')}</Tooltip>
+                        {/* <Tooltip placement="left" isOpen={tooltipOpen} target="TooltipExample" toggle={toggle}>{i18n.t('addOrder.receiveCode')}</Tooltip> */}
                         <div className="add-order__wrapper-row-form-label">{i18n.t('addOrder.country')}</div>
                         <select name="country" has-error={errors.country ? 'true' : 'false'} ref={register({ required: true })} onChange={handleSelectCountry} className="add-order__wrapper-row-form-input">
                             <option value="Kosovë">{i18n.t('addOrder.kosovo')}</option>
