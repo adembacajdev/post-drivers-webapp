@@ -9,6 +9,7 @@ import i18n from '../../services/locales/i18n';
 import './login.scss';
 import images from '../../assets/images';
 
+var timeout = null;
 const Login = ({ login, loggedIn, authenticate, isLoggedIn }) => {
     const [isEmailValid, validateEmail] = useState(true);
     const { logoWithoutText } = images;
@@ -20,10 +21,17 @@ const Login = ({ login, loggedIn, authenticate, isLoggedIn }) => {
     };
 
     const handleEmail = (e) => {
-        console.log('email', e.target.value)
-        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if (reg.test(e.target.value) === false) validateEmail(false);
-        else validateEmail(true);
+        window.onkeyup = (e) => {
+            clearTimeout(timeout);
+            timeout = setTimeout(async () => {
+                let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                if (reg.test(e.target.value) === false) validateEmail(false);
+                else validateEmail(true);
+            }, 500)
+        }
+        // let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        // if (reg.test(e.target.value) === false) validateEmail(false);
+        // else validateEmail(true);
     }
     return (
         isLoggedIn

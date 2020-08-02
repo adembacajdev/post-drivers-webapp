@@ -1,4 +1,4 @@
-import { GET_DAILY_EARNINGS, GET_DAILY_ORDERS, IS_LOGGED_IN, TOGGLE_ERROR_MODAL, GET_CITIES_STATISTICS } from '../actionTypes';
+import { GET_DAILY_EARNINGS, GET_DAILY_ORDERS, IS_LOGGED_IN, TOGGLE_ERROR_MODAL, GET_CITIES_STATISTICS, LOG_OUT, CLEAR_NOTIFICATION } from '../actionTypes';
 import axios from 'axios';
 
 export const getDailyEarnings = (month) => async (dispatch) => {
@@ -18,6 +18,12 @@ export const getDailyEarnings = (month) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.error })
         }
     } catch (e) {
+        if (e.response.status === 401) {
+            dispatch({ type: LOG_OUT });
+            dispatch({ type: IS_LOGGED_IN, data: false });
+            dispatch({ type: CLEAR_NOTIFICATION })
+            localStorage.clear();
+        }
         return Promise.reject(e);
     }
 }
@@ -39,6 +45,12 @@ export const getDailyOrders = (month) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.error })
         }
     } catch (e) {
+        if (e.response.status === 401) {
+            dispatch({ type: LOG_OUT });
+            dispatch({ type: IS_LOGGED_IN, data: false });
+            dispatch({ type: CLEAR_NOTIFICATION })
+            localStorage.clear();
+        }
         return Promise.reject(e);
     }
 }
@@ -57,6 +69,12 @@ export const getDailyCities = () => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.error })
         }
     } catch (e) {
+        if (e.response.status === 401) {
+            dispatch({ type: LOG_OUT });
+            dispatch({ type: IS_LOGGED_IN, data: false });
+            dispatch({ type: CLEAR_NOTIFICATION })
+            localStorage.clear();
+        }
         return Promise.reject(e);
     }
 }

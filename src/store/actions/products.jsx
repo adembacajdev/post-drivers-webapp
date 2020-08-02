@@ -1,6 +1,6 @@
 import {
     GET_ALL_PRODUCTS, GET_PRODUCT, GET_PRODUCT_ORDER, POST_STORE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, DELETE_PRODUCTS, IS_LOGGED_IN,
-    SEARCH_PRODUCTS, TOGGLE_ERROR_MODAL, SELECT_ALL_PRODUCTS, DELETE_ORDER
+    SEARCH_PRODUCTS, TOGGLE_ERROR_MODAL, SELECT_ALL_PRODUCTS, DELETE_ORDER, LOG_OUT, CLEAR_NOTIFICATION
 } from '../actionTypes';
 import axios from 'axios';
 
@@ -18,6 +18,12 @@ export const getAllProducts = (limit, page) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
+        if (e.response.status === 401) {
+            dispatch({ type: LOG_OUT });
+            dispatch({ type: IS_LOGGED_IN, data: false });
+            dispatch({ type: CLEAR_NOTIFICATION })
+            localStorage.clear();
+        }
         return Promise.reject(e);
     }
 }
@@ -36,6 +42,12 @@ export const searchProducts = (search) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
+        if (e.response.status === 401) {
+            dispatch({ type: LOG_OUT });
+            dispatch({ type: IS_LOGGED_IN, data: false });
+            dispatch({ type: CLEAR_NOTIFICATION })
+            localStorage.clear();
+        }
         return Promise.reject(e);
     }
 }
@@ -52,9 +64,14 @@ export const getProduct = (id) => async (dispatch) => {
             axios.defaults.headers.common['Authorization'] = ``
         }else{
             dispatch({ type: GET_PRODUCT, data: {error: data.error} });
-            // dispatch({ type: TOGGLE_ERROR_MODAL, data: data.error })
         }
     } catch (e) {
+        if (e.response.status === 401) {
+            dispatch({ type: LOG_OUT });
+            dispatch({ type: IS_LOGGED_IN, data: false });
+            dispatch({ type: CLEAR_NOTIFICATION })
+            localStorage.clear();
+        }
         return Promise.reject(e);
     }
 }
@@ -73,6 +90,12 @@ export const getProductOrder = (id) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
+        if (e.response.status === 401) {
+            dispatch({ type: LOG_OUT });
+            dispatch({ type: IS_LOGGED_IN, data: false });
+            dispatch({ type: CLEAR_NOTIFICATION })
+            localStorage.clear();
+        }
         return Promise.reject(e);
     }
 }
@@ -94,6 +117,12 @@ export const postStoreProduct = (body) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
+        if (e.response.status === 401) {
+            dispatch({ type: LOG_OUT });
+            dispatch({ type: IS_LOGGED_IN, data: false });
+            dispatch({ type: CLEAR_NOTIFICATION })
+            localStorage.clear();
+        }
         return Promise.reject(e);
     }
 }
@@ -114,6 +143,12 @@ export const updateProduct = (body) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
+        if (e.response.status === 401) {
+            dispatch({ type: LOG_OUT });
+            dispatch({ type: IS_LOGGED_IN, data: false });
+            dispatch({ type: CLEAR_NOTIFICATION })
+            localStorage.clear();
+        }
         return Promise.reject(e);
     }
 }
@@ -132,6 +167,12 @@ export const deleteProduct = (id) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.error })
         }
     } catch (e) {
+        if (e.response.status === 401) {
+            dispatch({ type: LOG_OUT });
+            dispatch({ type: IS_LOGGED_IN, data: false });
+            dispatch({ type: CLEAR_NOTIFICATION })
+            localStorage.clear();
+        }
         return Promise.reject(e);
     }
 }
@@ -155,6 +196,12 @@ export const deleteProducts = (product_ids) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
+        if (e.response.status === 401) {
+            dispatch({ type: LOG_OUT });
+            dispatch({ type: IS_LOGGED_IN, data: false });
+            dispatch({ type: CLEAR_NOTIFICATION })
+            localStorage.clear();
+        }
         return Promise.reject(e);
     }
 }

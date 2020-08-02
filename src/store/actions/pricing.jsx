@@ -1,4 +1,4 @@
-import { GET_PRICING_TABLE, IS_LOGGED_IN, TOGGLE_ERROR_MODAL } from '../actionTypes';
+import { GET_PRICING_TABLE, IS_LOGGED_IN, TOGGLE_ERROR_MODAL, LOG_OUT, CLEAR_NOTIFICATION } from '../actionTypes';
 import axios from 'axios';
 
 export const getAllPricing = () => async (dispatch) => {
@@ -19,6 +19,12 @@ export const getAllPricing = () => async (dispatch) => {
             }
         }
     } catch (e) {
+        if (e.response.status === 401) {
+            dispatch({ type: LOG_OUT });
+            dispatch({ type: IS_LOGGED_IN, data: false });
+            dispatch({ type: CLEAR_NOTIFICATION })
+            localStorage.clear();
+        }
         return Promise.reject(e);
     }
 }

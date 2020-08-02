@@ -38,7 +38,7 @@ const SeeCustomer = (props) => {
                         <div className="strike-customer__body-label">{i18next.t('customers.description')}</div>
                         <input disabled defaultValue={props.customer && props.customer.product.description} className="strike-customer__body-input" placeholder="Field" />
                         <div className="strike-customer__body-label">{i18next.t('customers.price')}</div>
-                        <input disabled defaultValue={props.customer && props.customer.product.price} className="strike-customer__body-input" placeholder="Field" />
+                        <input disabled defaultValue={props.customer && props.customer.product.ks_price} className="strike-customer__body-input" placeholder="Field" />
                     </div>
                 </div>
                 <button onClick={delCustomer} className="strike-customer__body-button">{i18next.t('customers.delete')}</button>

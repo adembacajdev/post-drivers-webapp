@@ -1,5 +1,5 @@
 import {
-    GET_ALL_TRANSFERS, GET_SELECTED_TRANSFERS, GET_BALANCE_DETAILS, IS_LOGGED_IN, SEARCH_TRANSFERS, TOGGLE_ERROR_MODAL
+    GET_ALL_TRANSFERS, GET_SELECTED_TRANSFERS, GET_BALANCE_DETAILS, IS_LOGGED_IN, SEARCH_TRANSFERS, TOGGLE_ERROR_MODAL, LOG_OUT, CLEAR_NOTIFICATION
 } from '../actionTypes';
 import axios from 'axios';
 import moment from 'moment';
@@ -13,6 +13,12 @@ export const getAllTransfers = (limit, page) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
+        if (e.response.status === 401) {
+            dispatch({ type: LOG_OUT });
+            dispatch({ type: IS_LOGGED_IN, data: false });
+            dispatch({ type: CLEAR_NOTIFICATION })
+            localStorage.clear();
+        }
         return Promise.reject(e);
     }
 }
@@ -34,6 +40,12 @@ export const searchTransfers = (type, text) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
+        if (e.response.status === 401) {
+            dispatch({ type: LOG_OUT });
+            dispatch({ type: IS_LOGGED_IN, data: false });
+            dispatch({ type: CLEAR_NOTIFICATION })
+            localStorage.clear();
+        }
         return Promise.reject(e);
     }
 }
@@ -52,6 +64,12 @@ export const getTransfer = (id) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
+        if (e.response.status === 401) {
+            dispatch({ type: LOG_OUT });
+            dispatch({ type: IS_LOGGED_IN, data: false });
+            dispatch({ type: CLEAR_NOTIFICATION })
+            localStorage.clear();
+        }
         return Promise.reject(e);
     }
 }
@@ -70,6 +88,12 @@ export const getBalanceDetails = () => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
+        if (e.response.status === 401) {
+            dispatch({ type: LOG_OUT });
+            dispatch({ type: IS_LOGGED_IN, data: false });
+            dispatch({ type: CLEAR_NOTIFICATION })
+            localStorage.clear();
+        }
         return Promise.reject(e);
     }
 }

@@ -7,6 +7,7 @@ import i18n from '../../services/locales/i18n';
 import { postUser } from '../../store/actions/users';
 import { useForm } from "react-hook-form";
 
+var timeout = null;
 const AddUser = (props) => {
     const [isEmailValid, validateEmail] = useState(true);
     const { register, handleSubmit, errors, watch } = useForm();
@@ -14,10 +15,14 @@ const AddUser = (props) => {
         if (isEmailValid) props.postUser(data, props.history);
     }
     const handleEmail = (e) => {
-        console.log('email', e.target.value)
-        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if (reg.test(e.target.value) === false) validateEmail(false);
-        else validateEmail(true);
+        window.onkeyup = (e) => {
+            clearTimeout(timeout);
+            timeout = setTimeout(async () => {
+                let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                if (reg.test(e.target.value) === false) validateEmail(false);
+                else validateEmail(true);
+            }, 500)
+        }
     }
     return (
         <Wrapper>

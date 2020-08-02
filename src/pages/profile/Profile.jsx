@@ -7,6 +7,7 @@ import { getUser, resetPassword } from '../../store/actions/authorization';
 import { updateUser } from '../../store/actions/users';
 import './style.scss';
 
+var timeout = null;
 const Profile = (props) => {
     const [isEmailValid, validateEmail] = useState(true);
     const [name, setName] = useState('');
@@ -35,10 +36,14 @@ const Profile = (props) => {
     }, [props.user]);
 
     const handleEmail = (e) => {
-        console.log('email', e.target.value)
-        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if (reg.test(e.target.value) === false) validateEmail(false);
-        else validateEmail(true);
+        window.onkeyup = (e) => {
+            clearTimeout(timeout);
+            timeout = setTimeout(async () => {
+                let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                if (reg.test(e.target.value) === false) validateEmail(false);
+                else validateEmail(true);
+            }, 500)
+        }
     }
 
     return (

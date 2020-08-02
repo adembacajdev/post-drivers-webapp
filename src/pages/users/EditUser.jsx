@@ -7,6 +7,7 @@ import { updateUser, getUser, deleteUser } from '../../store/actions/users';
 import { useForm } from "react-hook-form";
 import './style.scss';
 
+var timeout = null;
 const EditUser = (props) => {
     const [isEmailValid, validateEmail] = useState(true);
     const [data, setData] = useState(props.selectedUser)
@@ -23,10 +24,14 @@ const EditUser = (props) => {
     }
 
     const handleEmail = (e) => {
-        console.log('email', e.target.value)
-        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if (reg.test(e.target.value) === false) validateEmail(false);
-        else validateEmail(true);
+        window.onkeyup = (e) => {
+            clearTimeout(timeout);
+            timeout = setTimeout(async () => {
+                let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                if (reg.test(e.target.value) === false) validateEmail(false);
+                else validateEmail(true);
+            }, 500)
+        }
     }
     return (
         <Wrapper>
