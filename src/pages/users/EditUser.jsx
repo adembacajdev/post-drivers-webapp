@@ -30,7 +30,7 @@ const EditUser = (props) => {
                 let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
                 if (reg.test(e.target.value) === false) validateEmail(false);
                 else validateEmail(true);
-            }, 500)
+            }, 200)
         }
     }
     return (

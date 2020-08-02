@@ -15,7 +15,7 @@ const Login = ({ login, loggedIn, authenticate, isLoggedIn }) => {
     const { logoWithoutText } = images;
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = ({ email, password }) => {
-        if (!errors.email && !errors.password && isEmailValid) {
+        if (!errors.email && !errors.password) {
             login({ email, password })
         }
     };
@@ -27,7 +27,7 @@ const Login = ({ login, loggedIn, authenticate, isLoggedIn }) => {
                 let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
                 if (reg.test(e.target.value) === false) validateEmail(false);
                 else validateEmail(true);
-            }, 500)
+            }, 200)
         }
         // let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         // if (reg.test(e.target.value) === false) validateEmail(false);
