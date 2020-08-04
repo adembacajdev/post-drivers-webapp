@@ -50,13 +50,13 @@ const AddOrder = (props) => {
             product_id, description, first_name, last_name, phone, country, city, address, building,
             latitude: latitudeMarker, longitude: longitudeMarker
         }
-        props.postOrder(body, props.history);
-        // const isNumberValid = validateNumber(prefix, phone);
-        // if (isNumberValid) {
-        //     props.sendCodeVerification(`${prefix}${phone}`);
-        //     props.history.push('/order/verify', { ...body, phone: `${prefix}${phone}` })
-        // }
-        // else props.toggleErrorModal(i18n.t('addOrder.invalidNumber'))
+        const isNumberValid = validateNumber(prefix, phone);
+        if (isNumberValid) {
+            props.postOrder(body, props.history);
+            // props.sendCodeVerification(`${prefix}${phone}`);
+            // props.history.push('/order/verify', { ...body, phone: `${prefix}${phone}` })
+        }
+        else props.toggleErrorModal(i18n.t('addOrder.invalidNumber'))
     }
 
     useEffect(() => {
