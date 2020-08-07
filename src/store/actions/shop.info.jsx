@@ -17,7 +17,7 @@ export const getShopInfo = () => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.error })
         }
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e?.response?.status === 401) {
             dispatch({ type: LOG_OUT });
             dispatch({ type: IS_LOGGED_IN, data: false });
             dispatch({ type: CLEAR_NOTIFICATION })

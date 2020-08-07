@@ -13,7 +13,7 @@ export const getAllTransfers = (limit, page) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e?.response?.status === 401) {
             dispatch({ type: LOG_OUT });
             dispatch({ type: IS_LOGGED_IN, data: false });
             dispatch({ type: CLEAR_NOTIFICATION })
@@ -40,7 +40,7 @@ export const searchTransfers = (type, text) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e?.response?.status === 401) {
             dispatch({ type: LOG_OUT });
             dispatch({ type: IS_LOGGED_IN, data: false });
             dispatch({ type: CLEAR_NOTIFICATION })
@@ -64,7 +64,7 @@ export const getTransfer = (id) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e?.response?.status === 401) {
             dispatch({ type: LOG_OUT });
             dispatch({ type: IS_LOGGED_IN, data: false });
             dispatch({ type: CLEAR_NOTIFICATION })
@@ -88,7 +88,7 @@ export const getBalanceDetails = () => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e?.response?.status === 401) {
             dispatch({ type: LOG_OUT });
             dispatch({ type: IS_LOGGED_IN, data: false });
             dispatch({ type: CLEAR_NOTIFICATION })

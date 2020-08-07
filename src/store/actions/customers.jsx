@@ -14,7 +14,7 @@ export const getAllCustomers = (limit, page) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e?.response?.status === 401) {
             dispatch({ type: LOG_OUT });
             dispatch({ type: IS_LOGGED_IN, data: false });
             dispatch({ type: CLEAR_NOTIFICATION })
@@ -33,7 +33,7 @@ export const searchCustomers = (type, text) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e?.response?.status === 401) {
             dispatch({ type: LOG_OUT });
             dispatch({ type: IS_LOGGED_IN, data: false });
             dispatch({ type: CLEAR_NOTIFICATION })
@@ -57,7 +57,7 @@ export const getCustomer = (id) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e?.response?.status === 401) {
             dispatch({ type: LOG_OUT });
             dispatch({ type: IS_LOGGED_IN, data: false });
             dispatch({ type: CLEAR_NOTIFICATION })
@@ -81,7 +81,7 @@ export const getCustomerOrders = (id) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e?.response?.status === 401) {
             dispatch({ type: LOG_OUT });
             dispatch({ type: IS_LOGGED_IN, data: false });
             dispatch({ type: CLEAR_NOTIFICATION })
@@ -105,7 +105,7 @@ export const getRecentCustomers = () => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e?.response?.status === 401) {
             dispatch({ type: LOG_OUT });
             dispatch({ type: IS_LOGGED_IN, data: false });
             dispatch({ type: CLEAR_NOTIFICATION })
@@ -129,7 +129,7 @@ export const deleteCustomer = (id) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e?.response?.status === 401) {
             dispatch({ type: LOG_OUT });
             dispatch({ type: IS_LOGGED_IN, data: false });
             dispatch({ type: CLEAR_NOTIFICATION })
@@ -158,7 +158,7 @@ export const deleteCustomers = (client_ids) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e?.response?.status === 401) {
             dispatch({ type: LOG_OUT });
             dispatch({ type: IS_LOGGED_IN, data: false });
             dispatch({ type: CLEAR_NOTIFICATION })

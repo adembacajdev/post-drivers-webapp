@@ -17,7 +17,7 @@ export const getAllUsers = () => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e?.response?.status === 401) {
             dispatch({ type: LOG_OUT });
             dispatch({ type: IS_LOGGED_IN, data: false });
             dispatch({ type: CLEAR_NOTIFICATION })
@@ -41,7 +41,7 @@ export const getUser = (id) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e?.response?.status === 401) {
             dispatch({ type: LOG_OUT });
             dispatch({ type: IS_LOGGED_IN, data: false });
             dispatch({ type: CLEAR_NOTIFICATION })
@@ -67,7 +67,7 @@ export const postUser = (body, history) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data })
         }
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e?.response?.status === 401) {
             dispatch({ type: LOG_OUT });
             dispatch({ type: IS_LOGGED_IN, data: false });
             dispatch({ type: CLEAR_NOTIFICATION })
@@ -93,7 +93,7 @@ export const updateUser = (id, body, history) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e?.response?.status === 401) {
             dispatch({ type: LOG_OUT });
             dispatch({ type: IS_LOGGED_IN, data: false });
             dispatch({ type: CLEAR_NOTIFICATION })
@@ -117,7 +117,7 @@ export const deleteUser = (id) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e?.response?.status === 401) {
             dispatch({ type: LOG_OUT });
             dispatch({ type: IS_LOGGED_IN, data: false });
             dispatch({ type: CLEAR_NOTIFICATION })

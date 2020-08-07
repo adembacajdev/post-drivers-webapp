@@ -18,7 +18,7 @@ export const getAllProducts = (limit, page) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e?.response?.status === 401) {
             dispatch({ type: LOG_OUT });
             dispatch({ type: IS_LOGGED_IN, data: false });
             dispatch({ type: CLEAR_NOTIFICATION })
@@ -42,7 +42,7 @@ export const searchProducts = (search) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e?.response?.status === 401) {
             dispatch({ type: LOG_OUT });
             dispatch({ type: IS_LOGGED_IN, data: false });
             dispatch({ type: CLEAR_NOTIFICATION })
@@ -66,7 +66,7 @@ export const getProduct = (id) => async (dispatch) => {
             dispatch({ type: GET_PRODUCT, data: {error: data.error} });
         }
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e?.response?.status === 401) {
             dispatch({ type: LOG_OUT });
             dispatch({ type: IS_LOGGED_IN, data: false });
             dispatch({ type: CLEAR_NOTIFICATION })
@@ -90,7 +90,7 @@ export const getProductOrder = (id) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e?.response?.status === 401) {
             dispatch({ type: LOG_OUT });
             dispatch({ type: IS_LOGGED_IN, data: false });
             dispatch({ type: CLEAR_NOTIFICATION })
@@ -117,7 +117,7 @@ export const postStoreProduct = (body) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e?.response?.status === 401) {
             dispatch({ type: LOG_OUT });
             dispatch({ type: IS_LOGGED_IN, data: false });
             dispatch({ type: CLEAR_NOTIFICATION })
@@ -143,7 +143,7 @@ export const updateProduct = (body) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e?.response?.status === 401) {
             dispatch({ type: LOG_OUT });
             dispatch({ type: IS_LOGGED_IN, data: false });
             dispatch({ type: CLEAR_NOTIFICATION })
@@ -167,7 +167,7 @@ export const deleteProduct = (id) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.error })
         }
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e?.response?.status === 401) {
             dispatch({ type: LOG_OUT });
             dispatch({ type: IS_LOGGED_IN, data: false });
             dispatch({ type: CLEAR_NOTIFICATION })
@@ -196,7 +196,7 @@ export const deleteProducts = (product_ids) => async (dispatch) => {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.message })
         }
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e?.response?.status === 401) {
             dispatch({ type: LOG_OUT });
             dispatch({ type: IS_LOGGED_IN, data: false });
             dispatch({ type: CLEAR_NOTIFICATION })
