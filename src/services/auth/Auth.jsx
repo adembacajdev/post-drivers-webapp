@@ -14,16 +14,21 @@ const Auth = {
     },
     setLanguage: () => {
         const language = localStorage.getItem('language');
-        if (language !== null || language !== 'null' || language !== undefined || language !== 'undefined') {
+        const hasLang = checkLang(language)
+        function checkLang(lang){
+            return lang ?? false
+        }
+        if (hasLang) {
             i18n.changeLanguage(language)
         } else {
-            localStorage.setItem('language', 'en')
-            i18n.changeLanguage('en')
+            localStorage.setItem('language', 'al')
+            i18n.changeLanguage('al')
         }
     },
     getLanguage: () => {
         const language = localStorage.getItem('language');
-        return language ?? 'en';
+        console.log('getLanguage', language)
+        return language ?? 'al';
     },
     checkIsAdmin: () => {
         const isAdmin = localStorage.getItem('isAdmin');
