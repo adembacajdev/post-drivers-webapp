@@ -61,7 +61,7 @@ const Orders = (props) => {
     const prevPage = useCallback(() => { if (orders.hasPrevPage) props.getOrdersPaginated(10, orders.currentPage - 1) }, [orders]);
     const number = useCallback((page) => { props.getOrdersPaginated(10, page) }, [orders]);
 
-    const handleSearchSelect = useCallback((e) => { setSearchSelect(e.target.value) }, [searchSelect])
+    const handleSearchSelect = useCallback((e) => { setSearchSelect(e.target.value) }, [searchSelect]);
 
     return (
         <Context.Provider value={{ selected, setSelected, selectedAll, selectAll }}>

@@ -359,14 +359,10 @@ export const printOneOrder = (id) => async (dispatch) => {
 }
 
 export const printSelectedOrders = (order_ids) => async (dispatch) => {
-    var query = '';
-    order_ids.forEach(item => {
-        if (query === '') query = `order_ids[]=${item}`;
-        else query = `${query}&order_ids[]=${item}`;
-    });
+    const newState = order_ids.filter((v, i, a) => a.findIndex(t => (t === v)) === i);
     try {
         var query = '';
-        order_ids.forEach(item => {
+        newState.forEach(item => {
             if (query === '') query = `order_ids[]=${item}`;
             else query = `${query}&order_ids[]=${item}`;
         });
