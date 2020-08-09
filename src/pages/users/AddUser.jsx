@@ -15,14 +15,17 @@ const AddUser = (props) => {
         if (isEmailValid) props.postUser(data, props.history);
     }
     const handleEmail = (e) => {
-        window.onkeyup = (e) => {
-            clearTimeout(timeout);
-            timeout = setTimeout(async () => {
-                let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-                if (reg.test(e.target.value) === false) validateEmail(false);
-                else validateEmail(true);
-            }, 200)
-        }
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if (reg.test(e.target.value) === false) validateEmail(false);
+        else validateEmail(true);
+        // window.onkeyup = (e) => {
+        //     clearTimeout(timeout);
+        //     timeout = setTimeout(async () => {
+        //         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        //         if (reg.test(e.target.value) === false) validateEmail(false);
+        //         else validateEmail(true);
+        //     }, 200)
+        // }
     }
     return (
         <Wrapper>

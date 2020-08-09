@@ -33,7 +33,7 @@ const Table = ({ items, deleteUser }) => {
                 </div>
             </div>
             {items && items.map((item, index) => {
-                return <TableItem deleteUser={deleteUser} key={index} {...item} />
+                return <TableItem item={item} deleteUser={deleteUser} key={index} {...item} />
             })}
         </div>
     )

@@ -10,10 +10,10 @@ import './style.scss';
 var timeout = null;
 const EditUser = (props) => {
     const [isEmailValid, validateEmail] = useState(true);
-    const [data, setData] = useState(props.selectedUser)
+    const [data, setData] = useState([])
     const { register, handleSubmit, watch, errors } = useForm();
-    const onSubmit = data => {
-        if (isEmailValid) props.updateUser(props.location.state.id, data, props.history);
+    const onSubmit = dataa => {
+        if (isEmailValid) props.updateUser(props.location.state.id, dataa, props.history);
     }
 
     useEffect(() => { props.getUser(props.location.state.id); }, []);
@@ -24,14 +24,17 @@ const EditUser = (props) => {
     }
 
     const handleEmail = (e) => {
-        window.onkeyup = (e) => {
-            clearTimeout(timeout);
-            timeout = setTimeout(async () => {
-                let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-                if (reg.test(e.target.value) === false) validateEmail(false);
-                else validateEmail(true);
-            }, 200)
-        }
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if (reg.test(e.target.value) === false) validateEmail(false);
+        else validateEmail(true);
+        // window.onkeyup = (e) => {
+        //     clearTimeout(timeout);
+        //     timeout = setTimeout(async () => {
+        //         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        //         if (reg.test(e.target.value) === false) validateEmail(false);
+        //         else validateEmail(true);
+        //     }, 200)
+        // }
     }
     return (
         <Wrapper>
@@ -40,13 +43,13 @@ const EditUser = (props) => {
                 <div className="strike-adduser__form">
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="strike-adduser__form-label">{i18n.t('addUserForm.firstName')}</div>
-                        <input defaultValue={data && data.first_name} has-error={errors.first_name ? 'true' : 'false'} ref={register({ required: true })} name="first_name" className="strike-adduser__form-input" placeholder={i18n.t('addUserForm.firstName')} />
+                        <input defaultValue={data?.first_name} has-error={errors.first_name ? 'true' : 'false'} ref={register({ required: true })} name="first_name" className="strike-adduser__form-input" placeholder={i18n.t('addUserForm.firstName')} />
                         <div className="strike-adduser__form-label">{i18n.t('addUserForm.lastName')}</div>
-                        <input defaultValue={data && data.last_name} has-error={errors.last_name ? 'true' : 'false'} ref={register({ required: true })} name="last_name" className="strike-adduser__form-input" placeholder={i18n.t('addUserForm.lastName')} />
+                        <input defaultValue={data?.last_name} has-error={errors.last_name ? 'true' : 'false'} ref={register({ required: true })} name="last_name" className="strike-adduser__form-input" placeholder={i18n.t('addUserForm.lastName')} />
                         <div className="strike-adduser__form-label">{i18n.t('addUserForm.email')}</div>
                         <input onChange={handleEmail} defaultValue={data && data.email} has-error={!isEmailValid ? 'true' : 'false'} ref={register({ required: true })} name="email" className="strike-adduser__form-input" placeholder={i18n.t('addUserForm.email')} />
                         <div className="strike-adduser__form-label">{i18n.t('addUserForm.phone')}</div>
-                        <input defaultValue={data && data.phone} has-error={errors.phone ? 'true' : 'false'} ref={register({ required: true })} name="phone" className="strike-adduser__form-input" placeholder={i18n.t('addUserForm.phone')} />
+                        <input defaultValue={data?.phone} has-error={errors.phone ? 'true' : 'false'} ref={register({ required: true })} name="phone" className="strike-adduser__form-input" placeholder={i18n.t('addUserForm.phone')} />
                         {/* <div className="strike-adduser__form-label">{i18n.t('addUserForm.isAdmin')}</div> */}
                         {/* <select className="strike-adduser__form-input">
                         <option>{i18n.t('addUserForm.true')}</option>

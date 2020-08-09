@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 const SeeCustomer = (props) => {
     const [data, setData] = useState([]);
-    useEffect(() => { props.getCustomer(props.location.state.id); }, []);
+    // useEffect(() => { props.getCustomer(props.location.state.id); }, []);
     useEffect(() => { props.getCustomer(props.location.state.id); }, [props?.location?.state?.id]);
     const delCustomer = () => {
         props.deleteCustomer(props.location.state.id);

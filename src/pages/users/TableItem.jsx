@@ -4,14 +4,15 @@ import images from '../../assets/images';
 import i18n from '../../services/locales/i18n';
 import './style.scss';
 import moment from 'moment';
+import { useCallback } from 'react';
 
 
-const TableItem = ({ created_at, email, first_name, last_name, id, phone, deleteUser, is_admin }) => {
+const TableItem = ({ created_at, email, first_name, last_name, id, phone, deleteUser, is_admin, item }) => {
     const history = useHistory();
     const { threePoints } = images.customers;
     const date = moment(created_at).format('DD/MM/YYYY')
     const deleteUsr = () => deleteUser(id);
-    const editUsr = () => history.push('/edit-user', { id });
+    const editUsr = useCallback(() => { history.push('/edit-user', { id }) }, [item.id])
     return (
         <div className="strike-users__table-item">
             <div onClick={editUsr} is-responsive="true" className="strike-users__table-item-container">

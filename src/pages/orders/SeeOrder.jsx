@@ -57,7 +57,7 @@ const SeeOrder = (props) => {
                         </div>
                         <div className="strike-order__body-label"><b>{i18next.t('orders.product')}</b></div>
                         <div className="strike-order__body-label">{i18next.t('orders.id')}</div>
-                        <input disabled defaultValue={data?.id} className="strike-order__body-input" placeholder="Field" />
+                        <input disabled defaultValue={data?.product?.id} className="strike-order__body-input" placeholder="Field" />
                         <div className="strike-order__body-label">{i18next.t('orders.name')}</div>
                         <input disabled defaultValue={data?.product?.name} className="strike-order__body-input" placeholder="Field" />
                         <div className="strike-order__body-label">{i18next.t('orders.description')}</div>
