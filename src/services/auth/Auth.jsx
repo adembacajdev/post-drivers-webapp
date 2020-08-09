@@ -27,7 +27,6 @@ const Auth = {
     },
     getLanguage: () => {
         const language = localStorage.getItem('language');
-        console.log('getLanguage', language)
         return language ?? 'al';
     },
     checkIsAdmin: () => {

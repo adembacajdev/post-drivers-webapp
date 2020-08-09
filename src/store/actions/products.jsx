@@ -101,7 +101,6 @@ export const getProductOrder = (id) => async (dispatch) => {
 }
 
 export const postStoreProduct = (body) => async (dispatch) => {
-    console.log('body', body)
     try {
         const { name, description, size, ks_price, al_price, mk_price, openable, history } = body;
         const parsedOpenable = JSON.parse(openable);

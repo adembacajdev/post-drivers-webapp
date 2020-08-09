@@ -85,7 +85,7 @@ const Orders = (props) => {
                         <input defaultValue={searchSelect === 'date' ? moment().format('yyyy-MM-DD') : ''} type={searchSelect === 'date' ? 'date' : 'text'} name="search" ref={register({ required: true })} placeholder={i18n.t('orders.searchPlaceholder')} className="strike-orders__search-input" />
                         <button type="submit" className="strike-orders__search-button">{i18n.t('orders.search')}</button>
                     </form>
-                    <Table printOne={props.printOneOrder} deleteItem={props.deleteOrder} items={orders && orders.data} />
+                    <Table printOne={props.printOneOrder} deleteItem={props.deleteOrder} items={orders?.data} />
                     <div className="strike-orders__pagination">
                         <img onClick={prevPage} src={orders.hasPrevPage ? filledLeftArrow : unfilledLeftArrow} className='strike-orders__pagination-leftarrow' />
                         {orders && orders.lastPage.map(item => {

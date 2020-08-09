@@ -5,6 +5,7 @@ import i18n from '../../services/locales/i18n';
 import './orders.scss';
 import moment from 'moment';
 import Context from './Context';
+import { useCallback } from 'react';
 
 const TableItem = ({ id, serial_number, status, updated_at, deleteItem, price, client, printOne, item }) => {
     const { selected, setSelected } = useContext(Context);
@@ -48,7 +49,7 @@ const TableItem = ({ id, serial_number, status, updated_at, deleteItem, price, c
     }
 
     const deleteThisItem = () => deleteItem(id);
-    const navigate = () => history.push('/order', { id })
+    const navigate = useCallback(() => { history.push('/order', { id }) }, [item.id])
     const printOrder = () => {
         localStorage.setItem('printOne', id)
         window.open(`http://${window.location.host}/print/one`, 'Print Orders') //this should be https://

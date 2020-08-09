@@ -122,6 +122,9 @@
                 &:active{
                     background-color: #7cd8fc;
                 }
+                &:disabled{
+                    background-color: grey;
+                }
             }
         }
     }

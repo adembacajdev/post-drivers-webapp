@@ -18,6 +18,7 @@ import Auth from '../../services/auth/Auth';
 var timeout = null // timeout for searchBox
 
 const AddOrder = (props) => {
+    const [hasOrdred, setOrdered] = useState(false);
     const [phonePlaceholder, setPhonePlaceholder] = useState('4x xxx xxx');
     const { logoWithoutText } = images;
     const { register, handleSubmit, errors, watch } = useForm();
@@ -52,11 +53,15 @@ const AddOrder = (props) => {
         }
         const isNumberValid = validateNumber(prefix, phone);
         if (isNumberValid) {
+            setOrdered(true);
             props.postOrder(body, props.history);
             // props.sendCodeVerification(`${prefix}${phone}`);
             // props.history.push('/order/verify', { ...body, phone: `${prefix}${phone}` })
         }
-        else props.toggleErrorModal(i18n.t('addOrder.invalidNumber'))
+        else {
+            setOrdered(false);
+            props.toggleErrorModal(i18n.t('addOrder.invalidNumber'))
+        }
     }
 
     useEffect(() => {
@@ -164,7 +169,7 @@ const AddOrder = (props) => {
                     </Marker>
                 </ReactMapGL>
                 <div className="add-order__wrapper-footer">
-                    <button type="submit">{i18n.t('addOrder.button')}</button>
+                    <button disabled={hasOrdred} type="submit">{i18n.t('addOrder.button')}</button>
                 </div>
                 <a href="https://strikecourier.com">
                     <div className="add-order__footer">

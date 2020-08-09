@@ -165,7 +165,6 @@ export const postOrder = (params, history) => async (dispatch) => {
 export const postOrderByShop = (params, history) => async (dispatch) => {
     try {
         const { data } = await axios.post(`/orders/add`, params);
-        console.log('data', data)
         if (data.success) {
             dispatch({ type: TOGGLE_SUCCESS_MODAL, data: 'Porosia u dergua me sukses!' });
             dispatch({ type: POST_ORDER_BY_SHOP, data });
@@ -409,7 +408,6 @@ export const sendCodeVerification = (number) => async (dispatch) => {
     try {
         const { data } = await axios.post(`/orders/verify?phone=${number}`);
         if (data.success) {
-            console.log('data', data)
             dispatch({ type: SENT_VERIFICATION_CODE, data: data.data });
         } else {
             dispatch({ type: TOGGLE_ERROR_MODAL, data: data.error })
