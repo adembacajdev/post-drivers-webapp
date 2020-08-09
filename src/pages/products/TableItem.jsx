@@ -20,7 +20,7 @@ const TableItem = ({ item, deleteProduct }) => {
     const [isOpen, open] = useState(false);
 
     const toggle = useCallback(() => { open(!isOpen) }, [isOpen]);
-    const edit = useCallback(() => { history.push('/edit-product', { id: item.id }) }, []);
+    const edit = useCallback(() => { history.push('/edit-product', { id: item.id }) }, [item.id]);
     const deleteProd = useCallback(() => { deleteProduct(item.id) }, []);
     const check = () => setChecked(!checked);
     const copyLink = () => {

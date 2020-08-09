@@ -23,6 +23,7 @@ const Products = (props) => {
     useEffect(() => { props.getAllProducts(10, 1) }, []);
     useEffect(() => { if (props.deletedProduct) window.location.reload() }, [props.deletedProduct])
     useEffect(() => {
+        console.log('allProducts', props.allProducts)
         setData(props.allProducts);
         selectAll(false);
         setSelected([])
