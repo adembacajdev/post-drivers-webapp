@@ -27,7 +27,7 @@ const TableItem = ({ item, deleteProduct }) => {
         toast.notify('Link copied!', { position: 'bottom-right' });
         copy(copyText);
     }
-    const addOrder = () => history.push('/add-order-by-shop', { id: item.id })
+    const addOrder = useCallback(() => { history.push('/add-order-by-shop', { id: item.id }) }, [item.id])
 
     useEffect(() => {
         if (checked) setSelected([...selected, item.id])

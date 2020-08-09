@@ -15,8 +15,8 @@ import { postOrderByShop } from '../../store/actions/orders';
 var timeout = null;
 
 const AddOrderByShop = (props) => {
+    const [data, setData] = useState([]);
     const { register, handleSubmit, errors } = useForm();
-    const productId = props.location.state?.id;
     const [country, setCountry] = useState('Kosovë');
     const [tooltipOpen, setTooltipOpen] = useState(false);
     const [latitudeMarker, setLatitudeMarker] = useState(42.66758079200047);
@@ -49,7 +49,7 @@ const AddOrderByShop = (props) => {
 
     useEffect(() => {
         props.location.state?.id ? props.getProduct(props.location.state.id) : console.log('no id')
-    }, [])
+    }, [props.location.state.id])
 
     const handleIdChange = (e) => {
         window.onkeyup = (e) => {
@@ -70,6 +70,10 @@ const AddOrderByShop = (props) => {
         }
     }, [props.orderPosted]);
 
+    useEffect(() => {
+        setData(props.product)
+    }, [props.product])
+
 
     return (
         <Wrapper>
@@ -78,15 +82,15 @@ const AddOrderByShop = (props) => {
                 <div className="strike-addorderbyshop__form">
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="strike-addorderbyshop__fields-row-column-title">{i18n.t('addOrder.productDetails')}</div>
-                        {props.product && <div style={{ fontSize: 10, color: 'red' }}>{props.product && props.product.error}</div>}
+                        {props.product && <div style={{ fontSize: 10, color: 'red' }}>{data?.error}</div>}
                         <div className="strike-addorderbyshop__fields-row-form-label">{i18n.t('addOrder.productId')}</div>
-                        <input onChange={handleIdChange} defaultValue={productId} has-error={errors.product_id ? 'true' : 'false'} ref={register({ required: true })} name="product_id" className="strike-addorderbyshop__fields-row-form-input" placeholder={i18n.t('addOrder.productId')} />
+                        <input onChange={handleIdChange} defaultValue={props?.location?.state?.id} has-error={errors.product_id ? 'true' : 'false'} ref={register({ required: true })} name="product_id" className="strike-addorderbyshop__fields-row-form-input" placeholder={i18n.t('addOrder.productId')} />
                         <div className="strike-addorderbyshop__fields-row-form-label">{i18n.t('addOrder.name')}</div>
-                        <input defaultValue={props.product && props.product.name} disabled ref={register({ required: false })} name="name" className="strike-addorderbyshop__fields-row-form-input" placeholder={i18n.t('addOrder.name')} />
+                        <input defaultValue={data?.name} disabled ref={register({ required: false })} name="name" className="strike-addorderbyshop__fields-row-form-input" placeholder={i18n.t('addOrder.name')} />
                         <div className="strike-addorderbyshop__fields-row-form-label">{i18n.t('addOrder.description')}</div>
-                        <input defaultValue={props.product && props.product.description} disabled ref={register({ required: false })} name="firstDescription" className="strike-addorderbyshop__fields-row-form-input" placeholder={i18n.t('addOrder.description')} />
+                        <input defaultValue={data?.description} disabled ref={register({ required: false })} name="firstDescription" className="strike-addorderbyshop__fields-row-form-input" placeholder={i18n.t('addOrder.description')} />
                         <div className="strike-addorderbyshop__fields-row-form-label">{i18n.t('addOrder.price')}</div>
-                        <input defaultValue={props.product && props.product.ks_price} disabled ref={register({ required: false })} name="price" className="strike-addorderbyshop__fields-row-form-input" placeholder={i18n.t('addOrder.price')} />
+                        <input defaultValue={data?.ks_price} disabled ref={register({ required: false })} name="price" className="strike-addorderbyshop__fields-row-form-input" placeholder={i18n.t('addOrder.price')} />
                         <div className="strike-addorderbyshop__fields-row-form-label">{i18n.t('addOrder.additionalInfo')}</div>
                         <input has-error={errors.description ? 'true' : 'false'} ref={register({ required: false })} name="description" className="strike-addorderbyshop__fields-row-form-input" placeholder={i18n.t('addOrder.exSizeColor')} />
                         <div className="strike-addorderbyshop__fields-row-column-title">{i18n.t('addOrder.yourInformation')}</div>
