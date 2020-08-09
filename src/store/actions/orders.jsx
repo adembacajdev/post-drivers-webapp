@@ -315,7 +315,8 @@ export const deleteOrder = (id) => async (dispatch) => {
 export const deleteOrders = (order_ids, status) => async (dispatch) => {
     try {
         var query = '';
-        order_ids.forEach(item => {
+        const newState = order_ids.filter((v, i, a) => a.findIndex(t => (t === v)) === i);
+        newState.forEach(item => {
             if (query === '') query = `order_ids[]=${item}`;
             else query = `${query}&order_ids[]=${item}`;
         });
