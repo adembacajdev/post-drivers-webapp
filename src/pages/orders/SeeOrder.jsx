@@ -15,6 +15,7 @@ const SeeOrder = (props) => {
     useEffect(() => { props.getOrder(props.location.state.id); }, [props?.location?.state?.id]);
     useEffect(() => {
         if (props.order) {
+            console.log('order', props.order)
             setData(props.order);
             setViewPort({ width: 1200, height: 600, latitude: data?.location?.latitude, longitude: data?.location?.longitude, zoom: 5, })
         }
@@ -65,7 +66,7 @@ const SeeOrder = (props) => {
                         <div className="strike-order__body-label">{i18next.t('orders.price')}</div>
                         <input disabled defaultValue={data?.price} className="strike-order__body-input" placeholder="Field" />
                         <div className="strike-order__body-label">{i18next.t('orders.additionalInfo')}</div>
-                        <input disabled defaultValue={data?.additional_info} className="strike-order__body-input" placeholder="Field" />
+                        <input disabled defaultValue={data?.description} className="strike-order__body-input" placeholder="Field" />
                     </div>
                     <div className="strike-order__body-right">
                         <div className="strike-order__body-label"><b>{i18next.t('orders.customer')}</b></div>
