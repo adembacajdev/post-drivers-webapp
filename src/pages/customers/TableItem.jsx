@@ -4,6 +4,7 @@ import images from '../../assets/images';
 import i18n from '../../services/locales/i18n';
 import './customers.scss';
 import Context from './Context';
+import { useCallback } from 'react';
 
 const TableItem = ({ id, first_name, last_name, phone, address, city, deleteCustomer, item }) => {
     const { selected, setSelected } = useContext(Context);
@@ -12,7 +13,7 @@ const TableItem = ({ id, first_name, last_name, phone, address, city, deleteCust
     const { threePoints } = images.customers;
 
     const deleteClient = () => deleteCustomer(id);
-    const navigate = () => history.push('/customer', { id });
+    const navigate = useCallback(() => { history.push('/customer', { id }) }, [item.id])
     const check = () => setChecked(!checked);
 
     useEffect(() => {

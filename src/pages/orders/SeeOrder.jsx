@@ -11,7 +11,8 @@ import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 const SeeOrder = (props) => {
     const [data, setData] = useState([]);
     const [viewPort, setViewPort] = useState({ width: 1200, height: 600, latitude: 42.66758079200047, longitude: 21.165194013322285, zoom: 5, })
-    useEffect(() => { props.getOrder(props.location.state.id); }, [])
+    useEffect(() => { props.getOrder(props.location.state.id); }, []);
+    useEffect(() => { props.getOrder(props.location.state.id); }, [props?.location?.state?.id]);
     useEffect(() => {
         if (props.order) {
             setData(props.order);
