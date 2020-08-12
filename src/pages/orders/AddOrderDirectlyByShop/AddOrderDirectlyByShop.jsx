@@ -92,8 +92,8 @@ const AddProduct = (props) => {
                         <option value="medium">{i18n.t('addProductForm.medium')}</option>
                         <option value="large">{i18n.t('addProductForm.large')}</option>
                     </select>
-                    <div className="strike-addorderdirectlybyshop__form-label">{i18n.t('addOrderForm.description')}</div>
-                    <input has-error={errors.description ? 'true' : 'false'} name="description" ref={register({ required: false })} className="strike-addorderdirectlybyshop__form-input" placeholder={i18n.t('addProductForm.description')} />
+                    <div className="strike-addorderdirectlybyshop__form-label">{i18n.t('addOrderForm.additionalInfo')}</div>
+                    <input has-error={errors.description ? 'true' : 'false'} name="description" ref={register({ required: false })} className="strike-addorderdirectlybyshop__form-input" placeholder={i18n.t('addOrderForm.additionalInfo')} />
                     <div className="strike-addorderdirectlybyshop__form-label">{i18n.t('addOrderForm.firstName')}</div>
                     <input has-error={errors.first_name ? 'true' : 'false'} name="first_name" ref={register({ required: false })} className="strike-addorderdirectlybyshop__form-input" placeholder={i18n.t('addOrderForm.firstName')} />
                     <div className="strike-addorderdirectlybyshop__form-label">{i18n.t('addOrderForm.lastName')}</div>

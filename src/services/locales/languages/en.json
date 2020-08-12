@@ -228,7 +228,8 @@
         "latitude": "Latitude",
         "longitude": "Longitude",
         "productName": "Product Name",
-        "productDescription": "Product Description"
+        "productDescription": "Product Description",
+        "additionalInfo": "Additional Info"
     },
     "addOrder": {
         "productDetails": "Detajet e produktit:",

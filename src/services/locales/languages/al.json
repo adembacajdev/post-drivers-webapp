@@ -228,7 +228,8 @@
         "latitude": "Latituda",
         "longitude": "Longituda",
         "productName": "Emri i Produktit",
-        "productDescription": "Përshkrimi i Produktit"
+        "productDescription": "Përshkrimi i Produktit",
+        "additionalInfo": "Informata shtesë"
     },
     "addOrder": {
         "productDetails": "Detajet e produktit:",
