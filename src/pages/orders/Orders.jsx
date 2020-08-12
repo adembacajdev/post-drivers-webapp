@@ -62,7 +62,7 @@ const Orders = (props) => {
     const number = useCallback((page) => { props.getOrdersPaginated(10, page) }, [orders]);
 
     const handleSearchSelect = useCallback((e) => { setSearchSelect(e.target.value) }, [searchSelect]);
-
+    const addOrder = useCallback(() => { props.history.push('/add-order-direct-by-shop') }, []);
     return (
         <Context.Provider value={{ selected, setSelected, selectedAll, selectAll }}>
             <Wrapper>
@@ -72,6 +72,7 @@ const Orders = (props) => {
                             <div className="strike-orders__header-left-text">{title}</div>
                         </div>
                         <div className="strike-orders__header-right">
+                            <div onClick={addOrder} className="strike-orders__header-right-text">{i18n.t('products.addOrder')}</div>
                         </div>
                     </div>
                     <form onSubmit={handleSubmit(onSubmit)} className="strike-orders__search">

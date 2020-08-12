@@ -13,6 +13,7 @@ const Orders = lazy(() => import('../../pages/orders/Orders'));
 const SeeOrder = lazy(() => import('../../pages/orders/SeeOrder'));
 const AddOrder = lazy(() => import('../../pages/orders/AddOrder'));
 const AddOrderByShop = lazy(() => import('../../pages/orders/AddOrderByShop'));
+const AddOrderDirectlyByShop = lazy(() => import('../../pages/orders/AddOrderDirectlyByShop/AddOrderDirectlyByShop'));
 const VerifyOrder = lazy(() => import('../../pages/orders/VerifyOrder'));
 const OrderByStatus = lazy(() => import('../../pages/orders/OrdersByStatus'));
 const Products = lazy(() => import('../../pages/products/Products'));
@@ -52,22 +53,23 @@ function Router({ location }) {
         { path: '/edit-user', exact: true, component: EditUser },
         { path: '/profile', exact: true, component: Profile },
         { path: '/add-order-by-shop', exact: true, component: AddOrderByShop },
+        { path: '/add-order-direct-by-shop', exact: true, component: AddOrderDirectlyByShop },
     ]
     return (
         <BaseRouter history={history}>
-                <Suspense fallback={<Loader />}>
-                    <Switch location={location}>
-                        <Route path="/login" component={Login} exact />
-                        <Route path="/add-order/:productId" component={AddOrder} exact />
-                        <Route path="/add-order" component={AddOrder} exact />
-                        <Route path="/order/verify" component={VerifyOrder} exact />
-                        <Route path="/print/:type" component={PDFViewer} exact />
-                        <Route path="/print" component={PDFViewer} exact />
-                        {protectedRoutes.map((route, idx) => {
-                            return <PrivateRoute key={idx} {...route} />
-                        })}
-                    </Switch>
-                </Suspense>
+            <Suspense fallback={<Loader />}>
+                <Switch location={location}>
+                    <Route path="/login" component={Login} exact />
+                    <Route path="/add-order/:productId" component={AddOrder} exact />
+                    <Route path="/add-order" component={AddOrder} exact />
+                    <Route path="/order/verify" component={VerifyOrder} exact />
+                    <Route path="/print/:type" component={PDFViewer} exact />
+                    <Route path="/print" component={PDFViewer} exact />
+                    {protectedRoutes.map((route, idx) => {
+                        return <PrivateRoute key={idx} {...route} />
+                    })}
+                </Switch>
+            </Suspense>
         </BaseRouter>
     )
 }

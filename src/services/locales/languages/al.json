@@ -226,7 +226,9 @@
         "address": "Adresa",
         "building": "Ndërtesa",
         "latitude": "Latituda",
-        "longitude": "Longituda"
+        "longitude": "Longituda",
+        "productName": "Emri i Produktit",
+        "productDescription": "Përshkrimi i Produktit"
     },
     "addOrder": {
         "productDetails": "Detajet e produktit:",

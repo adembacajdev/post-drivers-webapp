@@ -226,7 +226,9 @@
         "address": "Address",
         "building": "Building",
         "latitude": "Latitude",
-        "longitude": "Longitude"
+        "longitude": "Longitude",
+        "productName": "Product Name",
+        "productDescription": "Product Description"
     },
     "addOrder": {
         "productDetails": "Detajet e produktit:",
