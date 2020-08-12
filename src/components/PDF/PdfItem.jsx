@@ -79,7 +79,7 @@ const PdfItem = ({ serial_number, seller, buyer, product, openable }) => (
                         <Text style={styles.title}>Qyteti</Text>
                     </View>
                     <View style={styles.col}>
-                        <Text style={styles.subtitle}>{buyer.city && buyer.city} / {buyer?.address}</Text>
+                        <Text style={styles.subtitle}>{buyer.city && buyer.city} / {buyer?.building}</Text>
                     </View>
                 </View>
                 <View style={styles.row}>
