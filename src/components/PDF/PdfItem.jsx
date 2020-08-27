@@ -9,7 +9,7 @@ const PdfItem = ({ serial_number, seller, buyer, product, openable }) => (
                 <Image style={{ width: 110, height: 30 }} src="/logo.png" />
             </View>
             <View style={styles.topMiddle}>
-                <Text style={styles.title}>045 963 772</Text>
+                <Text style={styles.title}></Text>
             </View>
             <View style={styles.topRight}>
                 <Text style={styles.subtitle}>Numri i porosise</Text>
